@@ -38,7 +38,6 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("No errors");
 		String VERSION = "1.0";
 		LEVEL level = LEVEL.RESPONSE;
 		boolean validateXml = false;
@@ -69,7 +68,6 @@ public class Application implements CommandLineRunner {
 			}
 		}
 
-		filename = "/Users/Suleiman/ANMO_BHZ.xml";
 		if (filename == null) {
 			System.out.println("File required!");
 			help();
