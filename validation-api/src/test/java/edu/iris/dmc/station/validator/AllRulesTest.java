@@ -68,7 +68,7 @@ public class AllRulesTest {
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("IIII", violation.getInvalidValue());
-		assertEquals("[SEED:b50,16] IIII doesn't match $[A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
+		assertEquals("102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
 	}
 
 	@Test
@@ -87,7 +87,7 @@ public class AllRulesTest {
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("#$", violation.getInvalidValue());
-		assertEquals("[SEED:b50,16] #$ doesn't match $[A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
+		assertEquals("102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class AllRulesTest {
 		assertEquals(1, violations.size());
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
-		assertEquals("startDate should be before endDate", violation.getMessage());
+		assertEquals("105, starttime should be before endtime", violation.getMessage());
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class AllRulesTest {
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
 		assertEquals(1, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals("[SEED:b50,3] [] doesn't match $[A-Za-z0-9\\*\\?]{1,5}", violation.getMessage());
+		assertEquals("202, station code doesn't match [A-Za-z0-9\\*\\?]{1,5}", violation.getMessage());
 
 		station.setCode("ANMO");
 		stationViolations = validator.validate(station);

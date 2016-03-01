@@ -61,13 +61,13 @@ import edu.iris.dmc.validation.rule.Seed;
  * 
  */
 
-@EpochRange(message = "startDate should be before endDate")
+@EpochRange(message = "{network.epoch.range}")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NetworkType", propOrder = { "totalNumberStations", "selectedNumberStations", "stations" })
 public class Network extends BaseNodeType {
 
-	@NotEmpty(message="network.code.empty")
-	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message="network.code.regex")
+	@NotNull(message="{network.code.notnull}")
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message="{network.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	// @XmlJavaTypeAdapter(value = StringAdapter.class)
 	protected String code;

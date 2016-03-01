@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
-import org.eclipse.persistence.oxm.annotations.XmlLocation;
 import org.xml.sax.Locator;
 
 import edu.iris.dmc.validation.rule.Seed;
@@ -94,10 +93,6 @@ public abstract class BaseNodeType implements NodeType{
 
 	@XmlElement(name = "DataAvailability")
 	protected DataAvailability dataAvailability;
-
-	@XmlLocation
-	@XmlTransient
-	public Locator locator;
 
 	public Long getId() {
 		return id;
@@ -293,8 +288,5 @@ public abstract class BaseNodeType implements NodeType{
 		return otherAttributes;
 	}
 
-	public Locator getLocator() {
-		return locator;
-	}
 
 }

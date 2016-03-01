@@ -90,12 +90,12 @@ import edu.iris.dmc.validation.rule.Seed;
 		"externalReference", "channels" })
 public class Station extends BaseNodeType {
 
-	@NotEmpty(message="station.code.empty")
+	@NotNull(message="{station.code.notnull}")
 	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message="{station.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
 
-	@NotNull(message = "blockette = 50, field = 13, required = true")
+	@NotNull(message = "{station.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
 	//@XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
