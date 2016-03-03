@@ -6,10 +6,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import edu.iris.dmc.validation.validator.SeedAsciiValidator;
-import edu.iris.dmc.validation.validator.SeedFloatingValidator;
-import edu.iris.dmc.validation.validator.SeedLatitudeValidator;
-import edu.iris.dmc.validation.validator.SeedLongitudeValidator;
 import edu.iris.dmc.validation.validator.UnitValidator;
 
 import java.lang.annotation.RetentionPolicy;

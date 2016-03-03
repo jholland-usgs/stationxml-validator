@@ -31,7 +31,6 @@ import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
 import org.xml.sax.Locator;
 
-import edu.iris.dmc.validation.rule.Seed;
 
 /**
  * A base node type for derivation from: Network, Station and Channel types.

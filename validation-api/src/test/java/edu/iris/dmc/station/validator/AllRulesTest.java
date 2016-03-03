@@ -29,6 +29,13 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
 
+import org.testng.annotations.*;
+
+import org.hibernate.validator.testutil.TestForIssue;
+import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertConstraintViolation;
+import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertNumberOfViolations;
+//import org.testng.annotations.Test;
+
 public class AllRulesTest {
 
 	private static Validator validator;
@@ -64,11 +71,14 @@ public class AllRulesTest {
 		assertNotNull(n);
 
 		Set<ConstraintViolation<Network>> violations = validator.validate(n);
-		assertEquals(1, violations.size());
+		// assertEquals(1, violations.size());
+		assertNumberOfViolations(violations, 1);
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("IIII", violation.getInvalidValue());
-		assertEquals("102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
+		// assertEquals("102, network code doesn't match
+		// [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
+		assertConstraintViolation(violation, "102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}");
 	}
 
 	@Test
@@ -162,7 +172,7 @@ public class AllRulesTest {
 			Iterator<ConstraintViolation<Channel>> it = channelViolations.iterator();
 			assertTrue(it.hasNext());
 			ConstraintViolation<Channel> violation = it.next();
-			assertEquals("[SEED:b52,4] [] doesn't match $[A-Za-z0-9\\*\\?]{1,3}", violation.getMessage());
+			assertEquals("302, channel code doesn't match [A-Za-z0-9\\*\\?]{1,3}", violation.getMessage());
 			while (it.hasNext()) {
 				System.out.println(it.next().getMessage());
 			}
@@ -221,7 +231,7 @@ public class AllRulesTest {
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
 		assertEquals(1, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals("Channel ditsnace from the station shouldn't exceed 1 KM", violation.getMessage());
+		assertEquals("251, Channel ditsnace from the station shouldn't exceed 1 KM", violation.getMessage());
 	}
 
 	@Test
@@ -256,10 +266,18 @@ public class AllRulesTest {
 
 		Set<ConstraintViolation<Response>> responseViolations = validator.validate(channel.getResponse());
 		assertEquals(2, responseViolations.size());
-		ConstraintViolation<Response> violation = responseViolations.iterator().next();
-		assertEquals("Stage number attribute must start at 1, be present in numerical order and have no gaps",
-				violation.getMessage());
+		ConstraintViolation<Response> violation1 = responseViolations.iterator().next();
+		ConstraintViolation<Response> violation2 = responseViolations.iterator().next();
 
+		assertTrue("401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
+				.equals(violation1.getMessage())
+				|| "402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1"
+						.equals(violation1.getMessage()));
+
+		assertTrue("401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
+				.equals(violation2.getMessage())
+				|| "402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1"
+						.equals(violation2.getMessage()));
 	}
 
 	@Test

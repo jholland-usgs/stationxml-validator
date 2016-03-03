@@ -53,8 +53,8 @@ import edu.iris.dmc.validation.rule.StageUnits;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResponseType", propOrder = { "instrumentSensitivity", "instrumentPolynomial", "stage", "any" })
-@StageSequence(message = "Stage number attribute must start at 1, be present in numerical order and have no gaps")
-@StageUnits(message = "The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1")
+@StageSequence(message = "{response.stage.sequence}")
+@StageUnits(message = "{response.stage.unit}")
 public class Response {
 
 	@XmlElement(name = "InstrumentSensitivity")
@@ -72,7 +72,6 @@ public class Response {
 		if (this.stage != null) {
 			for (ResponseStage stage : this.stage) {
 				stage.getCoefficients().getOutputUnits();
-
 			}
 		}
 	}

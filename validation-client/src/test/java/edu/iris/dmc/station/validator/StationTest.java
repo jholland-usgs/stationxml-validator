@@ -48,9 +48,6 @@ public class StationTest {
 		javax.validation.ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		javax.validation.Validator validator = factory.getValidator();
 		Set<ConstraintViolation<Station>> violations = validator.validate(anmo);
-		for (ConstraintViolation<Station> violation : violations) {
-			System.out.println("[Start Tag Line:"+anmo.locator.getLineNumber()+"] "+violation.getMessage());
-		}
 		assertEquals(0, violations.size());
 		anmo.setCode(null);
 		violations = validator.validate(anmo);

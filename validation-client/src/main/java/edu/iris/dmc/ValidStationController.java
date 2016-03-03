@@ -27,13 +27,13 @@ public class ValidStationController {
 	@Autowired
 	private Jaxb2Marshaller theMarshaller;
 
-	public void run(InputStream is, Errors errors) {System.out.println("1////////");
+	public void run(InputStream is, Errors errors) {
 		FDSNStationXML document = (FDSNStationXML) theMarshaller.unmarshal(new StreamSource(is));
 
 		List<Network> networks = document.getNetwork();
 		if (networks == null || networks.isEmpty()) {
 			// throw exception or null
-		}System.out.println("////////");
+		}
 		validatorService.run(document.getNetwork(), LEVEL.RESPONSE, errors);
 	}
 }

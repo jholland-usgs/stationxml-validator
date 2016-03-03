@@ -28,7 +28,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import edu.iris.dmc.validation.rule.EpochRange;
 import edu.iris.dmc.validation.rule.NoOverlap;
-import edu.iris.dmc.validation.rule.Seed;
 
 /**
  * This type represents the Network layer, all station metadata is contained

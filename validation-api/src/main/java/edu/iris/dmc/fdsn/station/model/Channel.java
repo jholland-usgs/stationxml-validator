@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,13 +24,8 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import edu.iris.dmc.validation.rule.NonZeroSampleRate;
-import edu.iris.dmc.validation.rule.Seed;
-import edu.iris.dmc.validation.rule.StageUnits;
 import edu.iris.dmc.validation.rule.Unit;
-import edu.iris.dmc.validation.validator.ChannelGroup;
-import edu.iris.dmc.validation.validator.NetworkGroup;
 import edu.iris.dmc.validation.validator.ResponseGroup;
-import edu.iris.dmc.validation.validator.StationGroup;
 
 /**
  * Equivalent to SEED blockette 52 and parent element for the related the
@@ -117,10 +113,10 @@ public class Channel extends BaseNodeType {
 	protected Date endDate;
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
-	@Seed(blockette = 50, field = 10, min = -90, max = 90, required = true, message = "${validatedValue} does not match: ${min},${max}")
+	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "${validatedValue} does not match: ${min},${max}")
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
-	@Seed(blockette = 52, field = 11, min = -180, max = 180, required = true, message = "${validatedValue} does not match: ${min},${max}")
+	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "${validatedValue} does not match: ${min},${max}")
 	@XmlElement(name = "Longitude", required = true)
 	protected Longitude longitude;
 	@XmlElement(name = "Elevation", required = true)
@@ -157,10 +153,14 @@ public class Channel extends BaseNodeType {
 	protected Equipment equipment;
 	@XmlElement(name = "Response")
 	protected Response response;
-	@Seed(blockette = 52, field = 4, expression = "[A-Za-z0-9\\*\\?]{1,3}", required = true, message = "[SEED:b{blockette},{field}] [${validatedValue}] doesn't match ${expression}")
+	
+	@NotNull(message = "{channel.code.notnull}")
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,3}", message = "{channel.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
-	@Seed(blockette = 52, field = 3, expression = "([A-Za-z0-9\\*\\?\\-\\ ]{1,2})?", required = true, message = "[SEED:b{blockette},{field}] [${validatedValue}] doesn't match ${expression}")
+	
+	@NotNull(message = "{channel.location.notnull}")
+	@Pattern(regexp = "([A-Za-z0-9\\*\\?\\-\\ ]{1,2})?", message = "{channel.location.regex}")
 	@XmlAttribute(name = "locationCode", required = true)
 	protected String locationCode;
 

@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -25,10 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import edu.iris.dmc.validation.rule.NoOverlap;
-import edu.iris.dmc.validation.rule.Seed;
 
 /**
  * This type represents a Station epoch. It is common to only have a single
@@ -83,35 +79,35 @@ import edu.iris.dmc.validation.rule.Seed;
  * 
  */
 
-@edu.iris.dmc.validation.rule.Distance(margin=1, message="Channel ditsnace from the station shouldn't exceed {margin} KM")
+@edu.iris.dmc.validation.rule.Distance(margin = 1, message = "{station.channel.distance}")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StationType", propOrder = { "latitude", "longitude", "elevation", "site", "vault", "geology",
 		"equipment", "operator", "creationDate", "terminationDate", "totalNumberChannels", "selectedNumberChannels",
 		"externalReference", "channels" })
 public class Station extends BaseNodeType {
 
-	@NotNull(message="{station.code.notnull}")
-	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message="{station.code.regex}")
+	@NotNull(message = "{station.code.notnull}")
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message = "{station.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
 
 	@NotNull(message = "{station.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
-	//@XmlSchemaType(name = "dateTime")
+	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date startDate;
 	@XmlAttribute(name = "endDate")
-	//@XmlSchemaType(name = "dateTime")
+	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date endDate;
-	@Seed(blockette = 50, field = 4, min = -90, max = 90, required = true, message = "[SEED:b{blockette},{field}] ${validatedValue.value} is invalid, must be between ${min},${max}")
+	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{station.latitude}")
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
-	@Seed(blockette = 50, field = 5, min = -180, max = 180, required = true, message = "[SEED:b{blockette},{field}] ${validatedValue.value} is invalid, must be between ${min},${max}")
+	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "{station.longitude}")
 	@XmlElement(name = "Longitude", required = true)
 	protected Longitude longitude;
-	// @Seed(blockette = 50, field = 6, required = true)
-	@NotNull(message = "blockette = 50, field = 6, required = true")
+
+	@NotNull(message = "station.elevation")
 	@XmlElement(name = "Elevation", required = true)
 	protected Distance elevation;
 	@XmlElement(name = "Site", required = true)
@@ -124,13 +120,13 @@ public class Station extends BaseNodeType {
 	protected List<Equipment> equipment;
 	@XmlElement(name = "Operator")
 	protected List<Station.Operator> operator;
-	@NotNull(message = "required = true")
+	@NotNull(message = "{station.creationtime}")
 	@XmlElement(name = "CreationDate", required = true)
-	//@XmlSchemaType(name = "dateTime")
+	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date creationDate;
 	@XmlElement(name = "TerminationDate")
-	//@XmlSchemaType(name = "dateTime")
+	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date terminationDate;
 	@XmlElement(name = "TotalNumberChannels")
@@ -140,7 +136,7 @@ public class Station extends BaseNodeType {
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
 
-	@NoOverlap
+	@NoOverlap(message = "station.channel.overlap")
 	@XmlElement(name = "Channel")
 	protected List<Channel> channels;
 
