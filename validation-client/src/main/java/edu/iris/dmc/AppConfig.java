@@ -26,16 +26,6 @@ import edu.iris.dmc.validation.ValidatorServiceImp;
 public class AppConfig {
 
 	@Bean
-	public Jaxb2Marshaller marshaller() {
-		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		jaxb2Marshaller.setPackagesToScan("edu.iris.dmc.fdsn.station.model");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("jaxb.formatted.output", true);
-		jaxb2Marshaller.setMarshallerProperties(map);
-		return jaxb2Marshaller;
-	}
-
-	@Bean
 	public javax.validation.Validator validator() {
 		return new LocalValidatorFactoryBean();
 	}
@@ -51,11 +41,13 @@ public class AppConfig {
 	}
 
 	@Bean
-
 	public Jaxb2Marshaller theMarshaller() throws Exception {
 		Jaxb2Marshaller theMarshaller = new Jaxb2Marshaller();
 		theMarshaller.setContextPath("edu.iris.dmc.fdsn.station.model");
 		theMarshaller.setSchema(schemaResource());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("jaxb.formatted.output", true);
+		theMarshaller.setMarshallerProperties(map);
 		theMarshaller.afterPropertiesSet();
 		return theMarshaller;
 

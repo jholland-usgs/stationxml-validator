@@ -95,14 +95,14 @@ import edu.iris.dmc.validation.validator.ResponseGroup;
  * 
  * 
  */
-@NonZeroSampleRate(groups = { ResponseGroup.class })
+@NonZeroSampleRate(message = "{channel.samplerate}", groups = ResponseGroup.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChannelType", propOrder = { "externalReference", "latitude", "longitude", "elevation", "depth",
 		"azimuth", "dip", "type", "sampleRate", "sampleRateRatio", "storageFormat", "clockDrift", "calibrationUnits",
 		"sensor", "preAmplifier", "dataLogger", "equipment", "response" })
 public class Channel extends BaseNodeType {
 
-	@NotNull(message = "blockette = 50, field = 13, required = true")
+	@NotNull(message = "{channel.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
 	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
@@ -153,12 +153,12 @@ public class Channel extends BaseNodeType {
 	protected Equipment equipment;
 	@XmlElement(name = "Response")
 	protected Response response;
-	
+
 	@NotNull(message = "{channel.code.notnull}")
 	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,3}", message = "{channel.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
-	
+
 	@NotNull(message = "{channel.location.notnull}")
 	@Pattern(regexp = "([A-Za-z0-9\\*\\?\\-\\ ]{1,2})?", message = "{channel.location.regex}")
 	@XmlAttribute(name = "locationCode", required = true)

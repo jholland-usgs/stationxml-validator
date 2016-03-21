@@ -33,14 +33,15 @@ public class Application implements CommandLineRunner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication app = new SpringApplication(Application.class);
+	    app.setBannerMode(org.springframework.boot.Banner.Mode.OFF);
+	    app.run(args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		String VERSION = "1.0";
 		LEVEL level = LEVEL.RESPONSE;
-		boolean validateXml = false;
 		boolean debug = false;
 		String filename = null;
 		OutputStream out = System.out;
@@ -56,12 +57,10 @@ public class Application implements CommandLineRunner {
 				debug = true;
 			} else if (arg.equals("--version")) {
 				System.out.println(VERSION);
-				// System.exit(0);
+				System.exit(0);
 			} else if (arg.equals("--help")) {
 				help();
 				System.exit(0);
-			} else if (arg.equals("--valid")) {
-				validateXml = true;
 			} else {
 				// assume the file name
 				filename = arg;
@@ -76,7 +75,7 @@ public class Application implements CommandLineRunner {
 
 		try (InputStream is = new FileInputStream(new File(filename))) {
 			Errors errors = new Errors();
-			controller.run(is, errors);
+			controller.run(is, level, errors);
 			stream = new PrintStream(out);
 			if (!errors.isEmpty()) {
 				PrintErrorService printer = new PrintErrorService(stream, ",");

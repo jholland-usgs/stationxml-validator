@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import edu.iris.dmc.validation.rule.NoOverlap;
 
 /**

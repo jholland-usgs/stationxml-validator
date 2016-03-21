@@ -23,9 +23,13 @@ public class XmlValidationTest {
 	private Resource schemaResource;
 
 	@Test
+	public void hello() throws Exception {
+	}
+
+	// @Test
 	public void notNullCode() throws Exception {
 		Resource resource = new ClassPathResource("IIKDAK10VHZ_invalidCHAAZ.xml");
-		FDSNStationXML root = xmlProcessor.unmarshal(resource.getInputStream(), schemaResource);
-		
+		FDSNStationXML root = xmlProcessor.unmarshal(resource.getInputStream());
+
 	}
 }

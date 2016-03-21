@@ -17,7 +17,7 @@ import java.lang.annotation.ElementType;
 @Target(ElementType.TYPE)
 @Constraint(validatedBy = { NonZeroSampleRateValidator.class })
 public @interface NonZeroSampleRate {
-	String message() default "{edu.iris.dmc.validator.rule.NonZero}";
+	String message() default "{channel.samplerate.NonZero}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 	boolean required() default false;

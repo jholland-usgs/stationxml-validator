@@ -17,7 +17,7 @@ import java.lang.annotation.ElementType;
 @Target(ElementType.TYPE)
 @Constraint(validatedBy = { DistanceValidator.class })
 public @interface Distance {
-	String message() default "{edu.iris.dmc.validator.rule.EpochOverlap}";
+	String message() default "{station.channel.distance}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 	boolean required() default false;

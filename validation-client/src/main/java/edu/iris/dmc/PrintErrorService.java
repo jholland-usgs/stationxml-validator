@@ -37,7 +37,7 @@ public class PrintErrorService {
 
 	private void printMessage(String network, Date nStart, Date nEnd, String station, Date sStart, Date sEnd,
 			String location, String channel, Date cStart, Date cEnd, String message) {
-		this.out.println(buildMessage(message, network, nStart, nEnd, station, (station != null) ? station : "",
+		this.out.println(buildMessage(message, network, nStart, nEnd, (station != null) ? station : "",
 				(sStart != null) ? sStart : "", (sEnd != null) ? sEnd : "", (location != null) ? location : "",
 				(channel != null) ? channel : "", (cStart != null) ? cStart : "", (cEnd != null) ? cEnd : ""));
 	}

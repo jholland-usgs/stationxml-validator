@@ -23,7 +23,6 @@ import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
 
 import edu.iris.dmc.validation.rule.MissingDecimation;
-import edu.iris.dmc.validation.rule.StageUnits;
 
 /**
  * This complex type represents channel response and covers SEED blockettes 53
@@ -64,7 +63,7 @@ import edu.iris.dmc.validation.rule.StageUnits;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResponseStageType", propOrder = { "polesZeros", "coefficients", "responseList", "fir", "polynomial",
 		"decimation", "stageGain", "any" })
-@MissingDecimation(message = "Response stages having Coefficient, FIR ResponseList or a PolesZeros with with transfer function type Digital, must include a Decimation element.")
+@MissingDecimation(message = "{response.stage.decimation.409}")
 public class ResponseStage {
 
 	@XmlElement(name = "PolesZeros")
@@ -100,6 +99,9 @@ public class ResponseStage {
 		}
 		if (polynomial != null) {
 			return new Units[] { polynomial.getInputUnits(), polynomial.getOutputUnits() };
+		}
+		if (coefficients != null) {
+			return new Units[] { coefficients.getInputUnits(), coefficients.getOutputUnits() };
 		}
 		return null;
 	}

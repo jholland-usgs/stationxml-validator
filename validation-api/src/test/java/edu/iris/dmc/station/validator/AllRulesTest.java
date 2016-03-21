@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -28,23 +29,47 @@ import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.validation.ValidatorService;
+import edu.iris.dmc.validation.ValidatorServiceImp;
+import edu.iris.dmc.validation.validator.ResponseGroup;
 
 import org.testng.annotations.*;
 
 import org.hibernate.validator.testutil.TestForIssue;
 import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertConstraintViolation;
 import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertNumberOfViolations;
+
 //import org.testng.annotations.Test;
 
 public class AllRulesTest {
 
-	private static Validator validator;
 	private InputStream in;
+	private static Properties messages = new Properties();
+	private static Validator validator;
 
 	@BeforeClass
 	public static void setUp() {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
+
+		InputStream is = null;
+		try {
+			is = AllRulesTest.class.getClassLoader().getResourceAsStream("ValidationMessages.properties");
+			messages.load(is);
+			is.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	@After
@@ -134,6 +159,7 @@ public class AllRulesTest {
 		assertEquals(1, stations.size());
 		Station station = stations.get(0);
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
+		ConstraintViolation<Station> v = stationViolations.iterator().next();
 		assertEquals(1, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
 		assertEquals("202, station code doesn't match [A-Za-z0-9\\*\\?]{1,5}", violation.getMessage());
@@ -164,24 +190,14 @@ public class AllRulesTest {
 
 		for (Channel channel : channels) {
 			Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
-			for (ConstraintViolation<Channel> v : channelViolations) {
-				System.out.println("out: " + v.getMessage());
-			}
 			assertEquals(1, channelViolations.size());
 
 			Iterator<ConstraintViolation<Channel>> it = channelViolations.iterator();
 			assertTrue(it.hasNext());
 			ConstraintViolation<Channel> violation = it.next();
 			assertEquals("302, channel code doesn't match [A-Za-z0-9\\*\\?]{1,3}", violation.getMessage());
-			while (it.hasNext()) {
-				System.out.println(it.next().getMessage());
-			}
-
 			channel.setCode("BHZ");
 			channelViolations = validator.validate(channel);
-			for (ConstraintViolation<Channel> v : channelViolations) {
-				System.out.println(v.getMessage());
-			}
 			assertEquals(0, channelViolations.size());
 		}
 	}
@@ -213,7 +229,7 @@ public class AllRulesTest {
 	}
 
 	@Test
-	public void channelTooFarFromStation() throws Exception {
+	public void channelTooFarFromStation251() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
 		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
 		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_CHAtooFarFromSTA.xml");
@@ -231,7 +247,7 @@ public class AllRulesTest {
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
 		assertEquals(1, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals("251, Channel ditsnace from the station shouldn't exceed 1 KM", violation.getMessage());
+		assertEquals(messages.get("station.channel.distance"), violation.getMessage());
 	}
 
 	@Test
@@ -281,11 +297,46 @@ public class AllRulesTest {
 	}
 
 	@Test
+	public void shouldPass402() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("402_pass.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network n = networks.get(0);
+		assertNotNull(n);
+		Set<ConstraintViolation<Network>> violations = validator.validate(n);
+		assertEquals(0, violations.size());
+		List<Station> stations = n.getStations();
+		assertEquals(1, stations.size());
+		Station station = stations.get(0);
+		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
+		assertEquals(0, stationViolations.size());
+
+		assertNotNull(station.getChannels());
+		assertFalse(station.getChannels().isEmpty());
+		assertEquals(1, station.getChannels().size());
+		Channel channel = station.getChannels().get(0);
+
+		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel, ResponseGroup.class);
+		assertEquals(0, channelViolations.size());
+
+		assertNotNull(channel.getResponse());
+		assertNotNull(channel.getResponse().getStage());
+		assertEquals(6, channel.getResponse().getStage().size());
+		ResponseStage stage = channel.getResponse().getStage().get(2);
+		Set<ConstraintViolation<Response>> responseViolations = validator.validate(channel.getResponse());
+		assertEquals(0, responseViolations.size());
+
+	}
+
+	@Test
 	public void nonZeroSampleRate() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_emptyINSTSENSITIVITY.xml");
+		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_INSTSENS_notlisted.xml");
 		FDSNStationXML root = (FDSNStationXML) jaxbUnmarshaller.unmarshal(in);
 
 		List<Network> networks = root.getNetwork();
@@ -305,8 +356,10 @@ public class AllRulesTest {
 		assertEquals(1, station.getChannels().size());
 		Channel channel = station.getChannels().get(0);
 
-		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
+		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel, ResponseGroup.class);
 		assertEquals(1, channelViolations.size());
+		ConstraintViolation<Channel> violation = channelViolations.iterator().next();
+		assertEquals(messages.get("response.samplerate.407"), violation.getMessage());
 
 	}
 
@@ -364,7 +417,6 @@ public class AllRulesTest {
 		Channel channel = station.getChannels().get(0);
 
 		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
-		// System.out.println("??????"+channelViolations.iterator().next().getMessage());
 		assertEquals(0, channelViolations.size());
 
 		assertNotNull(channel.getResponse());
@@ -413,7 +465,6 @@ public class AllRulesTest {
 		Channel channel = kdak.getChannels().get(0);
 
 		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
-		// System.out.println("??????"+channelViolations.iterator().next().getMessage());
 		assertEquals(0, channelViolations.size());
 
 		Response response = channel.getResponse();
@@ -422,24 +473,9 @@ public class AllRulesTest {
 		assertEquals(1, responseViolations.size());
 		ConstraintViolation<Response> violation = responseViolations.iterator().next();
 		assertNotNull(violation);
-		System.out.println(violation.getMessage());
-		/*
-		 * List<ResponseStage> stages = channel.getResponse().getStage();
-		 * assertEquals(9, stages.size());
-		 * 
-		 * for (ResponseStage stage : stages) {
-		 * Set<ConstraintViolation<ResponseStage>> stageViolations =
-		 * validator.validate(stage); if (stage.getNumber().intValue() == 1) {
-		 * assertEquals(0, stageViolations.size()); } else if
-		 * (stage.getNumber().intValue() == 2) { assertEquals(0,
-		 * stageViolations.size()); } else if (stage.getNumber().intValue() ==
-		 * 3) { assertEquals(1, stageViolations.size()); } else if
-		 * (stage.getNumber().intValue() == 4) { assertEquals(1,
-		 * stageViolations.size()); } else if (stage.getNumber().intValue() ==
-		 * 5) { assertEquals(1, stageViolations.size()); } else if
-		 * (stage.getNumber().intValue() == 6) { assertEquals(1,
-		 * stageViolations.size()); } }
-		 */
-	}
 
+		assertEquals(
+				"402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1",
+				violation.getMessage());
+	}
 }
