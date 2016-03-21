@@ -33,11 +33,6 @@ import edu.iris.dmc.validation.ValidatorService;
 import edu.iris.dmc.validation.ValidatorServiceImp;
 import edu.iris.dmc.validation.validator.ResponseGroup;
 
-import org.testng.annotations.*;
-
-import org.hibernate.validator.testutil.TestForIssue;
-import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertConstraintViolation;
-import static org.hibernate.validator.testutil.ConstraintViolationAssert.assertNumberOfViolations;
 
 //import org.testng.annotations.Test;
 
@@ -96,14 +91,11 @@ public class AllRulesTest {
 		assertNotNull(n);
 
 		Set<ConstraintViolation<Network>> violations = validator.validate(n);
-		// assertEquals(1, violations.size());
-		assertNumberOfViolations(violations, 1);
+		assertEquals(1, violations.size());
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("IIII", violation.getInvalidValue());
-		// assertEquals("102, network code doesn't match
-		// [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
-		assertConstraintViolation(violation, "102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}");
+		assertEquals(violation.getMessage(), "102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}");
 	}
 
 	@Test
