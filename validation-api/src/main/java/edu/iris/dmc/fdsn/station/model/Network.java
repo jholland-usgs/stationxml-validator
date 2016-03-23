@@ -77,7 +77,6 @@ public class Network extends BaseNodeType {
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date startDate;
 	@XmlAttribute(name = "endDate")
-	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date endDate;
 
