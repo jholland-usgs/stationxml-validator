@@ -68,13 +68,13 @@ public class Response {
 	@XmlAnyAttribute
 	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
-	public void getOutputUnits() {
+	/*public void getOutputUnits() {
 		if (this.stage != null) {
 			for (ResponseStage stage : this.stage) {
 				stage.getCoefficients().getOutputUnits();
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Gets the value of the instrumentSensitivity property.

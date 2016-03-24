@@ -85,7 +85,7 @@ public class Network extends BaseNodeType {
 	@XmlElement(name = "SelectedNumberStations")
 	protected BigInteger selectedNumberStations;
 
-	@NoOverlap
+	@NoOverlap(message = "{network.station.overlap}")
 	@XmlElement(name = "Station")
 	protected List<Station> stations;
 	@XmlTransient

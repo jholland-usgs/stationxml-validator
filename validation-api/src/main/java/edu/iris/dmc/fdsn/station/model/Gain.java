@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
+import edu.iris.dmc.validation.rule.NonZero;
+
 /**
  * Complex type for sensitivity and frequency ranges.This complex type can be
  * used to represent both overall sensitivities and individual stage gains. The
@@ -48,8 +50,10 @@ import javax.xml.bind.annotation.XmlType;
 public class Gain {
 
 	@XmlElement(name = "Value")
+	@NonZero(message="{gain.value}")
 	protected Double value;
 	@XmlElement(name = "Frequency")
+	@NonZero(message="")
 	protected Double frequency;
 
 	/**

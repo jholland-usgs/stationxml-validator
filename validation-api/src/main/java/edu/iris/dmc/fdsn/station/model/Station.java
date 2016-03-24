@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import edu.iris.dmc.validation.rule.EpochRange;
 import edu.iris.dmc.validation.rule.NoOverlap;
 
 /**
@@ -80,7 +81,7 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  * 
  */
-
+@EpochRange(message="{station.epoch.range}")
 @edu.iris.dmc.validation.rule.Distance(margin = 1, message = "{station.channel.distance}")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StationType", propOrder = { "latitude", "longitude", "elevation", "site", "vault", "geology",
@@ -138,7 +139,7 @@ public class Station extends BaseNodeType {
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
 
-	@NoOverlap(message = "station.channel.overlap")
+	@NoOverlap(message = "{station.channel.overlap}")
 	@XmlElement(name = "Channel")
 	protected List<Channel> channels;
 

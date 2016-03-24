@@ -25,16 +25,13 @@ import org.junit.Test;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
+import edu.iris.dmc.fdsn.station.model.Gain;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
+import edu.iris.dmc.fdsn.station.model.Sensitivity;
 import edu.iris.dmc.fdsn.station.model.Station;
-import edu.iris.dmc.validation.ValidatorService;
-import edu.iris.dmc.validation.ValidatorServiceImp;
 import edu.iris.dmc.validation.validator.ResponseGroup;
-
-
-//import org.testng.annotations.Test;
 
 public class AllRulesTest {
 
@@ -53,7 +50,6 @@ public class AllRulesTest {
 			messages.load(is);
 			is.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (is != null) {
@@ -95,7 +91,7 @@ public class AllRulesTest {
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("IIII", violation.getInvalidValue());
-		assertEquals(violation.getMessage(), "102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}");
+		assertEquals(messages.get("network.code.regex"), violation.getMessage());
 	}
 
 	@Test
@@ -114,7 +110,7 @@ public class AllRulesTest {
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
 		assertEquals("#$", violation.getInvalidValue());
-		assertEquals("102, network code doesn't match [A-Za-z0-9\\*\\?]{1,2}", violation.getMessage());
+		assertEquals(messages.get("network.code.regex"), violation.getMessage());
 	}
 
 	@Test
@@ -132,7 +128,7 @@ public class AllRulesTest {
 		assertEquals(1, violations.size());
 
 		ConstraintViolation<Network> violation = violations.iterator().next();
-		assertEquals("105, starttime should be before endtime", violation.getMessage());
+		assertEquals(messages.get("network.epoch.range"), violation.getMessage());
 	}
 
 	@Test
@@ -154,7 +150,7 @@ public class AllRulesTest {
 		ConstraintViolation<Station> v = stationViolations.iterator().next();
 		assertEquals(1, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals("202, station code doesn't match [A-Za-z0-9\\*\\?]{1,5}", violation.getMessage());
+		assertEquals(messages.get("station.code.regex"), violation.getMessage());
 
 		station.setCode("ANMO");
 		stationViolations = validator.validate(station);
@@ -187,7 +183,7 @@ public class AllRulesTest {
 			Iterator<ConstraintViolation<Channel>> it = channelViolations.iterator();
 			assertTrue(it.hasNext());
 			ConstraintViolation<Channel> violation = it.next();
-			assertEquals("302, channel code doesn't match [A-Za-z0-9\\*\\?]{1,3}", violation.getMessage());
+			assertEquals(messages.get("channel.code.regex"), violation.getMessage());
 			channel.setCode("BHZ");
 			channelViolations = validator.validate(channel);
 			assertEquals(0, channelViolations.size());
@@ -466,8 +462,148 @@ public class AllRulesTest {
 		ConstraintViolation<Response> violation = responseViolations.iterator().next();
 		assertNotNull(violation);
 
-		assertEquals(
-				"402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1",
-				violation.getMessage());
+		assertEquals(messages.get("response.stage.unit"), violation.getMessage());
 	}
+
+	@Test
+	public void dateRange305() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_CHASTARTDATE_afterenddate.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network ii = networks.get(0);
+		assertNotNull(ii);
+		Set<ConstraintViolation<Network>> violations = validator.validate(ii);
+		assertEquals(0, violations.size());
+		List<Station> stations = ii.getStations();
+		assertEquals(1, stations.size());
+		Station kdak = stations.get(0);
+		Set<ConstraintViolation<Station>> stationViolations = validator.validate(kdak);
+		assertEquals(0, stationViolations.size());
+
+		assertNotNull(kdak.getChannels());
+		assertFalse(kdak.getChannels().isEmpty());
+		assertEquals(1, kdak.getChannels().size());
+		Channel channel = kdak.getChannels().get(0);
+
+		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
+		assertEquals(1, channelViolations.size());
+
+		ConstraintViolation<Channel> violation = channelViolations.iterator().next();
+		assertEquals(messages.get("channel.epoch.range"), violation.getMessage());
+
+	}
+
+	@Test
+	public void noOverlap() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("ANMO_BHZ_epoch_overlap.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network iu = networks.get(0);
+		assertNotNull(iu);
+		assertNotNull(iu.getStations());
+		assertTrue(!iu.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(iu);
+		assertEquals(1, violations.size());
+		ConstraintViolation<Network> violation = violations.iterator().next();
+		assertEquals(messages.get("network.station.overlap"), violation.getMessage());
+
+		Station anmo1 = iu.getStations().get(0);
+		assertNotNull(anmo1);
+		assertNotNull(anmo1.getChannels());
+		assertTrue(!anmo1.getChannels().isEmpty());
+		Set<ConstraintViolation<Station>> anmoViolations = validator.validate(anmo1);
+		assertEquals(1, anmoViolations.size());
+		ConstraintViolation<Station> v = anmoViolations.iterator().next();
+		assertEquals(messages.get("station.channel.overlap"), v.getMessage());
+
+	}
+
+	@Test
+	public void zeroGain404() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_STAGEGAIN_zero.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network ii = networks.get(0);
+		assertNotNull(ii);
+		assertNotNull(ii.getStations());
+		assertTrue(!ii.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(ii);
+		assertEquals(0, violations.size());
+
+		Station kdak = ii.getStations().get(0);
+		assertNotNull(kdak);
+		assertNotNull(kdak.getChannels());
+		assertTrue(!kdak.getChannels().isEmpty());
+		Set<ConstraintViolation<Station>> v = validator.validate(kdak);
+		assertEquals(0, v.size());
+
+		assertNotNull(kdak.getChannels());
+		assertTrue(!kdak.getChannels().isEmpty());
+
+		Channel vhz = kdak.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv = validator.validate(vhz);
+		assertEquals(0, cv.size());
+
+		assertNotNull(vhz.getResponse().getStage());
+		assertTrue(!vhz.getResponse().getStage().isEmpty());
+
+		ResponseStage stage = vhz.getResponse().getStage().get(0);
+		Gain gain = stage.getStageGain();
+		assertNotNull(gain);
+		Set<ConstraintViolation<Gain>> gv = validator.validate(gain);
+		assertEquals(1, gv.size());
+
+		ConstraintViolation<Gain> gvm = gv.iterator().next();
+		assertEquals(messages.get("gain.value"), gvm.getMessage());
+
+	}
+
+	@Test
+	public void zeroInstrumentSensetivity404() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_INSTSENS_zero.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network ii = networks.get(0);
+		assertNotNull(ii);
+		assertNotNull(ii.getStations());
+		assertTrue(!ii.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(ii);
+		assertEquals(0, violations.size());
+
+		Station kdak = ii.getStations().get(0);
+		assertNotNull(kdak);
+		assertNotNull(kdak.getChannels());
+		assertTrue(!kdak.getChannels().isEmpty());
+		Set<ConstraintViolation<Station>> v = validator.validate(kdak);
+		assertEquals(0, v.size());
+
+		assertNotNull(kdak.getChannels());
+		assertTrue(!kdak.getChannels().isEmpty());
+
+		Channel vhz = kdak.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv = validator.validate(vhz);
+		assertEquals(0, cv.size());
+
+		Sensitivity is = vhz.getResponse().getInstrumentSensitivity();
+		assertNotNull(is);
+		Set<ConstraintViolation<Gain>> gv = validator.validate(is);
+		assertEquals(1, gv.size());
+
+		ConstraintViolation<Gain> gvm = gv.iterator().next();
+		assertEquals(messages.get("gain.value"), gvm.getMessage());
+
+	}
+
 }

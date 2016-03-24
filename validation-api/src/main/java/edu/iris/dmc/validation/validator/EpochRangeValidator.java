@@ -2,10 +2,13 @@ package edu.iris.dmc.validation.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import edu.iris.dmc.fdsn.station.model.BaseNodeType;
 import edu.iris.dmc.fdsn.station.model.Network;
+import edu.iris.dmc.fdsn.station.model.NodeType;
 import edu.iris.dmc.validation.rule.EpochRange;
 
-public class EpochRangeValidator implements ConstraintValidator<EpochRange, Network> {
+public class EpochRangeValidator implements ConstraintValidator<EpochRange, NodeType> {
 	private EpochRange constraintAnnotation;
 
 	@Override
@@ -15,20 +18,20 @@ public class EpochRangeValidator implements ConstraintValidator<EpochRange, Netw
 	}
 
 	@Override
-	public boolean isValid(Network network, ConstraintValidatorContext context) {
-		if (network.getStartDate() == null && network.getEndDate() == null) {
+	public boolean isValid(NodeType node, ConstraintValidatorContext context) {
+		if (node.getStartDate() == null && node.getEndDate() == null) {
 			return true;
 		}
 
-		if (network.getEndDate() == null) {
+		if (node.getEndDate() == null) {
 			return true;
 		}
 
-		if (network.getStartDate() == null) {
+		if (node.getStartDate() == null) {
 			return false;
 		}
 
-		if (network.getStartDate().after(network.getEndDate())) {
+		if (node.getStartDate().after(node.getEndDate())) {
 			return false;
 		}
 		return true;

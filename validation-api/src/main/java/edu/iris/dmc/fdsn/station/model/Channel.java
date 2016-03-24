@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import edu.iris.dmc.validation.rule.EpochRange;
 import edu.iris.dmc.validation.rule.NonZeroSampleRate;
 import edu.iris.dmc.validation.rule.Unit;
 import edu.iris.dmc.validation.validator.ResponseGroup;
@@ -95,6 +96,7 @@ import edu.iris.dmc.validation.validator.ResponseGroup;
  * 
  * 
  */
+@EpochRange(message = "{channel.epoch.range}")
 @NonZeroSampleRate(message = "{channel.samplerate}", groups = ResponseGroup.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChannelType", propOrder = { "externalReference", "latitude", "longitude", "elevation", "depth",
@@ -113,10 +115,10 @@ public class Channel extends BaseNodeType {
 	protected Date endDate;
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
-	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "${validatedValue} does not match: ${min},${max}")
+	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{channel.latitude}")
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
-	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "${validatedValue} does not match: ${min},${max}")
+	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "{channel.longitude}")
 	@XmlElement(name = "Longitude", required = true)
 	protected Longitude longitude;
 	@XmlElement(name = "Elevation", required = true)
