@@ -17,4 +17,7 @@ to build:
 
 5. mvn clean assembly:assembly you can choose to skip testing with: -Dmaven.test.skip=true
 
-4. your jar is under the target directory.
+6. your jar is under the target directory: validation-client-1.0.1-jar-with-dependencies.jar
+
+
+
