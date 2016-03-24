@@ -8,7 +8,7 @@ to build:
 
 1. download
 
-2. cd to directory 
+2. cd to directory StationXML-Validation
 
 3. mvn install
 
