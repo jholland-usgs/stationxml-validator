@@ -1,7 +1,9 @@
 package edu.iris.dmc;
 
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.xml.sax.Locator;
 
@@ -37,8 +39,12 @@ public class PrintErrorService {
 
 	private void printMessage(String network, Date nStart, Date nEnd, String station, Date sStart, Date sEnd,
 			String location, String channel, Date cStart, Date cEnd, String message) {
-		this.out.println(buildMessage(message, network, nStart, nEnd, (station != null) ? station : "",
-				(sStart != null) ? sStart : "", (sEnd != null) ? sEnd : "", (location != null) ? location : "",
-				(channel != null) ? channel : "", (cStart != null) ? cStart : "", (cEnd != null) ? cEnd : ""));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		this.out.println(
+				buildMessage(message, network, sdf.format(nStart), sdf.format(nEnd), (station != null) ? station : "",
+						(sStart != null) ? sdf.format(sStart) : "", (sEnd != null) ? sdf.format(sEnd) : "",
+						(location != null) ? location : "", (channel != null) ? channel : "",
+						(cStart != null) ? sdf.format(cStart) : "", (cEnd != null) ? sdf.format(cEnd) : ""));
 	}
 }

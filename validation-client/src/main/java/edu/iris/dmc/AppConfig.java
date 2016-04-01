@@ -1,15 +1,9 @@
 package edu.iris.dmc;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.util.JAXBSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
+import javax.validation.Validation;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +11,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.xml.sax.SAXException;
 
 import edu.iris.dmc.validation.ValidatorService;
 import edu.iris.dmc.validation.ValidatorServiceImp;
@@ -27,6 +20,7 @@ public class AppConfig {
 
 	@Bean
 	public javax.validation.Validator validator() {
+		//Validation.buildDefaultValidatorFactory().getValidator();
 		return new LocalValidatorFactoryBean();
 	}
 
