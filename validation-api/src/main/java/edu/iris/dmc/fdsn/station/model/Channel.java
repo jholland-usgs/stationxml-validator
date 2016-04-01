@@ -145,6 +145,8 @@ public class Channel extends BaseNodeType {
 	@Unit(message = "[CalibrationUnits] Invalid unit ${validatedValue.name}")
 	@XmlElement(name = "CalibrationUnits")
 	protected Units calibrationUnits;
+	
+	@NotNull(message = "{channel.sensor.notnull}")
 	@XmlElement(name = "Sensor")
 	protected Equipment sensor;
 	@XmlElement(name = "PreAmplifier")

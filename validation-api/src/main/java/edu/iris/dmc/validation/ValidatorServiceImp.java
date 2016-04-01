@@ -7,6 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.groups.Default;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
+import edu.iris.dmc.fdsn.station.model.Equipment;
 import edu.iris.dmc.fdsn.station.model.Gain;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Polynomial;
@@ -53,6 +54,16 @@ public class ValidatorServiceImp implements ValidatorService {
 										station.getCode(), station.getStartDate(), station.getEndDate(),
 										channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
 										channel.getEndDate(), violation.getMessage());
+							}
+							if (channel.getSensor() != null) {
+								Set<ConstraintViolation<Equipment>> eViolations = validator
+										.validate(channel.getSensor());
+								for (ConstraintViolation<Equipment> violation : eViolations) {
+									errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
+											station.getCode(), station.getStartDate(), station.getEndDate(),
+											channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
+											channel.getEndDate(), violation.getMessage());
+								}
 							}
 							if (level.getValue() >= LEVEL.CHANNEL.getValue()) {
 								Response response = channel.getResponse();

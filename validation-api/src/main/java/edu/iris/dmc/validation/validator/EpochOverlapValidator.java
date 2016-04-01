@@ -49,27 +49,13 @@ public class EpochOverlapValidator implements ConstraintValidator<NoOverlap, Col
 			}
 			tuples.add(new Tuple(node.getCode(), node.getCode(), start, end, i));
 			i++;
-			node.getEndDate();
-			node.getStartDate();
 		}
 
 		if (!map.isEmpty()) {
 			Collection<List<Tuple>> coll = map.values();
 			for (List<Tuple> tuples : coll) {
 				List<Tuple[]> invalidRanges = checkRanges(tuples);
-				if (invalidRanges != null && !invalidRanges
-						.isEmpty()) {/*
-										 * if (violation == null) { violation =
-										 * new Violation(this); }
-										 * 
-										 * for (Tuple[] array : invalidRanges) {
-										 * violation.addMessage(array[0].code +
-										 * " " // + array[0].location +
-										 * " epochs overlaps [base epoch endTime: "
-										 * + array[0].end +
-										 * " | other epoch startTime: " +
-										 * array[1].start + "]"); }
-										 */
+				if (invalidRanges != null && !invalidRanges.isEmpty()) {
 					return false;
 				}
 			}
@@ -83,36 +69,31 @@ public class EpochOverlapValidator implements ConstraintValidator<NoOverlap, Col
 		for (int i = 1; i < tuples.size(); i++) {
 			Tuple tuple1 = tuples.get(i - 1);
 			Tuple tuple2 = tuples.get(i);
-			// }Tuple tuple : tuples) {
-			if (tuple1.end.getTime() > tuple2.start.getTime()) {
+			if (tuple1.end == null || tuple2.start == null || tuple1.end.getTime() > tuple2.start.getTime()) {
 				overlappingDatePairs.add(new Tuple[] { tuple1, tuple2 });
 			}
 		}
 		return overlappingDatePairs;
 	}
 
-	private static class Tuple implements Comparable<Tuple> {
+	private class Tuple implements Comparable<Tuple> {
 		public final Date start;
 		private Date end;
-		public final int id;
+		public final int index;
 		public String code;
 		public String location;
 
-		public Tuple(String code, String location, Date start, Date end, int id) {
+		public Tuple(String code, String location, Date start, Date end, int index) {
 			this.code = code;
 			this.location = location;
 			this.start = start;
 			this.end = end;
-			this.id = id;
+			this.index = index;
 		}
 
 		public int compareTo(Tuple other) {
 			return start.compareTo(other.start);
-			/*
-			 * if (dateCompare != 0) { return dateCompare; } else { if (!isStart
-			 * && other.isStart) { return -1; } else if (isStart &&
-			 * !other.isStart) { return 1; } else { return 0; } }
-			 */
 		}
+
 	}
 }
