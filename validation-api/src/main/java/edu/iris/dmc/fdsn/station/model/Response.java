@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
@@ -57,6 +58,9 @@ import edu.iris.dmc.validation.rule.StageUnits;
 @StageUnits(message = "{response.stage.unit}")
 public class Response {
 
+	@XmlTransient
+	private Long id;
+	
 	@XmlElement(name = "InstrumentSensitivity")
 	protected Sensitivity instrumentSensitivity;
 	@XmlElement(name = "InstrumentPolynomial")
@@ -68,6 +72,7 @@ public class Response {
 	@XmlAnyAttribute
 	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
+	
 	/*public void getOutputUnits() {
 		if (this.stage != null) {
 			for (ResponseStage stage : this.stage) {
@@ -75,6 +80,14 @@ public class Response {
 			}
 		}
 	}*/
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the value of the instrumentSensitivity property.

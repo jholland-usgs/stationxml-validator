@@ -4,13 +4,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.xml.sax.Locator;
-
 public class Errors {
 
+	private List<Integer> ignoreList = new ArrayList<Integer>();
 	private List<Error> list = new ArrayList<Error>();
 
+	public Errors() {
+	}
+
+	public Errors(List<Integer> ignoreList) {
+		if (ignoreList != null && !ignoreList.isEmpty()) {
+			this.ignoreList = ignoreList;
+		}
+	}
+
 	public void add(Error error) {
+		if (ignoreList.contains(error.getId())) {
+			return;
+		}
 		this.list.add(error);
 	}
 
@@ -18,11 +29,13 @@ public class Errors {
 		return list.isEmpty();
 	}
 
-	public void add(String network, Date nStart, Date nEnd,
-			String station, Date sStart, Date sEnd, String location, String channel,
-			Date cStart, Date cEnd, String message) {
-		
-		this.list.add(new Error(network,nStart,nEnd,station,sStart,sEnd,location,channel,cStart,cEnd,message));
+	public void add(String network, Date nStart, Date nEnd, String station, Date sStart, Date sEnd, String location,
+			String channel, Date cStart, Date cEnd, String path, Object invalidValue, String message) {
+		if (message == null || message.trim().isEmpty()) {
+			throw new IllegalArgumentException("Message cannot be null");
+		}
+		this.list.add(new Error(network, nStart, nEnd, station, sStart, sEnd, location, channel, cStart, cEnd, path,
+				invalidValue, message));
 	}
 
 	public List<Error> getAll() {

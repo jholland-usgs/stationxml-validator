@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -67,8 +69,9 @@ public class Equipment {
 
 	@XmlElement(name = "Type")
 	protected String type;
-	
-	@NotNull(message = "{channel.sensor.notnull}")
+
+	@NotNull(message = "{channel.sensor.description.notnull}")
+	@Size(min = 1, message = "{channel.sensor.description.notnull}")
 	@XmlElement(name = "Description")
 	protected String description;
 	@XmlElement(name = "Manufacturer")
@@ -97,6 +100,17 @@ public class Equipment {
 	protected String resourceId;
 	@XmlAnyAttribute
 	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+
+	@XmlTransient
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the value of the type property.

@@ -98,4 +98,35 @@ public class SampleRateRatioType {
         this.numberSeconds = value;
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numberSamples == null) ? 0 : numberSamples.hashCode());
+		result = prime * result + ((numberSeconds == null) ? 0 : numberSeconds.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SampleRateRatioType other = (SampleRateRatioType) obj;
+		if (numberSamples == null) {
+			if (other.numberSamples != null)
+				return false;
+		} else if (!numberSamples.equals(other.numberSamples))
+			return false;
+		if (numberSeconds == null) {
+			if (other.numberSeconds != null)
+				return false;
+		} else if (!numberSeconds.equals(other.numberSeconds))
+			return false;
+		return true;
+	}
+
 }

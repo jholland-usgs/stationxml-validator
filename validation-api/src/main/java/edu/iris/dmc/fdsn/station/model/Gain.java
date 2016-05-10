@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import edu.iris.dmc.validation.rule.NonZero;
@@ -50,11 +51,21 @@ import edu.iris.dmc.validation.rule.NonZero;
 public class Gain {
 
 	@XmlElement(name = "Value")
-	@NonZero(message="{gain.value}")
+	@NonZero(message = "{gain.value}")
 	protected Double value;
 	@XmlElement(name = "Frequency")
-	@NonZero(message="")
 	protected Double frequency;
+
+	@XmlTransient
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the value of the value property.

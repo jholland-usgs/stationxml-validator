@@ -6,14 +6,15 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>station-xml-validation</artifactId>
-		<version>1.0</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>validation-client</artifactId>
 	<name>validation-client</name>
-	<version>1.0.1</version>
+	<version>1.0.2_SNAPSHOT</version>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HHmmss'Z'</maven.build.timestamp.format>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -71,17 +72,33 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<finalName>${project.name}-${build.timestamp}</finalName>
+					<descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+						</descriptorRefs>
 					<archive>
 						<manifest>
 							<mainClass>edu.iris.dmc.Application</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
+				<executions>
+					<execution>
+						<id>create-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>${project.name}-${build.timestamp}</finalName>
+							<attach>true</attach>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
+
 		</plugins>
 
 	</build>
+
 </project>

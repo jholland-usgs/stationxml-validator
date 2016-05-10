@@ -1,7 +1,5 @@
 package edu.iris.dmc.validation.validator;
 
-import java.util.Collection;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -18,11 +16,17 @@ public class AzimuthValidator implements ConstraintValidator<edu.iris.dmc.valida
 	}
 
 	@Override
-	public boolean isValid(Azimuth value, ConstraintValidatorContext context) {
-		if (value.getValue() < this.azimuth.min()) {
+	public boolean isValid(Azimuth azimuth, ConstraintValidatorContext context) {
+		if (azimuth == null) {
+			if (this.azimuth.required()) {
+				return false;
+			}
+			return true;
+		}
+		if (azimuth.getValue() < this.azimuth.min()) {
 			return false;
 		}
-		if (value.getValue() >= this.azimuth.max()) {System.out.println(value.getValue() +"    "+ this.azimuth.max());
+		if (azimuth.getValue() >= this.azimuth.max()) {
 			return false;
 		}
 		return true;

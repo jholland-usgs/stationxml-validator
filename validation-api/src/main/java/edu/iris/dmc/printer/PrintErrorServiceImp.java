@@ -1,26 +1,15 @@
-package edu.iris.dmc;
+package edu.iris.dmc.printer;
 
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.xml.sax.Locator;
+public class PrintErrorServiceImp implements PrintErrorService {
 
-public class PrintErrorService {
-
-	private PrintStream out;
-	private String delimiter;
-
-	PrintErrorService(PrintStream out, String delimiter) {
-		this.out = out;
-		this.delimiter = delimiter;
-
-	}
+	private PrintHandler printHandler;
 
 	public void header() {
-		out.println(
-				"rule-id,rule-message,network,network-start-time,network-end-time,station,station-start-time,station-end-time,location,channel-code,channel-start-time,channel-end-time");
+		printHandler.printHeader();
 	}
 
 	public void print(edu.iris.dmc.validation.Error error) {
@@ -32,7 +21,7 @@ public class PrintErrorService {
 	private String buildMessage(Object... args) {
 		StringBuilder builder = new StringBuilder();
 		for (Object obj : args) {
-			builder.append(obj).append(delimiter);
+			builder.append(obj).append(printHandler.getDelimiter());
 		}
 		return builder.substring(0, builder.length() - 1);
 	}
@@ -41,10 +30,16 @@ public class PrintErrorService {
 			String location, String channel, Date cStart, Date cEnd, String message) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		this.out.println(buildMessage(message, network, (nStart != null) ? sdf.format(nStart) : "",
+		this.printHandler.println(buildMessage(message, network, (nStart != null) ? sdf.format(nStart) : "",
 				(nEnd != null) ? sdf.format(nEnd) : "", (station != null) ? station : "",
 				(sStart != null) ? sdf.format(sStart) : "", (sEnd != null) ? sdf.format(sEnd) : "",
 				(location != null) ? location : "", (channel != null) ? channel : "",
 				(cStart != null) ? sdf.format(cStart) : "", (cEnd != null) ? sdf.format(cEnd) : ""));
 	}
+
+	@Override
+	public void setPrintHandler(PrintHandler PrintHandler) {
+		this.printHandler = PrintHandler;
+	}
+
 }

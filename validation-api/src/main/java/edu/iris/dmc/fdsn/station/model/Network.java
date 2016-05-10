@@ -7,6 +7,7 @@
 
 package edu.iris.dmc.fdsn.station.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,14 +63,23 @@ import edu.iris.dmc.validation.rule.NoOverlap;
 
 @EpochRange(message = "{network.epoch.range}")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NetworkType", propOrder = { "totalNumberStations", "selectedNumberStations", "stations" })
-public class Network extends BaseNodeType {
+@XmlType(name = "NetworkType", propOrder = {  "code","description", "comment","totalNumberStations", "selectedNumberStations", "stations" })
+public class Network extends BaseNodeType implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5226236597603445089L;
 
-	@NotNull(message="{network.code.notnull}")
-	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message="{network.code.regex}")
+	@NotNull(message = "{network.code.notnull}")
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message = "{network.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	// @XmlJavaTypeAdapter(value = StringAdapter.class)
 	protected String code;
+
+	@XmlAttribute(name = "alternateCode")
+	protected String alternateCode;
+	@XmlAttribute(name = "historicalCode")
+	protected String historicalCode;
 
 	@NotNull(message = "{network.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
@@ -80,6 +90,11 @@ public class Network extends BaseNodeType {
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date endDate;
 
+	@XmlElement(name = "Description")
+	protected String description;
+	@XmlElement(name = "Comment")
+	protected List<Comment> comment;
+
 	@XmlElement(name = "TotalNumberStations")
 	protected BigInteger totalNumberStations;
 	@XmlElement(name = "SelectedNumberStations")
@@ -87,9 +102,20 @@ public class Network extends BaseNodeType {
 
 	@NoOverlap(message = "{network.station.overlap}")
 	@XmlElement(name = "Station")
-	protected List<Station> stations;
+	protected List<Station> stations = new ArrayList<Station>();;
 	@XmlTransient
 	private FDSNStationXML rootDocument;
+
+	@XmlTransient
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the value of the code property.
@@ -112,6 +138,42 @@ public class Network extends BaseNodeType {
 		this.code = value;
 	}
 
+	public String getAlternateCode() {
+		return alternateCode;
+	}
+
+	/**
+	 * Sets the value of the alternateCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setAlternateCode(String value) {
+		this.alternateCode = value;
+	}
+
+	/**
+	 * Gets the value of the historicalCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getHistoricalCode() {
+		return historicalCode;
+	}
+
+	/**
+	 * Sets the value of the historicalCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setHistoricalCode(String value) {
+		this.historicalCode = value;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -126,6 +188,50 @@ public class Network extends BaseNodeType {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * Sets the value of the description property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDescription(String value) {
+		this.description = value;
+	}
+
+	/**
+	 * Gets the value of the comment property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the comment property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getComment().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Comment }
+	 * 
+	 * 
+	 */
+	public List<Comment> getComment() {
+		if (comment == null) {
+			comment = new ArrayList<Comment>();
+		}
+		return this.comment;
 	}
 
 	/**
@@ -202,9 +308,6 @@ public class Network extends BaseNodeType {
 	public void addStation(Station station) {
 		if (station == null) {
 			return;
-		}
-		if (this.stations == null) {
-			this.stations = new ArrayList<Station>();
 		}
 		station.setNetwork(this);
 		this.stations.add(station);

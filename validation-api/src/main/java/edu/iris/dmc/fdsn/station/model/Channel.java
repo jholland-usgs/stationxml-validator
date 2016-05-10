@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.Unmarshaller;
@@ -97,22 +98,26 @@ import edu.iris.dmc.validation.validator.ResponseGroup;
  * 
  */
 @EpochRange(message = "{channel.epoch.range}")
-@NonZeroSampleRate(message = "{channel.samplerate}", groups = ResponseGroup.class)
+@NonZeroSampleRate(groups = ResponseGroup.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChannelType", propOrder = { "externalReference", "latitude", "longitude", "elevation", "depth",
-		"azimuth", "dip", "type", "sampleRate", "sampleRateRatio", "storageFormat", "clockDrift", "calibrationUnits",
-		"sensor", "preAmplifier", "dataLogger", "equipment", "response" })
+@XmlType(name = "ChannelType", propOrder = { "code", "description", "comment", "externalReference", "latitude",
+		"longitude", "elevation", "depth", "azimuth", "dip", "type", "sampleRate", "sampleRateRatio", "storageFormat",
+		"clockDrift", "calibrationUnits", "sensor", "preAmplifier", "dataLogger", "equipment", "response" })
 public class Channel extends BaseNodeType {
 
 	@NotNull(message = "{channel.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
-	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date startDate;
 	@XmlAttribute(name = "endDate")
-	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date endDate;
+
+	@XmlElement(name = "Description")
+	protected String description;
+	@XmlElement(name = "Comment")
+	protected List<Comment> comment;
+
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
 	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{channel.latitude}")
@@ -123,11 +128,11 @@ public class Channel extends BaseNodeType {
 	protected Longitude longitude;
 	@XmlElement(name = "Elevation", required = true)
 	protected Distance elevation;
-	@NotNull(message = "Channel's Depth is required")
+	@NotNull(message = "{channel.depth}")
 	@XmlElement(name = "Depth", required = true)
 	protected Distance depth;
 	@XmlElement(name = "Azimuth")
-	@edu.iris.dmc.validation.rule.Azimuth(min = 0, max = 360, message = "${validatedValue} does not match: Instrument azimuth, degrees clockwise from North: [0, 360[")
+	@edu.iris.dmc.validation.rule.Azimuth( min = 0, max = 360, message = "{channel.azimuth}")
 	protected Azimuth azimuth;
 	@XmlElement(name = "Dip")
 	protected Dip dip;
@@ -142,11 +147,12 @@ public class Channel extends BaseNodeType {
 	protected String storageFormat;
 	@XmlElement(name = "ClockDrift")
 	protected Channel.ClockDrift clockDrift;
-	@Unit(message = "[CalibrationUnits] Invalid unit ${validatedValue.name}")
+	@Unit(message = "{channel.callibration.unit}")
 	@XmlElement(name = "CalibrationUnits")
 	protected Units calibrationUnits;
-	
+
 	@NotNull(message = "{channel.sensor.notnull}")
+	@Valid
 	@XmlElement(name = "Sensor")
 	protected Equipment sensor;
 	@XmlElement(name = "PreAmplifier")
@@ -168,8 +174,24 @@ public class Channel extends BaseNodeType {
 	@XmlAttribute(name = "locationCode", required = true)
 	protected String locationCode;
 
+	@XmlAttribute(name = "alternateCode")
+	protected String alternateCode;
+	@XmlAttribute(name = "historicalCode")
+	protected String historicalCode;
+
 	@XmlTransient
 	private Station station;
+
+	@XmlTransient
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Station getStation() {
 		return this.station;
@@ -237,6 +259,50 @@ public class Channel extends BaseNodeType {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * Sets the value of the description property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDescription(String value) {
+		this.description = value;
+	}
+
+	/**
+	 * Gets the value of the comment property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the comment property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getComment().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Comment }
+	 * 
+	 * 
+	 */
+	public List<Comment> getComment() {
+		if (comment == null) {
+			comment = new ArrayList<Comment>();
+		}
+		return this.comment;
 	}
 
 	/**
@@ -687,6 +753,42 @@ public class Channel extends BaseNodeType {
 	 */
 	public void setCode(String value) {
 		this.code = value;
+	}
+
+	public String getAlternateCode() {
+		return alternateCode;
+	}
+
+	/**
+	 * Sets the value of the alternateCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setAlternateCode(String value) {
+		this.alternateCode = value;
+	}
+
+	/**
+	 * Gets the value of the historicalCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getHistoricalCode() {
+		return historicalCode;
+	}
+
+	/**
+	 * Sets the value of the historicalCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setHistoricalCode(String value) {
+		this.historicalCode = value;
 	}
 
 	/**

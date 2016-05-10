@@ -97,4 +97,9 @@ public class Units {
         this.description = value;
     }
 
+	@Override
+	public String toString() {
+		return "Units [name=" + name + ", description=" + description + "]";
+	}
+
 }

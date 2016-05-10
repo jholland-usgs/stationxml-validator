@@ -90,7 +90,7 @@ public class Polynomial
     @XmlElement(name = "MaximumError", required = true)
     protected BigDecimal maximumError;
     @XmlElement(name = "Coefficient", required = true)
-    protected List<Polynomial.Coefficient> coefficient;
+    protected List<Coefficient> coefficient;
 
     /**
      * Gets the value of the approximationType property.
@@ -258,9 +258,9 @@ public class Polynomial
      * 
      * 
      */
-    public List<Polynomial.Coefficient> getCoefficient() {
+    public List<Coefficient> getCoefficient() {
         if (coefficient == null) {
-            coefficient = new ArrayList<Polynomial.Coefficient>();
+            coefficient = new ArrayList<Coefficient>();
         }
         return this.coefficient;
     }
@@ -283,39 +283,5 @@ public class Polynomial
      * 
      * 
      */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "")
-    public static class Coefficient
-        extends FloatNoUnitType
-    {
-
-        @XmlAttribute(name = "number")
-        protected BigInteger number;
-
-        /**
-         * Gets the value of the number property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
-         */
-        public BigInteger getNumber() {
-            return number;
-        }
-
-        /**
-         * Sets the value of the number property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
-         */
-        public void setNumber(BigInteger value) {
-            this.number = value;
-        }
-
-    }
-
+   
 }

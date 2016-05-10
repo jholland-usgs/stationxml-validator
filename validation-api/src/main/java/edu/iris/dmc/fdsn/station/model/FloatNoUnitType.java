@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlSeeAlso({
-    edu.iris.dmc.fdsn.station.model.Polynomial.Coefficient.class
+    edu.iris.dmc.fdsn.station.model.Coefficient.class
 })
 public class FloatNoUnitType {
 

@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
@@ -66,6 +67,9 @@ import edu.iris.dmc.validation.rule.MissingDecimation;
 @MissingDecimation(message = "{response.stage.decimation.409}")
 public class ResponseStage {
 
+	@XmlTransient
+	private Long id;
+
 	@XmlElement(name = "PolesZeros")
 	protected PolesZeros polesZeros;
 	@XmlElement(name = "Coefficients")
@@ -87,6 +91,14 @@ public class ResponseStage {
 	@XmlAnyAttribute
 	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Units[] getUnits() {
 		if (polesZeros != null) {
 			return new Units[] { polesZeros.getInputUnits(), polesZeros.getOutputUnits() };
@@ -104,6 +116,27 @@ public class ResponseStage {
 			return new Units[] { coefficients.getInputUnits(), coefficients.getOutputUnits() };
 		}
 		return null;
+	}
+
+	public List<Filter> getFilters() {
+		List<Filter> filters = new ArrayList<Filter>();
+		if (this.polesZeros != null) {
+			filters.add(this.polesZeros);
+		}
+		if (this.coefficients != null) {
+			filters.add(this.coefficients);
+		}
+		if (this.responseList != null) {
+			filters.add(this.responseList);
+		}
+		if (this.fir != null) {
+			filters.add(this.fir);
+		}
+		if (this.polynomial != null) {
+			filters.add(this.polynomial);
+		}
+
+		return filters;
 	}
 
 	/**

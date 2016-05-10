@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
+import edu.iris.dmc.fdsn.station.model.Equipment;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Gain;
 import edu.iris.dmc.fdsn.station.model.Network;
@@ -350,6 +351,39 @@ public class AllRulesTest {
 		assertEquals(messages.get("response.samplerate.407"), violation.getMessage());
 
 	}
+	
+	@Test
+	public void nonZeroSampleRateNoStages() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+		in = this.getClass().getClassLoader().getResourceAsStream("CIABLEHZ_block61NoCoeff.xml");
+		FDSNStationXML root = (FDSNStationXML) jaxbUnmarshaller.unmarshal(in);
+
+		List<Network> networks = root.getNetwork();
+
+		Network n = networks.get(0);
+		assertNotNull(n);
+		Set<ConstraintViolation<Network>> violations = validator.validate(n);
+		assertEquals(1, violations.size());
+		assertEquals(messages.get("network.starttime.notnull"), violations.iterator().next().getMessage());
+		List<Station> stations = n.getStations();
+		assertEquals(1, stations.size());
+		Station station = stations.get(0);
+		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
+		assertEquals(0, stationViolations.size());
+
+		assertNotNull(station.getChannels());
+		assertFalse(station.getChannels().isEmpty());
+		assertEquals(3, station.getChannels().size());
+		Channel channel = station.getChannels().get(0);
+
+		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel, ResponseGroup.class);
+		assertEquals(1, channelViolations.size());
+		ConstraintViolation<Channel> violation = channelViolations.iterator().next();
+		assertEquals(messages.get("response.samplerate.406"), violation.getMessage());
+
+	}
 
 	@Test
 	public void invalidAzimuth() throws Exception {
@@ -523,9 +557,10 @@ public class AllRulesTest {
 		assertEquals(messages.get("station.channel.overlap"), v.getMessage());
 
 	}
-
+	
+	
 	@Test
-	public void zeroGain404() throws Exception {
+	public void zeroGain403() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
 		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
 		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_STAGEGAIN_zero.xml");
@@ -606,4 +641,97 @@ public class AllRulesTest {
 
 	}
 
+	@Test
+	public void noCoeef_411() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("411_CI_ABL.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network network = networks.get(0);
+		assertNotNull(network);
+		assertNotNull(network.getStations());
+		assertTrue(!network.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(network);
+		assertEquals(1, violations.size());
+		assertEquals(messages.get("network.starttime.notnull"), violations.iterator().next().getMessage());
+
+		Station abl = network.getStations().get(0);
+		assertNotNull(abl);
+		assertNotNull(abl.getChannels());
+		assertTrue(!abl.getChannels().isEmpty());
+		Set<ConstraintViolation<Station>> v = validator.validate(abl);
+		assertEquals(0, v.size());
+
+		assertNotNull(abl.getChannels());
+		assertTrue(!abl.getChannels().isEmpty());
+
+		Channel ehz1 = abl.getChannels().get(0);
+		Channel ehz2 = abl.getChannels().get(1);
+		Channel ehz3 = abl.getChannels().get(2);
+		Set<ConstraintViolation<Channel>> cv = validator.validate(ehz1);
+		assertEquals(1, cv.size());
+		assertEquals(messages.get("channel.sensor.description.notnull"), cv.iterator().next().getMessage());
+
+		Equipment eq = ehz1.getSensor();
+		assertNotNull(eq);
+		String sensorMessage = (String) messages.get("channel.sensor.description.notnull");
+
+		Set<ConstraintViolation<Equipment>> eqv = validator.validate(eq);
+		assertEquals(1, eqv.size());
+		assertEquals(sensorMessage, eqv.iterator().next().getMessage());
+
+		Sensitivity is = ehz1.getResponse().getInstrumentSensitivity();
+		assertNotNull(is);
+		assertNotNull(is.getInputUnits());
+		String iu = is.getInputUnits().getName();
+		assertNotNull(iu);
+
+	}
+
+	@Test
+	public void noSensorDescription_310() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("ANMO_BHZ_nosensor_description_310.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network iu = networks.get(0);
+		assertNotNull(iu);
+		assertNotNull(iu.getStations());
+		assertTrue(!iu.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(iu);
+		assertEquals(0, violations.size());
+
+		Station station1 = iu.getStations().get(0);
+		assertNotNull(station1);
+		assertNotNull(station1.getChannels());
+		assertTrue(!station1.getChannels().isEmpty());
+		Channel channel1 = station1.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv1 = validator.validate(channel1);
+		assertEquals(0, cv1.size());
+
+		Station station2 = iu.getStations().get(1);
+		assertNotNull(station2);
+
+		assertNotNull(station2.getChannels());
+		assertTrue(!station2.getChannels().isEmpty());
+		Channel channel2 = station2.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv2 = validator.validate(channel2);
+		assertEquals(1, cv2.size());
+		String sensorMessage = (String) messages.get("channel.sensor.notnull");
+		assertEquals(messages.get("channel.sensor.description.notnull"),cv2.iterator().next().getMessage());
+
+		Station station3 = iu.getStations().get(2);
+		assertNotNull(station3.getChannels());
+		assertTrue(!station3.getChannels().isEmpty());
+		Channel channel3 = station3.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv3 = validator.validate(channel3);
+		assertEquals(1, cv3.size());
+		assertEquals(sensorMessage,cv3.iterator().next().getMessage());
+
+	}
+	
 }

@@ -34,8 +34,8 @@ public class Application implements CommandLineRunner {
 	 */
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(Application.class);
-	    app.setBannerMode(org.springframework.boot.Banner.Mode.OFF);
-	    app.run(args);
+		app.setBannerMode(org.springframework.boot.Banner.Mode.OFF);
+		app.run(args);
 	}
 
 	@Override
@@ -74,8 +74,7 @@ public class Application implements CommandLineRunner {
 		}
 
 		try (InputStream is = new FileInputStream(new File(filename))) {
-			Errors errors = new Errors();
-			controller.run(is, level, errors);
+			Errors errors = controller.run(is, level);
 			stream = new PrintStream(out);
 			if (!errors.isEmpty()) {
 				PrintErrorService printer = new PrintErrorService(stream, ",");

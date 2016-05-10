@@ -48,10 +48,10 @@ import edu.iris.dmc.validation.rule.Unit;
 		"frequencyDBVariation" })
 public class Sensitivity extends Gain {
 
-	@Unit(message = "[SensitivityType] Invalid unit ${validatedValue.name}", required = true)
+	@Unit(message = "{sensitivity.input.unit}", required = true)
 	@XmlElement(name = "InputUnits", required = true)
 	protected Units inputUnits;
-	@Unit(message = "[SensitivityType] Invalid unit ${validatedValue.name}", required = true)
+	@Unit(message = "{sensitivity.output.unit}", required = true)
 	@XmlElement(name = "OutputUnits", required = true)
 	protected Units outputUnits;
 	@XmlElement(name = "FrequencyStart")

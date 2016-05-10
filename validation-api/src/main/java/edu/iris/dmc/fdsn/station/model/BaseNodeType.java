@@ -7,31 +7,23 @@
 
 package edu.iris.dmc.fdsn.station.model;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
-import org.w3c.dom.Element;
-import org.xml.sax.Locator;
 
-import edu.iris.dmc.validation.rule.EpochRange;
+import org.w3c.dom.Element;
 
 
 /**
@@ -68,40 +60,26 @@ import edu.iris.dmc.validation.rule.EpochRange;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "BaseNodeType", propOrder = { "description", "comment", "dataAvailability", "any" })
+@XmlType(name = "BaseNodeType", propOrder = { "dataAvailability", "any" })
 @XmlSeeAlso({ Station.class, Network.class, Channel.class })
 public abstract class BaseNodeType implements NodeType{
 
-	@XmlTransient
-	private Long id;
 	
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlElement(name = "Comment")
-	protected List<Comment> comment;
+	
+	
 	@XmlAnyElement(lax = true)
 	protected List<Object> any;
 	
 
 	@XmlAttribute(name = "restrictedStatus")
 	protected RestrictedStatusType restrictedStatus;
-	@XmlAttribute(name = "alternateCode")
-	protected String alternateCode;
-	@XmlAttribute(name = "historicalCode")
-	protected String historicalCode;
+	
 	@XmlAnyAttribute
 	private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
 	@XmlElement(name = "DataAvailability")
 	protected DataAvailability dataAvailability;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 
 	/**
@@ -131,49 +109,7 @@ public abstract class BaseNodeType implements NodeType{
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * Sets the value of the description property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
-
-	/**
-	 * Gets the value of the comment property.
-	 * 
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the comment property.
-	 * 
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getComment().add(newItem);
-	 * </pre>
-	 * 
-	 * 
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Comment }
-	 * 
-	 * 
-	 */
-	public List<Comment> getComment() {
-		if (comment == null) {
-			comment = new ArrayList<Comment>();
-		}
-		return this.comment;
-	}
+	
 
 	/**
 	 * Gets the value of the any property.
@@ -235,41 +171,7 @@ public abstract class BaseNodeType implements NodeType{
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getAlternateCode() {
-		return alternateCode;
-	}
-
-	/**
-	 * Sets the value of the alternateCode property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setAlternateCode(String value) {
-		this.alternateCode = value;
-	}
-
-	/**
-	 * Gets the value of the historicalCode property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getHistoricalCode() {
-		return historicalCode;
-	}
-
-	/**
-	 * Sets the value of the historicalCode property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setHistoricalCode(String value) {
-		this.historicalCode = value;
-	}
+	
 
 	/**
 	 * Gets a map that contains attributes that aren't bound to any typed

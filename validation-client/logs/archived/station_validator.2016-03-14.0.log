@@ -1,0 +1,1611 @@
+2016-03-14 10:30:13 - Starting Application on Yazans-MacBook-Pro.local with PID 45848 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 10:30:13 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 10:30:13 - No active profile set, falling back to default profiles: default
+2016-03-14 10:30:13 - Loading source class edu.iris.dmc.Application
+2016-03-14 10:30:13 - Loaded config file 'classpath:/application.properties'
+2016-03-14 10:30:13 - Skipped (empty) config file 'classpath:/application.properties' for profile default
+2016-03-14 10:30:14 - 
+
+
+=========================
+AUTO-CONFIGURATION REPORT
+=========================
+
+
+Positive matches:
+-----------------
+
+   GenericCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   JmxAutoConfiguration matched
+      - @ConditionalOnClass classes found: org.springframework.jmx.export.MBeanExporter (OnClassCondition)
+      - matched (OnPropertyCondition)
+
+   JmxAutoConfiguration#mbeanExporter matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.MBeanExporter; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#mbeanServer matched
+      - @ConditionalOnMissingBean (types: javax.management.MBeanServer; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#objectNamingStrategy matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.naming.ObjectNamingStrategy; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   NoOpCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   PropertyPlaceholderAutoConfiguration#propertySourcesPlaceholderConfigurer matched
+      - @ConditionalOnMissingBean (types: org.springframework.context.support.PropertySourcesPlaceholderConfigurer; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   SimpleCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.ActiveMQConnectionFactory (OnClassCondition)
+
+   AopAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.aspectj.lang.annotation.Aspect,org.aspectj.lang.reflect.Advice (OnClassCondition)
+
+   ArtemisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory (OnClassCondition)
+
+   BatchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.batch.core.launch.JobLauncher,org.springframework.jdbc.core.JdbcOperations (OnClassCondition)
+
+   CacheAutoConfiguration did not match
+      - @ConditionalOnClass classes found: org.springframework.cache.CacheManager (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   CacheAutoConfiguration.CacheManagerJpaDependencyConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+      - Ancestor 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+
+   CassandraAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster (OnClassCondition)
+
+   CassandraDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster,org.springframework.data.cassandra.core.CassandraAdminOperations (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Session,org.springframework.data.cassandra.repository.CassandraRepository (OnClassCondition)
+
+   CloudAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.cloud.config.java.CloudScanConfiguration (OnClassCondition)
+
+   DataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   DataSourceTransactionManagerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.core.JdbcTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   DeviceDelegatingViewResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver (OnClassCondition)
+
+   DeviceResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.DeviceResolverHandlerInterceptor,org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver (OnClassCondition)
+
+   DispatcherServletAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   EhCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: net.sf.ehcache.Cache,org.springframework.cache.ehcache.EhCacheCacheManager (OnClassCondition)
+
+   ElasticsearchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.client.TransportClientFactoryBean,org.springframework.data.elasticsearch.client.NodeClientFactoryBean (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.core.ElasticsearchTemplate (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.repository.ElasticsearchRepository (OnClassCondition)
+
+   EmbeddedMongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,de.flapdoodle.embed.mongo.MongodStarter (OnClassCondition)
+
+   EmbeddedServletContainerAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   FacebookAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.facebook.connect.FacebookConnectionFactory (OnClassCondition)
+
+   FallbackWebSecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.config.annotation.web.configuration.EnableWebSecurity (OnClassCondition)
+
+   FlywayAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.flywaydb.core.Flyway (OnClassCondition)
+
+   FreeMarkerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: freemarker.template.Configuration,org.springframework.ui.freemarker.FreeMarkerConfigurationFactory (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: groovy.text.markup.MarkupTemplateEngine (OnClassCondition)
+
+   GsonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.gson.Gson (OnClassCondition)
+
+   GuavaCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.common.cache.CacheBuilder,org.springframework.cache.guava.GuavaCacheManager (OnClassCondition)
+
+   H2ConsoleAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.h2.server.web.WebServlet (OnClassCondition)
+
+   HazelcastAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance (OnClassCondition)
+
+   HazelcastCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,com.hazelcast.spring.cache.HazelcastCacheManager (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+
+   HibernateJpaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean,org.springframework.transaction.annotation.EnableTransactionManagement (OnClassCondition)
+
+   HornetQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.hornetq.api.jms.HornetQJMSClient (OnClassCondition)
+
+   HttpEncodingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.filter.CharacterEncodingFilter (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.http.converter.HttpMessageConverter (OnClassCondition)
+
+   HypermediaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.hateoas.Resource,org.springframework.web.bind.annotation.RequestMapping,org.springframework.plugin.core.Plugin (OnClassCondition)
+
+   InfinispanCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.infinispan.spring.provider.SpringEmbeddedCacheManager (OnClassCondition)
+
+   IntegrationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.integration.config.EnableIntegration (OnClassCondition)
+
+   JCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.cache.Caching,org.springframework.cache.jcache.JCacheCacheManager (OnClassCondition)
+
+   JacksonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.fasterxml.jackson.databind.ObjectMapper (OnClassCondition)
+
+   JerseyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.glassfish.jersey.server.spring.SpringComponentProvider,javax.servlet.ServletRegistration (OnClassCondition)
+
+   JmsAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   JooqAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.jooq.DSLContext (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.jpa.repository.JpaRepository (OnClassCondition)
+
+   JtaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.Transaction (OnClassCondition)
+
+   LinkedInAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.linkedin.connect.LinkedInConnectionFactory (OnClassCondition)
+
+   LiquibaseAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: liquibase.integration.spring.SpringLiquibase (OnClassCondition)
+
+   MailSenderAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.mail.internet.MimeMessage (OnClassCondition)
+
+   MailSenderValidatorAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.mail.test-connection  (OnPropertyCondition)
+
+   MessageSourceAutoConfiguration did not match
+      - No bundle found for spring.messages.basename: messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.MongoClient (OnClassCondition)
+
+   MongoDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.core.MongoTemplate (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.repository.MongoRepository (OnClassCondition)
+
+   MultipartAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.multipart.support.StandardServletMultipartResolver,javax.servlet.MultipartConfigElement (OnClassCondition)
+
+   MustacheAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.samskivert.mustache.Mustache (OnClassCondition)
+
+   OAuth2AutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.oauth2.common.OAuth2AccessToken,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   PersistenceExceptionTranslationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor (OnClassCondition)
+
+   RabbitAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.amqp.rabbit.core.RabbitTemplate,com.rabbitmq.client.Channel (OnClassCondition)
+
+   ReactorAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: reactor.spring.context.config.EnableReactor,reactor.Environment (OnClassCondition)
+
+   RedisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.redis.connection.jedis.JedisConnection,org.springframework.data.redis.core.RedisOperations,redis.clients.jedis.Jedis (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration (OnClassCondition)
+
+   SecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter (OnClassCondition)
+
+   SecurityFilterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer,org.springframework.security.config.http.SessionCreationPolicy (OnClassCondition)
+
+   SendGridAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.sendgrid.SendGrid (OnClassCondition)
+
+   ServerPropertiesAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   SessionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.session.Session (OnClassCondition)
+
+   SitePreferenceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor,org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver (OnClassCondition)
+
+   SocialWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.connect.web.ConnectController,org.springframework.social.config.annotation.SocialConfigurerAdapter (OnClassCondition)
+
+   SolrAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.impl.HttpSolrServer,org.apache.solr.client.solrj.impl.CloudSolrServer,org.apache.solr.common.cloud.HashPartitioner (OnClassCondition)
+
+   SolrRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.SolrServer,org.springframework.data.solr.repository.SolrRepository (OnClassCondition)
+
+   SpringApplicationAdminJmxAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.application.admin.enabled  (OnPropertyCondition)
+
+   SpringDataWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.web.PageableHandlerMethodArgumentResolver,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   ThymeleafAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.thymeleaf.spring4.SpringTemplateEngine (OnClassCondition)
+
+   TransactionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.transaction.support.TransactionTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   TwitterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.twitter.connect.TwitterConnectionFactory (OnClassCondition)
+
+   VelocityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.velocity.app.VelocityEngine,org.springframework.ui.velocity.VelocityEngineFactory (OnClassCondition)
+
+   WebMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   WebSocketAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,javax.websocket.server.ServerContainer (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer (OnClassCondition)
+
+   XADataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.TransactionManager,org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+   org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+
+   org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+
+
+2016-03-14 10:30:14 - Started Application in 1.292 seconds (JVM running for 2.005)
+2016-03-14 10:32:14 - Starting Application on Yazans-MacBook-Pro.local with PID 45868 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 10:32:14 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 10:32:14 - No active profile set, falling back to default profiles: default
+2016-03-14 10:32:14 - Loading source class edu.iris.dmc.Application
+2016-03-14 10:32:14 - Loaded config file 'classpath:/application.properties'
+2016-03-14 10:32:14 - Skipped (empty) config file 'classpath:/application.properties' for profile default
+2016-03-14 10:32:15 - 
+
+
+=========================
+AUTO-CONFIGURATION REPORT
+=========================
+
+
+Positive matches:
+-----------------
+
+   GenericCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   JmxAutoConfiguration matched
+      - @ConditionalOnClass classes found: org.springframework.jmx.export.MBeanExporter (OnClassCondition)
+      - matched (OnPropertyCondition)
+
+   JmxAutoConfiguration#mbeanExporter matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.MBeanExporter; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#mbeanServer matched
+      - @ConditionalOnMissingBean (types: javax.management.MBeanServer; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#objectNamingStrategy matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.naming.ObjectNamingStrategy; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   NoOpCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   PropertyPlaceholderAutoConfiguration#propertySourcesPlaceholderConfigurer matched
+      - @ConditionalOnMissingBean (types: org.springframework.context.support.PropertySourcesPlaceholderConfigurer; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   SimpleCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.ActiveMQConnectionFactory (OnClassCondition)
+
+   AopAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.aspectj.lang.annotation.Aspect,org.aspectj.lang.reflect.Advice (OnClassCondition)
+
+   ArtemisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory (OnClassCondition)
+
+   BatchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.batch.core.launch.JobLauncher,org.springframework.jdbc.core.JdbcOperations (OnClassCondition)
+
+   CacheAutoConfiguration did not match
+      - @ConditionalOnClass classes found: org.springframework.cache.CacheManager (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   CacheAutoConfiguration.CacheManagerJpaDependencyConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+      - Ancestor 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+
+   CassandraAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster (OnClassCondition)
+
+   CassandraDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster,org.springframework.data.cassandra.core.CassandraAdminOperations (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Session,org.springframework.data.cassandra.repository.CassandraRepository (OnClassCondition)
+
+   CloudAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.cloud.config.java.CloudScanConfiguration (OnClassCondition)
+
+   DataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   DataSourceTransactionManagerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.core.JdbcTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   DeviceDelegatingViewResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver (OnClassCondition)
+
+   DeviceResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.DeviceResolverHandlerInterceptor,org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver (OnClassCondition)
+
+   DispatcherServletAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   EhCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: net.sf.ehcache.Cache,org.springframework.cache.ehcache.EhCacheCacheManager (OnClassCondition)
+
+   ElasticsearchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.client.TransportClientFactoryBean,org.springframework.data.elasticsearch.client.NodeClientFactoryBean (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.core.ElasticsearchTemplate (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.repository.ElasticsearchRepository (OnClassCondition)
+
+   EmbeddedMongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,de.flapdoodle.embed.mongo.MongodStarter (OnClassCondition)
+
+   EmbeddedServletContainerAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   FacebookAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.facebook.connect.FacebookConnectionFactory (OnClassCondition)
+
+   FallbackWebSecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.config.annotation.web.configuration.EnableWebSecurity (OnClassCondition)
+
+   FlywayAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.flywaydb.core.Flyway (OnClassCondition)
+
+   FreeMarkerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: freemarker.template.Configuration,org.springframework.ui.freemarker.FreeMarkerConfigurationFactory (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: groovy.text.markup.MarkupTemplateEngine (OnClassCondition)
+
+   GsonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.gson.Gson (OnClassCondition)
+
+   GuavaCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.common.cache.CacheBuilder,org.springframework.cache.guava.GuavaCacheManager (OnClassCondition)
+
+   H2ConsoleAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.h2.server.web.WebServlet (OnClassCondition)
+
+   HazelcastAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance (OnClassCondition)
+
+   HazelcastCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,com.hazelcast.spring.cache.HazelcastCacheManager (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+
+   HibernateJpaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean,org.springframework.transaction.annotation.EnableTransactionManagement (OnClassCondition)
+
+   HornetQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.hornetq.api.jms.HornetQJMSClient (OnClassCondition)
+
+   HttpEncodingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.filter.CharacterEncodingFilter (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.http.converter.HttpMessageConverter (OnClassCondition)
+
+   HypermediaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.hateoas.Resource,org.springframework.web.bind.annotation.RequestMapping,org.springframework.plugin.core.Plugin (OnClassCondition)
+
+   InfinispanCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.infinispan.spring.provider.SpringEmbeddedCacheManager (OnClassCondition)
+
+   IntegrationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.integration.config.EnableIntegration (OnClassCondition)
+
+   JCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.cache.Caching,org.springframework.cache.jcache.JCacheCacheManager (OnClassCondition)
+
+   JacksonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.fasterxml.jackson.databind.ObjectMapper (OnClassCondition)
+
+   JerseyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.glassfish.jersey.server.spring.SpringComponentProvider,javax.servlet.ServletRegistration (OnClassCondition)
+
+   JmsAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   JooqAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.jooq.DSLContext (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.jpa.repository.JpaRepository (OnClassCondition)
+
+   JtaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.Transaction (OnClassCondition)
+
+   LinkedInAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.linkedin.connect.LinkedInConnectionFactory (OnClassCondition)
+
+   LiquibaseAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: liquibase.integration.spring.SpringLiquibase (OnClassCondition)
+
+   MailSenderAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.mail.internet.MimeMessage (OnClassCondition)
+
+   MailSenderValidatorAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.mail.test-connection  (OnPropertyCondition)
+
+   MessageSourceAutoConfiguration did not match
+      - No bundle found for spring.messages.basename: messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.MongoClient (OnClassCondition)
+
+   MongoDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.core.MongoTemplate (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.repository.MongoRepository (OnClassCondition)
+
+   MultipartAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.multipart.support.StandardServletMultipartResolver,javax.servlet.MultipartConfigElement (OnClassCondition)
+
+   MustacheAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.samskivert.mustache.Mustache (OnClassCondition)
+
+   OAuth2AutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.oauth2.common.OAuth2AccessToken,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   PersistenceExceptionTranslationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor (OnClassCondition)
+
+   RabbitAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.amqp.rabbit.core.RabbitTemplate,com.rabbitmq.client.Channel (OnClassCondition)
+
+   ReactorAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: reactor.spring.context.config.EnableReactor,reactor.Environment (OnClassCondition)
+
+   RedisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.redis.connection.jedis.JedisConnection,org.springframework.data.redis.core.RedisOperations,redis.clients.jedis.Jedis (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration (OnClassCondition)
+
+   SecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter (OnClassCondition)
+
+   SecurityFilterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer,org.springframework.security.config.http.SessionCreationPolicy (OnClassCondition)
+
+   SendGridAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.sendgrid.SendGrid (OnClassCondition)
+
+   ServerPropertiesAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   SessionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.session.Session (OnClassCondition)
+
+   SitePreferenceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor,org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver (OnClassCondition)
+
+   SocialWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.connect.web.ConnectController,org.springframework.social.config.annotation.SocialConfigurerAdapter (OnClassCondition)
+
+   SolrAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.impl.HttpSolrServer,org.apache.solr.client.solrj.impl.CloudSolrServer,org.apache.solr.common.cloud.HashPartitioner (OnClassCondition)
+
+   SolrRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.SolrServer,org.springframework.data.solr.repository.SolrRepository (OnClassCondition)
+
+   SpringApplicationAdminJmxAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.application.admin.enabled  (OnPropertyCondition)
+
+   SpringDataWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.web.PageableHandlerMethodArgumentResolver,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   ThymeleafAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.thymeleaf.spring4.SpringTemplateEngine (OnClassCondition)
+
+   TransactionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.transaction.support.TransactionTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   TwitterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.twitter.connect.TwitterConnectionFactory (OnClassCondition)
+
+   VelocityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.velocity.app.VelocityEngine,org.springframework.ui.velocity.VelocityEngineFactory (OnClassCondition)
+
+   WebMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   WebSocketAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,javax.websocket.server.ServerContainer (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer (OnClassCondition)
+
+   XADataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.TransactionManager,org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+   org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+
+   org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+
+
+2016-03-14 10:32:15 - Started Application in 1.252 seconds (JVM running for 1.995)
+2016-03-14 10:37:01 - Starting Application on Yazans-MacBook-Pro.local with PID 45873 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 10:37:01 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 10:37:01 - No active profile set, falling back to default profiles: default
+2016-03-14 10:37:01 - Loading source class edu.iris.dmc.Application
+2016-03-14 10:37:01 - Loaded config file 'classpath:/application.properties'
+2016-03-14 10:37:01 - Skipped (empty) config file 'classpath:/application.properties' for profile default
+2016-03-14 10:37:02 - 
+
+
+=========================
+AUTO-CONFIGURATION REPORT
+=========================
+
+
+Positive matches:
+-----------------
+
+   GenericCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   JmxAutoConfiguration matched
+      - @ConditionalOnClass classes found: org.springframework.jmx.export.MBeanExporter (OnClassCondition)
+      - matched (OnPropertyCondition)
+
+   JmxAutoConfiguration#mbeanExporter matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.MBeanExporter; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#mbeanServer matched
+      - @ConditionalOnMissingBean (types: javax.management.MBeanServer; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#objectNamingStrategy matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.naming.ObjectNamingStrategy; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   NoOpCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   PropertyPlaceholderAutoConfiguration#propertySourcesPlaceholderConfigurer matched
+      - @ConditionalOnMissingBean (types: org.springframework.context.support.PropertySourcesPlaceholderConfigurer; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   SimpleCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.ActiveMQConnectionFactory (OnClassCondition)
+
+   AopAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.aspectj.lang.annotation.Aspect,org.aspectj.lang.reflect.Advice (OnClassCondition)
+
+   ArtemisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory (OnClassCondition)
+
+   BatchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.batch.core.launch.JobLauncher,org.springframework.jdbc.core.JdbcOperations (OnClassCondition)
+
+   CacheAutoConfiguration did not match
+      - @ConditionalOnClass classes found: org.springframework.cache.CacheManager (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   CacheAutoConfiguration.CacheManagerJpaDependencyConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+      - Ancestor 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+
+   CassandraAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster (OnClassCondition)
+
+   CassandraDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster,org.springframework.data.cassandra.core.CassandraAdminOperations (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Session,org.springframework.data.cassandra.repository.CassandraRepository (OnClassCondition)
+
+   CloudAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.cloud.config.java.CloudScanConfiguration (OnClassCondition)
+
+   DataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   DataSourceTransactionManagerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.core.JdbcTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   DeviceDelegatingViewResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver (OnClassCondition)
+
+   DeviceResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.DeviceResolverHandlerInterceptor,org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver (OnClassCondition)
+
+   DispatcherServletAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   EhCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: net.sf.ehcache.Cache,org.springframework.cache.ehcache.EhCacheCacheManager (OnClassCondition)
+
+   ElasticsearchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.client.TransportClientFactoryBean,org.springframework.data.elasticsearch.client.NodeClientFactoryBean (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.core.ElasticsearchTemplate (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.repository.ElasticsearchRepository (OnClassCondition)
+
+   EmbeddedMongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,de.flapdoodle.embed.mongo.MongodStarter (OnClassCondition)
+
+   EmbeddedServletContainerAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   FacebookAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.facebook.connect.FacebookConnectionFactory (OnClassCondition)
+
+   FallbackWebSecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.config.annotation.web.configuration.EnableWebSecurity (OnClassCondition)
+
+   FlywayAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.flywaydb.core.Flyway (OnClassCondition)
+
+   FreeMarkerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: freemarker.template.Configuration,org.springframework.ui.freemarker.FreeMarkerConfigurationFactory (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: groovy.text.markup.MarkupTemplateEngine (OnClassCondition)
+
+   GsonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.gson.Gson (OnClassCondition)
+
+   GuavaCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.common.cache.CacheBuilder,org.springframework.cache.guava.GuavaCacheManager (OnClassCondition)
+
+   H2ConsoleAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.h2.server.web.WebServlet (OnClassCondition)
+
+   HazelcastAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance (OnClassCondition)
+
+   HazelcastCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,com.hazelcast.spring.cache.HazelcastCacheManager (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+
+   HibernateJpaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean,org.springframework.transaction.annotation.EnableTransactionManagement (OnClassCondition)
+
+   HornetQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.hornetq.api.jms.HornetQJMSClient (OnClassCondition)
+
+   HttpEncodingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.filter.CharacterEncodingFilter (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.http.converter.HttpMessageConverter (OnClassCondition)
+
+   HypermediaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.hateoas.Resource,org.springframework.web.bind.annotation.RequestMapping,org.springframework.plugin.core.Plugin (OnClassCondition)
+
+   InfinispanCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.infinispan.spring.provider.SpringEmbeddedCacheManager (OnClassCondition)
+
+   IntegrationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.integration.config.EnableIntegration (OnClassCondition)
+
+   JCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.cache.Caching,org.springframework.cache.jcache.JCacheCacheManager (OnClassCondition)
+
+   JacksonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.fasterxml.jackson.databind.ObjectMapper (OnClassCondition)
+
+   JerseyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.glassfish.jersey.server.spring.SpringComponentProvider,javax.servlet.ServletRegistration (OnClassCondition)
+
+   JmsAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   JooqAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.jooq.DSLContext (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.jpa.repository.JpaRepository (OnClassCondition)
+
+   JtaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.Transaction (OnClassCondition)
+
+   LinkedInAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.linkedin.connect.LinkedInConnectionFactory (OnClassCondition)
+
+   LiquibaseAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: liquibase.integration.spring.SpringLiquibase (OnClassCondition)
+
+   MailSenderAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.mail.internet.MimeMessage (OnClassCondition)
+
+   MailSenderValidatorAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.mail.test-connection  (OnPropertyCondition)
+
+   MessageSourceAutoConfiguration did not match
+      - No bundle found for spring.messages.basename: messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.MongoClient (OnClassCondition)
+
+   MongoDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.core.MongoTemplate (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.repository.MongoRepository (OnClassCondition)
+
+   MultipartAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.multipart.support.StandardServletMultipartResolver,javax.servlet.MultipartConfigElement (OnClassCondition)
+
+   MustacheAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.samskivert.mustache.Mustache (OnClassCondition)
+
+   OAuth2AutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.oauth2.common.OAuth2AccessToken,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   PersistenceExceptionTranslationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor (OnClassCondition)
+
+   RabbitAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.amqp.rabbit.core.RabbitTemplate,com.rabbitmq.client.Channel (OnClassCondition)
+
+   ReactorAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: reactor.spring.context.config.EnableReactor,reactor.Environment (OnClassCondition)
+
+   RedisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.redis.connection.jedis.JedisConnection,org.springframework.data.redis.core.RedisOperations,redis.clients.jedis.Jedis (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration (OnClassCondition)
+
+   SecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter (OnClassCondition)
+
+   SecurityFilterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer,org.springframework.security.config.http.SessionCreationPolicy (OnClassCondition)
+
+   SendGridAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.sendgrid.SendGrid (OnClassCondition)
+
+   ServerPropertiesAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   SessionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.session.Session (OnClassCondition)
+
+   SitePreferenceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor,org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver (OnClassCondition)
+
+   SocialWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.connect.web.ConnectController,org.springframework.social.config.annotation.SocialConfigurerAdapter (OnClassCondition)
+
+   SolrAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.impl.HttpSolrServer,org.apache.solr.client.solrj.impl.CloudSolrServer,org.apache.solr.common.cloud.HashPartitioner (OnClassCondition)
+
+   SolrRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.SolrServer,org.springframework.data.solr.repository.SolrRepository (OnClassCondition)
+
+   SpringApplicationAdminJmxAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.application.admin.enabled  (OnPropertyCondition)
+
+   SpringDataWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.web.PageableHandlerMethodArgumentResolver,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   ThymeleafAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.thymeleaf.spring4.SpringTemplateEngine (OnClassCondition)
+
+   TransactionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.transaction.support.TransactionTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   TwitterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.twitter.connect.TwitterConnectionFactory (OnClassCondition)
+
+   VelocityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.velocity.app.VelocityEngine,org.springframework.ui.velocity.VelocityEngineFactory (OnClassCondition)
+
+   WebMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   WebSocketAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,javax.websocket.server.ServerContainer (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer (OnClassCondition)
+
+   XADataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.TransactionManager,org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+   org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+
+   org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+
+
+2016-03-14 10:37:02 - Started Application in 1.264 seconds (JVM running for 1.946)
+2016-03-14 10:37:26 - Starting Application on Yazans-MacBook-Pro.local with PID 45874 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 10:37:26 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 10:37:26 - No active profile set, falling back to default profiles: default
+2016-03-14 10:37:26 - Loading source class edu.iris.dmc.Application
+2016-03-14 10:37:26 - Loaded config file 'classpath:/application.properties'
+2016-03-14 10:37:26 - Skipped (empty) config file 'classpath:/application.properties' for profile default
+2016-03-14 10:37:27 - 
+
+
+=========================
+AUTO-CONFIGURATION REPORT
+=========================
+
+
+Positive matches:
+-----------------
+
+   GenericCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   JmxAutoConfiguration matched
+      - @ConditionalOnClass classes found: org.springframework.jmx.export.MBeanExporter (OnClassCondition)
+      - matched (OnPropertyCondition)
+
+   JmxAutoConfiguration#mbeanExporter matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.MBeanExporter; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#mbeanServer matched
+      - @ConditionalOnMissingBean (types: javax.management.MBeanServer; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#objectNamingStrategy matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.naming.ObjectNamingStrategy; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   NoOpCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   PropertyPlaceholderAutoConfiguration#propertySourcesPlaceholderConfigurer matched
+      - @ConditionalOnMissingBean (types: org.springframework.context.support.PropertySourcesPlaceholderConfigurer; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   SimpleCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.ActiveMQConnectionFactory (OnClassCondition)
+
+   AopAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.aspectj.lang.annotation.Aspect,org.aspectj.lang.reflect.Advice (OnClassCondition)
+
+   ArtemisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory (OnClassCondition)
+
+   BatchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.batch.core.launch.JobLauncher,org.springframework.jdbc.core.JdbcOperations (OnClassCondition)
+
+   CacheAutoConfiguration did not match
+      - @ConditionalOnClass classes found: org.springframework.cache.CacheManager (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   CacheAutoConfiguration.CacheManagerJpaDependencyConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+      - Ancestor 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+
+   CassandraAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster (OnClassCondition)
+
+   CassandraDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster,org.springframework.data.cassandra.core.CassandraAdminOperations (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Session,org.springframework.data.cassandra.repository.CassandraRepository (OnClassCondition)
+
+   CloudAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.cloud.config.java.CloudScanConfiguration (OnClassCondition)
+
+   DataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   DataSourceTransactionManagerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.core.JdbcTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   DeviceDelegatingViewResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver (OnClassCondition)
+
+   DeviceResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.DeviceResolverHandlerInterceptor,org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver (OnClassCondition)
+
+   DispatcherServletAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   EhCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: net.sf.ehcache.Cache,org.springframework.cache.ehcache.EhCacheCacheManager (OnClassCondition)
+
+   ElasticsearchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.client.TransportClientFactoryBean,org.springframework.data.elasticsearch.client.NodeClientFactoryBean (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.core.ElasticsearchTemplate (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.repository.ElasticsearchRepository (OnClassCondition)
+
+   EmbeddedMongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,de.flapdoodle.embed.mongo.MongodStarter (OnClassCondition)
+
+   EmbeddedServletContainerAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   FacebookAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.facebook.connect.FacebookConnectionFactory (OnClassCondition)
+
+   FallbackWebSecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.config.annotation.web.configuration.EnableWebSecurity (OnClassCondition)
+
+   FlywayAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.flywaydb.core.Flyway (OnClassCondition)
+
+   FreeMarkerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: freemarker.template.Configuration,org.springframework.ui.freemarker.FreeMarkerConfigurationFactory (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: groovy.text.markup.MarkupTemplateEngine (OnClassCondition)
+
+   GsonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.gson.Gson (OnClassCondition)
+
+   GuavaCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.common.cache.CacheBuilder,org.springframework.cache.guava.GuavaCacheManager (OnClassCondition)
+
+   H2ConsoleAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.h2.server.web.WebServlet (OnClassCondition)
+
+   HazelcastAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance (OnClassCondition)
+
+   HazelcastCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,com.hazelcast.spring.cache.HazelcastCacheManager (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+
+   HibernateJpaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean,org.springframework.transaction.annotation.EnableTransactionManagement (OnClassCondition)
+
+   HornetQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.hornetq.api.jms.HornetQJMSClient (OnClassCondition)
+
+   HttpEncodingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.filter.CharacterEncodingFilter (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.http.converter.HttpMessageConverter (OnClassCondition)
+
+   HypermediaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.hateoas.Resource,org.springframework.web.bind.annotation.RequestMapping,org.springframework.plugin.core.Plugin (OnClassCondition)
+
+   InfinispanCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.infinispan.spring.provider.SpringEmbeddedCacheManager (OnClassCondition)
+
+   IntegrationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.integration.config.EnableIntegration (OnClassCondition)
+
+   JCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.cache.Caching,org.springframework.cache.jcache.JCacheCacheManager (OnClassCondition)
+
+   JacksonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.fasterxml.jackson.databind.ObjectMapper (OnClassCondition)
+
+   JerseyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.glassfish.jersey.server.spring.SpringComponentProvider,javax.servlet.ServletRegistration (OnClassCondition)
+
+   JmsAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   JooqAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.jooq.DSLContext (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.jpa.repository.JpaRepository (OnClassCondition)
+
+   JtaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.Transaction (OnClassCondition)
+
+   LinkedInAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.linkedin.connect.LinkedInConnectionFactory (OnClassCondition)
+
+   LiquibaseAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: liquibase.integration.spring.SpringLiquibase (OnClassCondition)
+
+   MailSenderAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.mail.internet.MimeMessage (OnClassCondition)
+
+   MailSenderValidatorAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.mail.test-connection  (OnPropertyCondition)
+
+   MessageSourceAutoConfiguration did not match
+      - No bundle found for spring.messages.basename: messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.MongoClient (OnClassCondition)
+
+   MongoDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.core.MongoTemplate (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.repository.MongoRepository (OnClassCondition)
+
+   MultipartAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.multipart.support.StandardServletMultipartResolver,javax.servlet.MultipartConfigElement (OnClassCondition)
+
+   MustacheAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.samskivert.mustache.Mustache (OnClassCondition)
+
+   OAuth2AutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.oauth2.common.OAuth2AccessToken,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   PersistenceExceptionTranslationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor (OnClassCondition)
+
+   RabbitAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.amqp.rabbit.core.RabbitTemplate,com.rabbitmq.client.Channel (OnClassCondition)
+
+   ReactorAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: reactor.spring.context.config.EnableReactor,reactor.Environment (OnClassCondition)
+
+   RedisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.redis.connection.jedis.JedisConnection,org.springframework.data.redis.core.RedisOperations,redis.clients.jedis.Jedis (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration (OnClassCondition)
+
+   SecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter (OnClassCondition)
+
+   SecurityFilterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer,org.springframework.security.config.http.SessionCreationPolicy (OnClassCondition)
+
+   SendGridAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.sendgrid.SendGrid (OnClassCondition)
+
+   ServerPropertiesAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   SessionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.session.Session (OnClassCondition)
+
+   SitePreferenceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor,org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver (OnClassCondition)
+
+   SocialWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.connect.web.ConnectController,org.springframework.social.config.annotation.SocialConfigurerAdapter (OnClassCondition)
+
+   SolrAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.impl.HttpSolrServer,org.apache.solr.client.solrj.impl.CloudSolrServer,org.apache.solr.common.cloud.HashPartitioner (OnClassCondition)
+
+   SolrRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.SolrServer,org.springframework.data.solr.repository.SolrRepository (OnClassCondition)
+
+   SpringApplicationAdminJmxAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.application.admin.enabled  (OnPropertyCondition)
+
+   SpringDataWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.web.PageableHandlerMethodArgumentResolver,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   ThymeleafAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.thymeleaf.spring4.SpringTemplateEngine (OnClassCondition)
+
+   TransactionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.transaction.support.TransactionTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   TwitterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.twitter.connect.TwitterConnectionFactory (OnClassCondition)
+
+   VelocityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.velocity.app.VelocityEngine,org.springframework.ui.velocity.VelocityEngineFactory (OnClassCondition)
+
+   WebMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   WebSocketAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,javax.websocket.server.ServerContainer (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer (OnClassCondition)
+
+   XADataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.TransactionManager,org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+   org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+
+   org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+
+
+2016-03-14 10:37:27 - Started Application in 1.315 seconds (JVM running for 1.706)
+2016-03-14 10:42:56 - Starting Application on Yazans-MacBook-Pro.local with PID 45884 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 10:42:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 10:42:56 - No active profile set, falling back to default profiles: default
+2016-03-14 10:42:56 - Loading source class edu.iris.dmc.Application
+2016-03-14 10:42:56 - Loaded config file 'classpath:/application.properties'
+2016-03-14 10:42:56 - Skipped (empty) config file 'classpath:/application.properties' for profile default
+2016-03-14 10:42:57 - 
+
+
+=========================
+AUTO-CONFIGURATION REPORT
+=========================
+
+
+Positive matches:
+-----------------
+
+   GenericCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   JmxAutoConfiguration matched
+      - @ConditionalOnClass classes found: org.springframework.jmx.export.MBeanExporter (OnClassCondition)
+      - matched (OnPropertyCondition)
+
+   JmxAutoConfiguration#mbeanExporter matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.MBeanExporter; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#mbeanServer matched
+      - @ConditionalOnMissingBean (types: javax.management.MBeanServer; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   JmxAutoConfiguration#objectNamingStrategy matched
+      - @ConditionalOnMissingBean (types: org.springframework.jmx.export.naming.ObjectNamingStrategy; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   NoOpCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   PropertyPlaceholderAutoConfiguration#propertySourcesPlaceholderConfigurer matched
+      - @ConditionalOnMissingBean (types: org.springframework.context.support.PropertySourcesPlaceholderConfigurer; SearchStrategy: current) found no beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+   SimpleCacheConfiguration matched
+      - Automatic cache type (CacheCondition)
+
+
+Negative matches:
+-----------------
+
+   ActiveMQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.ActiveMQConnectionFactory (OnClassCondition)
+
+   AopAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.aspectj.lang.annotation.Aspect,org.aspectj.lang.reflect.Advice (OnClassCondition)
+
+   ArtemisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory (OnClassCondition)
+
+   BatchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.batch.core.launch.JobLauncher,org.springframework.jdbc.core.JdbcOperations (OnClassCondition)
+
+   CacheAutoConfiguration did not match
+      - @ConditionalOnClass classes found: org.springframework.cache.CacheManager (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.cache.interceptor.CacheAspectSupport; SearchStrategy: all) found no beans (OnBeanCondition)
+
+   CacheAutoConfiguration.CacheManagerJpaDependencyConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+      - Ancestor 'org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration' did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+
+   CassandraAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster (OnClassCondition)
+
+   CassandraDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Cluster,org.springframework.data.cassandra.core.CassandraAdminOperations (OnClassCondition)
+
+   CassandraRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.datastax.driver.core.Session,org.springframework.data.cassandra.repository.CassandraRepository (OnClassCondition)
+
+   CloudAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.cloud.config.java.CloudScanConfiguration (OnClassCondition)
+
+   DataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   DataSourceTransactionManagerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.core.JdbcTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   DeviceDelegatingViewResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver (OnClassCondition)
+
+   DeviceResolverAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.DeviceResolverHandlerInterceptor,org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver (OnClassCondition)
+
+   DispatcherServletAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   EhCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: net.sf.ehcache.Cache,org.springframework.cache.ehcache.EhCacheCacheManager (OnClassCondition)
+
+   ElasticsearchAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.client.TransportClientFactoryBean,org.springframework.data.elasticsearch.client.NodeClientFactoryBean (OnClassCondition)
+
+   ElasticsearchDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.core.ElasticsearchTemplate (OnClassCondition)
+
+   ElasticsearchRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.elasticsearch.client.Client,org.springframework.data.elasticsearch.repository.ElasticsearchRepository (OnClassCondition)
+
+   EmbeddedMongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,de.flapdoodle.embed.mongo.MongodStarter (OnClassCondition)
+
+   EmbeddedServletContainerAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   ErrorMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet (OnClassCondition)
+
+   FacebookAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.facebook.connect.FacebookConnectionFactory (OnClassCondition)
+
+   FallbackWebSecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.config.annotation.web.configuration.EnableWebSecurity (OnClassCondition)
+
+   FlywayAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.flywaydb.core.Flyway (OnClassCondition)
+
+   FreeMarkerAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: freemarker.template.Configuration,org.springframework.ui.freemarker.FreeMarkerConfigurationFactory (OnClassCondition)
+
+   GroovyTemplateAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: groovy.text.markup.MarkupTemplateEngine (OnClassCondition)
+
+   GsonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.gson.Gson (OnClassCondition)
+
+   GuavaCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.google.common.cache.CacheBuilder,org.springframework.cache.guava.GuavaCacheManager (OnClassCondition)
+
+   H2ConsoleAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.h2.server.web.WebServlet (OnClassCondition)
+
+   HazelcastAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance (OnClassCondition)
+
+   HazelcastCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,com.hazelcast.spring.cache.HazelcastCacheManager (OnClassCondition)
+
+   HazelcastJpaDependencyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.hazelcast.core.HazelcastInstance,org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean (OnClassCondition)
+
+   HibernateJpaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean,org.springframework.transaction.annotation.EnableTransactionManagement (OnClassCondition)
+
+   HornetQAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.jms.ConnectionFactory,org.hornetq.api.jms.HornetQJMSClient (OnClassCondition)
+
+   HttpEncodingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.filter.CharacterEncodingFilter (OnClassCondition)
+
+   HttpMessageConvertersAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.http.converter.HttpMessageConverter (OnClassCondition)
+
+   HypermediaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.hateoas.Resource,org.springframework.web.bind.annotation.RequestMapping,org.springframework.plugin.core.Plugin (OnClassCondition)
+
+   InfinispanCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.infinispan.spring.provider.SpringEmbeddedCacheManager (OnClassCondition)
+
+   IntegrationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.integration.config.EnableIntegration (OnClassCondition)
+
+   JCacheCacheConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.cache.Caching,org.springframework.cache.jcache.JCacheCacheManager (OnClassCondition)
+
+   JacksonAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.fasterxml.jackson.databind.ObjectMapper (OnClassCondition)
+
+   JerseyAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.glassfish.jersey.server.spring.SpringComponentProvider,javax.servlet.ServletRegistration (OnClassCondition)
+
+   JmsAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiConnectionFactoryAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jms.core.JmsTemplate (OnClassCondition)
+
+   JndiDataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+   JooqAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.jooq.DSLContext (OnClassCondition)
+
+   JpaRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.jpa.repository.JpaRepository (OnClassCondition)
+
+   JtaAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.Transaction (OnClassCondition)
+
+   LinkedInAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.linkedin.connect.LinkedInConnectionFactory (OnClassCondition)
+
+   LiquibaseAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: liquibase.integration.spring.SpringLiquibase (OnClassCondition)
+
+   MailSenderAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.mail.internet.MimeMessage (OnClassCondition)
+
+   MailSenderValidatorAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.mail.test-connection  (OnPropertyCondition)
+
+   MessageSourceAutoConfiguration did not match
+      - No bundle found for spring.messages.basename: messages (MessageSourceAutoConfiguration.ResourceBundleCondition)
+
+   MongoAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.MongoClient (OnClassCondition)
+
+   MongoDataAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.core.MongoTemplate (OnClassCondition)
+
+   MongoRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.mongodb.Mongo,org.springframework.data.mongodb.repository.MongoRepository (OnClassCondition)
+
+   MultipartAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.multipart.support.StandardServletMultipartResolver,javax.servlet.MultipartConfigElement (OnClassCondition)
+
+   MustacheAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.samskivert.mustache.Mustache (OnClassCondition)
+
+   OAuth2AutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.oauth2.common.OAuth2AccessToken,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   PersistenceExceptionTranslationAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor (OnClassCondition)
+
+   RabbitAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.amqp.rabbit.core.RabbitTemplate,com.rabbitmq.client.Channel (OnClassCondition)
+
+   ReactorAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: reactor.spring.context.config.EnableReactor,reactor.Environment (OnClassCondition)
+
+   RedisAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.redis.connection.jedis.JedisConnection,org.springframework.data.redis.core.RedisOperations,redis.clients.jedis.Jedis (OnClassCondition)
+
+   RepositoryRestMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration (OnClassCondition)
+
+   SecurityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter (OnClassCondition)
+
+   SecurityFilterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer,org.springframework.security.config.http.SessionCreationPolicy (OnClassCondition)
+
+   SendGridAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: com.sendgrid.SendGrid (OnClassCondition)
+
+   ServerPropertiesAutoConfiguration did not match
+      - web application classes not found (OnWebApplicationCondition)
+
+   SessionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.session.Session (OnClassCondition)
+
+   SitePreferenceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor,org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver (OnClassCondition)
+
+   SocialWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.connect.web.ConnectController,org.springframework.social.config.annotation.SocialConfigurerAdapter (OnClassCondition)
+
+   SolrAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.impl.HttpSolrServer,org.apache.solr.client.solrj.impl.CloudSolrServer,org.apache.solr.common.cloud.HashPartitioner (OnClassCondition)
+
+   SolrRepositoriesAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.solr.client.solrj.SolrServer,org.springframework.data.solr.repository.SolrRepository (OnClassCondition)
+
+   SpringApplicationAdminJmxAutoConfiguration did not match
+      - @ConditionalOnProperty missing required properties spring.application.admin.enabled  (OnPropertyCondition)
+
+   SpringDataWebAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.data.web.PageableHandlerMethodArgumentResolver,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   ThymeleafAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.thymeleaf.spring4.SpringTemplateEngine (OnClassCondition)
+
+   TransactionAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.transaction.support.TransactionTemplate,org.springframework.transaction.PlatformTransactionManager (OnClassCondition)
+
+   TwitterAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.social.config.annotation.SocialConfigurerAdapter,org.springframework.social.twitter.connect.TwitterConnectionFactory (OnClassCondition)
+
+   VelocityAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.apache.velocity.app.VelocityEngine,org.springframework.ui.velocity.VelocityEngineFactory (OnClassCondition)
+
+   WebMvcAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,org.springframework.web.servlet.DispatcherServlet,org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter (OnClassCondition)
+
+   WebSocketAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.servlet.Servlet,javax.websocket.server.ServerContainer (OnClassCondition)
+
+   WebSocketMessagingAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer (OnClassCondition)
+
+   XADataSourceAutoConfiguration did not match
+      - required @ConditionalOnClass classes not found: javax.transaction.TransactionManager,org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+   org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration
+
+   org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration
+
+
+
+2016-03-14 11:50:55 - Starting Application on Yazans-MacBook-Pro.local with PID 46141 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 11:50:55 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 11:50:55 - No active profile set, falling back to default profiles: default
+2016-03-14 11:57:26 - Starting Application on Yazans-MacBook-Pro.local with PID 46151 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 11:57:26 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 11:57:26 - No active profile set, falling back to default profiles: default
+2016-03-14 11:59:31 - Starting Application on Yazans-MacBook-Pro.local with PID 46152 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 11:59:31 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 11:59:31 - No active profile set, falling back to default profiles: default
+2016-03-14 12:07:35 - Starting Application on Yazans-MacBook-Pro.local with PID 46184 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-03-14 12:07:35 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-03-14 12:07:35 - No active profile set, falling back to default profiles: default

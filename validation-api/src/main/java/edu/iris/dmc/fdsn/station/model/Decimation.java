@@ -5,22 +5,24 @@
 // Generated on: 2012.11.05 at 01:15:36 PM PST 
 //
 
-
 package edu.iris.dmc.fdsn.station.model;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
 
 /**
  * Corresponds to SEED blockette 57.
  * 
- * <p>Java class for DecimationType complex type.
+ * <p>
+ * Java class for DecimationType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="DecimationType">
@@ -41,144 +43,134 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DecimationType", propOrder = {
-    "inputSampleRate",
-    "factor",
-    "offset",
-    "delay",
-    "correction"
-})
+@XmlType(name = "DecimationType", propOrder = { "inputSampleRate", "factor", "offset", "delay", "correction" })
 public class Decimation {
 
-    @XmlElement(name = "InputSampleRate", required = true)
-    protected Frequency inputSampleRate;
-    @XmlElement(name = "Factor", required = true)
-    protected BigInteger factor;
-    @XmlElement(name = "Offset", required = true)
-    protected BigInteger offset;
-    @XmlElement(name = "Delay", required = true)
-    protected Float delay;
-    @XmlElement(name = "Correction", required = true)
-    protected Float correction;
+	@XmlElement(name = "InputSampleRate", required = true)
+	protected Frequency inputSampleRate;
+	@XmlElement(name = "Factor", required = true)
+	protected BigInteger factor;
+	@XmlElement(name = "Offset", required = true)
+	protected BigInteger offset;
+	@XmlElement(name = "Delay", required = true)
+	protected Float delay;
+	@XmlElement(name = "Correction", required = true)
+	protected Float correction;
 
-    /**
-     * Gets the value of the inputSampleRate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Frequency }
-     *     
-     */
-    public Frequency getInputSampleRate() {
-        return inputSampleRate;
-    }
+	@XmlTransient
+	private Long id;
 
-    /**
-     * Sets the value of the inputSampleRate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Frequency }
-     *     
-     */
-    public void setInputSampleRate(Frequency value) {
-        this.inputSampleRate = value;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    /**
-     * Gets the value of the factor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getFactor() {
-        return factor;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * Sets the value of the factor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setFactor(BigInteger value) {
-        this.factor = value;
-    }
+	/**
+	 * Gets the value of the inputSampleRate property.
+	 * 
+	 * @return possible object is {@link Frequency }
+	 * 
+	 */
+	public Frequency getInputSampleRate() {
+		return inputSampleRate;
+	}
 
-    /**
-     * Gets the value of the offset property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getOffset() {
-        return offset;
-    }
+	/**
+	 * Sets the value of the inputSampleRate property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Frequency }
+	 * 
+	 */
+	public void setInputSampleRate(Frequency value) {
+		this.inputSampleRate = value;
+	}
 
-    /**
-     * Sets the value of the offset property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setOffset(BigInteger value) {
-        this.offset = value;
-    }
+	/**
+	 * Gets the value of the factor property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getFactor() {
+		return factor;
+	}
 
-    /**
-     * Gets the value of the delay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
-     */
-    public Float getDelay() {
-        return delay;
-    }
+	/**
+	 * Sets the value of the factor property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setFactor(BigInteger value) {
+		this.factor = value;
+	}
 
-    /**
-     * Sets the value of the delay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
-     */
-    public void setDelay(Float value) {
-        this.delay = value;
-    }
+	/**
+	 * Gets the value of the offset property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getOffset() {
+		return offset;
+	}
 
-    /**
-     * Gets the value of the correction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
-     */
-    public Float getCorrection() {
-        return correction;
-    }
+	/**
+	 * Sets the value of the offset property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setOffset(BigInteger value) {
+		this.offset = value;
+	}
 
-    /**
-     * Sets the value of the correction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
-     */
-    public void setCorrection(Float value) {
-        this.correction = value;
-    }
+	/**
+	 * Gets the value of the delay property.
+	 * 
+	 * @return possible object is {@link Float }
+	 * 
+	 */
+	public Float getDelay() {
+		return delay;
+	}
+
+	/**
+	 * Sets the value of the delay property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Float }
+	 * 
+	 */
+	public void setDelay(Float value) {
+		this.delay = value;
+	}
+
+	/**
+	 * Gets the value of the correction property.
+	 * 
+	 * @return possible object is {@link Float }
+	 * 
+	 */
+	public Float getCorrection() {
+		return correction;
+	}
+
+	/**
+	 * Sets the value of the correction property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Float }
+	 * 
+	 */
+	public void setCorrection(Float value) {
+		this.correction = value;
+	}
 
 }

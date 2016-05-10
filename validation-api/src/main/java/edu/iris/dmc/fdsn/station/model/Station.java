@@ -81,10 +81,10 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  * 
  */
-@EpochRange(message="{station.epoch.range}")
+@EpochRange(message = "{station.epoch.range}")
 @edu.iris.dmc.validation.rule.Distance(margin = 1, message = "{station.channel.distance}")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StationType", propOrder = { "latitude", "longitude", "elevation", "site", "vault", "geology",
+@XmlType(name = "StationType", propOrder = { "code","description", "comment","latitude", "longitude", "elevation", "site", "vault", "geology",
 		"equipment", "operator", "creationDate", "terminationDate", "totalNumberChannels", "selectedNumberChannels",
 		"externalReference", "channels" })
 public class Station extends BaseNodeType {
@@ -93,6 +93,11 @@ public class Station extends BaseNodeType {
 	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message = "{station.code.regex}")
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
+
+	@XmlAttribute(name = "alternateCode")
+	protected String alternateCode;
+	@XmlAttribute(name = "historicalCode")
+	protected String historicalCode;
 
 	@NotNull(message = "{station.starttime.notnull}")
 	@XmlAttribute(name = "startDate", required = true)
@@ -103,6 +108,12 @@ public class Station extends BaseNodeType {
 	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
 	protected Date endDate;
+
+	@XmlElement(name = "Description")
+	protected String description;
+	@XmlElement(name = "Comment")
+	protected List<Comment> comment;
+
 	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{station.latitude}")
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
@@ -122,7 +133,7 @@ public class Station extends BaseNodeType {
 	@XmlElement(name = "Equipment")
 	protected List<Equipment> equipment;
 	@XmlElement(name = "Operator")
-	protected List<Station.Operator> operator;
+	protected List<Operator> operator;
 	@NotNull(message = "{station.creationtime}")
 	@XmlElement(name = "CreationDate", required = true)
 	// @XmlSchemaType(name = "dateTime")
@@ -146,6 +157,17 @@ public class Station extends BaseNodeType {
 	@XmlTransient
 	private Network network;
 
+	@XmlTransient
+	private Long id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	/**
 	 * Gets the value of the code property.
 	 * 
@@ -167,6 +189,42 @@ public class Station extends BaseNodeType {
 		this.code = value;
 	}
 
+	public String getAlternateCode() {
+		return alternateCode;
+	}
+
+	/**
+	 * Sets the value of the alternateCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setAlternateCode(String value) {
+		this.alternateCode = value;
+	}
+
+	/**
+	 * Gets the value of the historicalCode property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getHistoricalCode() {
+		return historicalCode;
+	}
+
+	/**
+	 * Sets the value of the historicalCode property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setHistoricalCode(String value) {
+		this.historicalCode = value;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -181,6 +239,50 @@ public class Station extends BaseNodeType {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * Sets the value of the description property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDescription(String value) {
+		this.description = value;
+	}
+
+	/**
+	 * Gets the value of the comment property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the comment property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getComment().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Comment }
+	 * 
+	 * 
+	 */
+	public List<Comment> getComment() {
+		if (comment == null) {
+			comment = new ArrayList<Comment>();
+		}
+		return this.comment;
 	}
 
 	public Network getNetwork() {
@@ -406,9 +508,9 @@ public class Station extends BaseNodeType {
 	 * 
 	 * 
 	 */
-	public List<Station.Operator> getOperator() {
+	public List<Operator> getOperator() {
 		if (operator == null) {
-			operator = new ArrayList<Station.Operator>();
+			operator = new ArrayList<Operator>();
 		}
 		return this.operator;
 	}
@@ -559,125 +661,6 @@ public class Station extends BaseNodeType {
 	 * { if (c.getCode().equals(code) && c.getLocationCode().equals(location)) {
 	 * return c; } } return null; }
 	 */
-	/**
-	 * <p>
-	 * Java class for anonymous complex type.
-	 * 
-	 * <p>
-	 * The following schema fragment specifies the expected content contained
-	 * within this class.
-	 * 
-	 * <pre>
-	 * &lt;complexType>
-	 *   &lt;complexContent>
-	 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *       &lt;sequence>
-	 *         &lt;element name="Agency" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
-	 *         &lt;element name="Contact" type="{http://www.fdsn.org/xml/station/1}PersonType" maxOccurs="unbounded" minOccurs="0"/>
-	 *         &lt;element name="WebSite" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
-	 *       &lt;/sequence>
-	 *     &lt;/restriction>
-	 *   &lt;/complexContent>
-	 * &lt;/complexType>
-	 * </pre>
-	 * 
-	 * 
-	 */
-
-	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "", propOrder = { "agency", "contact", "webSite" })
-	public static class Operator {
-
-		@XmlElement(name = "Agency", required = true)
-		protected List<String> agency;
-		@XmlElement(name = "Contact")
-		protected List<PersonType> contact;
-		@XmlElement(name = "WebSite")
-		@XmlSchemaType(name = "anyURI")
-		protected String webSite;
-
-		/**
-		 * Gets the value of the agency property.
-		 * 
-		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the agency property.
-		 * 
-		 * <p>
-		 * For example, to add a new item, do as follows:
-		 * 
-		 * <pre>
-		 * getAgency().add(newItem);
-		 * </pre>
-		 * 
-		 * 
-		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link String }
-		 * 
-		 * 
-		 */
-		public List<String> getAgency() {
-			if (agency == null) {
-				agency = new ArrayList<String>();
-			}
-			return this.agency;
-		}
-
-		/**
-		 * Gets the value of the contact property.
-		 * 
-		 * <p>
-		 * This accessor method returns a reference to the live list, not a
-		 * snapshot. Therefore any modification you make to the returned list
-		 * will be present inside the JAXB object. This is why there is not a
-		 * <CODE>set</CODE> method for the contact property.
-		 * 
-		 * <p>
-		 * For example, to add a new item, do as follows:
-		 * 
-		 * <pre>
-		 * getContact().add(newItem);
-		 * </pre>
-		 * 
-		 * 
-		 * <p>
-		 * Objects of the following type(s) are allowed in the list
-		 * {@link PersonType }
-		 * 
-		 * 
-		 */
-		public List<PersonType> getContact() {
-			if (contact == null) {
-				contact = new ArrayList<PersonType>();
-			}
-			return this.contact;
-		}
-
-		/**
-		 * Gets the value of the webSite property.
-		 * 
-		 * @return possible object is {@link String }
-		 * 
-		 */
-		public String getWebSite() {
-			return webSite;
-		}
-
-		/**
-		 * Sets the value of the webSite property.
-		 * 
-		 * @param value
-		 *            allowed object is {@link String }
-		 * 
-		 */
-		public void setWebSite(String value) {
-			this.webSite = value;
-		}
-
-	}
 
 	@Override
 	public int hashCode() {

@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.iris.dmc</groupId>
-	<artifactId>station-xml-validation</artifactId>
+	<artifactId>station-xml-loader</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0</version>
-	<name>FDSN StationXML Validation</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>FDSN StationXML Loader</name>
 
 
 
@@ -52,8 +52,8 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>validation-api</module>
-		<module>validation-client</module>
+		<module>api</module>
+		<module>client</module>
 	</modules>
 
 </project>

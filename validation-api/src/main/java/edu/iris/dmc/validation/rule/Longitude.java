@@ -17,8 +17,10 @@ import java.lang.annotation.ElementType;
 @Documented
 public @interface Longitude {
 	String message() default "{longitude}";
-	Class<?>[] groups() default {};
-	Class<? extends Payload>[] payload() default {};
+
+	Class<?>[]groups() default {};
+
+	Class<? extends Payload>[]payload() default {};
 
 	double min() default 0;
 

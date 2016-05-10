@@ -11,6 +11,8 @@ package edu.iris.dmc.fdsn.station.model;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -19,6 +21,8 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
@@ -73,8 +77,10 @@ public class FIR
     @XmlElement(name = "Symmetry", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String symmetry;
+    @NotNull(message="{response.stage.fir.coefficient}")
+    @NotEmpty(message="{response.stage.fir.coefficient}")
     @XmlElement(name = "NumeratorCoefficient")
-    protected List<FIR.NumeratorCoefficient> numeratorCoefficient;
+    protected List<NumeratorCoefficient> numeratorCoefficient;
 
     /**
      * Gets the value of the symmetry property.
@@ -122,9 +128,9 @@ public class FIR
      * 
      * 
      */
-    public List<FIR.NumeratorCoefficient> getNumeratorCoefficient() {
+    public List<NumeratorCoefficient> getNumeratorCoefficient() {
         if (numeratorCoefficient == null) {
-            numeratorCoefficient = new ArrayList<FIR.NumeratorCoefficient>();
+            numeratorCoefficient = new ArrayList<NumeratorCoefficient>();
         }
         return this.numeratorCoefficient;
     }
@@ -147,57 +153,6 @@ public class FIR
      * 
      * 
      */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "value"
-    })
-    public static class NumeratorCoefficient {
-
-        @XmlValue
-        protected double value;
-        @XmlAttribute(name = "i")
-        protected BigInteger i;
-
-        /**
-         * Gets the value of the value property.
-         * 
-         */
-        public double getValue() {
-            return value;
-        }
-
-        /**
-         * Sets the value of the value property.
-         * 
-         */
-        public void setValue(double value) {
-            this.value = value;
-        }
-
-        /**
-         * Gets the value of the i property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigInteger }
-         *     
-         */
-        public BigInteger getI() {
-            return i;
-        }
-
-        /**
-         * Sets the value of the i property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigInteger }
-         *     
-         */
-        public void setI(BigInteger value) {
-            this.i = value;
-        }
-
-    }
+    
 
 }

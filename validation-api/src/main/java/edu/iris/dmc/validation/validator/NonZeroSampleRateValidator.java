@@ -32,12 +32,6 @@ public class NonZeroSampleRateValidator implements ConstraintValidator<NonZeroSa
 
 		if (sampleRate == null || sampleRate.getValue() == 0) {
 			if (channel.getResponse() != null) {
-				/*
-				 * context.disableDefaultConstraintViolation();
-				 * context.buildConstraintViolationWithTemplate(
-				 * "If the Channel sample rate is 0 (non-timeseries ASCII channel), no Response should be included."
-				 * ) .addConstraintViolation();
-				 */
 				context.disableDefaultConstraintViolation();
 				context.buildConstraintViolationWithTemplate("{response.samplerate.405}").addConstraintViolation();
 				return false;
@@ -59,6 +53,11 @@ public class NonZeroSampleRateValidator implements ConstraintValidator<NonZeroSa
 		if (sampleRate != null) {
 			if (channel.getResponse() != null) {
 				List<ResponseStage> stages = channel.getResponse().getStage();
+				if (stages == null || stages.isEmpty()) {
+					context.disableDefaultConstraintViolation();
+					context.buildConstraintViolationWithTemplate("{response.samplerate.406}").addConstraintViolation();
+					return false;
+				}
 				Decimation decimation = null;
 				for (ResponseStage stage : stages) {
 					if (stage.getDecimation() != null) {

@@ -18,8 +18,10 @@ import java.lang.annotation.ElementType;
 @Documented
 public @interface Latitude {
 	String message() default "{latitude}";
-	Class<?>[] groups() default {};
-	Class<? extends Payload>[] payload() default {};
+
+	Class<?>[]groups() default {};
+
+	Class<? extends Payload>[]payload() default {};
 
 	double min() default 0;
 
