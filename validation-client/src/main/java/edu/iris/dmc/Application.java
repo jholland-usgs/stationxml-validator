@@ -24,7 +24,7 @@ import org.xml.sax.SAXParseException;
 
 import edu.iris.dmc.Table.ALIGN;
 import edu.iris.dmc.fdsn.station.model.LEVEL;
-import edu.iris.dmc.validation.Errors;
+import edu.iris.dmc.service.Errors;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -203,7 +203,7 @@ public class Application implements CommandLineRunner {
 				if (!errors.isEmpty()) {
 					PrintErrorService printer = new PrintErrorService(stream, ",");
 					printer.header();
-					for (edu.iris.dmc.validation.Error error : errors.getAll()) {
+					for (edu.iris.dmc.service.Error error : errors.getAll()) {
 						printer.print(error);
 					}
 				} else {

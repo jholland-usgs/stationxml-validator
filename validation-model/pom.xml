@@ -7,9 +7,8 @@
     <artifactId>station-xml-validation</artifactId>
     <version>1.5.0-SNAPSHOT</version>
   </parent>
-  <groupId>edu.iris.dmc</groupId>
   <artifactId>validation-model</artifactId>
-  <version>1.5.0-SNAPSHOT</version>
+  <version>1.5.1-SNAPSHOT</version>
   <name>validation-model</name>
   <url>http://maven.apache.org</url>
   <properties>

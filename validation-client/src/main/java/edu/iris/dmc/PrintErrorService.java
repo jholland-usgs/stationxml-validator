@@ -23,7 +23,7 @@ public class PrintErrorService {
 				"rule-id,rule-message,network,network-start-time,network-end-time,station,station-start-time,station-end-time,location,channel-code,channel-start-time,channel-end-time");
 	}
 
-	public void print(edu.iris.dmc.validation.Error error) {
+	public void print(edu.iris.dmc.service.Error error) {
 		printMessage(error.getNetwork(), error.getnStart(), error.getnEnd(), error.getStation(), error.getsStart(),
 				error.getsEnd(), error.getLocation(), error.getChannel(), error.getcStart(), error.getcEnd(),
 				error.getMessage());

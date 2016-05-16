@@ -12,7 +12,7 @@ public class PrintErrorServiceImp implements PrintErrorService {
 		printHandler.printHeader();
 	}
 
-	public void print(edu.iris.dmc.validation.Error error) {
+	public void print(edu.iris.dmc.service.Error error) {
 		printMessage(error.getNetwork(), error.getnStart(), error.getnEnd(), error.getStation(), error.getsStart(),
 				error.getsEnd(), error.getLocation(), error.getChannel(), error.getcStart(), error.getcEnd(),
 				error.getMessage());

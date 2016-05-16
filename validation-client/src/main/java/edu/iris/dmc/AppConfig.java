@@ -12,8 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import edu.iris.dmc.validation.ValidatorService;
-import edu.iris.dmc.validation.ValidatorServiceImp;
+import edu.iris.dmc.service.ValidatorService;
+import edu.iris.dmc.service.ValidatorServiceImp;
 
 @Configuration
 public class AppConfig {

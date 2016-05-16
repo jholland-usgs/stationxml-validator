@@ -27,9 +27,9 @@ import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Sensitivity;
 import edu.iris.dmc.fdsn.station.model.Station;
-import edu.iris.dmc.validation.Errors;
-import edu.iris.dmc.validation.ValidatorService;
-import edu.iris.dmc.validation.ValidatorServiceImp;
+import edu.iris.dmc.service.Errors;
+import edu.iris.dmc.service.ValidatorService;
+import edu.iris.dmc.service.ValidatorServiceImp;
 import edu.iris.dmc.validation.validator.ResponseGroup;
 
 public class ValidatorServiceTest {
@@ -75,7 +75,7 @@ public class ValidatorServiceTest {
 		}
 	}
 
-	//@Test
+	// @Test
 	public void nonZeroSampleRate() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -84,10 +84,10 @@ public class ValidatorServiceTest {
 		FDSNStationXML root = (FDSNStationXML) jaxbUnmarshaller.unmarshal(in);
 
 		Errors errors = service.run(root.getNetwork(), LEVEL.RESPONSE, null);
-		for (edu.iris.dmc.validation.Error error : errors.getAll()) {
-			System.out.println("////"+error.getMessage());
+		for (edu.iris.dmc.service.Error error : errors.getAll()) {
+			System.out.println("////" + error.getMessage());
 		}
-		//assertTrue(errors.isEmpty());
+		// assertTrue(errors.isEmpty());
 	}
 
 	@Test
@@ -97,8 +97,9 @@ public class ValidatorServiceTest {
 		in = this.getClass().getClassLoader().getResourceAsStream("411_CI_ABL.xml");
 		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
 		Errors errors = service.run(root.getNetwork(), LEVEL.RESPONSE, null);
-		for (edu.iris.dmc.validation.Error e : errors.getAll()) {
-			System.out.println(e.getMessage()+" ["+e.getInvalidValue()+"]"+"   "+e.getPath()+"  "+e.getId());
+		for (edu.iris.dmc.service.Error e : errors.getAll()) {
+			System.out.println(
+					e.getMessage() + " [" + e.getInvalidValue() + "]" + "   " + e.getPath() + "  " + e.getId());
 		}
 		/*
 		 * Network network = networks.get(0); assertNotNull(network);
@@ -142,6 +143,5 @@ public class ValidatorServiceTest {
 		 * eqViolation.size());
 		 */
 	}
-	
-	
+
 }

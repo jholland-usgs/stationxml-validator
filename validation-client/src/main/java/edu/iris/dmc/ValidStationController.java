@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
-import edu.iris.dmc.validation.Errors;
-import edu.iris.dmc.validation.ValidatorService;
+import edu.iris.dmc.service.Errors;
+import edu.iris.dmc.service.ValidatorService;
 
 @Controller
 public class ValidStationController {
