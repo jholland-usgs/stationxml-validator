@@ -14,6 +14,7 @@ import edu.iris.dmc.fdsn.station.model.Decimation;
 import edu.iris.dmc.fdsn.station.model.Equipment;
 import edu.iris.dmc.fdsn.station.model.Filter;
 import edu.iris.dmc.fdsn.station.model.Gain;
+import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Polynomial;
 import edu.iris.dmc.fdsn.station.model.Response;

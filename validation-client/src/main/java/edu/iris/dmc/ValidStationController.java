@@ -11,9 +11,9 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Controller;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
+import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.validation.Errors;
-import edu.iris.dmc.validation.LEVEL;
 import edu.iris.dmc.validation.ValidatorService;
 
 @Controller
@@ -27,13 +27,13 @@ public class ValidStationController {
 	@Autowired
 	private Jaxb2Marshaller theMarshaller;
 
-	public Errors run(InputStream is, LEVEL level) {
+	public Errors run(InputStream is, LEVEL level, List<Integer> ignoreRules) {
 		FDSNStationXML document = (FDSNStationXML) theMarshaller.unmarshal(new StreamSource(is));
 
 		List<Network> networks = document.getNetwork();
 		if (networks == null || networks.isEmpty()) {
 			// throw exception or null
 		}
-		return validatorService.run(document.getNetwork(), level);
+		return validatorService.run(document.getNetwork(), level, ignoreRules);
 	}
 }

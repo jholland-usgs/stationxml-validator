@@ -6,11 +6,12 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>station-xml-validation</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>validation-client</artifactId>
 	<name>validation-client</name>
 	<version>1.0.2_SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,17 +31,17 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
+			<groupId>edu.iris.dmc</groupId>
+			<artifactId>validation-service</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>edu.iris.dmc</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,8 +74,9 @@
 				<version>2.6</version>
 				<configuration>
 					<finalName>${project.name}-${build.timestamp}</finalName>
-					<descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
-						</descriptorRefs>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 					<archive>
 						<manifest>
 							<mainClass>edu.iris.dmc.Application</mainClass>
