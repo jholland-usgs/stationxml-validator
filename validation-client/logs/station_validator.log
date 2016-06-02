@@ -1,3 +1,4 @@
-2016-05-12 10:11:54 - Starting Application on Yazans-MacBook-Pro.local with PID 36474 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
-2016-05-12 10:11:54 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-05-12 10:11:54 - No active profile set, falling back to default profiles: default
+2016-05-31 11:31:25 - Starting Application on Yazans-MacBook-Pro.local with PID 34717 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-31 11:31:25 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-31 11:31:25 - No active profile set, falling back to default profiles: default
+2016-05-31 11:38:08 - Started Application in 402.654 seconds (JVM running for 403.418)

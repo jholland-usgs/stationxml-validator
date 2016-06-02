@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.validation.rule.MissingDecimation;
 
-
 public class DecimationValidator implements ConstraintValidator<MissingDecimation, ResponseStage> {
 	private MissingDecimation constraintAnnotation;
 
@@ -29,6 +28,26 @@ public class DecimationValidator implements ConstraintValidator<MissingDecimatio
 				if (stage.getDecimation() == null) {
 					return false;
 				}
+			}
+		}
+
+		if (stage.getDecimation() != null && stage.getDecimation().getFactor() != null) {
+			int factor = stage.getDecimation().getFactor().intValue();
+			if (factor > 1) {
+				if(stage.getDecimation().getCorrection()==null){
+					context.disableDefaultConstraintViolation();
+					context.buildConstraintViolationWithTemplate("{response.stage.decimation.413}")
+							.addConstraintViolation();
+				}
+				if (stage.getDecimation().getCorrection().getValue() > 0) {
+
+				} else {
+					context.disableDefaultConstraintViolation();
+					context.buildConstraintViolationWithTemplate("{response.stage.decimation.413}")
+							.addConstraintViolation();
+					return false;
+				}
+
 			}
 		}
 

@@ -2,11 +2,13 @@ package edu.iris.dmc.service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import javax.validation.Path.Node;
+import javax.validation.Payload;
 import javax.validation.groups.Default;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -21,7 +23,9 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Sensitivity;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.validation.rule.Rule;
 import edu.iris.dmc.validation.validator.ResponseGroup;
+import edu.iris.dmc.validation.validator.Util;
 
 public class ValidatorServiceImp implements ValidatorService {
 
@@ -31,11 +35,33 @@ public class ValidatorServiceImp implements ValidatorService {
 		this.validator = validator;
 	}
 
+	public List<Rule> getRules() {
+		return Util.rules();
+	}
+
+	public Set<String> getUnits() {
+		return Util.units();
+	}
+
+	public Errors run2(List<Network> list, LEVEL level, List<Integer> ignoreList) {
+
+		for (Network n : list) {
+
+		}
+		return null;
+	}
+
 	public Errors run(List<Network> list, LEVEL level, List<Integer> ignoreList) {
 		Errors errors = new Errors(ignoreList);
 		for (Network network : list) {
 			Set<ConstraintViolation<Network>> constraintViolations = validator.validate(network);
 			for (ConstraintViolation<Network> violation : constraintViolations) {
+				Set<Class<? extends Payload>> payloadSet = violation.getConstraintDescriptor().getPayload();
+				Iterator<Class<? extends Payload>> it = payloadSet.iterator();
+				while (it.hasNext()) {
+					Class<? extends Payload> clazz = it.next();
+
+				}
 				errors.add(network.getCode(), network.getStartDate(), network.getEndDate(), null, null, null, null,
 						null, null, null, map(violation.getPropertyPath()), violation.getInvalidValue(),
 						violation.getMessage());
@@ -49,6 +75,9 @@ public class ValidatorServiceImp implements ValidatorService {
 								map(violation.getPropertyPath()), violation.getInvalidValue(), violation.getMessage());
 					}
 					if (level.getValue() >= LEVEL.STATION.getValue()) {
+						if (station.getChannels() == null) {
+							continue;
+						}
 						for (Channel channel : station.getChannels()) {
 							Set<ConstraintViolation<Channel>> channelConstraintViolations = null;
 							if (level.getValue() > LEVEL.CHANNEL.getValue()) {

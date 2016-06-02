@@ -8,7 +8,7 @@ import javax.validation.Payload;
 
 import edu.iris.dmc.validation.validator.DistanceValidator;
 import edu.iris.dmc.validation.validator.EpochOverlapValidator;
-import edu.iris.dmc.validation.validator.EpochRangeValidator;
+import edu.iris.dmc.validation.validator.GreaterThanValidator;
 import edu.iris.dmc.validation.validator.StageSequenceValidator;
 import edu.iris.dmc.validation.validator.StageUnitsValidator;
 

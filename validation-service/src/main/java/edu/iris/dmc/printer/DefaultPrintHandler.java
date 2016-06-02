@@ -2,6 +2,10 @@ package edu.iris.dmc.printer;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
+import edu.iris.dmc.service.Error;
 
 public class DefaultPrintHandler implements PrintHandler {
 	private PrintStream out;
@@ -49,14 +53,25 @@ public class DefaultPrintHandler implements PrintHandler {
 	}
 
 	@Override
-	public void println(String line) {
-		this.out.println(line);
+	public void printHeader() {
+		this.out.println(this.header);
 
 	}
 
 	@Override
-	public void printHeader() {
-		this.out.println(this.header);
+	public void print(Error error, String file) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		this.out.println(file + "," + error.getId() + "," + error.getNetwork() + ","
+				+ ((error.getnStart() != null) ? sdf.format(error.getnStart()) : "") + ","
+				+ ((error.getnEnd() != null) ? sdf.format(error.getnEnd()) : "") + ","
+				+ ((error.getStation() != null) ? error.getStation() : "") + ","
+				+ ((error.getsStart() != null) ? sdf.format(error.getsStart()) : "") + ","
+				+ ((error.getsEnd() != null) ? sdf.format(error.getsEnd()) : "") + ","
+				+ ((error.getLocation() != null) ? error.getLocation() : "") + ","
+				+ ((error.getChannel() != null) ? error.getChannel() : "") + ","
+				+ ((error.getcStart() != null) ? sdf.format(error.getcStart()) : "") + ","
+				+ ((error.getcEnd() != null) ? sdf.format(error.getcEnd()) : "") + "," + error.getMessage());
 
 	}
 

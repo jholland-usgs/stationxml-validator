@@ -6,13 +6,13 @@ import javax.validation.ConstraintValidatorContext;
 import edu.iris.dmc.fdsn.station.model.BaseNodeType;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.NodeType;
-import edu.iris.dmc.validation.rule.EpochRange;
+import edu.iris.dmc.validation.rule.GreaterThan;
 
-public class EpochRangeValidator implements ConstraintValidator<EpochRange, NodeType> {
-	private EpochRange constraintAnnotation;
+public class GreaterThanValidator implements ConstraintValidator<GreaterThan, NodeType> {
+	private GreaterThan constraintAnnotation;
 
 	@Override
-	public void initialize(EpochRange constraintAnnotation) {
+	public void initialize(GreaterThan constraintAnnotation) {
 		this.constraintAnnotation = constraintAnnotation;
 
 	}

@@ -6,15 +6,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import edu.iris.dmc.validation.validator.EpochRangeValidator;
+import edu.iris.dmc.validation.validator.GreaterThanValidator;
 
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.ElementType;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE) // on class level
-@Constraint(validatedBy = { EpochRangeValidator.class })
-public @interface EpochRange {
+@Constraint(validatedBy = { GreaterThanValidator.class })
+public @interface GreaterThan {
 	String message() default "{edu.iris.dmc.validator.rule.EpochRange}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};

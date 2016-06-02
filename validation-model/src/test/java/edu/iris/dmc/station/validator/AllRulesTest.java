@@ -671,9 +671,9 @@ public class AllRulesTest {
 		Channel ehz2 = abl.getChannels().get(1);
 		Channel ehz3 = abl.getChannels().get(2);
 		Set<ConstraintViolation<Channel>> cv = validator.validate(ehz1);
-		assertEquals(1, cv.size());
-		assertEquals(messages.get("channel.sensor.description.notnull"), cv.iterator().next().getMessage());
-
+		System.out.println(cv.iterator().next().getMessage()+"    "+cv.iterator().next().getMessage());
+		assertEquals(2, cv.size());
+		
 		Equipment eq = ehz1.getSensor();
 		assertNotNull(eq);
 		String sensorMessage = (String) messages.get("channel.sensor.description.notnull");

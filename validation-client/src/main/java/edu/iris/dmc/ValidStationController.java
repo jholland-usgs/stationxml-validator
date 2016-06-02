@@ -2,6 +2,7 @@ package edu.iris.dmc;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.transform.stream.StreamSource;
 
@@ -15,6 +16,7 @@ import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.service.Errors;
 import edu.iris.dmc.service.ValidatorService;
+import edu.iris.dmc.validation.rule.Rule;
 
 @Controller
 public class ValidStationController {
@@ -35,5 +37,13 @@ public class ValidStationController {
 			// throw exception or null
 		}
 		return validatorService.run(document.getNetwork(), level, ignoreRules);
+	}
+
+	public List<Rule>  getRules() {
+		return validatorService.getRules();
+	}
+
+	public Set<String> getUnits() {
+		return validatorService.getUnits();
 	}
 }

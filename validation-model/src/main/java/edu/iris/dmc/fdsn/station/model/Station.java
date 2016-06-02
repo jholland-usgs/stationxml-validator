@@ -26,7 +26,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import edu.iris.dmc.validation.rule.EpochRange;
+import edu.iris.dmc.validation.rule.GreaterThan;
+import edu.iris.dmc.validation.rule.ErrorCodes;
 import edu.iris.dmc.validation.rule.NoOverlap;
 
 /**
@@ -81,16 +82,16 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  * 
  */
-@EpochRange(message = "{station.epoch.range}")
-@edu.iris.dmc.validation.rule.Distance(margin = 1, message = "{station.channel.distance}")
+@GreaterThan(message = "{station.epoch.range}")
+@edu.iris.dmc.validation.rule.Distance(id = 2, margin = 1, message = "{station.channel.distance}", payload = ErrorCodes.Station.DistanceCheck.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StationType", propOrder = { "code","description", "comment","latitude", "longitude", "elevation", "site", "vault", "geology",
-		"equipment", "operator", "creationDate", "terminationDate", "totalNumberChannels", "selectedNumberChannels",
-		"externalReference", "channels" })
+@XmlType(name = "StationType", propOrder = { "code", "description", "comment", "latitude", "longitude", "elevation",
+		"site", "vault", "geology", "equipment", "operator", "creationDate", "terminationDate", "totalNumberChannels",
+		"selectedNumberChannels", "externalReference", "channels" })
 public class Station extends BaseNodeType {
 
-	@NotNull(message = "{station.code.notnull}")
-	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message = "{station.code.regex}")
+	@NotNull(message = "{station.code.notnull}", payload = ErrorCodes.Station.Code.class)
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,5}", message = "{station.code.regex}", payload = ErrorCodes.Station.Regex.class)
 	@XmlAttribute(name = "code", required = true)
 	protected String code;
 
@@ -99,7 +100,7 @@ public class Station extends BaseNodeType {
 	@XmlAttribute(name = "historicalCode")
 	protected String historicalCode;
 
-	@NotNull(message = "{station.starttime.notnull}")
+	@NotNull(message = "{station.starttime.notnull}", payload = ErrorCodes.Station.StartTime.class)
 	@XmlAttribute(name = "startDate", required = true)
 	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)
@@ -114,14 +115,14 @@ public class Station extends BaseNodeType {
 	@XmlElement(name = "Comment")
 	protected List<Comment> comment;
 
-	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{station.latitude}")
+	@edu.iris.dmc.validation.rule.Latitude(id = 206, min = -90, max = 90, required = true, message = "{station.latitude}", payload = ErrorCodes.Station.LatitudeCheck.class)
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
-	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "{station.longitude}")
+	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "{station.longitude}", payload = ErrorCodes.Station.LongitudeCheck.class)
 	@XmlElement(name = "Longitude", required = true)
 	protected Longitude longitude;
 
-	@NotNull(message = "station.elevation")
+	@NotNull(message = "station.elevation", payload = ErrorCodes.Station.ElevationCheck.class)
 	@XmlElement(name = "Elevation", required = true)
 	protected Distance elevation;
 	@XmlElement(name = "Site", required = true)
@@ -134,7 +135,7 @@ public class Station extends BaseNodeType {
 	protected List<Equipment> equipment;
 	@XmlElement(name = "Operator")
 	protected List<Operator> operator;
-	@NotNull(message = "{station.creationtime}")
+	@NotNull(message = "{station.creationtime}", payload = ErrorCodes.Station.CreationTimeCheck.class)
 	@XmlElement(name = "CreationDate", required = true)
 	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)

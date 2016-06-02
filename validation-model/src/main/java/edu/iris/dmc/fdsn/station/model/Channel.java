@@ -24,7 +24,8 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import edu.iris.dmc.validation.rule.EpochRange;
+import edu.iris.dmc.validation.rule.GreaterThan;
+import edu.iris.dmc.validation.rule.ErrorCodes;
 import edu.iris.dmc.validation.rule.NonZeroSampleRate;
 import edu.iris.dmc.validation.rule.Unit;
 import edu.iris.dmc.validation.validator.ResponseGroup;
@@ -97,7 +98,7 @@ import edu.iris.dmc.validation.validator.ResponseGroup;
  * 
  * 
  */
-@EpochRange(message = "{channel.epoch.range}")
+@GreaterThan(message = "{channel.epoch.range}")
 @NonZeroSampleRate(groups = ResponseGroup.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChannelType", propOrder = { "code", "description", "comment", "externalReference", "latitude",
@@ -120,7 +121,7 @@ public class Channel extends BaseNodeType {
 
 	@XmlElement(name = "ExternalReference")
 	protected List<ExternalReferenceType> externalReference;
-	@edu.iris.dmc.validation.rule.Latitude(min = -90, max = 90, required = true, message = "{channel.latitude}")
+	@edu.iris.dmc.validation.rule.Latitude(id = 306, min = -90, max = 90, required = true, message = "{channel.latitude}")
 	@XmlElement(name = "Latitude", required = true)
 	protected Latitude latitude;
 	@edu.iris.dmc.validation.rule.Longitude(min = -180, max = 180, required = true, message = "{channel.longitude}")
@@ -132,7 +133,7 @@ public class Channel extends BaseNodeType {
 	@XmlElement(name = "Depth", required = true)
 	protected Distance depth;
 	@XmlElement(name = "Azimuth")
-	@edu.iris.dmc.validation.rule.Azimuth( min = 0, max = 360, message = "{channel.azimuth}")
+	@edu.iris.dmc.validation.rule.Azimuth(min = 0, max = 360, message = "{channel.azimuth}")
 	protected Azimuth azimuth;
 	@XmlElement(name = "Dip")
 	protected Dip dip;

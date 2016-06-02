@@ -3,16 +3,16 @@ package edu.iris.dmc;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
+import java.util.Set;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,9 +22,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.oxm.UnmarshallingFailureException;
 import org.xml.sax.SAXParseException;
 
-import edu.iris.dmc.Table.ALIGN;
 import edu.iris.dmc.fdsn.station.model.LEVEL;
+import edu.iris.dmc.print.CSVPrintHandler;
+import edu.iris.dmc.printer.PrintErrorService;
+import edu.iris.dmc.printer.PrintErrorServiceImp;
+import edu.iris.dmc.printer.PrintHandler;
 import edu.iris.dmc.service.Errors;
+import edu.iris.dmc.validation.rule.Rule;
+import edu.iris.dms.table.Column;
+import edu.iris.dms.table.Table;
+import edu.iris.dms.table.view.ALIGN;
+import edu.iris.dms.table.view.Renderer;
+import edu.iris.dms.table.view.console.ConsoleTableRenderer;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -48,9 +57,6 @@ public class Application implements CommandLineRunner {
 			} else if (arg.equals("--help")) {
 				help();
 				System.exit(0);
-			} else if (arg.equals("--print-rules")) {
-				printRules();
-				System.exit(0);
 			} else {
 				list.add(arg);
 			}
@@ -63,52 +69,6 @@ public class Application implements CommandLineRunner {
 		app.run(args);
 	}
 
-	private static void printRules() {
-		try (InputStream is = Application.class.getClassLoader().getResourceAsStream("ValidationMessages.properties");
-				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-			System.out.println(header("IRIS: Validation rules", 70));
-			String l = null;
-			System.out.println(String.format("%10s %10s", "Number", "Description"));
-
-			Table table = new Table(70);
-			int row = 0;
-			while ((l = br.readLine()) != null) {
-				if (l.trim().isEmpty()) {
-					continue;
-				}
-				String[] array = l.split("=");
-				String[] rules = array[1].split(",");
-				table.add(row, 0, rules[0].trim(), ALIGN.RIGHT, 10);
-				table.add(row, 1, rules[1].trim(), ALIGN.LEFT, 60);
-				row++;
-			}
-			System.out.println(table.print());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static String header(String s, int width) {
-		int l = s.length();
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < width; i++) {
-			builder.append("=");
-		}
-		builder.append(System.getProperty("line.separator"));
-		for (int i = 0; i < (width - l) / 2; i++) {
-			builder.append(" ");
-		}
-		builder.append(s);
-		for (int i = 0; i < (width - l) / 2; i++) {
-			builder.append(" ");
-		}
-		builder.append(System.getProperty("line.separator"));
-		for (int i = 0; i < width; i++) {
-			builder.append("=");
-		}
-		return builder.toString();
-	}
-
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -117,6 +77,7 @@ public class Application implements CommandLineRunner {
 		String filename = null;
 		OutputStream out = System.out;
 		PrintStream stream = null;
+		boolean summary = false;
 
 		List<Integer> ignoreList = new ArrayList<Integer>();
 		List<Integer> availableRules = new ArrayList<Integer>();
@@ -129,6 +90,17 @@ public class Application implements CommandLineRunner {
 				}
 			} else if (arg.equals("--debug")) {
 				debug = true;
+			} else if (arg.equals("--summary")) {
+				summary = true;
+			} else if (arg.equals("--print-rules")) {
+				printRules();
+				System.exit(0);
+			} else if (arg.equals("--print-units")) {
+				printUnits();
+				System.exit(0);
+			} else if (arg.startsWith("--output") || arg.startsWith("-o")) {
+				String[] outputFile = arg.split("=");
+				out = new FileOutputStream(new File(outputFile[1]));
 			} else if (arg.equals("--ignore-rules")) {
 				i = i + 1;
 				String ignore = args[i];
@@ -188,26 +160,26 @@ public class Application implements CommandLineRunner {
 		}
 
 		File[] list = null;
-		int size = 0;
 		if (file.isDirectory()) {
 			list = file.listFiles();
-			size = list.length;
 		} else {
 			list = new File[] { file };
 		}
 
+		stream = new PrintStream(out);
+		PrintHandler printHandler = new CSVPrintHandler(stream, "|", summary);
+		PrintErrorService printer = new PrintErrorServiceImp();
+		printer.setPrintHandler(printHandler);
+		printer.header();
 		for (File f : list) {
 			try (InputStream is = new FileInputStream(f)) {
 				Errors errors = controller.run(is, level, ignoreList);
-				stream = new PrintStream(out);
 				if (!errors.isEmpty()) {
-					PrintErrorService printer = new PrintErrorService(stream, ",");
-					printer.header();
 					for (edu.iris.dmc.service.Error error : errors.getAll()) {
-						printer.print(error);
+						printer.print(error, f.getName());
 					}
 				} else {
-					System.out.println("No errors");
+					// System.out.println("No errors");
 				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
@@ -220,7 +192,43 @@ public class Application implements CommandLineRunner {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			stream.flush();
 		}
+		if (out != null) {
+			out.close();
+		}
+
+	}
+
+	private void printRules() {
+		Table table = new Table("IRIS: Validation rules");
+		table.setBorder(1);
+		Column id = new Column("id", 10);
+		Column description = new Column("description", 60);
+		table.addAll(id, description);
+
+		List<Rule> list = controller.getRules();
+		for (int i = 0; i < list.size(); i++) {
+			Rule rule = list.get(i);
+			table.add(i, 0, "" + rule.getId(), ALIGN.RIGHT, 1);
+			table.add(i, 1, rule.getMessage(), ALIGN.LEFT, 1);
+		}
+		Renderer<Table> renderer = new ConsoleTableRenderer(System.out);
+		renderer.render(table);
+	}
+
+	private void printUnits() {
+		Set<String> units = controller.getUnits();
+		Table table = new Table("IRIS: Validation units");
+		table.setBorder(1);
+		int row = 0;
+		for (String unit : units) {
+			table.add(row, 0, unit, ALIGN.LEFT);
+			row++;
+		}
+		Renderer<Table> renderer = new ConsoleTableRenderer(System.out);
+		renderer.render(table);
+
 	}
 
 	private void printInfo(SAXParseException e) {
@@ -243,6 +251,8 @@ public class Application implements CommandLineRunner {
 		System.out.println("   --[net|sta|cha|resp] default is resp ");
 		System.out.println("   --ignore-rules: comma seperated numbers of validation rules");
 		System.out.println("   --print-rules : print a list of validation rules");
+		System.out.println("   --print-units : print a list of units used to validate");
+		System.out.println("   --summary     : print summary only report for errors if any");
 		System.out.println("   --debug:");
 		System.out.println("   --help: print this message");
 		System.out.println("+==============================================================");

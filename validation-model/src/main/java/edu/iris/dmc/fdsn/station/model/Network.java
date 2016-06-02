@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import edu.iris.dmc.validation.rule.EpochRange;
+import edu.iris.dmc.validation.rule.GreaterThan;
+import edu.iris.dmc.validation.rule.ErrorCodes;
 import edu.iris.dmc.validation.rule.NoOverlap;
 
 /**
@@ -61,17 +62,18 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  */
 
-@EpochRange(message = "{network.epoch.range}")
+@GreaterThan(message = "{network.epoch.range}", payload = ErrorCodes.Network.EpochRange.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NetworkType", propOrder = {  "code","description", "comment","totalNumberStations", "selectedNumberStations", "stations" })
-public class Network extends BaseNodeType implements Serializable{
+@XmlType(name = "NetworkType", propOrder = { "code", "description", "comment", "totalNumberStations",
+		"selectedNumberStations", "stations" })
+public class Network extends BaseNodeType implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5226236597603445089L;
 
-	@NotNull(message = "{network.code.notnull}")
-	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message = "{network.code.regex}")
+	@NotNull(message = "{network.code.notnull}", payload = ErrorCodes.Network.Code.class)
+	@Pattern(regexp = "[A-Za-z0-9\\*\\?]{1,2}", message = "{network.code.regex}", payload = ErrorCodes.Network.Regex.class)
 	@XmlAttribute(name = "code", required = true)
 	// @XmlJavaTypeAdapter(value = StringAdapter.class)
 	protected String code;
@@ -81,7 +83,7 @@ public class Network extends BaseNodeType implements Serializable{
 	@XmlAttribute(name = "historicalCode")
 	protected String historicalCode;
 
-	@NotNull(message = "{network.starttime.notnull}")
+	@NotNull(message = "{network.starttime.notnull}", payload = ErrorCodes.Network.StartTime.class)
 	@XmlAttribute(name = "startDate", required = true)
 	// @XmlSchemaType(name = "dateTime")
 	@XmlJavaTypeAdapter(DateAdapter.class)

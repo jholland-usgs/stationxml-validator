@@ -8,7 +8,7 @@ import javax.validation.Payload;
 
 import edu.iris.dmc.validation.validator.DistanceValidator;
 import edu.iris.dmc.validation.validator.EpochOverlapValidator;
-import edu.iris.dmc.validation.validator.EpochRangeValidator;
+import edu.iris.dmc.validation.validator.GreaterThanValidator;
 
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.ElementType;
@@ -17,6 +17,7 @@ import java.lang.annotation.ElementType;
 @Target(ElementType.TYPE)
 @Constraint(validatedBy = { DistanceValidator.class })
 public @interface Distance {
+	int id();
 	String message() default "{station.channel.distance}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};

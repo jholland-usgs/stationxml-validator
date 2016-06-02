@@ -17,6 +17,7 @@ import java.lang.annotation.ElementType;
 @Constraint(validatedBy = { LatitudeValidator.class })
 @Documented
 public @interface Latitude {
+	int id();
 	String message() default "{latitude}";
 
 	Class<?>[]groups() default {};

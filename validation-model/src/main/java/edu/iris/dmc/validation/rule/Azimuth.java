@@ -7,8 +7,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import edu.iris.dmc.validation.validator.AzimuthValidator;
-import edu.iris.dmc.validation.validator.EpochOverlapValidator;
-import edu.iris.dmc.validation.validator.EpochRangeValidator;
 
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.ElementType;
