@@ -5,8 +5,8 @@ import edu.iris.dmc.Application;
 public class ApplicationTest {
 
 	public static void main(String[] args) {
-		//args = new String[] {"--print-units"};
-		args = new String[] {"/Users/Suleiman/stations/archive/", "--summary", "-o=/Users/Suleiman/outs.txt"};
+		args = new String[] {"--print-rules"};
+		//args = new String[] {"/Users/Suleiman/stations/archive/", "--summary", "-o=/Users/Suleiman/outs.txt"};
 		
 		Application.main(args);
 	}

@@ -1,0 +1,87 @@
+2016-05-26 09:42:56 - Starting Application on Yazans-MacBook-Pro.local with PID 33359 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 09:42:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 09:42:56 - No active profile set, falling back to default profiles: default
+2016-05-26 09:42:57 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:68)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.NullPointerException: null
+	at edu.iris.dms.table.Table.addAll(Table.java:50)
+	at edu.iris.dmc.Application.printRules(Application.java:199)
+	at edu.iris.dmc.Application.run(Application.java:92)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-26 09:43:43 - Starting Application on Yazans-MacBook-Pro.local with PID 33360 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 09:43:43 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 09:43:43 - No active profile set, falling back to default profiles: default
+2016-05-26 09:45:54 - Starting Application on Yazans-MacBook-Pro.local with PID 33361 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 09:45:54 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 09:45:54 - No active profile set, falling back to default profiles: default
+2016-05-26 09:47:59 - Starting Application on Yazans-MacBook-Pro.local with PID 33362 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 09:47:59 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 09:47:59 - No active profile set, falling back to default profiles: default
+2016-05-26 09:59:56 - Starting Application on Yazans-MacBook-Pro.local with PID 33369 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 09:59:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 09:59:56 - No active profile set, falling back to default profiles: default
+2016-05-26 09:59:57 - Application startup failed
+java.lang.Error: Unresolved compilation problem: 
+	The method format(Cell, int) in the type SupportUtil is not applicable for the arguments (Cell)
+
+	at edu.iris.dms.table.view.CellRenderer.render(CellRenderer.java:20)
+	at edu.iris.dms.table.view.CellRenderer.render(CellRenderer.java:1)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:35)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:1)
+	at edu.iris.dmc.Application.printRules(Application.java:208)
+	at edu.iris.dmc.Application.run(Application.java:92)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:68)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+2016-05-26 10:06:38 - Starting Application on Yazans-MacBook-Pro.local with PID 33372 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 10:06:38 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 10:06:38 - No active profile set, falling back to default profiles: default
+2016-05-26 11:10:40 - Starting Application on Yazans-MacBook-Pro.local with PID 33404 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 11:10:40 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 11:10:40 - No active profile set, falling back to default profiles: default
+2016-05-26 13:11:45 - Starting Application on Yazans-MacBook-Pro.local with PID 33483 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:11:45 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:11:45 - No active profile set, falling back to default profiles: default
+2016-05-26 13:12:58 - Starting Application on Yazans-MacBook-Pro.local with PID 33484 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:12:58 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:12:58 - No active profile set, falling back to default profiles: default
+2016-05-26 13:14:21 - Starting Application on Yazans-MacBook-Pro.local with PID 33485 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:14:21 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:14:21 - No active profile set, falling back to default profiles: default
+2016-05-26 13:18:09 - Starting Application on Yazans-MacBook-Pro.local with PID 33486 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:18:09 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:18:09 - No active profile set, falling back to default profiles: default
+2016-05-26 13:27:51 - Starting Application on Yazans-MacBook-Pro.local with PID 33489 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:27:51 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:27:51 - No active profile set, falling back to default profiles: default
+2016-05-26 13:34:48 - Starting Application on Yazans-MacBook-Pro.local with PID 33496 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:34:48 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:34:48 - No active profile set, falling back to default profiles: default
+2016-05-26 13:35:14 - Starting Application on Yazans-MacBook-Pro.local with PID 33497 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:35:14 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:35:14 - No active profile set, falling back to default profiles: default
+2016-05-26 13:37:13 - Starting Application on Yazans-MacBook-Pro.local with PID 33499 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:37:13 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:37:13 - No active profile set, falling back to default profiles: default
+2016-05-26 13:44:24 - Starting Application on Yazans-MacBook-Pro.local with PID 33503 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:44:24 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:44:24 - No active profile set, falling back to default profiles: default
+2016-05-26 13:46:07 - Starting Application on Yazans-MacBook-Pro.local with PID 33504 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:46:07 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:46:07 - No active profile set, falling back to default profiles: default
+2016-05-26 13:47:46 - Starting Application on Yazans-MacBook-Pro.local with PID 33505 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:47:46 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:47:46 - No active profile set, falling back to default profiles: default
+2016-05-26 13:48:33 - Starting Application on Yazans-MacBook-Pro.local with PID 33506 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-26 13:48:33 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-26 13:48:33 - No active profile set, falling back to default profiles: default

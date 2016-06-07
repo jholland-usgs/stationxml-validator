@@ -1,0 +1,400 @@
+2016-05-20 16:47:15 - Starting Application on Yazans-MacBook-Pro.local with PID 30641 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:47:15 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:47:15 - No active profile set, falling back to default profiles: default
+2016-05-20 16:47:16 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:76)
+	at edu.iris.dmc.Application.run(Application.java:140)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:51:22 - Starting Application on Yazans-MacBook-Pro.local with PID 30642 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:51:22 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:51:22 - No active profile set, falling back to default profiles: default
+2016-05-20 16:51:23 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:52:16 - Starting Application on Yazans-MacBook-Pro.local with PID 30643 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:52:16 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:52:16 - No active profile set, falling back to default profiles: default
+2016-05-20 16:52:17 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:53:42 - Starting Application on Yazans-MacBook-Pro.local with PID 30647 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:53:42 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:53:42 - No active profile set, falling back to default profiles: default
+2016-05-20 16:53:43 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:53:52 - Starting Application on Yazans-MacBook-Pro.local with PID 30648 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:53:52 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:53:52 - No active profile set, falling back to default profiles: default
+2016-05-20 16:53:53 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:54:17 - Starting Application on Yazans-MacBook-Pro.local with PID 30649 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:54:17 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:54:17 - No active profile set, falling back to default profiles: default
+2016-05-20 16:54:18 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 16:55:43 - Starting Application on Yazans-MacBook-Pro.local with PID 30650 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 16:55:43 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 16:55:43 - No active profile set, falling back to default profiles: default
+2016-05-20 16:55:44 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 17:47:51 - Starting Application on Yazans-MacBook-Pro.local with PID 30680 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:47:51 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:47:51 - No active profile set, falling back to default profiles: default
+2016-05-20 17:47:52 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:197)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 17:48:44 - Starting Application on Yazans-MacBook-Pro.local with PID 30682 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:48:44 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:48:44 - No active profile set, falling back to default profiles: default
+2016-05-20 17:48:45 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:198)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 17:50:19 - Starting Application on Yazans-MacBook-Pro.local with PID 30683 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:50:19 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:50:19 - No active profile set, falling back to default profiles: default
+2016-05-20 17:50:20 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:198)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 17:52:34 - Starting Application on Yazans-MacBook-Pro.local with PID 30685 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:52:34 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:52:34 - No active profile set, falling back to default profiles: default
+2016-05-20 17:52:35 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.IllegalArgumentException: Column width cannot be bigger than the table width!
+	at edu.iris.dms.table.Table.add(Table.java:93)
+	at edu.iris.dms.table.Table.add(Table.java:68)
+	at edu.iris.dmc.Application.printRules(Application.java:198)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 17:53:36 - Starting Application on Yazans-MacBook-Pro.local with PID 30686 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:53:36 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:53:36 - No active profile set, falling back to default profiles: default
+2016-05-20 17:54:01 - Starting Application on Yazans-MacBook-Pro.local with PID 30687 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:54:01 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:54:01 - No active profile set, falling back to default profiles: default
+2016-05-20 17:54:34 - Starting Application on Yazans-MacBook-Pro.local with PID 30688 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 17:54:34 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 17:54:34 - No active profile set, falling back to default profiles: default
+2016-05-20 18:08:14 - Starting Application on Yazans-MacBook-Pro.local with PID 30690 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:08:14 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:08:14 - No active profile set, falling back to default profiles: default
+2016-05-20 18:08:15 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:37)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:09:13 - Starting Application on Yazans-MacBook-Pro.local with PID 30691 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:09:13 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:09:13 - No active profile set, falling back to default profiles: default
+2016-05-20 18:09:14 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:37)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:10:56 - Starting Application on Yazans-MacBook-Pro.local with PID 30693 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:10:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:10:56 - No active profile set, falling back to default profiles: default
+2016-05-20 18:10:57 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:37)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:12:18 - Starting Application on Yazans-MacBook-Pro.local with PID 30694 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:12:18 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:12:18 - No active profile set, falling back to default profiles: default
+2016-05-20 18:12:19 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:37)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:13:13 - Starting Application on Yazans-MacBook-Pro.local with PID 30695 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:13:13 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:13:13 - No active profile set, falling back to default profiles: default
+2016-05-20 18:13:14 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:37)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:21:03 - Starting Application on Yazans-MacBook-Pro.local with PID 30699 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:21:03 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:21:03 - No active profile set, falling back to default profiles: default
+2016-05-20 18:21:04 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:204)
+	at edu.iris.dms.table.Table.getCells(Table.java:138)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:49)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:23:19 - Starting Application on Yazans-MacBook-Pro.local with PID 30700 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:23:19 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:23:19 - No active profile set, falling back to default profiles: default
+2016-05-20 18:23:20 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:65)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:9)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at edu.iris.dms.table.Table.create(Table.java:145)
+	at edu.iris.dms.table.Table.getCells(Table.java:139)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:49)
+	at edu.iris.dmc.Application.printRules(Application.java:201)
+	at edu.iris.dmc.Application.run(Application.java:89)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-05-20 18:32:10 - Starting Application on Yazans-MacBook-Pro.local with PID 30704 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:32:10 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:32:10 - No active profile set, falling back to default profiles: default
+2016-05-20 18:32:54 - Starting Application on Yazans-MacBook-Pro.local with PID 30705 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:32:54 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:32:54 - No active profile set, falling back to default profiles: default
+2016-05-20 18:36:11 - Starting Application on Yazans-MacBook-Pro.local with PID 30706 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 18:36:11 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 18:36:11 - No active profile set, falling back to default profiles: default
+2016-05-20 19:12:22 - Starting Application on Yazans-MacBook-Pro.local with PID 30712 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:12:22 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:12:22 - No active profile set, falling back to default profiles: default
+2016-05-20 19:15:11 - Starting Application on Yazans-MacBook-Pro.local with PID 30713 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:15:11 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:15:11 - No active profile set, falling back to default profiles: default
+2016-05-20 19:16:24 - Starting Application on Yazans-MacBook-Pro.local with PID 30715 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:16:24 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:16:24 - No active profile set, falling back to default profiles: default
+2016-05-20 19:23:46 - Starting Application on Yazans-MacBook-Pro.local with PID 30720 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:23:46 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:23:46 - No active profile set, falling back to default profiles: default
+2016-05-20 19:26:12 - Starting Application on Yazans-MacBook-Pro.local with PID 30721 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:26:12 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:26:12 - No active profile set, falling back to default profiles: default
+2016-05-20 19:27:25 - Starting Application on Yazans-MacBook-Pro.local with PID 30722 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:27:25 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:27:25 - No active profile set, falling back to default profiles: default
+2016-05-20 19:28:33 - Starting Application on Yazans-MacBook-Pro.local with PID 30723 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:28:33 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:28:33 - No active profile set, falling back to default profiles: default
+2016-05-20 19:30:24 - Starting Application on Yazans-MacBook-Pro.local with PID 30725 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:30:24 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:30:24 - No active profile set, falling back to default profiles: default
+2016-05-20 19:33:05 - Starting Application on Yazans-MacBook-Pro.local with PID 30727 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:33:05 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:33:05 - No active profile set, falling back to default profiles: default
+2016-05-20 19:39:43 - Starting Application on Yazans-MacBook-Pro.local with PID 30740 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:39:43 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:39:43 - No active profile set, falling back to default profiles: default
+2016-05-20 19:44:04 - Starting Application on Yazans-MacBook-Pro.local with PID 30741 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:44:04 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:44:04 - No active profile set, falling back to default profiles: default
+2016-05-20 19:44:24 - Starting Application on Yazans-MacBook-Pro.local with PID 30742 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:44:24 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:44:24 - No active profile set, falling back to default profiles: default
+2016-05-20 19:45:34 - Starting Application on Yazans-MacBook-Pro.local with PID 30743 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:45:34 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:45:34 - No active profile set, falling back to default profiles: default
+2016-05-20 19:54:44 - Starting Application on Yazans-MacBook-Pro.local with PID 30746 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:54:44 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:54:44 - No active profile set, falling back to default profiles: default
+2016-05-20 19:57:05 - Starting Application on Yazans-MacBook-Pro.local with PID 30747 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:57:05 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:57:05 - No active profile set, falling back to default profiles: default
+2016-05-20 19:58:38 - Starting Application on Yazans-MacBook-Pro.local with PID 30748 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 19:58:38 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 19:58:38 - No active profile set, falling back to default profiles: default
+2016-05-20 20:00:04 - Starting Application on Yazans-MacBook-Pro.local with PID 30749 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-05-20 20:00:04 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-05-20 20:00:04 - No active profile set, falling back to default profiles: default
