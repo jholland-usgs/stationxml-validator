@@ -27,6 +27,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import edu.iris.dmc.validation.rule.GreaterThan;
+import edu.iris.dmc.validation.rule.Elevation;
 import edu.iris.dmc.validation.rule.ErrorCodes;
 import edu.iris.dmc.validation.rule.NoOverlap;
 
@@ -83,6 +84,7 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  */
 @GreaterThan(message = "{station.epoch.range}")
+@Elevation(message = "station.channel.elevation", id = 0, margin = 0, payload = ErrorCodes.Station.ElevationCheck.class)
 @edu.iris.dmc.validation.rule.Distance(id = 2, margin = 1, message = "{station.channel.distance}", payload = ErrorCodes.Station.DistanceCheck.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StationType", propOrder = { "code", "description", "comment", "latitude", "longitude", "elevation",

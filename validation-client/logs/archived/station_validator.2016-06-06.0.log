@@ -1,0 +1,46 @@
+2016-06-06 09:24:31 - Starting Application on Yazans-MacBook-Pro.local with PID 37563 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-06-06 09:24:31 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-06-06 09:24:31 - No active profile set, falling back to default profiles: default
+2016-06-06 10:05:37 - Starting Application on Yazans-MacBook-Pro.local with PID 37571 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-06-06 10:05:37 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-06-06 10:05:37 - No active profile set, falling back to default profiles: default
+2016-06-06 10:05:38 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:69)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:11)
+Caused by: java.lang.NullPointerException: null
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.prepareRow(ConsoleTableRenderer.java:111)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.prepare(ConsoleTableRenderer.java:101)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:53)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:1)
+	at edu.iris.dmc.Application.printUnits(Application.java:230)
+	at edu.iris.dmc.Application.run(Application.java:99)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-06-06 10:07:10 - Starting Application on Yazans-MacBook-Pro.local with PID 37574 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-06-06 10:07:10 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-06-06 10:07:10 - No active profile set, falling back to default profiles: default
+2016-06-06 10:07:11 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:69)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:11)
+Caused by: java.lang.NullPointerException: null
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.prepareRow(ConsoleTableRenderer.java:111)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.prepare(ConsoleTableRenderer.java:101)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:53)
+	at edu.iris.dms.table.view.console.ConsoleTableRenderer.render(ConsoleTableRenderer.java:1)
+	at edu.iris.dmc.Application.printUnits(Application.java:230)
+	at edu.iris.dmc.Application.run(Application.java:99)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-06-06 10:07:26 - Starting Application on Yazans-MacBook-Pro.local with PID 37575 (/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validation/validation-client)
+2016-06-06 10:07:26 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-06-06 10:07:26 - No active profile set, falling back to default profiles: default

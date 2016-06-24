@@ -238,6 +238,28 @@ public class AllRulesTest {
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
 		assertEquals(messages.get("station.channel.distance"), violation.getMessage());
 	}
+	
+	@Test
+	public void stationChannelElevation() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("station_channel_elevation.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		in.close();
+		List<Network> networks = root.getNetwork();
+
+		Network n = networks.get(0);
+		assertNotNull(n);
+		Set<ConstraintViolation<Network>> violations = validator.validate(n);
+		assertEquals(0, violations.size());
+		List<Station> stations = n.getStations();
+		assertEquals(1, stations.size());
+		Station station = stations.get(0);
+		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
+		assertEquals(2, stationViolations.size());
+		ConstraintViolation<Station> violation = stationViolations.iterator().next();
+		assertEquals(messages.get("station.channel.distance"), violation.getMessage());
+	}
 
 	@Test
 	public void stageSequence() throws Exception {
