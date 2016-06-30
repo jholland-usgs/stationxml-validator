@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<FDSNStationXML xmlns="http://www.fdsn.org/xml/station/1" schemaVersion="1.0" xsi:schemaLocation="http://www.fdsn.org/xml/station/1 http://www.fdsn.org/xml/station/fdsn-station-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iris="http://www.fdsn.org/xml/station/1/iris">
+ <Source>IRIS-DMC</Source>
+ <Sender>IRIS-DMC</Sender>
+ <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.20</Module>
+ <ModuleURI>http://service.iris.edu/fdsnws/station/1/</ModuleURI>
+ <Created>2016-06-08T23:28:03</Created>
+ <Network code="XX" startDate="1988-01-01T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
+  <Description>TEST CASE - NO NETWORK</Description>
+  <TotalNumberStations>269</TotalNumberStations>
+  <SelectedNumberStations>1</SelectedNumberStations>
+  <Station code="TEST" startDate="2009-07-03T00:00:00" endDate="2014-11-16T00:00:00" restrictedStatus="open" iris:alternateNetworkCodes="TEST TEST TEST">
+   <Latitude>68.0653</Latitude>
+   <Longitude>166.4531</Longitude>
+   <Elevation>320.0</Elevation>
+   <Site>
+    <Name>TEST TEST TEST</Name>
+   </Site>
+   <CreationDate>1995-08-16T00:00:00</CreationDate>
+   <TotalNumberChannels>15</TotalNumberChannels>
+   <SelectedNumberChannels>1</SelectedNumberChannels>
+   <Channel code="BHZ" endDate="2014-11-16T00:00:00" locationCode="00" restrictedStatus="open" startDate="2009-07-03T00:00:00">
+    <Latitude>68.0653</Latitude>
+    <Longitude>166.4531</Longitude>
+    <Elevation>320.0</Elevation>
+    <Depth>0.0</Depth>
+    <Azimuth>0.0</Azimuth>
+    <Dip>-90.0</Dip>
+    <Type>CONTINUOUS</Type>
+    <Type>GEOPHYSICAL</Type>
+    <SampleRate>20.0</SampleRate>
+    <ClockDrift>0.0</ClockDrift>
+    <Sensor>
+     <Description>Streckeisen STS-1V/VBB Seismometer</Description>
+    </Sensor>
+    <Response>
+    </Response>
+   </Channel>
+  </Station>
+ </Network>
+</FDSNStationXML>

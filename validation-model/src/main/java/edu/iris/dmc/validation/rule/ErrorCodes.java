@@ -17,10 +17,11 @@ public class ErrorCodes {
 			public static int id = 103;
 		}
 
-		//@Field("end_date")
-		//@ErrorDescription("The end date must be greater than the start date")
-		//public static final class EndDateMustBeGreaterThanStartDatePayload implements ApiResponseOverridePayload {
-		//};
+		// @Field("end_date")
+		// @ErrorDescription("The end date must be greater than the start date")
+		// public static final class EndDateMustBeGreaterThanStartDatePayload
+		// implements ApiResponseOverridePayload {
+		// };
 
 		public interface EpochRange extends Payload {
 			public static int id = 105;
@@ -58,6 +59,10 @@ public class ErrorCodes {
 
 		public interface ElevationCheck extends Payload {
 			public static int id = 208;
+		}
+
+		public interface ChannelElevationCheck extends Payload {
+			public static int id = 253;
 		}
 
 		public interface CreationTimeCheck extends Payload {
