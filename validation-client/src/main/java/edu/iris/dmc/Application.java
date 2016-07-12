@@ -49,6 +49,7 @@ public class Application implements CommandLineRunner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		args = new String[] { "--print-rules" };
 		List<String> list = new ArrayList<String>();
 		for (String arg : args) {
 			if (arg.equals("--version")) {
@@ -218,9 +219,12 @@ public class Application implements CommandLineRunner {
 	}
 
 	private void printUnits() {
-		Set<String> units = controller.getUnits();
 		Table table = new Table("IRIS: Validation units");
 		table.setBorder(1);
+		Column id = new Column("unit", 100);
+		table.addAll(id);
+
+		Set<String> units = controller.getUnits();
 		int row = 0;
 		for (String unit : units) {
 			table.add(row, 0, unit, ALIGN.LEFT);
@@ -228,7 +232,6 @@ public class Application implements CommandLineRunner {
 		}
 		Renderer<Table> renderer = new ConsoleTableRenderer(System.out);
 		renderer.render(table);
-
 	}
 
 	private void printInfo(SAXParseException e) {
