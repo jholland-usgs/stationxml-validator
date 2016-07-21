@@ -6,5 +6,9 @@ public interface PrintHandler {
 
 	public void print(edu.iris.dmc.service.Error error, String file);
 
+	public void print(String message);
+
 	public void printHeader();
+	
+	public void flush();
 }

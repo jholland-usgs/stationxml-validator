@@ -75,4 +75,14 @@ public class DefaultPrintHandler implements PrintHandler {
 
 	}
 
+	@Override
+	public void print(String message) {
+		this.out.println(message);
+	}
+
+	@Override
+	public void flush() {
+		this.out.flush();
+	}
+
 }

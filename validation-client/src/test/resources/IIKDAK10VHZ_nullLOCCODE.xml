@@ -6,7 +6,7 @@
  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.20</Module>
  <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=II&amp;sta=KDAK&amp;level=channel&amp;channel=VHZ&amp;starttime=2010-01-01&amp;loc=10&amp;includecomments=false</ModuleURI>
  <Created>2016-01-07T23:21:01</Created>
- <Network code="II" startDate="1986-01-01T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
+ <Network code="II11" startDate="1986-01-01T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
   <Description>Global Seismograph Network (GSN - IRIS/IDA)</Description>
   <TotalNumberStations>52</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>

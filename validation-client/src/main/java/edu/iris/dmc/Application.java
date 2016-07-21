@@ -9,9 +9,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -43,17 +50,22 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private ValidStationController controller;
 
-	private static String VERSION = "1.0";
+	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
 
 	/**
 	 * @param args
+	 * @throws Exception
 	 */
-	public static void main(String[] args) {
-		args = new String[] { "--print-rules" };
+	public static void main(String[] args) throws Exception {
+		args = new String[] { "--summary",
+				"/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/src/test/resources/IIKDAK10VHZ_nullLOCCODE.xml" };
+
+		args = new String[] { "--debug",
+				"http://service.iris.edu/fdsnws/station/1/query?net=IU&sta=ANMO&cha=BHZ&loc=00&level=resp" };
 		List<String> list = new ArrayList<String>();
 		for (String arg : args) {
 			if (arg.equals("--version")) {
-				System.out.println(VERSION);
+				System.out.println(Application.getVersion());
 				System.exit(0);
 			} else if (arg.equals("--help")) {
 				help();
@@ -91,6 +103,9 @@ public class Application implements CommandLineRunner {
 				}
 			} else if (arg.equals("--debug")) {
 				debug = true;
+				LOGGER.setLevel(Level.INFO);
+				Handler consoleHandler = new ConsoleHandler();
+				LOGGER.addHandler(consoleHandler);
 			} else if (arg.equals("--summary")) {
 				summary = true;
 			} else if (arg.equals("--print-rules")) {
@@ -102,6 +117,9 @@ public class Application implements CommandLineRunner {
 			} else if (arg.startsWith("--output") || arg.startsWith("-o")) {
 				String[] outputFile = arg.split("=");
 				out = new FileOutputStream(new File(outputFile[1]));
+				Handler fileHandler = new FileHandler(outputFile[1]);
+				LOGGER.addHandler(fileHandler);
+
 			} else if (arg.equals("--ignore-rules")) {
 				i = i + 1;
 				String ignore = args[i];
@@ -150,55 +168,93 @@ public class Application implements CommandLineRunner {
 		if (filename == null) {
 			System.out.println("File is required!");
 			help();
-			System.exit(0);
+			System.exit(1);
 		}
-
-		File file = new File(filename);
-		if (!file.exists()) {
-			System.out.println("File does not exist.  File is required!");
-			help();
-			System.exit(0);
-		}
-
-		File[] list = null;
-		if (file.isDirectory()) {
-			list = file.listFiles();
-		} else {
-			list = new File[] { file };
-		}
-
+		Errors errors = null;
 		stream = new PrintStream(out);
 		PrintHandler printHandler = new CSVPrintHandler(stream, "|", summary);
-		PrintErrorService printer = new PrintErrorServiceImp();
+		PrintErrorServiceImp printer = new PrintErrorServiceImp();
 		printer.setPrintHandler(printHandler);
-		printer.header();
-		for (File f : list) {
-			try (InputStream is = new FileInputStream(f)) {
-				Errors errors = controller.run(is, level, ignoreList);
+		int EXIT = 0;
+		if (filename.startsWith("http://")) {
+			try (InputStream is = new URL(filename).openStream()) {
+				LOGGER.info("Validating: " + filename);
+				errors = validate(is, level, ignoreList);
 				if (!errors.isEmpty()) {
-					for (edu.iris.dmc.service.Error error : errors.getAll()) {
-						printer.print(error, f.getName());
-					}
-				} else {
-					// System.out.println("No errors");
+					printer.header();
+					print(errors, printer, filename);
+					EXIT = 1;
 				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
+				System.err.println(ioe.getMessage());
 			} catch (UnmarshallingFailureException e) {
 				if (e.getRootCause() instanceof SAXParseException) {
 					printInfo((SAXParseException) e.getRootCause());
 				} else {
 					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 			}
-			stream.flush();
+		} else {
+			File file = new File(filename);
+			if (!file.exists()) {
+				System.out.println("File does not exist.  File is required!");
+				help();
+				System.exit(1);
+			}
+
+			File[] list = null;
+			if (file.isDirectory()) {
+				list = file.listFiles();
+			} else {
+				list = new File[] { file };
+			}
+			boolean printHeader = true;
+			for (File f : list) {
+				try (InputStream is = new FileInputStream(f)) {
+					errors = validate(is, level, ignoreList);
+					if (!errors.isEmpty()) {
+						if (printHeader) {
+							printHeader = false;
+							printer.header();
+						}
+						print(errors, printer, f.getName());
+						EXIT = 1;
+					}
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+					System.err.println(ioe.getMessage());
+				} catch (UnmarshallingFailureException e) {
+					if (e.getRootCause() instanceof SAXParseException) {
+						printInfo((SAXParseException) e.getRootCause());
+					} else {
+						e.printStackTrace();
+					}
+					System.err.println(e.getMessage());
+				}
+			}
 		}
+		if (EXIT == 0) {
+			printer.getPrintHandler().print("Validation successful, all tests passed");
+		}
+
 		if (out != null) {
 			out.close();
 		}
+		System.exit(EXIT);
+	}
 
+	private Errors validate(InputStream is, LEVEL level, List<Integer> ignoreList) {
+		Errors errors = controller.run(is, level, ignoreList);
+		return errors;
+	}
+
+	private void print(Errors errors, PrintErrorService printer, String resource) {
+		for (edu.iris.dmc.service.Error error : errors.getAll()) {
+			printer.print(error, resource);
+		}
+		printer.flush();
 	}
 
 	private void printRules() {
@@ -234,31 +290,53 @@ public class Application implements CommandLineRunner {
 		renderer.render(table);
 	}
 
+	private static String getVersion() throws IOException {
+		Properties prop = new Properties();
+		InputStream in = Application.class.getClassLoader().getResourceAsStream("application.properties");
+		prop.load(in);
+		in.close();
+		return prop.getProperty("application.version");
+	}
+
 	private void printInfo(SAXParseException e) {
 		System.out.println(" Line number: " + e.getLineNumber() + " Column number: " + e.getColumnNumber()
 				+ " Message: " + e.getMessage());
 	}
 
-	private static void help() {
-		String blanks = "";
-		for (int i = VERSION.length(); i < 35; i++) {
-			blanks += " ";
+	private static String center(String text, int length, String pad) {
+		int width = length - text.length();
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < width / 2; i++) {
+			builder.append(pad);
 		}
+		builder.append(text);
+		int remainder = length - builder.length();
+		for (int i = 0; i < remainder; i++) {
+			builder.append(pad);
+		}
+		return builder.toString();
+	}
+
+	private static void help() throws IOException {
+		String version = "Version " + getVersion();
+		version = center(version, 62, " ");
+
 		System.out.println("===============================================================");
-		System.out.println("|                   FDSN StationXml validator                  |");
-		System.out.println("|                  Version " + VERSION + blanks + "|");
+		System.out.println("|" + center("FDSN StationXml validator", 62, " ") + "|");
+		System.out.println("|" + version + "|");
 		System.out.println("================================================================");
 		System.out.println("Usage:");
 		System.out.println("java -jar stationxml-validator [OPTIONS] [FILE]");
 		System.out.println("OPTIONS");
 		System.out.println("   --[net|sta|cha|resp] default is resp ");
+		System.out.println("   --output      : where to output result, default is System.out");
 		System.out.println("   --ignore-rules: comma seperated numbers of validation rules");
 		System.out.println("   --print-rules : print a list of validation rules");
 		System.out.println("   --print-units : print a list of units used to validate");
 		System.out.println("   --summary     : print summary only report for errors if any");
-		System.out.println("   --debug:");
-		System.out.println("   --help: print this message");
-		System.out.println("+==============================================================");
+		System.out.println("   --debug       :");
+		System.out.println("   --help        : print this message");
+		System.out.println("===============================================================");
 		System.exit(0);
 	}
 }

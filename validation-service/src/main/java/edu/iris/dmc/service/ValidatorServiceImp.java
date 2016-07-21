@@ -43,25 +43,12 @@ public class ValidatorServiceImp implements ValidatorService {
 		return Util.units();
 	}
 
-	public Errors run2(List<Network> list, LEVEL level, List<Integer> ignoreList) {
-
-		for (Network n : list) {
-
-		}
-		return null;
-	}
 
 	public Errors run(List<Network> list, LEVEL level, List<Integer> ignoreList) {
 		Errors errors = new Errors(ignoreList);
 		for (Network network : list) {
 			Set<ConstraintViolation<Network>> constraintViolations = validator.validate(network);
 			for (ConstraintViolation<Network> violation : constraintViolations) {
-				Set<Class<? extends Payload>> payloadSet = violation.getConstraintDescriptor().getPayload();
-				Iterator<Class<? extends Payload>> it = payloadSet.iterator();
-				while (it.hasNext()) {
-					Class<? extends Payload> clazz = it.next();
-
-				}
 				errors.add(network.getCode(), network.getStartDate(), network.getEndDate(), null, null, null, null,
 						null, null, null, map(violation.getPropertyPath()), violation.getInvalidValue(),
 						violation.getMessage());

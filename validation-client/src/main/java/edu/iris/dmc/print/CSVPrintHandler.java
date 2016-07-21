@@ -10,11 +10,11 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 	private String delimiter;
 	private boolean summary;
 
-	private static String[] FULL_HEADER = new String[] { "file", "rule-id", "rule-message", "network",
-			"network-start-time", "network-end-time", "station", "station-start-time", "station-end-time", "location",
-			"channel-code", "channel-start-time", "channel-end-time" };
-	private static String[] SUMMARY_HEADER = new String[] { "file", "rule-id", "network", "station", "location",
-			"channel-code", "channel-start-time", "channel-end-time" };
+	private static String[] FULL_HEADER = new String[] { "File", "Rule-Id", "Rule-Message", "Network",
+			"Network-Start-Time", "Network-End-Time", "Station", "Station-Start-Time", "Station-End-Time", "Location",
+			"Channel-Code", "Channel-Start-Time", "Channel-End-Time" };
+	private static String[] SUMMARY_HEADER = new String[] { "File", "Rule-Id", "Network", "Station", "Location",
+			"Channel-Code", "Channel-Start-Time", "Channel-End-Time" };
 
 	public CSVPrintHandler(PrintStream stream) {
 		this(stream, ",");
@@ -35,6 +35,11 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 		printMessage(file, error.getId(), error.getNetwork(), error.getnStart(), error.getnEnd(), error.getStation(),
 				error.getsStart(), error.getsEnd(), error.getLocation(), error.getChannel(), error.getcStart(),
 				error.getcEnd(), error.getMessage());
+	}
+
+	@Override
+	public void print(String message) {
+		stream.println(message);
 	}
 
 	@Override
@@ -71,6 +76,7 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 			Date sEnd, String location, String channel, Date cStart, Date cEnd, String message) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+		System.out.println("before: "+message);
 		String line = "";
 		if (this.summary) {
 			line = buildMessage(file, id, network, (station != null) ? station : "", (location != null) ? location : "",
@@ -81,7 +87,7 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 					(nEnd != null) ? sdf.format(nEnd) : "", (station != null) ? station : "",
 					(sStart != null) ? sdf.format(sStart) : "", (sEnd != null) ? sdf.format(sEnd) : "",
 					(location != null) ? location : "", (channel != null) ? channel : "",
-					(cStart != null) ? sdf.format(cStart) : "", (cEnd != null) ? sdf.format(cEnd) : "", message);
+					(cStart != null) ? sdf.format(cStart) : "", (cEnd != null) ? sdf.format(cEnd) : "");
 		}
 		this.stream.println(line);
 	}

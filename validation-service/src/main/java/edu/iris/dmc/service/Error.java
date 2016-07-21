@@ -41,12 +41,12 @@ public class Error {
 		if (message != null) {
 			message = message.trim();
 			if (!message.isEmpty()) {
-				String array[] = message.split(",");
+				String array[] = message.split(",", 2);
 				if (array.length > 1) {
 					this.id = Integer.valueOf(array[0]);
-					this.message = array[1];
+					this.message = array[1].trim();
 				} else {
-					this.message = array[0];
+					this.message = array[0].trim();
 				}
 			}
 		}

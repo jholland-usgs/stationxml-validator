@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>edu.iris.dmc</groupId>
 			<artifactId>validation-model</artifactId>
-			<version>1.5.1-SNAPSHOT</version>
+			<version>1.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -116,6 +116,12 @@
 			</plugin>
 
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
 	</build>
 

@@ -20,9 +20,20 @@ public class PrintErrorServiceImp implements PrintErrorService {
 		this.printHandler.print(error, file);
 	}
 
+	public void print(String message) {
+		this.printHandler.print(message);
+	}
+
 	@Override
 	public void setPrintHandler(PrintHandler PrintHandler) {
 		this.printHandler = PrintHandler;
 	}
 
+	public PrintHandler getPrintHandler() {
+		return printHandler;
+	}
+
+	public void flush() {
+		this.printHandler.flush();
+	}
 }

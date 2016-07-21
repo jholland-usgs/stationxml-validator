@@ -693,7 +693,6 @@ public class AllRulesTest {
 		Channel ehz2 = abl.getChannels().get(1);
 		Channel ehz3 = abl.getChannels().get(2);
 		Set<ConstraintViolation<Channel>> cv = validator.validate(ehz1);
-		System.out.println(cv.iterator().next().getMessage()+"    "+cv.iterator().next().getMessage());
 		assertEquals(2, cv.size());
 		
 		Equipment eq = ehz1.getSensor();

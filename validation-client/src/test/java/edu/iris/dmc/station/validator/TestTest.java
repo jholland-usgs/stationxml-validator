@@ -43,7 +43,7 @@ public class TestTest {
 	public void hello() throws Exception {
 	}
 
-	// @Test
+	@Test
 	public void nulllocationCode() throws Exception {
 		Resource resource = new ClassPathResource("IIKDAK10VHZ_nullLOCCODE.xml");
 		FDSNStationXML root = xmlProcessor.unmarshal(resource.getInputStream());
@@ -52,7 +52,8 @@ public class TestTest {
 		Network n = networks.get(0);
 		assertNotNull(n);
 		Set<ConstraintViolation<Network>> violations = validator.validate(n);
-		assertEquals(0, violations.size());
+		//System.out.println(violations.iterator().next().getMessage());
+		assertEquals(1, violations.size());
 		List<Station> stations = n.getStations();
 		assertEquals(1, stations.size());
 		Station station = stations.get(0);
