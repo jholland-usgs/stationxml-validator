@@ -91,4 +91,9 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 		}
 		this.stream.println(line);
 	}
+
+	@Override
+	public void flush() {
+		this.stream.flush();
+	}
 }
