@@ -57,11 +57,6 @@ public class Application implements CommandLineRunner {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		args = new String[] { "--summary",
-				"/Users/Suleiman/PROJECTS/StationXML-Validation/validation-client/src/test/resources/IIKDAK10VHZ_nullLOCCODE.xml" };
-
-		args = new String[] { "--debug",
-				"http://service.iris.edu/fdsnws/station/1/query?net=IU&sta=ANMO&cha=BHZ&loc=00&level=resp" };
 		List<String> list = new ArrayList<String>();
 		for (String arg : args) {
 			if (arg.equals("--version")) {
