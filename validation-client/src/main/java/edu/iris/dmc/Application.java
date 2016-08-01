@@ -218,9 +218,11 @@ public class Application implements CommandLineRunner {
 						EXIT = 1;
 					}
 				} catch (IOException ioe) {
+					EXIT = 1;
 					ioe.printStackTrace();
 					System.err.println(ioe.getMessage());
 				} catch (UnmarshallingFailureException e) {
+					EXIT = 1;
 					if (e.getRootCause() instanceof SAXParseException) {
 						printInfo((SAXParseException) e.getRootCause());
 					} else {
