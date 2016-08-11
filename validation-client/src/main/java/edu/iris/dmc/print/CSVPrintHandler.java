@@ -76,7 +76,6 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 			Date sEnd, String location, String channel, Date cStart, Date cEnd, String message) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		System.out.println("before: "+message);
 		String line = "";
 		if (this.summary) {
 			line = buildMessage(file, id, network, (station != null) ? station : "", (location != null) ? location : "",

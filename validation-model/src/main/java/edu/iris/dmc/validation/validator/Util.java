@@ -12,6 +12,7 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 
 import edu.iris.dmc.validation.rule.Rule;
+import edu.iris.dmc.validation.rule.UnitTable;
 
 public class Util {
 
@@ -32,14 +33,14 @@ public class Util {
 		return list;
 	}
 
-	public static Set<String> units() {
-		return UnitValidator.units;
+	public static UnitTable units() {
+		return UnitValidator.unitTable;
 	}
 
 	public static void main(String[] args) {
-		int gaps=2;
-		int col1=15;
-		int col2=40;
-		System.out.printf("%"+col1+"s %2s %-40s %n", "Number", "|", "Description");
+		int gaps = 2;
+		int col1 = 15;
+		int col2 = 40;
+		System.out.printf("%" + col1 + "s %2s %-40s %n", "Number", "|", "Description");
 	}
 }

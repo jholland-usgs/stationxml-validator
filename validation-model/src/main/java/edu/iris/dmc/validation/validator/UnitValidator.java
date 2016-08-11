@@ -1,26 +1,17 @@
 package edu.iris.dmc.validation.validator;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import edu.iris.dmc.fdsn.station.model.Units;
 import edu.iris.dmc.validation.rule.Unit;
+import edu.iris.dmc.validation.rule.UnitTable;
 
 public class UnitValidator implements ConstraintValidator<Unit, Units> {
 
 	private Unit unit;
-	public static Set<String> units = new HashSet<String>(Arrays.asList("M", "C", "NULL", "CELSIUS", "RAD",
-			"COUNTS/(CM/SEC2)", "Pa", "MS", "COUNTS/MV", "KPA", "NM/S^-2", "MB", "M/S", "AMPERES", "MILLIBAR", "M/S**2",
-			"HECTOPASCALS", "USEC", "NANORADIANS", "NM/SEC", "PASCALS", "MM/HOUR", "M/M", "COUNTS", "RAD/S**2",
-			"NANOTESLA", "COUNTS", "D", "M/S", "MM", "HZ", "CALIBRATION", "NANOSTRAIN", "VOLTS", "KILOPASCALS", "NONE",
-			"PA", "S", "RAD/SEC", "NM", "MILLIBARS", "MINUTES", "DEGREES", "NONE.SPECIFIED", "PERCENT", "COUNTS",
-			"NM/S**2", "U", "NM/S", "NT", "HPA", "TILT", "V", "COUNTS/V", "MBAR", "RADIANS", "A", "M/S", "GAPS",
-			"URADIAN", "CM/S", "UNKNOWN", "RAD/S", "SEC", "MICRORADIANS", "MICROSTRAIN"));
+	// [As of 2016-05-06]
+	public static UnitTable unitTable = new UnitTable();
 
 	@Override
 	public void initialize(Unit unit) {
@@ -38,7 +29,6 @@ public class UnitValidator implements ConstraintValidator<Unit, Units> {
 		if (units == null || units.getName() == null) {
 			return true;
 		}
-		return UnitValidator.units.contains(units.getName().toUpperCase());
+		return unitTable.contains(units.getName().toUpperCase());
 	}
-
 }

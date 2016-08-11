@@ -26,6 +26,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.validation.rule.Rule;
 import edu.iris.dmc.validation.validator.ResponseGroup;
 import edu.iris.dmc.validation.validator.Util;
+import edu.iris.dmc.validation.rule.UnitTable;
 
 public class ValidatorServiceImp implements ValidatorService {
 
@@ -39,10 +40,9 @@ public class ValidatorServiceImp implements ValidatorService {
 		return Util.rules();
 	}
 
-	public Set<String> getUnits() {
+	public UnitTable getUnits() {
 		return Util.units();
 	}
-
 
 	public Errors run(List<Network> list, LEVEL level, List<Integer> ignoreList) {
 		Errors errors = new Errors(ignoreList);

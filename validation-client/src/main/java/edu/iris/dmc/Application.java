@@ -11,9 +11,9 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
@@ -36,6 +36,7 @@ import edu.iris.dmc.printer.PrintErrorServiceImp;
 import edu.iris.dmc.printer.PrintHandler;
 import edu.iris.dmc.service.Errors;
 import edu.iris.dmc.validation.rule.Rule;
+import edu.iris.dmc.validation.rule.UnitTable;
 import edu.iris.dms.table.Column;
 import edu.iris.dms.table.Table;
 import edu.iris.dms.table.view.ALIGN;
@@ -272,19 +273,17 @@ public class Application implements CommandLineRunner {
 	}
 
 	private void printUnits() {
-		Table table = new Table("IRIS: Validation units");
-		table.setBorder(1);
-		Column id = new Column("unit", 100);
-		table.addAll(id);
 
-		Set<String> units = controller.getUnits();
+		UnitTable table = controller.getUnits();
+		Collections.sort(table.getUnits());
+		System.out.println("UNIT TABLE, verified:"+table.getTag());
+		System.out.println("-------------------------------------");
 		int row = 0;
-		for (String unit : units) {
-			table.add(row, 0, unit, ALIGN.LEFT);
+		for (String unit : table.getUnits()) {
+			System.out.println(unit);
 			row++;
 		}
-		Renderer<Table> renderer = new ConsoleTableRenderer(System.out);
-		renderer.render(table);
+
 	}
 
 	private static String getVersion() throws IOException {

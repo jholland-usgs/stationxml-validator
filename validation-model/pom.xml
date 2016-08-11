@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
-		<artifactId>station-xml-validation</artifactId>
-		<version>1.5.0-SNAPSHOT</version>
+		<artifactId>stationXml-Validator</artifactId>
+		<version>1.5.1</version>
 	</parent>
 	<artifactId>validation-model</artifactId>
-	<version>1.5.1</version>
+	<version>1.5.2</version>
 	<name>validation-model</name>
 	<url>http://maven.apache.org</url>
 	<properties>

@@ -153,7 +153,7 @@ public class Channel extends BaseNodeType {
 	protected Units calibrationUnits;
 
 	@NotNull(message = "{channel.sensor.notnull}")
-	@Valid
+	//@Valid
 	@XmlElement(name = "Sensor")
 	protected Equipment sensor;
 	@XmlElement(name = "PreAmplifier")

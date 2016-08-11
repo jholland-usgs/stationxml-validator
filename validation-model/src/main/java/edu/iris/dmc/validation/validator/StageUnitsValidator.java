@@ -21,7 +21,7 @@ public class StageUnitsValidator implements ConstraintValidator<StageUnits, Resp
 		for (ResponseStage stage : response.getStage()) {
 			Units[] units = stage.getUnits();
 			if (units == null) {
-				return false;
+				return true;
 			}
 			if (current != null) {
 				if (!current[1].getName().equals(units[0].getName())) {

@@ -17,6 +17,7 @@ import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.service.Errors;
 import edu.iris.dmc.service.ValidatorService;
 import edu.iris.dmc.validation.rule.Rule;
+import edu.iris.dmc.validation.rule.UnitTable;
 
 @Controller
 public class ValidStationController {
@@ -43,7 +44,7 @@ public class ValidStationController {
 		return validatorService.getRules();
 	}
 
-	public Set<String> getUnits() {
+	public UnitTable getUnits() {
 		return validatorService.getUnits();
 	}
 }

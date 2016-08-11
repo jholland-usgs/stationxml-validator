@@ -238,7 +238,7 @@ public class AllRulesTest {
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
 		assertEquals(messages.get("station.channel.distance"), violation.getMessage());
 	}
-	
+
 	@Test
 	public void stationChannelElevation() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
@@ -258,7 +258,7 @@ public class AllRulesTest {
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
 		assertEquals(2, stationViolations.size());
 		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals(messages.get("station.channel.distance"), violation.getMessage());
+		assertEquals(messages.get("station.channel.elevation"), violation.getMessage());
 	}
 
 	@Test
@@ -292,19 +292,13 @@ public class AllRulesTest {
 		assertEquals(5, channel.getResponse().getStage().size());
 
 		Set<ConstraintViolation<Response>> responseViolations = validator.validate(channel.getResponse());
-		assertEquals(2, responseViolations.size());
+		assertEquals(1, responseViolations.size());
 		ConstraintViolation<Response> violation1 = responseViolations.iterator().next();
-		ConstraintViolation<Response> violation2 = responseViolations.iterator().next();
 
 		assertTrue("401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
 				.equals(violation1.getMessage())
 				|| "402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1"
 						.equals(violation1.getMessage()));
-
-		assertTrue("401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
-				.equals(violation2.getMessage())
-				|| "402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1"
-						.equals(violation2.getMessage()));
 	}
 
 	@Test
@@ -373,7 +367,7 @@ public class AllRulesTest {
 		assertEquals(messages.get("response.samplerate.407"), violation.getMessage());
 
 	}
-	
+
 	@Test
 	public void nonZeroSampleRateNoStages() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
@@ -579,8 +573,7 @@ public class AllRulesTest {
 		assertEquals(messages.get("station.channel.overlap"), v.getMessage());
 
 	}
-	
-	
+
 	@Test
 	public void zeroGain403() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
@@ -656,10 +649,11 @@ public class AllRulesTest {
 		Sensitivity is = vhz.getResponse().getInstrumentSensitivity();
 		assertNotNull(is);
 		Set<ConstraintViolation<Gain>> gv = validator.validate(is);
-		assertEquals(1, gv.size());
+		assertEquals(2, gv.size());
+		//Iterator<ConstraintViolation<Gain>> it = gv.iterator();
 
-		ConstraintViolation<Gain> gvm = gv.iterator().next();
-		assertEquals(messages.get("gain.value"), gvm.getMessage());
+		//ConstraintViolation<Gain> gvm = gv.iterator().next();
+		//assertEquals(messages.get("gain.value"),gvm.getMessage());
 
 	}
 
@@ -693,8 +687,8 @@ public class AllRulesTest {
 		Channel ehz2 = abl.getChannels().get(1);
 		Channel ehz3 = abl.getChannels().get(2);
 		Set<ConstraintViolation<Channel>> cv = validator.validate(ehz1);
-		assertEquals(2, cv.size());
-		
+		assertEquals(1, cv.size());
+
 		Equipment eq = ehz1.getSensor();
 		assertNotNull(eq);
 		String sensorMessage = (String) messages.get("channel.sensor.description.notnull");
@@ -741,9 +735,11 @@ public class AllRulesTest {
 		assertTrue(!station2.getChannels().isEmpty());
 		Channel channel2 = station2.getChannels().get(0);
 		Set<ConstraintViolation<Channel>> cv2 = validator.validate(channel2);
-		assertEquals(1, cv2.size());
+		assertEquals(0, cv2.size());
+
+		Set<ConstraintViolation<Equipment>> ev = validator.validate(channel2.getSensor());
 		String sensorMessage = (String) messages.get("channel.sensor.notnull");
-		assertEquals(messages.get("channel.sensor.description.notnull"),cv2.iterator().next().getMessage());
+		assertEquals(messages.get("channel.sensor.description.notnull"), ev.iterator().next().getMessage());
 
 		Station station3 = iu.getStations().get(2);
 		assertNotNull(station3.getChannels());
@@ -751,8 +747,42 @@ public class AllRulesTest {
 		Channel channel3 = station3.getChannels().get(0);
 		Set<ConstraintViolation<Channel>> cv3 = validator.validate(channel3);
 		assertEquals(1, cv3.size());
-		assertEquals(sensorMessage,cv3.iterator().next().getMessage());
+		assertEquals(sensorMessage, cv3.iterator().next().getMessage());
 
 	}
-	
+
+	@Test
+	public void stageNoUnits402() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("XX-TEST-GainOnlyStage-UnitTestFail.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+
+		Network xx = networks.get(0);
+		assertNotNull(xx);
+		assertNotNull(xx.getStations());
+		assertTrue(!xx.getStations().isEmpty());
+		Set<ConstraintViolation<Network>> violations = validator.validate(xx);
+		assertEquals(0, violations.size());
+
+		Station xxxx = xx.getStations().get(0);
+		assertNotNull(xxxx);
+		assertNotNull(xxxx.getChannels());
+		assertTrue(!xxxx.getChannels().isEmpty());
+		Channel channel1 = xxxx.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv1 = validator.validate(channel1);
+		assertEquals(0, cv1.size());
+
+		Channel bhe = xxxx.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv = validator.validate(bhe);
+		assertEquals(0, cv.size());
+
+		for (ResponseStage stage : bhe.getResponse().getStage()) {
+			Set<ConstraintViolation<ResponseStage>> v = validator.validate(stage);
+			assertEquals(0, v.size());
+		}
+
+	}
+
 }
