@@ -134,6 +134,7 @@ public class ValidatorServiceImp implements ValidatorService {
 								}
 
 								for (ResponseStage stage : response.getStage()) {
+									
 									Set<ConstraintViolation<ResponseStage>> stageConstraintViolations = validator
 											.validate(stage);
 									for (ConstraintViolation<ResponseStage> violation : stageConstraintViolations) {
@@ -141,7 +142,7 @@ public class ValidatorServiceImp implements ValidatorService {
 												station.getCode(), station.getStartDate(), station.getEndDate(),
 												channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
 												channel.getEndDate(), map(violation.getPropertyPath()),
-												violation.getInvalidValue(), violation.getMessage());
+												violation.getInvalidValue(), "(stage:"+stage.getNumber()+")"+violation.getMessage());
 									}
 
 									if (stage.getFilters() != null) {
@@ -154,7 +155,7 @@ public class ValidatorServiceImp implements ValidatorService {
 														station.getEndDate(), channel.getLocationCode(),
 														channel.getCode(), channel.getStartDate(), channel.getEndDate(),
 														map(violation.getPropertyPath()), violation.getInvalidValue(),
-														violation.getMessage());
+														violation.getMessage()+"[stage:"+stage.getNumber()+"]");
 											}
 										}
 										if (stage.getDecimation() != null) {
