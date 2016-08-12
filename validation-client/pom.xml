@@ -6,11 +6,10 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>stationXml-Validator</artifactId>
-		<version>1.5.1</version>
+		<version>1.5.2</version>
 	</parent>
 	<artifactId>validation-client</artifactId>
 	<name>validation-client</name>
-	<version>1.0.3</version>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -33,7 +32,7 @@
 		<dependency>
 			<groupId>edu.iris.dmc</groupId>
 			<artifactId>validation-service</artifactId>
-			<version>1.0.3</version>
+			<version>1.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.iris.dmc</groupId>

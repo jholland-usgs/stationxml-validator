@@ -6,10 +6,9 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>stationXml-Validator</artifactId>
-		<version>1.5.1</version>
+		<version>1.5.2</version>
 	</parent>
 	<artifactId>validation-model</artifactId>
-	<version>1.5.2</version>
 	<name>validation-model</name>
 	<url>http://maven.apache.org</url>
 	<properties>
