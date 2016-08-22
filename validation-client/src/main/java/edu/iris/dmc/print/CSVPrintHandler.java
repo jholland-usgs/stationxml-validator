@@ -34,7 +34,7 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 	public void print(edu.iris.dmc.service.Error error, String file) {
 		printMessage(file, error.getId(), error.getNetwork(), error.getnStart(), error.getnEnd(), error.getStation(),
 				error.getsStart(), error.getsEnd(), error.getLocation(), error.getChannel(), error.getcStart(),
-				error.getcEnd(), error.getMessage());
+				error.getcEnd(), error.getMessage(), error.getInvalidValue());
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 	}
 
 	private void printMessage(String file, int id, String network, Date nStart, Date nEnd, String station, Date sStart,
-			Date sEnd, String location, String channel, Date cStart, Date cEnd, String message) {
+			Date sEnd, String location, String channel, Date cStart, Date cEnd, String message, Object invalidValue) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String line = "";
@@ -82,7 +82,7 @@ public class CSVPrintHandler extends AbstractBasicPrintHandler {
 					(channel != null) ? channel : "", (cStart != null) ? sdf.format(cStart) : "",
 					(cEnd != null) ? sdf.format(cEnd) : "");
 		} else {
-			line = buildMessage(file, id, message, network, (nStart != null) ? sdf.format(nStart) : "",
+			line = buildMessage(file, id, "["+invalidValue+"] "+message, network, (nStart != null) ? sdf.format(nStart) : "",
 					(nEnd != null) ? sdf.format(nEnd) : "", (station != null) ? station : "",
 					(sStart != null) ? sdf.format(sStart) : "", (sEnd != null) ? sdf.format(sEnd) : "",
 					(location != null) ? location : "", (channel != null) ? channel : "",

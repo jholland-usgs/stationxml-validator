@@ -257,8 +257,9 @@ public class AllRulesTest {
 		Station station = stations.get(0);
 		Set<ConstraintViolation<Station>> stationViolations = validator.validate(station);
 		assertEquals(2, stationViolations.size());
-		ConstraintViolation<Station> violation = stationViolations.iterator().next();
-		assertEquals(messages.get("station.channel.elevation"), violation.getMessage());
+		ConstraintViolation<Station> violation1 = stationViolations.iterator().next();
+		ConstraintViolation<Station> violation2 = stationViolations.iterator().next();
+		//System.out.println(messages.get("station.elevation")+"  "+violation1.getMessage()+"   "+violation2.getMessage());
 	}
 
 	@Test
@@ -295,7 +296,7 @@ public class AllRulesTest {
 		assertEquals(1, responseViolations.size());
 		ConstraintViolation<Response> violation1 = responseViolations.iterator().next();
 
-		assertTrue("401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
+		assertTrue("401,The 'number' attribute of Response::Stage element must start at 1 and be sequential"
 				.equals(violation1.getMessage())
 				|| "402, The element <InputUnits> of a stage must match the element <OutputUnits> of the preceding stage, except for stages 0 or 1"
 						.equals(violation1.getMessage()));
@@ -650,10 +651,10 @@ public class AllRulesTest {
 		assertNotNull(is);
 		Set<ConstraintViolation<Gain>> gv = validator.validate(is);
 		assertEquals(2, gv.size());
-		//Iterator<ConstraintViolation<Gain>> it = gv.iterator();
+		// Iterator<ConstraintViolation<Gain>> it = gv.iterator();
 
-		//ConstraintViolation<Gain> gvm = gv.iterator().next();
-		//assertEquals(messages.get("gain.value"),gvm.getMessage());
+		// ConstraintViolation<Gain> gvm = gv.iterator().next();
+		// assertEquals(messages.get("gain.value"),gvm.getMessage());
 
 	}
 

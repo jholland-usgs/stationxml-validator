@@ -84,7 +84,7 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  */
 @GreaterThan(message = "{station.epoch.range}")
-@Elevation(message = "{station.channel.elevation}", id = 0, margin = 0, payload = ErrorCodes.Station.ChannelElevationCheck.class)
+@Elevation(message = "{station.elevation}", id = 0, margin = 0, payload = ErrorCodes.Station.ChannelElevationCheck.class)
 @edu.iris.dmc.validation.rule.Distance(id = 2, margin = 1, message = "{station.channel.distance}", payload = ErrorCodes.Station.DistanceCheck.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StationType", propOrder = { "code", "description", "comment", "latitude", "longitude", "elevation",

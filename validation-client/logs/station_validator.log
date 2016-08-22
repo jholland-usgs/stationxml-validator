@@ -1,49 +1,7 @@
-2016-08-11 10:52:16 - Starting Application on Yazans-MacBook-Pro.local with PID 64989 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 10:52:16 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 10:52:16 - No active profile set, falling back to default profiles: default
-2016-08-11 11:00:10 - Starting Application on Yazans-MacBook-Pro.local with PID 65016 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:00:10 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:00:10 - No active profile set, falling back to default profiles: default
-2016-08-11 11:02:56 - Starting Application on Yazans-MacBook-Pro.local with PID 65025 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:02:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:02:56 - No active profile set, falling back to default profiles: default
-2016-08-11 11:42:39 - Starting Application on Yazans-MacBook-Pro.local with PID 65117 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:42:39 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:42:39 - No active profile set, falling back to default profiles: default
-2016-08-11 11:43:49 - Starting Application on Yazans-MacBook-Pro.local with PID 65121 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:43:49 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:43:49 - No active profile set, falling back to default profiles: default
-2016-08-11 11:48:16 - Starting Application on Yazans-MacBook-Pro.local with PID 65157 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:48:16 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:48:16 - No active profile set, falling back to default profiles: default
-2016-08-11 11:48:36 - Starting Application on Yazans-MacBook-Pro.local with PID 65158 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 11:48:36 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 11:48:36 - No active profile set, falling back to default profiles: default
-2016-08-11 12:56:40 - Starting Application on Yazans-MacBook-Pro.local with PID 65460 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 12:56:40 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 12:56:40 - No active profile set, falling back to default profiles: default
-2016-08-11 12:58:00 - Starting Application on Yazans-MacBook-Pro.local with PID 65463 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 12:58:00 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 12:58:00 - No active profile set, falling back to default profiles: default
-2016-08-11 13:02:39 - Starting Application on Yazans-MacBook-Pro.local with PID 65476 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:02:39 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:02:39 - No active profile set, falling back to default profiles: default
-2016-08-11 13:40:48 - Starting Application on Yazans-MacBook-Pro.local with PID 65633 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:40:48 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:40:48 - No active profile set, falling back to default profiles: default
-2016-08-11 13:41:22 - Starting Application on Yazans-MacBook-Pro.local with PID 65634 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:41:22 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:41:22 - No active profile set, falling back to default profiles: default
-2016-08-11 13:44:39 - Starting Application on Yazans-MacBook-Pro.local with PID 65644 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:44:39 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:44:39 - No active profile set, falling back to default profiles: default
-2016-08-11 13:48:00 - Starting Application on Yazans-MacBook-Pro.local with PID 65653 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:48:00 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:48:00 - No active profile set, falling back to default profiles: default
-2016-08-11 13:49:02 - Starting Application on Yazans-MacBook-Pro.local with PID 65657 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:49:02 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:49:02 - No active profile set, falling back to default profiles: default
-2016-08-11 13:49:03 - Application startup failed
+2016-08-22 11:22:28 - Starting Application on Yazans-MacBook-Pro.local with PID 83547 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 11:22:28 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 11:22:28 - No active profile set, falling back to default profiles: default
+2016-08-22 11:22:29 - Application startup failed
 java.lang.IllegalStateException: Failed to execute CommandLineRunner
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
@@ -51,117 +9,21 @@ java.lang.IllegalStateException: Failed to execute CommandLineRunner
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at edu.iris.dmc.Application.main(Application.java:78)
 	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "(stage:2)512"
-	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.lang.Integer.parseInt(Integer.java:569)
-	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
-	... 5 common frames omitted
-2016-08-11 13:49:17 - Starting Application on Yazans-MacBook-Pro.local with PID 65658 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:49:17 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:49:17 - No active profile set, falling back to default profiles: default
-2016-08-11 13:49:18 - Application startup failed
-java.lang.IllegalStateException: Failed to execute CommandLineRunner
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
-	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
-	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
-	at edu.iris.dmc.Application.main(Application.java:78)
-	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "(stage:2)512"
-	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.lang.Integer.parseInt(Integer.java:569)
-	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
-	... 5 common frames omitted
-2016-08-11 13:49:55 - Starting Application on Yazans-MacBook-Pro.local with PID 65661 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:49:55 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:49:55 - No active profile set, falling back to default profiles: default
-2016-08-11 13:49:56 - Application startup failed
-java.lang.IllegalStateException: Failed to execute CommandLineRunner
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
-	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
-	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
-	at edu.iris.dmc.Application.main(Application.java:78)
-	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "(stage:2)512"
-	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.lang.Integer.parseInt(Integer.java:569)
-	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
-	... 5 common frames omitted
-2016-08-11 13:50:20 - Starting Application on Yazans-MacBook-Pro.local with PID 65662 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:50:20 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:50:20 - No active profile set, falling back to default profiles: default
-2016-08-11 13:50:39 - Starting Application on Yazans-MacBook-Pro.local with PID 65665 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:50:39 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:50:39 - No active profile set, falling back to default profiles: default
-2016-08-11 13:50:41 - Application startup failed
-java.lang.IllegalStateException: Failed to execute CommandLineRunner
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
-	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
-	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
-	at edu.iris.dmc.Application.main(Application.java:78)
-	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "(stage:2)512"
-	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-	at java.lang.Integer.parseInt(Integer.java:569)
-	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
-	... 5 common frames omitted
-2016-08-11 13:52:17 - Starting Application on Yazans-MacBook-Pro.local with PID 65668 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:52:17 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:52:17 - No active profile set, falling back to default profiles: default
-2016-08-11 13:52:18 - Application startup failed
-java.lang.IllegalStateException: Failed to execute CommandLineRunner
-	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
-	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
-	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
-	at edu.iris.dmc.Application.main(Application.java:78)
-	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "stage[2] 512"
+Caused by: java.lang.NumberFormatException: For input string: "401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
 	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
 	at java.lang.Integer.parseInt(Integer.java:580)
 	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
+	at edu.iris.dmc.validation.validator.Util.rules(Util.java:30)
+	at edu.iris.dmc.service.ValidatorServiceImp.getRules(ValidatorServiceImp.java:40)
+	at edu.iris.dmc.ValidStationController.getRules(ValidStationController.java:44)
+	at edu.iris.dmc.Application.printRules(Application.java:265)
+	at edu.iris.dmc.Application.run(Application.java:108)
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
 	... 5 common frames omitted
-2016-08-11 13:52:40 - Starting Application on Yazans-MacBook-Pro.local with PID 65671 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:52:40 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:52:40 - No active profile set, falling back to default profiles: default
-2016-08-11 13:52:41 - Application startup failed
+2016-08-22 11:22:47 - Starting Application on Yazans-MacBook-Pro.local with PID 83548 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 11:22:47 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 11:22:47 - No active profile set, falling back to default profiles: default
+2016-08-22 11:22:48 - Application startup failed
 java.lang.IllegalStateException: Failed to execute CommandLineRunner
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
@@ -169,21 +31,51 @@ java.lang.IllegalStateException: Failed to execute CommandLineRunner
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at edu.iris.dmc.Application.main(Application.java:78)
 	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
-Caused by: java.lang.NumberFormatException: For input string: "2-512"
+Caused by: java.lang.NumberFormatException: For input string: "401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
 	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
 	at java.lang.Integer.parseInt(Integer.java:580)
 	at java.lang.Integer.valueOf(Integer.java:766)
-	at edu.iris.dmc.service.Error.<init>(Error.java:46)
-	at edu.iris.dmc.service.Errors.add(Errors.java:38)
-	at edu.iris.dmc.service.ValidatorServiceImp.run(ValidatorServiceImp.java:153)
-	at edu.iris.dmc.ValidStationController.run(ValidStationController.java:40)
-	at edu.iris.dmc.Application.validate(Application.java:247)
-	at edu.iris.dmc.Application.run(Application.java:212)
+	at edu.iris.dmc.validation.validator.Util.rules(Util.java:30)
+	at edu.iris.dmc.service.ValidatorServiceImp.getRules(ValidatorServiceImp.java:40)
+	at edu.iris.dmc.ValidStationController.getRules(ValidStationController.java:44)
+	at edu.iris.dmc.Application.printRules(Application.java:265)
+	at edu.iris.dmc.Application.run(Application.java:108)
 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
 	... 5 common frames omitted
-2016-08-11 13:52:51 - Starting Application on Yazans-MacBook-Pro.local with PID 65672 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:52:51 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:52:51 - No active profile set, falling back to default profiles: default
-2016-08-11 13:53:56 - Starting Application on Yazans-MacBook-Pro.local with PID 65675 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
-2016-08-11 13:53:56 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
-2016-08-11 13:53:56 - No active profile set, falling back to default profiles: default
+2016-08-22 11:24:04 - Starting Application on Yazans-MacBook-Pro.local with PID 83554 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 11:24:04 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 11:24:04 - No active profile set, falling back to default profiles: default
+2016-08-22 11:24:05 - Application startup failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:809)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:790)
+	at org.springframework.boot.SpringApplication.afterRefresh(SpringApplication.java:777)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at edu.iris.dmc.Application.main(Application.java:78)
+	at edu.iris.dmc.station.validator.ApplicationTest.main(ApplicationTest.java:12)
+Caused by: java.lang.NumberFormatException: For input string: "401, Stage number attribute must start at 1, be present in numerical order and have no gaps"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.valueOf(Integer.java:766)
+	at edu.iris.dmc.validation.validator.Util.rules(Util.java:30)
+	at edu.iris.dmc.service.ValidatorServiceImp.getRules(ValidatorServiceImp.java:40)
+	at edu.iris.dmc.ValidStationController.getRules(ValidStationController.java:44)
+	at edu.iris.dmc.Application.printRules(Application.java:265)
+	at edu.iris.dmc.Application.run(Application.java:108)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:806)
+	... 5 common frames omitted
+2016-08-22 12:22:20 - Starting Application on Yazans-MacBook-Pro.local with PID 83761 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 12:22:20 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 12:22:20 - No active profile set, falling back to default profiles: default
+2016-08-22 12:29:09 - Starting Application on Yazans-MacBook-Pro.local with PID 83783 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 12:29:09 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 12:29:09 - No active profile set, falling back to default profiles: default
+2016-08-22 12:37:48 - Starting Application on Yazans-MacBook-Pro.local with PID 83816 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 12:37:48 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 12:37:48 - No active profile set, falling back to default profiles: default
+2016-08-22 12:39:19 - Starting Application on Yazans-MacBook-Pro.local with PID 83821 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 12:39:19 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 12:39:19 - No active profile set, falling back to default profiles: default
+2016-08-22 12:39:51 - Starting Application on Yazans-MacBook-Pro.local with PID 83824 (/Users/Suleiman/PROJECTS/StationXML-Validator/validation-client/target/classes started by Suleiman in /Users/Suleiman/PROJECTS/StationXML-Validator/validation-client)
+2016-08-22 12:39:51 - Running with Spring Boot v1.3.3.RELEASE, Spring v4.2.5.RELEASE
+2016-08-22 12:39:51 - No active profile set, falling back to default profiles: default

@@ -1,7 +1,6 @@
 package edu.iris.dmc.service;
 
 import java.util.List;
-import java.util.Set;
 
 import edu.iris.dmc.fdsn.station.model.LEVEL;
 import edu.iris.dmc.fdsn.station.model.Network;
