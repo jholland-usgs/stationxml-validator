@@ -26,7 +26,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import edu.iris.dmc.validation.rule.GreaterThan;
 import edu.iris.dmc.validation.rule.ErrorCodes;
+import edu.iris.dmc.validation.rule.GeoLocation;
 import edu.iris.dmc.validation.rule.NonZeroSampleRate;
+import edu.iris.dmc.validation.rule.Orientation;
 import edu.iris.dmc.validation.rule.Unit;
 import edu.iris.dmc.validation.validator.ResponseGroup;
 
@@ -100,6 +102,8 @@ import edu.iris.dmc.validation.validator.ResponseGroup;
  */
 @GreaterThan(message = "{channel.epoch.range}")
 @NonZeroSampleRate(groups = ResponseGroup.class)
+@GeoLocation(id = 0, message = "{channel.geo.location}")
+@Orientation()
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChannelType", propOrder = { "code", "description", "comment", "externalReference", "latitude",
 		"longitude", "elevation", "depth", "azimuth", "dip", "type", "sampleRate", "sampleRateRatio", "storageFormat",
@@ -136,6 +140,7 @@ public class Channel extends BaseNodeType {
 	@edu.iris.dmc.validation.rule.Azimuth(min = 0, max = 360, message = "{channel.azimuth}")
 	protected Azimuth azimuth;
 	@XmlElement(name = "Dip")
+	@edu.iris.dmc.validation.rule.Dip(min = -90, max = 90, message = "{channel.dip}")
 	protected Dip dip;
 	@XmlElement(name = "Type")
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
@@ -153,7 +158,7 @@ public class Channel extends BaseNodeType {
 	protected Units calibrationUnits;
 
 	@NotNull(message = "{channel.sensor.notnull}")
-	//@Valid
+	// @Valid
 	@XmlElement(name = "Sensor")
 	protected Equipment sensor;
 	@XmlElement(name = "PreAmplifier")
@@ -894,6 +899,7 @@ public class Channel extends BaseNodeType {
 
 	@Override
 	public String toString() {
+
 		return "Channel [code=" + code + ", locationCode=" + locationCode + ", startDate=" + startDate + ", endDate="
 				+ endDate + "]";
 	}

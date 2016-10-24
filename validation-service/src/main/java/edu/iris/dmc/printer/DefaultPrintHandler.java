@@ -11,10 +11,11 @@ public class DefaultPrintHandler implements PrintHandler {
 	private PrintStream out;
 	private String delimiter;
 	private String header;
+	private boolean ignoreWarnings;
 
 	public DefaultPrintHandler() {
 		this(System.out,
-				"rule-id,rule-message,network,network-start-time,network-end-time,station,station-start-time,station-end-time,location,channel-code,channel-start-time,channel-end-time",
+				"rule-id,severity,rule-message,network,network-start-time,network-end-time,station,station-start-time,station-end-time,location,channel-code,channel-start-time,channel-end-time",
 				",");
 	}
 
@@ -62,8 +63,9 @@ public class DefaultPrintHandler implements PrintHandler {
 	public void print(Error error, String file) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		this.out.println(file + "," + error.getId() + "," + error.getNetwork() + ","
-				+ ((error.getnStart() != null) ? sdf.format(error.getnStart()) : "") + ","
+
+		this.out.println(file + "," + error.getId() + "," + error.getSeverity().getDescription() + ","
+				+ error.getNetwork() + "," + ((error.getnStart() != null) ? sdf.format(error.getnStart()) : "") + ","
 				+ ((error.getnEnd() != null) ? sdf.format(error.getnEnd()) : "") + ","
 				+ ((error.getStation() != null) ? error.getStation() : "") + ","
 				+ ((error.getsStart() != null) ? sdf.format(error.getsStart()) : "") + ","

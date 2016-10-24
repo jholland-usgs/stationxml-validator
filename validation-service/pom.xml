@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>stationXml-Validator</artifactId>
-		<version>1.5.2</version>
+		<version>1.5.4</version>
 	</parent>
 	<artifactId>validation-service</artifactId>
 	<name>validation-service</name>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>edu.iris.dmc</groupId>
 			<artifactId>validation-model</artifactId>
-			<version>1.5.2</version>
+			<version>1.5.4</version>
 		</dependency>
 
 	</dependencies>

@@ -5,7 +5,7 @@
 	<groupId>edu.iris.dmc</groupId>
 	<artifactId>stationXml-Validator</artifactId>
 	<packaging>pom</packaging>
-	<version>1.5.3</version>
+	<version>1.5.4</version>
 	<name>FDSN StationXML Validator</name>
 
 
@@ -28,10 +28,11 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.4.Final</version>
+			<version>5.3.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>

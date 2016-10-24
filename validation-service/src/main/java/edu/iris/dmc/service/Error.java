@@ -2,6 +2,8 @@ package edu.iris.dmc.service;
 
 import java.util.Date;
 
+import edu.iris.dmc.validation.rule.Severity;
+
 public class Error {
 
 	private int id;
@@ -18,13 +20,15 @@ public class Error {
 	private String path;
 	private Object invalidValue;
 	private String message;
+	private Severity severity;
 
 	public Error() {
 	}
 
-	public Error(String network, Date nStart, Date nEnd, String station, Date sStart, Date sEnd, String location,
+	public Error(Severity severity,String network, Date nStart, Date nEnd, String station, Date sStart, Date sEnd, String location,
 			String channel, Date cStart, Date cEnd, String path, Object invalidValue, String message) {
 		super();
+		this.severity=severity;
 		this.network = network;
 		this.nStart = nStart;
 		this.nEnd = nEnd;
@@ -50,6 +54,14 @@ public class Error {
 				}
 			}
 		}
+	}
+
+	public Severity getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(Severity severity) {
+		this.severity = severity;
 	}
 
 	public int getId() {

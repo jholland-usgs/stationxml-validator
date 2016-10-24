@@ -40,7 +40,7 @@ public class ValidStationController {
 		return validatorService.run(document.getNetwork(), level, ignoreRules);
 	}
 
-	public List<Rule>  getRules() {
+	public List<Rule> getRules() {
 		return validatorService.getRules();
 	}
 

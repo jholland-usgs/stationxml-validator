@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>edu.iris.dmc</groupId>
 		<artifactId>stationXml-Validator</artifactId>
-		<version>1.5.2</version>
+		<version>1.5.4</version>
 	</parent>
 	<artifactId>validation-model</artifactId>
 	<name>validation-model</name>
@@ -15,14 +15,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<!-- http://mvnrepository.com/artifact/javax.validation/validation-api -->
 
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
 		<!-- http://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>

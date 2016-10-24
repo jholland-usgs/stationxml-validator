@@ -29,6 +29,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import edu.iris.dmc.validation.rule.GreaterThan;
 import edu.iris.dmc.validation.rule.Elevation;
 import edu.iris.dmc.validation.rule.ErrorCodes;
+import edu.iris.dmc.validation.rule.GeoLocation;
 import edu.iris.dmc.validation.rule.NoOverlap;
 
 /**
@@ -84,6 +85,7 @@ import edu.iris.dmc.validation.rule.NoOverlap;
  * 
  */
 @GreaterThan(message = "{station.epoch.range}")
+@GeoLocation(id = 0, message = "{station.geo.location}")
 @Elevation(message = "{station.elevation}", id = 0, margin = 0, payload = ErrorCodes.Station.ChannelElevationCheck.class)
 @edu.iris.dmc.validation.rule.Distance(id = 2, margin = 1, message = "{station.channel.distance}", payload = ErrorCodes.Station.DistanceCheck.class)
 @XmlAccessorType(XmlAccessType.FIELD)

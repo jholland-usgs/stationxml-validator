@@ -8,8 +8,9 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Path;
 import javax.validation.Path.Node;
-import javax.validation.Payload;
 import javax.validation.groups.Default;
+
+import org.hibernate.validator.engine.HibernateConstraintViolation;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Decimation;
@@ -24,6 +25,7 @@ import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Sensitivity;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.validation.rule.Rule;
+import edu.iris.dmc.validation.rule.Severity;
 import edu.iris.dmc.validation.validator.ResponseGroup;
 import edu.iris.dmc.validation.validator.Util;
 import edu.iris.dmc.validation.rule.UnitTable;
@@ -48,17 +50,18 @@ public class ValidatorServiceImp implements ValidatorService {
 		Errors errors = new Errors(ignoreList);
 		for (Network network : list) {
 			Set<ConstraintViolation<Network>> constraintViolations = validator.validate(network);
+
 			for (ConstraintViolation<Network> violation : constraintViolations) {
-				errors.add(network.getCode(), network.getStartDate(), network.getEndDate(), null, null, null, null,
-						null, null, null, map(violation.getPropertyPath()), violation.getInvalidValue(),
+				errors.add(Severity.ERROR, network.getCode(), network.getStartDate(), network.getEndDate(), null, null,
+						null, null, null, null, null, map(violation.getPropertyPath()), violation.getInvalidValue(),
 						violation.getMessage());
 			}
 			if (level.getValue() >= LEVEL.NETWORK.getValue()) {
 				for (Station station : network.getStations()) {
 					Set<ConstraintViolation<Station>> stationConstraintViolations = validator.validate(station);
 					for (ConstraintViolation<Station> violation : stationConstraintViolations) {
-						errors.add(network.getCode(), network.getStartDate(), network.getEndDate(), station.getCode(),
-								station.getStartDate(), station.getEndDate(), null, null, null, null,
+						errors.add(Severity.ERROR, network.getCode(), network.getStartDate(), network.getEndDate(),
+								station.getCode(), station.getStartDate(), station.getEndDate(), null, null, null, null,
 								map(violation.getPropertyPath()), violation.getInvalidValue(), violation.getMessage());
 					}
 					if (level.getValue() >= LEVEL.STATION.getValue()) {
@@ -75,10 +78,10 @@ public class ValidatorServiceImp implements ValidatorService {
 							}
 
 							for (ConstraintViolation<Channel> violation : channelConstraintViolations) {
-								errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-										station.getCode(), station.getStartDate(), station.getEndDate(),
-										channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-										channel.getEndDate(), map(violation.getPropertyPath()),
+								errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+										network.getEndDate(), station.getCode(), station.getStartDate(),
+										station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+										channel.getStartDate(), channel.getEndDate(), map(violation.getPropertyPath()),
 										violation.getInvalidValue(), violation.getMessage());
 							}
 
@@ -86,11 +89,12 @@ public class ValidatorServiceImp implements ValidatorService {
 								Set<ConstraintViolation<Equipment>> eViolations = validator
 										.validate(channel.getSensor());
 								for (ConstraintViolation<Equipment> violation : eViolations) {
-									errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-											station.getCode(), station.getStartDate(), station.getEndDate(),
-											channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-											channel.getEndDate(), map(violation.getPropertyPath()),
-											violation.getInvalidValue(), violation.getMessage());
+									errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+											network.getEndDate(), station.getCode(), station.getStartDate(),
+											station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+											channel.getStartDate(), channel.getEndDate(),
+											map(violation.getPropertyPath()), violation.getInvalidValue(),
+											violation.getMessage());
 								}
 							}
 							if (level.getValue() >= LEVEL.CHANNEL.getValue()) {
@@ -102,22 +106,37 @@ public class ValidatorServiceImp implements ValidatorService {
 								Set<ConstraintViolation<Response>> responseConstraintViolations = validator
 										.validate(response);
 								for (ConstraintViolation<Response> violation : responseConstraintViolations) {
-									errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-											station.getCode(), station.getStartDate(), station.getEndDate(),
-											channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-											channel.getEndDate(), map(violation.getPropertyPath()),
-											violation.getInvalidValue(), violation.getMessage());
+									errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+											network.getEndDate(), station.getCode(), station.getStartDate(),
+											station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+											channel.getStartDate(), channel.getEndDate(),
+											map(violation.getPropertyPath()), violation.getInvalidValue(),
+											violation.getMessage());
 								}
 
 								if (response.getInstrumentSensitivity() != null) {
 									Set<ConstraintViolation<Sensitivity>> stageConstraintViolations = validator
 											.validate(response.getInstrumentSensitivity());
 									for (ConstraintViolation<Sensitivity> violation : stageConstraintViolations) {
-										errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-												station.getCode(), station.getStartDate(), station.getEndDate(),
-												channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-												channel.getEndDate(), map(violation.getPropertyPath()),
-												violation.getInvalidValue(), violation.getMessage());
+										// System.out.println("Violation:
+										// "+violation);
+										HibernateConstraintViolation<?> hibernateViolation = violation
+												.unwrap(HibernateConstraintViolation.class);
+										if (hibernateViolation.getDynamicPayload(Severity.class) == Severity.ERROR) {
+											errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+													network.getEndDate(), station.getCode(), station.getStartDate(),
+													station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+													channel.getStartDate(), channel.getEndDate(),
+													map(violation.getPropertyPath()), violation.getInvalidValue(),
+													violation.getMessage());
+										} else {
+											errors.add(Severity.WARN, network.getCode(), network.getStartDate(),
+													network.getEndDate(), station.getCode(), station.getStartDate(),
+													station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+													channel.getStartDate(), channel.getEndDate(),
+													map(violation.getPropertyPath()), violation.getInvalidValue(),
+													violation.getMessage());
+										}
 									}
 								}
 
@@ -125,24 +144,26 @@ public class ValidatorServiceImp implements ValidatorService {
 									Set<ConstraintViolation<Polynomial>> stageConstraintViolations = validator
 											.validate(response.getInstrumentPolynomial());
 									for (ConstraintViolation<Polynomial> violation : stageConstraintViolations) {
-										errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-												station.getCode(), station.getStartDate(), station.getEndDate(),
-												channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-												channel.getEndDate(), map(violation.getPropertyPath()),
-												violation.getInvalidValue(), violation.getMessage());
+										errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+												network.getEndDate(), station.getCode(), station.getStartDate(),
+												station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+												channel.getStartDate(), channel.getEndDate(),
+												map(violation.getPropertyPath()), violation.getInvalidValue(),
+												violation.getMessage());
 									}
 								}
 
 								for (ResponseStage stage : response.getStage()) {
-									
+
 									Set<ConstraintViolation<ResponseStage>> stageConstraintViolations = validator
 											.validate(stage);
 									for (ConstraintViolation<ResponseStage> violation : stageConstraintViolations) {
-										errors.add(network.getCode(), network.getStartDate(), network.getEndDate(),
-												station.getCode(), station.getStartDate(), station.getEndDate(),
-												channel.getLocationCode(), channel.getCode(), channel.getStartDate(),
-												channel.getEndDate(), map(violation.getPropertyPath()),
-												violation.getInvalidValue(), "(stage:"+stage.getNumber()+")"+violation.getMessage());
+										errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
+												network.getEndDate(), station.getCode(), station.getStartDate(),
+												station.getEndDate(), channel.getLocationCode(), channel.getCode(),
+												channel.getStartDate(), channel.getEndDate(),
+												map(violation.getPropertyPath()), violation.getInvalidValue(),
+												"(stage:" + stage.getNumber() + ")" + violation.getMessage());
 									}
 
 									if (stage.getFilters() != null) {
@@ -150,19 +171,19 @@ public class ValidatorServiceImp implements ValidatorService {
 											Set<ConstraintViolation<Filter>> filterConstraintViolations = validator
 													.validate(filter);
 											for (ConstraintViolation<Filter> violation : filterConstraintViolations) {
-												errors.add(network.getCode(), network.getStartDate(),
+												errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
 														network.getEndDate(), station.getCode(), station.getStartDate(),
 														station.getEndDate(), channel.getLocationCode(),
 														channel.getCode(), channel.getStartDate(), channel.getEndDate(),
 														map(violation.getPropertyPath()), violation.getInvalidValue(),
-														violation.getMessage()+"[stage:"+stage.getNumber()+"]");
+														violation.getMessage() + "[stage:" + stage.getNumber() + "]");
 											}
 										}
 										if (stage.getDecimation() != null) {
 											Set<ConstraintViolation<Decimation>> filterConstraintViolations = validator
 													.validate(stage.getDecimation());
 											for (ConstraintViolation<Decimation> violation : filterConstraintViolations) {
-												errors.add(network.getCode(), network.getStartDate(),
+												errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
 														network.getEndDate(), station.getCode(), station.getStartDate(),
 														station.getEndDate(), channel.getLocationCode(),
 														channel.getCode(), channel.getStartDate(), channel.getEndDate(),
@@ -174,7 +195,8 @@ public class ValidatorServiceImp implements ValidatorService {
 											Set<ConstraintViolation<Gain>> filterConstraintViolations = validator
 													.validate(stage.getStageGain());
 											for (ConstraintViolation<Gain> violation : filterConstraintViolations) {
-												errors.add(network.getCode(), network.getStartDate(),
+												/////// violation.getConstraintDescriptor().getPayload();
+												errors.add(Severity.ERROR, network.getCode(), network.getStartDate(),
 														network.getEndDate(), station.getCode(), station.getStartDate(),
 														station.getEndDate(), channel.getLocationCode(),
 														channel.getCode(), channel.getStartDate(), channel.getEndDate(),

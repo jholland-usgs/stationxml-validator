@@ -3,7 +3,10 @@ package edu.iris.dmc.validation.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
+
 import edu.iris.dmc.fdsn.station.model.Units;
+import edu.iris.dmc.validation.rule.Severity;
 import edu.iris.dmc.validation.rule.Unit;
 import edu.iris.dmc.validation.rule.UnitTable;
 
@@ -29,6 +32,19 @@ public class UnitValidator implements ConstraintValidator<Unit, Units> {
 		if (units == null || units.getName() == null) {
 			return true;
 		}
-		return unitTable.contains(units.getName().toUpperCase());
+		boolean result = unitTable.contains(units.getName());
+		if (result) {
+			return true;
+		}
+		if (unitTable.containsCaseInsensitive(units.getName())) {
+			//String originalMessage = context.getDefaultConstraintMessageTemplate();
+			// context.disableDefaultConstraintViolation();
+			HibernateConstraintValidatorContext hibernateContext = context
+					.unwrap(HibernateConstraintValidatorContext.class);
+			hibernateContext.withDynamicPayload(Severity.WARN);
+			// context.buildConstraintViolationWithTemplate(originalMessage).addPropertyNode("warning")
+			// .addConstraintViolation();
+		}
+		return false;
 	}
 }

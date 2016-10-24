@@ -87,6 +87,7 @@ public class Application implements CommandLineRunner {
 		OutputStream out = System.out;
 		PrintStream stream = null;
 		boolean summary = false;
+		boolean ignoreWarnings = false;
 
 		List<Integer> ignoreList = new ArrayList<Integer>();
 		List<Integer> availableRules = new ArrayList<Integer>();
@@ -155,6 +156,8 @@ public class Application implements CommandLineRunner {
 						}
 					}
 				}
+			} else if (arg.equals("--ignore-warnings")) {
+				ignoreWarnings = true;
 			} else {
 				// assume the file name
 				filename = arg;
@@ -168,7 +171,7 @@ public class Application implements CommandLineRunner {
 		}
 		Errors errors = null;
 		stream = new PrintStream(out);
-		PrintHandler printHandler = new CSVPrintHandler(stream, "|", summary);
+		PrintHandler printHandler = new CSVPrintHandler(stream, "|", summary,ignoreWarnings);
 		PrintErrorServiceImp printer = new PrintErrorServiceImp();
 		printer.setPrintHandler(printHandler);
 		int EXIT = 0;
@@ -275,8 +278,8 @@ public class Application implements CommandLineRunner {
 	private void printUnits() {
 
 		UnitTable table = controller.getUnits();
-		Collections.sort(table.getUnits());
-		System.out.println("UNIT TABLE, verified:"+table.getTag());
+		// Collections.sort(table.getUnits());
+		System.out.println("UNIT TABLE, verified:" + table.getTag());
 		System.out.println("-------------------------------------");
 		int row = 0;
 		for (String unit : table.getUnits()) {
@@ -325,13 +328,14 @@ public class Application implements CommandLineRunner {
 		System.out.println("java -jar stationxml-validator [OPTIONS] [FILE]");
 		System.out.println("OPTIONS");
 		System.out.println("   --[net|sta|cha|resp] default is resp ");
-		System.out.println("   --output      : where to output result, default is System.out");
-		System.out.println("   --ignore-rules: comma seperated numbers of validation rules");
-		System.out.println("   --print-rules : print a list of validation rules");
-		System.out.println("   --print-units : print a list of units used to validate");
-		System.out.println("   --summary     : print summary only report for errors if any");
-		System.out.println("   --debug       :");
-		System.out.println("   --help        : print this message");
+		System.out.println("   --output      	: where to output result, default is System.out");
+		System.out.println("   --ignore-warnings: don't show warnings");
+		System.out.println("   --ignore-rules	: comma seperated numbers of validation rules");
+		System.out.println("   --print-rules 	: print a list of validation rules");
+		System.out.println("   --print-units 	: print a list of units used to validate");
+		System.out.println("   --summary     	: print summary only report for errors if any");
+		System.out.println("   --debug       	:");
+		System.out.println("   --help        	: print this message");
 		System.out.println("===============================================================");
 		System.exit(0);
 	}

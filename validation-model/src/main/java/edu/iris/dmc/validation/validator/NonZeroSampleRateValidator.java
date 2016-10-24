@@ -30,12 +30,14 @@ public class NonZeroSampleRateValidator implements ConstraintValidator<NonZeroSa
 
 		SampleRate sampleRate = channel.getSampleRate();
 
-		if (sampleRate == null || sampleRate.getValue() == 0) {
+		if (sampleRate == null) {
 			if (channel.getResponse() != null) {
 				context.disableDefaultConstraintViolation();
 				context.buildConstraintViolationWithTemplate("{response.samplerate.405}").addConstraintViolation();
 				return false;
 			}
+		} else if (sampleRate.getValue() == 0) {
+
 		} else {
 			Response response = channel.getResponse();
 			if (response == null) {

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -23,10 +24,15 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import edu.iris.dmc.fdsn.station.model.Azimuth;
 import edu.iris.dmc.fdsn.station.model.Channel;
+import edu.iris.dmc.fdsn.station.model.Dip;
+import edu.iris.dmc.fdsn.station.model.Distance;
 import edu.iris.dmc.fdsn.station.model.Equipment;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Gain;
+import edu.iris.dmc.fdsn.station.model.Latitude;
+import edu.iris.dmc.fdsn.station.model.Longitude;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
@@ -259,7 +265,8 @@ public class AllRulesTest {
 		assertEquals(2, stationViolations.size());
 		ConstraintViolation<Station> violation1 = stationViolations.iterator().next();
 		ConstraintViolation<Station> violation2 = stationViolations.iterator().next();
-		//System.out.println(messages.get("station.elevation")+"  "+violation1.getMessage()+"   "+violation2.getMessage());
+		// System.out.println(messages.get("station.elevation")+"
+		// "+violation1.getMessage()+" "+violation2.getMessage());
 	}
 
 	@Test
@@ -504,6 +511,7 @@ public class AllRulesTest {
 		Channel channel = kdak.getChannels().get(0);
 
 		Set<ConstraintViolation<Channel>> channelViolations = validator.validate(channel);
+		//channelViolations.forEach(v->v.getMessage());
 		assertEquals(0, channelViolations.size());
 
 		Response response = channel.getResponse();
@@ -645,13 +653,20 @@ public class AllRulesTest {
 
 		Channel vhz = kdak.getChannels().get(0);
 		Set<ConstraintViolation<Channel>> cv = validator.validate(vhz);
+		//cv.forEach(vv->System.out.println(vv.getMessage()));
 		assertEquals(0, cv.size());
 
 		Sensitivity is = vhz.getResponse().getInstrumentSensitivity();
 		assertNotNull(is);
 		Set<ConstraintViolation<Gain>> gv = validator.validate(is);
-		assertEquals(2, gv.size());
-		// Iterator<ConstraintViolation<Gain>> it = gv.iterator();
+		// assertEquals(2, gv.size());
+		Iterator<ConstraintViolation<Gain>> it = gv.iterator();
+
+		while (it.hasNext()) {
+			ConstraintViolation<Gain> gve = it.next();
+			// gve.getPropertyPath()
+			System.out.println("The unit: " + gve.getInvalidValue() + "   " + gve);
+		}
 
 		// ConstraintViolation<Gain> gvm = gv.iterator().next();
 		// assertEquals(messages.get("gain.value"),gvm.getMessage());
@@ -699,11 +714,45 @@ public class AllRulesTest {
 		assertEquals(sensorMessage, eqv.iterator().next().getMessage());
 
 		Sensitivity is = ehz1.getResponse().getInstrumentSensitivity();
+		Set<ConstraintViolation<Sensitivity>> sv = validator.validate(is);
 		assertNotNull(is);
 		assertNotNull(is.getInputUnits());
 		String iu = is.getInputUnits().getName();
 		assertNotNull(iu);
 
+	}
+
+	@Test
+	public void channelOrientation315() throws Exception {
+		
+		Channel channel = new Channel();
+		channel.setCode("BHE");
+		channel.setStartDate(new Date());
+		Latitude latitude=new Latitude();
+		latitude.setValue(12);
+		channel.setLatitude(latitude);
+		Longitude longitude=new Longitude();
+		longitude.setValue(12);
+		channel.setLongitude(longitude);
+		Distance depth =new Distance();
+		depth.setValue(2);
+		channel.setDepth(depth);
+		Equipment sensor = new Equipment();
+		sensor.setDescription("Testing!!!");
+		channel.setSensor(sensor);
+		//90
+		Azimuth az=new Azimuth();
+		az.setValue(97);
+		channel.setAzimuth(az);
+		//0
+		Dip d=new Dip();
+		d.setValue(7);
+		channel.setDip(d);
+		Set<ConstraintViolation<Channel>> cv = validator.validate(channel);
+		
+		//cv.forEach(v->System.out.println(v.getMessage()));
+		
+		//assertEquals(0, cv.size());
 	}
 
 	@Test
