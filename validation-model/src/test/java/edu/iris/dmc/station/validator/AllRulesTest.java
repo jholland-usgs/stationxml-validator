@@ -668,7 +668,7 @@ public class AllRulesTest {
 			System.out.println("The unit: " + gve.getInvalidValue() + "   " + gve);
 		}
 
-		// ConstraintViolation<Gain> gvm = gv.iterator().next();
+		 ConstraintViolation<Gain> gvm = gv.iterator().next();
 		// assertEquals(messages.get("gain.value"),gvm.getMessage());
 
 	}
@@ -754,7 +754,40 @@ public class AllRulesTest {
 		
 		//assertEquals(0, cv.size());
 	}
+	@Test
+	public void decimation414() throws Exception {
+		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);
+		Unmarshaller xmlProcessor = jaxbContext.createUnmarshaller();
+		in = this.getClass().getClassLoader().getResourceAsStream("IIKDAK10VHZ_DECIMATION_414.xml");
+		FDSNStationXML root = (FDSNStationXML) xmlProcessor.unmarshal(in);
+		List<Network> networks = root.getNetwork();
+		Network ii = networks.get(0);
+		assertNotNull(ii);
+		assertNotNull(ii.getStations());
+		assertTrue(!ii.getStations().isEmpty());
+		
+		Set<ConstraintViolation<Network>> violations = validator.validate(ii);
+		assertEquals(0, violations.size());
 
+		Station kdak = ii.getStations().get(0);
+		
+		assertNotNull(kdak);
+		assertNotNull(kdak.getChannels());
+		assertTrue(!kdak.getChannels().isEmpty());
+		Channel VHZ = kdak.getChannels().get(0);
+		Set<ConstraintViolation<Channel>> cv1 = validator.validate(VHZ);
+		assertEquals(0, cv1.size());
+		
+		Response response = VHZ.getResponse();
+		assertNotNull(response);
+		Set<ConstraintViolation<Response>> responseViolations = validator.validate(response);
+		assertEquals(1, responseViolations.size());
+		ConstraintViolation<Response> violation = responseViolations.iterator().next();
+		String message = (String) messages.get("response.stage.decimation.414");
+		assertEquals(message, violation.getMessage());
+
+		
+	}
 	@Test
 	public void noSensorDescription_310() throws Exception {
 		JAXBContext jaxbContext = (JAXBContext) JAXBContext.newInstance(FDSNStationXML.class);

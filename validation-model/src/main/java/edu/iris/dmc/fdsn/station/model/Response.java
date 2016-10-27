@@ -21,8 +21,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 import org.w3c.dom.Element;
 
-import edu.iris.dmc.validation.rule.StageSequence;
-import edu.iris.dmc.validation.rule.StageUnits;
+import edu.iris.dmc.validation.rule.Stage;
 
 /**
  * <p>
@@ -54,8 +53,7 @@ import edu.iris.dmc.validation.rule.StageUnits;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResponseType", propOrder = { "instrumentSensitivity", "instrumentPolynomial", "stage", "any" })
-@StageSequence(message = "{response.stage.sequence}")
-@StageUnits(message = "{response.stage.unit}")
+@Stage(message = "{response.stage.sequence}")
 public class Response {
 
 	@XmlTransient
