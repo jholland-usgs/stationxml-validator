@@ -45,8 +45,6 @@ public class Application {
 	 */
 	public static void main(String[] argv) throws Exception {
 
-		argv = new String[] { "https://files.anss-sis.scsn.org/production/FDSNstationXML" };
-
 		JCommander.newBuilder().addObject(args).build().parse(argv);
 		if (args.version) {
 			System.out.println(Application.getVersion());
