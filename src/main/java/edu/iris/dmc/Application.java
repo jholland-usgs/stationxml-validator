@@ -19,9 +19,14 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+
+import org.xml.sax.SAXException;
 
 import com.beust.jcommander.JCommander;
 
+import edu.iris.dmc.fdsn.station.model.BaseNodeType.LEVEL;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.Action;
@@ -44,7 +49,7 @@ public class Application {
 	 * @throws Exception
 	 */
 	public static void main(String[] argv) throws Exception {
-
+		//argv = new String[] { "/Users/Suleiman/test.xml", "--format", "csv" };
 		JCommander.newBuilder().addObject(args).build().parse(argv);
 		if (args.version) {
 			System.out.println(Application.getVersion());
@@ -112,6 +117,8 @@ public class Application {
 		if (out != null) {
 			out.close();
 		}
+		
+	
 		System.exit(EXIT);
 	}
 
@@ -124,32 +131,50 @@ public class Application {
 			InputStream is = null;
 			Bool bool = new Bool();
 			for (String uri : input) {
-				ps.printRow(uri);
 				if (uri.startsWith("http://")) {
 					is = new URL(uri).openStream();
 				} else {
+					if (!uri.endsWith(".xml")) {
+						continue;
+					}
 					File file = new File(uri);
 					if (!file.exists()) {
-						System.out.println("File does not exist.  File is required!");
+						System.err.println("File does not exist.  File is required!");
 						help();
 						System.exit(1);
 					}
 					is = new FileInputStream(new File(uri));
 				}
+
 				FDSNStationXML document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
 
 				ruleEngineService.executeAllRules(document, context, new Action() {
 					@Override
 					public void update(RuleContext context, Result result) {
-						ps.print(result);
-						ps.flush();
+						try {
+							bool.value = false;
+							ps.print(uri, result);
+							ps.flush();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				});
+				if (is != null) {
+					try {
+						is.close();
+					} catch (Exception e) {
+					}
+				}
 			}
 			if (bool.value) {
-				ps.printRow("PASSED");
+				ps.printMessage("PASSED");
 			}
 			ps.printFooter();
+		} catch (IOException ioe) {
+			// TODO Auto-generated catch block
+			ioe.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -169,10 +194,18 @@ public class Application {
 		}
 	}
 
-	private Unmarshaller theMarshaller() throws JAXBException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		return jaxbUnmarshaller;
+	private Unmarshaller theMarshaller() throws IOException {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
+			Unmarshaller u = jaxbContext.createUnmarshaller();
+			StreamSource stream = new StreamSource(Application.class.getResourceAsStream("fdsn-station-1.0.xsd"));
+			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = sf.newSchema(stream);
+			u.setSchema(schema);
+			return u;
+		} catch (JAXBException | SAXException e) {
+			throw new IOException(e);
+		}
 
 	}
 
@@ -232,6 +265,7 @@ public class Application {
 		System.out.println("   --ignore-rules	: comma seperated numbers of validation rules");
 		System.out.println("   --print-rules 	: print a list of validation rules");
 		System.out.println("   --print-units 	: print a list of units used to validate");
+		System.out.println("   --format 	    : csv|html|xml");
 		System.out.println("   --summary     	: print summary only report for errors if any");
 		System.out.println("   --debug       	:");
 		System.out.println("   --help        	: print this message");

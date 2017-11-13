@@ -13,6 +13,8 @@ public class AzimuthCondition extends AbstractCondition {
 
 	public AzimuthCondition(boolean required, String description, double min, double max) {
 		super(required, description);
+		this.min = min;
+		this.max = max;
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class AzimuthCondition extends AbstractCondition {
 			}
 			return Result.of(true, "");
 		}
-		if (azimuth.getValue() < min || azimuth.getValue() >= max) {
+		if (azimuth.getValue() < min || azimuth.getValue() > max) {
 			return Result.of(false,
 					"Expected a value between " + min + " and " + max + " but received " + azimuth.getValue());
 		}

@@ -26,16 +26,10 @@ public class OrientationCondition extends AbstractCondition {
 	public Result evaluate(Channel channel) {
 		assert (channel != null);
 
-		if (channel.getCode() == null) {
-			// if this is an error, it should be caught somewhere else
+		if(channel.getCode()==null || channel.getAzimuth()==null || channel.getDip()==null){
+			//should be caught somewhere else
 			return Result.of(true, "");
 		}
-
-		if (channel.getCode().trim().length() < 3) {
-			// if this is an error, it should be caught somewhere else
-			return Result.of(true, "");
-		}
-
 		char[] array = channel.getCode().toCharArray();
 
 		double azimuth = channel.getAzimuth().getValue();
@@ -77,7 +71,7 @@ public class OrientationCondition extends AbstractCondition {
 			return Result.of(true, "");
 		}
 		return Result.of(false,
-				"315,Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
+				"Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 	}
 

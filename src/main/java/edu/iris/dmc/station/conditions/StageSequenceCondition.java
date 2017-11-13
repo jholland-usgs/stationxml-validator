@@ -31,7 +31,7 @@ public class StageSequenceCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Response response) {
+	public Result evaluate(Channel channel,Response response) {
 		if (this.required) {
 			if (response == null) {
 				return Result.of(false, "expected response but was null");

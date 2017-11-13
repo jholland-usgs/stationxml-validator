@@ -30,7 +30,7 @@ public class StageUnitCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Response response) {
+	public Result evaluate(Channel channel,Response response) {
 		if (this.required) {
 			if (response == null) {
 				return Result.of(false, "expected response but was null");
@@ -42,7 +42,7 @@ public class StageUnitCondition extends AbstractCondition {
 			for (ResponseStage stage : response.getStage()) {
 				Units[] units = getUnits(stage);
 				if (units == null) {
-					return Result.of(false, "stage [ null units for " + stage.getNumber().intValue() + "]");
+					return Result.of(false, "stage [ null units for stage " + stage.getNumber().intValue() + "]");
 				} else {
 					if (current != null) {
 

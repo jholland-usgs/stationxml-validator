@@ -31,7 +31,7 @@ public class StageSequenceConditionTest {
 		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
 
 		StageSequenceCondition condition = new StageSequenceCondition(true, "");
-		Result result = condition.evaluate(bhz00.getResponse());
+		Result result = condition.evaluate(bhz00,bhz00.getResponse());
 		Assert.assertTrue(result.isSuccess());
 		
 	}

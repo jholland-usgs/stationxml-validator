@@ -31,7 +31,7 @@ public class MissingDecimationCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Response response) {
+	public Result evaluate(Channel channel,Response response) {
 		List<ResponseStage> stages = response.getStage();
 		if (stages == null || stages.isEmpty()) {
 			Result.of(true, null);

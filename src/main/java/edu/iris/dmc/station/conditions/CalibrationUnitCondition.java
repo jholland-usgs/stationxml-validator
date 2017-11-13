@@ -27,11 +27,11 @@ public class CalibrationUnitCondition extends AbstractCondition {
 	public Result evaluate(Channel channel) {
 		Units units = channel.getCalibrationUnits();
 		if (this.required && units == null) {
-			return Result.of(false, "expected a value for unit but was null");
+			return Result.of(false, "expected a value for calibration unit but was null");
 		}
 
 		if (units.getName() == null) {
-			return Result.of(false, "expected a value for unit/name but was null");
+			return Result.of(false, "expected a value for calibration unit/name but was null");
 		}
 
 		boolean result = UnitTable.contains(units.getName());
@@ -39,6 +39,6 @@ public class CalibrationUnitCondition extends AbstractCondition {
 			return Result.of(true, null);
 		}
 
-		return Result.of(false, "invalid value "+units.getName()+" for unit");
+		return Result.of(false, "invalid value "+units.getName()+" for calibration unit");
 	}
 }

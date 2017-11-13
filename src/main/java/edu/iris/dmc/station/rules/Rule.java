@@ -57,9 +57,12 @@ public class Rule {
 
 	public void execute(Network network, Station station, Channel channel, Response response, RuleContext context,
 			Action action) {
-		Result result = condition.evaluate(response);
+		Result result = condition.evaluate(channel,response);
 		if (!result.isSuccess()) {
 			result.setRuleId(this.id);
+			result.setNetwork(network);
+			result.setStation(station);
+			result.setChannel(channel);
 			action.update(context, result);
 		}
 	}
@@ -78,23 +81,26 @@ public class Rule {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		Rule rule = (Rule) o;
-
-		if (condition != null ? !condition.equals(rule.condition) : rule.condition != null)
-			return false;
-
-		return true;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
 	}
 
 	@Override
-	public int hashCode() {
-		int result = condition != null ? condition.hashCode() : 0;
-		return result;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rule other = (Rule) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
+
+
 }

@@ -32,7 +32,7 @@ public class EpochOverlapCondition extends AbstractCondition {
 		if (document.getNetwork() == null || document.getNetwork().isEmpty()) {
 			return Result.of(true, null);
 		}
-		
+
 		Result result = run(document.getNetwork());
 		return result;
 	}
@@ -75,19 +75,11 @@ public class EpochOverlapCondition extends AbstractCondition {
 		int i = 0;
 		Map<String, List<Tuple>> map = new HashMap<String, List<Tuple>>();
 		for (BaseNodeType node : list) {
-			node.getStartDate();
-			node.getEndDate();
-
-			Date start = XmlUtil.toDate(node.getStartDate());
-			Date end = null;
-
 			String key = node.getCode();
 			if (node instanceof Channel) {
 				key = key + ((Channel) node).getLocationCode();
 			}
-			if (node.getEndDate() != null) {
-				end = XmlUtil.toDate(node.getEndDate());
-			}
+
 			List<Tuple> tuples = map.get(key);
 			if (tuples == null) {
 				tuples = new ArrayList<Tuple>();
@@ -95,9 +87,10 @@ public class EpochOverlapCondition extends AbstractCondition {
 			}
 
 			if (node instanceof Channel) {
-				tuples.add(new Tuple(node.getCode(), ((Channel) node).getLocationCode(), start, end, i));
+				tuples.add(new Tuple(node.getCode(), ((Channel) node).getLocationCode(), node.getStartDate(),
+						node.getEndDate(), i));
 			} else {
-				tuples.add(new Tuple(node.getCode(), node.getCode(), start, end, i));
+				tuples.add(new Tuple(node.getCode(), node.getCode(), node.getStartDate(), node.getEndDate(), i));
 			}
 
 			i++;

@@ -31,7 +31,7 @@ public class DecimationFactorCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Response response) {
+	public Result evaluate(Channel channel,Response response) {
 		List<ResponseStage> stages = response.getStage();
 		if (stages == null || stages.isEmpty()) {
 			Result.of(true, null);
@@ -43,12 +43,12 @@ public class DecimationFactorCondition extends AbstractCondition {
 				int factor = stage.getDecimation().getFactor().intValue();
 				if (factor > 1) {
 					if (stage.getDecimation().getCorrection() == null) {
-						return Result.of(false, "Stage number: " + i);
+						return Result.of(false, "Decimation correction is null for stage number: " + i);
 					}
 					if (stage.getDecimation().getCorrection().getValue() != 0) {
 
 					} else {
-						return Result.of(false, "Stage number: " + i);
+						return Result.of(false, "Decimation correction is null for stage number: " + i);
 					}
 				}
 			}

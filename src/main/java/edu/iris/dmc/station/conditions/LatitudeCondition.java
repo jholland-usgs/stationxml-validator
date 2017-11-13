@@ -15,10 +15,13 @@ public class LatitudeCondition extends AbstractCondition {
 		if (latitude == null) {
 			return Result.of(false, "Latitude cannot be null");
 		}
+		if (latitude.getValue() == 0) {
+			return Result.of(false, "Latitude cannot be 0");
+		}
 		if (-90 <= latitude.getValue() && 90 >= latitude.getValue()) {
 			return Result.of(true, null);
 		}
-		return Result.of(false, "Expected a value between -90 and 90 but was "+latitude.getValue());
+		return Result.of(false, "Expected a value between -90 and 90 but was " + latitude.getValue());
 	}
 
 	@Override

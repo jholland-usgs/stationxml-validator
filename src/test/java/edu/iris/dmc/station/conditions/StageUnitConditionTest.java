@@ -37,7 +37,7 @@ public class StageUnitConditionTest {
 
 		StageUnitCondition condition = new StageUnitCondition(true, "");
 		Response response = bhz00.getResponse();
-		Result result = condition.evaluate(response);
+		Result result = condition.evaluate(bhz00,response);
 		Assert.assertTrue(result.isSuccess());
 
 		List<ResponseStage> stages = response.getStage();
@@ -50,12 +50,12 @@ public class StageUnitConditionTest {
 		units.setDescription("Dummy");
 		coefficients.setOutputUnits(units);
 
-		result = condition.evaluate(response);
+		result = condition.evaluate(bhz00,response);
 		Assert.assertFalse(result.isSuccess());
 
 		coefficients.setOutputUnits(originalUnits);
 
-		result = condition.evaluate(response);
+		result = condition.evaluate(bhz00,response);
 		Assert.assertTrue(result.isSuccess());
 
 	}

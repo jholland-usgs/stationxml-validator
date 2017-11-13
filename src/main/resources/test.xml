@@ -2355,7 +2355,7 @@
     </Response>
    </Channel>
   </Station>
-  <Station code="ANMO" startDate="2008-06-30T20:00:00" endDate="2599-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_GSN-BROADBAND,_US-ALL,.TEST,.CEUSN-CONTRIB,_ANSS,_REALTIME,_US-TA,_GSN,.EARTHSCOPE,_CARIBE-EWS,_US-REF,_FDSN-ALL,.UNRESTRICTED,_ANSS-BB,_FDSN,_CEUSN">
+  <Station code="ANMO" startDate="2008-06-30T20:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_GSN-BROADBAND,_US-ALL,.TEST,.CEUSN-CONTRIB,_ANSS,_REALTIME,_US-TA,_GSN,.EARTHSCOPE,_CARIBE-EWS,_US-REF,_FDSN-ALL,.UNRESTRICTED,_ANSS-BB,_FDSN,_CEUSN">
    <Latitude>34.94591</Latitude>
    <Longitude>-106.4572</Longitude>
    <Elevation>1820.0</Elevation>

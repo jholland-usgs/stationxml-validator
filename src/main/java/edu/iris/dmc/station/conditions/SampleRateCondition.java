@@ -35,19 +35,19 @@ public class SampleRateCondition extends AbstractCondition {
 		Response response = channel.getResponse();
 		if (sampleRate == null || sampleRate.getValue() == 0) {
 			if (response != null) {
-				return Result.of(false, "");
+				return Result.of(false, "Sample rate cannot be 0 or null.");
 			} else {
 
 			}
 		} else {
 			if (response == null) {
 				return Result.of(false,
-						"If Channel sample rate > 0, at least one stage must be included and be comprised of units, gain, and sample rate.");
+						"response cannot be null.");
 			} else {
 				List<ResponseStage> stages = channel.getResponse().getStage();
 				if (stages == null || stages.isEmpty()) {
 					return Result.of(false,
-							"If Channel sample rate > 0, at least one stage must be included and be comprised of units, gain, and sample rate.");
+							"Response has no stages");
 				}
 				Decimation decimation = null;
 				for (ResponseStage stage : stages) {
@@ -57,18 +57,7 @@ public class SampleRateCondition extends AbstractCondition {
 				}
 				if (decimation == null) {
 					return Result.of(false,
-							"The value of Channel::SampleRate must be equal to the value of Decimation::InputSampleRate divided by Decimation::Factor of the final response stage.");
-				}
-
-				Frequency frequence = decimation.getInputSampleRate();
-				BigInteger factor = decimation.getFactor();
-
-				if (frequence == null) {
-					return Result.of(false, "408");
-				}
-
-				if (sampleRate.getValue() != (frequence.getValue() / factor.doubleValue())) {
-					return Result.of(false, "408");
+							"Decimation cannot be null");
 				}
 			}
 			if (response.getInstrumentPolynomial() == null && response.getInstrumentSensitivity() == null) {

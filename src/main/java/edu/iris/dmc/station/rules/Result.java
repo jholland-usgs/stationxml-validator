@@ -73,4 +73,23 @@ public class Result {
 		return new Result(success, message);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("Result [ruleId=" + ruleId);
+
+		if (network != null) {
+			builder.append(", network=" + network.getCode());
+		}
+		if (station != null) {
+			builder.append(", station=" + station.getCode());
+		}
+		if (channel != null) {
+			builder.append(", channel=" + channel.getCode() + "|" + channel.getLocationCode());
+			builder.append(channel.getStartDate() + "|" + channel.getEndDate());
+		}
+		builder.append(", success=" + success + ", message=" + message + "]");
+
+		return builder.toString();
+	}
+
 }

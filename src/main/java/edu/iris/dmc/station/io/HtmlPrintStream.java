@@ -1,5 +1,6 @@
 package edu.iris.dmc.station.io;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
@@ -7,7 +8,6 @@ import edu.iris.dmc.station.XmlUtil;
 import edu.iris.dmc.station.rules.Result;
 
 public class HtmlPrintStream extends PrintStream implements RuleResultPrintStream {
-
 
 	public HtmlPrintStream(OutputStream out) {
 		super(out);
@@ -66,13 +66,6 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 		this.println("<TABLE class=\"table table-striped table-bordered table-condensed\">");
 
 		this.println("<thead>");
-		this.print("<TR>");
-		this.print("<TH colspan=\"8\">");
-		this.print("Report for: " );
-		this.print("</TH>");
-		this.println("</thead>");
-
-		this.println("<thead>");
 
 		this.print("<TR>");
 		this.print("<TH>");
@@ -111,6 +104,10 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 	}
 
 	public void print(Result result) {
+		print("", result);
+	}
+
+	public void print(String source, Result result) {
 		this.println("<TR>");
 		this.print("<TD>");
 		this.print(result.getRuleId());
@@ -183,6 +180,12 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 	public void printFooter() {
 		this.println("</TABLE>");
 		this.println("</BODY></HTML>");
+	}
+
+	@Override
+	public void printMessage(String text) throws IOException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

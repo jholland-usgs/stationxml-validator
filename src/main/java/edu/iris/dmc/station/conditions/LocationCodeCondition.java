@@ -12,7 +12,7 @@ public class LocationCodeCondition extends AbstractCondition {
 
 	private String regex;
 
-	public LocationCodeCondition(boolean required, String description, String regex) {
+	public LocationCodeCondition(boolean required, String regex, String description) {
 		super(required, description);
 		this.regex = regex;
 	}
@@ -34,14 +34,14 @@ public class LocationCodeCondition extends AbstractCondition {
 			if (!required) {
 				return Result.of(true, "");
 			}
-			return Result.of(false, "Expected a value like" + this.regex + " but was null.");
+			return Result.of(false, "Expected a value like " + this.regex + " but was null.");
 		}
 
 		Pattern p = Pattern.compile(this.regex);
 		Matcher m = p.matcher(code);
 
 		if (!m.matches()) {
-			return Result.of(false, "Expected a value like" + this.regex + " but was " + code);
+			return Result.of(false, "Expected a value like " + this.regex + " but was " + code);
 		}
 		return Result.of(true, "");
 	}

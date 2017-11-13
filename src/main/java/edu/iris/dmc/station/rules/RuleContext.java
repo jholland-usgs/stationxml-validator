@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.iris.dmc.LEVEL;
+import edu.iris.dmc.fdsn.station.model.BaseNodeType.LEVEL;
+
+
+
 
 public class RuleContext {
 

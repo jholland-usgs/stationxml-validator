@@ -2,14 +2,15 @@ package edu.iris.dmc.station.conditions;
 
 import java.io.InputStream;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
-import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.rules.Result;
 
 public class CodeConditionTest {
 
@@ -26,7 +27,13 @@ public class CodeConditionTest {
 	@Test
 	public void shouldRunWithNoProblems() throws Exception {
 		Network iu = theDocument.getNetwork().get(0);
-		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
+		CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,2}", "");
+		Result result = condition.evaluate(iu);
+		Assert.assertTrue(result.isSuccess());
+
+		iu.setCode("IIIIII");
+		result = condition.evaluate(iu);
+		Assert.assertFalse(result.isSuccess());
 
 		
 

@@ -20,5 +20,5 @@ public interface Condition {
 
 	public Result evaluate(Channel channel);
 	
-	public Result evaluate(Response response);
+	public Result evaluate(Channel channel,Response response);
 }
