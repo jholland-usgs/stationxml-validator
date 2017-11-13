@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -49,7 +50,8 @@ public class Application {
 	 * @throws Exception
 	 */
 	public static void main(String[] argv) throws Exception {
-		//argv = new String[] { "/Users/Suleiman/test.xml", "--format", "csv" };
+
+		
 		JCommander.newBuilder().addObject(args).build().parse(argv);
 		if (args.version) {
 			System.out.println(Application.getVersion());
@@ -175,7 +177,9 @@ public class Application {
 		} catch (IOException ioe) {
 			// TODO Auto-generated catch block
 			ioe.printStackTrace();
-		} catch (Exception e) {
+		} catch(UnmarshalException e){
+			System.err.println(e.getCause().getMessage());
+		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -198,7 +202,7 @@ public class Application {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
 			Unmarshaller u = jaxbContext.createUnmarshaller();
-			StreamSource stream = new StreamSource(Application.class.getResourceAsStream("fdsn-station-1.0.xsd"));
+			StreamSource stream = new StreamSource(Application.class.getClassLoader().getResourceAsStream("fdsn-station-1.0.xsd"));
 			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = sf.newSchema(stream);
 			u.setSchema(schema);
@@ -262,9 +266,8 @@ public class Application {
 		System.out.println("   --[net|sta|cha|resp] default is resp ");
 		System.out.println("   --output      	: where to output result, default is System.out");
 		System.out.println("   --ignore-warnings: don't show warnings");
-		System.out.println("   --ignore-rules	: comma seperated numbers of validation rules");
-		System.out.println("   --print-rules 	: print a list of validation rules");
-		System.out.println("   --print-units 	: print a list of units used to validate");
+		System.out.println("   --rules 			: print a list of validation rules");
+		System.out.println("   --units 			: print a list of units used to validate");
 		System.out.println("   --format 	    : csv|html|xml");
 		System.out.println("   --summary     	: print summary only report for errors if any");
 		System.out.println("   --debug       	:");

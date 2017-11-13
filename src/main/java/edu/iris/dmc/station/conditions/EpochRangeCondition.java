@@ -1,6 +1,8 @@
 package edu.iris.dmc.station.conditions;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -56,18 +58,20 @@ public class EpochRangeCondition extends AbstractCondition {
 		if (!result.isSuccess()) {
 			return result;
 		}
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		dateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 		if (station.getChannels() != null && !station.getChannels().isEmpty()) {
 			for (Channel channel : station.getChannels()) {
 				if (station.getStartDate().getTime() > channel.getStartDate().getTime()) {
-					return Result.of(false, "Station startDate " + station.getStartDate()
-							+ " cannot be after channel startDate " + channel.getStartDate());
+					return Result.of(false, "Station "+station.getCode()+" startDate " + dateFormatter.format(station.getStartDate())
+							+ " cannot be after channel "+channel.getCode()+":"+channel.getLocationCode()+" startDate " + dateFormatter.format(channel.getStartDate()));
 
 				}
 
 				if (station.getEndDate() != null && channel.getEndDate() != null) {
 					if (station.getEndDate().before(channel.getEndDate())) {
 						return Result.of(false,
-								"Station endDate " + station.getEndDate() + " cannot be before channel endDate " + channel.getEndDate());
+								"Station endDate " + dateFormatter.format(station.getEndDate()) + " cannot be before channel endDate " + dateFormatter.format(channel.getEndDate()));
 
 					}
 				}

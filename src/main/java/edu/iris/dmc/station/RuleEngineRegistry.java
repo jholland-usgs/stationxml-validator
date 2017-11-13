@@ -99,7 +99,7 @@ public class RuleEngineRegistry {
 		add(307, new LongitudeCondition(true, "Invalid longitude value"), Channel.class);
 		add(308, new DepthCondition(true, "depth is required"), Channel.class);
 
-		add(309, new AzimuthCondition(true, "Invalid azimuth", 0, 90), Channel.class);
+		add(309, new AzimuthCondition(true, "Invalid azimuth", 0, 360), Channel.class);
 		
 		add(310, new SampleRateCondition(false, "If Channel sample rate = 0, no Response should be included."),
 				Channel.class);

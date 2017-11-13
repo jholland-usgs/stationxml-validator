@@ -13,8 +13,6 @@ public class Args {
 	@Parameter(names = "--debug", description = "Debug mode")
 	boolean debug = false;
 
-	@Parameter(names = "--ignore-rules", description = "Ignore rules")
-	boolean ignoreRules = false;
 
 	@Parameter(names = "--ignore-warnings", description = "Ignore warnings")
 	boolean ignoreWarnings = true;
