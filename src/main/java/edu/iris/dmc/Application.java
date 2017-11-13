@@ -262,9 +262,8 @@ public class Application {
 		System.out.println("   --[net|sta|cha|resp] default is resp ");
 		System.out.println("   --output      	: where to output result, default is System.out");
 		System.out.println("   --ignore-warnings: don't show warnings");
-		System.out.println("   --ignore-rules	: comma seperated numbers of validation rules");
-		System.out.println("   --print-rules 	: print a list of validation rules");
-		System.out.println("   --print-units 	: print a list of units used to validate");
+		System.out.println("   --rules 			: print a list of validation rules");
+		System.out.println("   --units 			: print a list of units used to validate");
 		System.out.println("   --format 	    : csv|html|xml");
 		System.out.println("   --summary     	: print summary only report for errors if any");
 		System.out.println("   --debug       	:");
