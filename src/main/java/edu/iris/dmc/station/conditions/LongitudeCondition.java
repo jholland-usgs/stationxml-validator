@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Longitude;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class LongitudeCondition extends AbstractCondition {
@@ -11,17 +12,17 @@ public class LongitudeCondition extends AbstractCondition {
 		super(required, description);
 	}
 
-	private Result run(Longitude longitude) {
+	private Message run(Longitude longitude) {
 		if (longitude == null) {
-			return Result.of(false, "longitude cannot be null");
+			return Result.error("longitude cannot be null");
 		}
 		if (longitude.getValue() == 0) {
-			return Result.of(false, "longitude cannot be 0");
+			return Result.error( "longitude cannot be 0");
 		}
 		if (-180 <= longitude.getValue() && 180 >= longitude.getValue()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
-		return Result.of(false, "Expected a value between -180 and 180 but was " + longitude.getValue());
+		return Result.error( "Expected a value between -180 and 180 but was " + longitude.getValue());
 	}
 
 	@Override
@@ -30,17 +31,17 @@ public class LongitudeCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported for network.");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		return run(station.getLongitude());
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		return run(channel.getLongitude());
 	}
 

@@ -35,10 +35,13 @@ import edu.iris.dmc.station.io.CsvPrintStream;
 import edu.iris.dmc.station.io.HtmlPrintStream;
 import edu.iris.dmc.station.io.RuleResultPrintStream;
 import edu.iris.dmc.station.io.XmlPrintStream;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 import edu.iris.dmc.station.rules.Rule;
 import edu.iris.dmc.station.rules.RuleContext;
+import edu.iris.dmc.station.rules.Success;
 import edu.iris.dmc.station.rules.UnitTable;
+import edu.iris.dmc.station.rules.Warning;
 
 public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -90,8 +93,6 @@ public class Application {
 			// LOGGER.addHandler(fileHandler);
 		}
 
-		List<Integer> ignoreList = new ArrayList<Integer>();
-
 		List<String> input = new ArrayList<>();
 		// PrintStream stream = new PrintStream(out);
 
@@ -115,7 +116,7 @@ public class Application {
 				input.add(file.getAbsolutePath());
 			}
 		}
-		run(rulesContext, input, args.format, out, level, ignoreList);
+		run(rulesContext, input, args.format, out, level, args.ignoreWarnings);
 		if (out != null) {
 			out.close();
 		}
@@ -125,7 +126,7 @@ public class Application {
 	}
 
 	private void run(RuleContext context, List<String> input, String format, OutputStream outputStream, LEVEL level,
-			List<Integer> ignoreList) {
+			boolean ignoreWarnings) {
 
 		RuleEngineService ruleEngineService = new RuleEngineService();
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
@@ -152,10 +153,16 @@ public class Application {
 
 				ruleEngineService.executeAllRules(document, context, new Action() {
 					@Override
-					public void update(RuleContext context, Result result) {
+					public void update(RuleContext context, Message message) {
 						try {
+							if(message instanceof Success){
+								return;
+							}
+							if(ignoreWarnings && message instanceof Warning){
+								return;
+							}
 							bool.value = false;
-							ps.print(uri, result);
+							ps.print(uri, message);
 							ps.flush();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block

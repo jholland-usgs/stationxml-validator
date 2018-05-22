@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class XmlPrintStream extends PrintStream implements RuleResultPrintStream {
@@ -28,12 +29,12 @@ public class XmlPrintStream extends PrintStream implements RuleResultPrintStream
 
 	}
 
-	public void print(Result result) {
+	public void print(Message result) {
 		print("", result);
 	}
 
 	@Override
-	public void print(String source, Result result) {
+	public void print(String source, Message result) {
 		// TODO Auto-generated method stub
 
 	}

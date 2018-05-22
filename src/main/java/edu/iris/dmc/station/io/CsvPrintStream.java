@@ -10,12 +10,13 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 import edu.iris.dmc.station.XmlUtil;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
-public class CsvPrintStream extends PrintStream implements RuleResultPrintStream{
+public class CsvPrintStream extends PrintStream implements RuleResultPrintStream {
 
-	private static final Object[] FILE_HEADER = { "Source","RuleId", "Network", "Station", "Channel", "Location", "StartDate",
-			"EndDate", "Message" };
+	private static final Object[] FILE_HEADER = { "Source", "RuleId", "Network", "Station", "Channel", "Location",
+			"StartDate", "EndDate", "Message" };
 	private CSVPrinter csvFilePrinter = null;
 
 	public CsvPrintStream(OutputStream out) throws IOException {
@@ -27,31 +28,33 @@ public class CsvPrintStream extends PrintStream implements RuleResultPrintStream
 	public void printHeader() throws IOException {
 		csvFilePrinter.printRecord(FILE_HEADER);
 	}
-	public void print(Result result) throws IOException {
-		print("", result);
+
+	public void print(Message message) throws IOException {
+		print("", message);
 	}
-	public void print(String source,Result result) throws IOException {
+
+	public void print(String source, Message message) throws IOException {
 		List<String> record = new ArrayList<>();
 
 		record.add(source);
-		record.add("" + result.getRuleId());
-		record.add(result.getNetwork() == null ? null : result.getNetwork().getCode());
-		record.add(result.getStation() == null ? null : result.getStation().getCode());
-		record.add(result.getChannel() == null ? null : result.getChannel().getCode());
-		record.add(result.getChannel() == null ? null : result.getChannel().getLocationCode());
+		record.add("" + message.getRule().getId());
+		record.add(message.getNetwork() == null ? null : message.getNetwork().getCode());
+		record.add(message.getStation() == null ? null : message.getStation().getCode());
+		record.add(message.getChannel() == null ? null : message.getChannel().getCode());
+		record.add(message.getChannel() == null ? null : message.getChannel().getLocationCode());
 
-		if (result.getChannel() != null) {
-			record.add(result.getChannel() == null ? null : XmlUtil.toText(result.getChannel().getStartDate()));
-			record.add(result.getChannel() == null ? null : XmlUtil.toText(result.getChannel().getEndDate()));
-		} else if (result.getStation() != null) {
-			record.add(XmlUtil.toText(result.getStation().getStartDate()));
-			record.add(XmlUtil.toText(result.getStation().getEndDate()));
-		} else if (result.getNetwork() != null) {
-			record.add(XmlUtil.toText(result.getNetwork().getStartDate()));
-			record.add(XmlUtil.toText(result.getNetwork().getEndDate()));
+		if (message.getChannel() != null) {
+			record.add(message.getChannel() == null ? null : XmlUtil.toText(message.getChannel().getStartDate()));
+			record.add(message.getChannel() == null ? null : XmlUtil.toText(message.getChannel().getEndDate()));
+		} else if (message.getStation() != null) {
+			record.add(XmlUtil.toText(message.getStation().getStartDate()));
+			record.add(XmlUtil.toText(message.getStation().getEndDate()));
+		} else if (message.getNetwork() != null) {
+			record.add(XmlUtil.toText(message.getNetwork().getStartDate()));
+			record.add(XmlUtil.toText(message.getNetwork().getEndDate()));
 		}
 
-		record.add(result.getMessage());
+		record.add(message.getDescription());
 		csvFilePrinter.printRecord(record);
 		csvFilePrinter.flush();
 
@@ -67,7 +70,6 @@ public class CsvPrintStream extends PrintStream implements RuleResultPrintStream
 		this.println(text);
 	}
 
-	
 	@Override
 	public void printMessage(String text) {
 		this.print(text);

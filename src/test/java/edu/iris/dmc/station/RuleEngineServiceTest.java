@@ -17,6 +17,7 @@ import edu.iris.dmc.fdsn.station.model.Longitude;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.actions.DefaultAction;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 import edu.iris.dmc.station.rules.RuleContext;
 
@@ -41,7 +42,7 @@ public class RuleEngineServiceTest {
 		for (Network network : theDocument.getNetwork()) {
 			ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 		}
-		List<Result> resultSet = context.getResponse();
+		List<Message> resultSet = context.getResponse();
 		Assert.assertTrue("Expected result of rule execution to be true", resultSet.isEmpty());
 	}
 
@@ -53,16 +54,16 @@ public class RuleEngineServiceTest {
 			network.setCode("IUUUUUUUUU");
 			ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 		}
-		List<Result> resultSet = context.getResponse();
+		List<Message> resultSet = context.getResponse();
 		Assert.assertFalse("Expected result of rule execution to be true", resultSet.isEmpty());
 
-		for (Result r : resultSet) {
+		for (Message r : resultSet) {
 			System.out.println(r);
 		}
 		Assert.assertEquals(1, resultSet.size());
-		Result result = resultSet.get(0);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(101, result.getRuleId());
+		Message result = resultSet.get(0);
+		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		Assert.assertEquals(101, result.getRule().getId());
 	}
 
 	@Test
@@ -77,12 +78,12 @@ public class RuleEngineServiceTest {
 		System.out.println(network.getStartDate() + "  " + network.getEndDate());
 		ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 
-		List<Result> resultSet = context.getResponse();
+		List<Message> resultSet = context.getResponse();
 		Assert.assertFalse("Expected result of rule execution to be true", resultSet.isEmpty());
 		Assert.assertEquals(1, resultSet.size());
-		Result result = resultSet.get(0);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(105, result.getRuleId());
+		Message result = resultSet.get(0);
+		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		Assert.assertEquals(105, result.getRule().getId());
 
 		context.clear();
 		network.getStations().get(0).setStartDate(cal);
@@ -94,7 +95,7 @@ public class RuleEngineServiceTest {
 		resultSet = context.getResponse(105);
 		Assert.assertFalse(resultSet.isEmpty());
 		result = resultSet.get(0);
-		Assert.assertEquals(105, result.getRuleId());
+		Assert.assertEquals(105, result.getRule().getId());
 
 	}
 
@@ -105,7 +106,7 @@ public class RuleEngineServiceTest {
 		RuleEngineService ruleEngineService = new RuleEngineService();
 		RuleContext context = getContext(LEVEL.RESPONSE);
 		ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
-		List<Result> resultSet = context.getResponse();
+		List<Message> resultSet = context.getResponse();
 		Assert.assertTrue("Expected result of rule execution to be true", resultSet.isEmpty());
 
 		network.setEndDate(XmlUtil.toDate("yyyy-MM-dd'T'HH:mm:ss", "2008-01-01T10:00:00"));
@@ -130,7 +131,7 @@ public class RuleEngineServiceTest {
 		RuleEngineService ruleEngineService = new RuleEngineService();
 		RuleContext context = getContext(LEVEL.RESPONSE);
 		ruleEngineService.executeNetworkRules(iu, context, new DefaultAction());
-		List<Result> resultSet = context.getResponse();
+		List<Message> resultSet = context.getResponse();
 		Assert.assertFalse("Expected result of rule execution to be true", resultSet.isEmpty());
 		Assert.assertEquals(1, resultSet.size());
 	}

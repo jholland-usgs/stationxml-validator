@@ -89,8 +89,8 @@ public class RuleEngineRegistry {
 		String codeRegex = "[A-Za-z0-9\\*\\?]{1,3}";
 		add(301, new CodeCondition(true, codeRegex,
 				"Channel attribute 'code' cannot be null, must consist of a three-character string"), Channel.class);
-		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\?\\-\\ ]{1,2})?",
-				"Channel attribute 'location' cannot be null, must consist of a two-character string"),
+		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\?\\-\\ ]{0,2})?",
+				"Channel attribute 'location' cannot be null, must consist of a two-character string or left empty"),
 				Channel.class);
 		add(303, new StartTimeCondition(true, "'startDate' is required"), Channel.class);
 		add(305, new EpochRangeCondition(true, "Channel startDate must be before endDate when endDate available"),

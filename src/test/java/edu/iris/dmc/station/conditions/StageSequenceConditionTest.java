@@ -11,7 +11,9 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
+import edu.iris.dmc.station.rules.Success;
 
 public class StageSequenceConditionTest {
 
@@ -31,8 +33,9 @@ public class StageSequenceConditionTest {
 		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
 
 		StageSequenceCondition condition = new StageSequenceCondition(true, "");
-		Result result = condition.evaluate(bhz00,bhz00.getResponse());
-		Assert.assertTrue(result.isSuccess());
+
+		Message result = condition.evaluate(bhz00,bhz00.getResponse());
+		Assert.assertTrue(result instanceof Success);
 		
 	}
 }

@@ -5,6 +5,7 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public interface Condition {
@@ -12,13 +13,13 @@ public interface Condition {
 
 	public String getDescription();
 
-	public Result evaluate(FDSNStationXML document);
+	public Message evaluate(FDSNStationXML document);
 	
-	public Result evaluate(Network network);
+	public Message evaluate(Network network);
 
-	public Result evaluate(Station station);
+	public Message evaluate(Station station);
 
-	public Result evaluate(Channel channel);
+	public Message evaluate(Channel channel);
 	
-	public Result evaluate(Channel channel,Response response);
+	public Message evaluate(Channel channel,Response response);
 }

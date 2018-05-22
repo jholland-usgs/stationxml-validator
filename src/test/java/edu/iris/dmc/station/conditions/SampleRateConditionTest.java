@@ -14,20 +14,21 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
+import edu.iris.dmc.fdsn.station.model.SampleRate;
 import edu.iris.dmc.fdsn.station.model.Units;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 import edu.iris.dmc.station.rules.Success;
 
-public class StageUnitConditionTest {
+public class SampleRateConditionTest {
 
 	private FDSNStationXML theDocument;
 
 	@Before
 	public void init() throws Exception {
 
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("test.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("408.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 		}
 	}
@@ -37,28 +38,21 @@ public class StageUnitConditionTest {
 		Network iu = theDocument.getNetwork().get(0);
 		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
 
-		StageUnitCondition condition = new StageUnitCondition(true, "");
+		SampleRateDecimationCondition condition = new SampleRateDecimationCondition(true, "");
 		Response response = bhz00.getResponse();
-		Message result = condition.evaluate(bhz00,response);
-		Assert.assertTrue(result instanceof Success);
+		Message result = condition.evaluate(bhz00, response);
 
-		List<ResponseStage> stages = response.getStage();
-		ResponseStage stage = stages.get(1);
-		Assert.assertEquals(2, stage.getNumber().intValue());
-		Coefficients coefficients = stage.getCoefficients();
-		Units originalUnits = coefficients.getOutputUnits();
-		Units units = new Units();
-		units.setName("Dummy");
-		units.setDescription("Dummy");
-		coefficients.setOutputUnits(units);
-
-		result = condition.evaluate(bhz00,response);
+		result = condition.evaluate(bhz00, response);
 		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		
+		SampleRate sr=bhz00.getSampleRate();
+		sr.setValue(20);
+		
+		bhz00.setSampleRate(sr);
+		
+		result = condition.evaluate(bhz00, response);
+		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 
-		coefficients.setOutputUnits(originalUnits);
-
-		result = condition.evaluate(bhz00,response);
-		Assert.assertTrue(result instanceof Success);
 
 	}
 }

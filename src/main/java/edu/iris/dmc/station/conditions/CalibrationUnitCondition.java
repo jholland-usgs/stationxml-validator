@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.fdsn.station.model.Units;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 import edu.iris.dmc.station.rules.UnitTable;
 
@@ -14,31 +15,37 @@ public class CalibrationUnitCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		Units units = channel.getCalibrationUnits();
 		if (this.required && units == null) {
-			return Result.of(false, "expected a value for calibration unit but was null");
+			return Result.error("expected a value for calibration unit but was null");
 		}
 
 		if (units.getName() == null) {
-			return Result.of(false, "expected a value for calibration unit/name but was null");
+			return Result.error("expected a value for calibration unit/name but was null");
 		}
 
 		boolean result = UnitTable.contains(units.getName());
 		if (result) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
-		return Result.of(false, "invalid value "+units.getName()+" for calibration unit");
+		result = UnitTable.contains(units.getName().toLowerCase());
+		if (result) {
+			return Result.warning("expected " + units.getName().toLowerCase() + " for calibration unit/name but was "
+					+ units.getName());
+		}
+
+		return Result.error("Invalid unit "+units.getName());
 	}
 }

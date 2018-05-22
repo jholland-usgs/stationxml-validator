@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Azimuth;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class AzimuthCondition extends AbstractCondition {
@@ -18,28 +19,28 @@ public class AzimuthCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		Azimuth azimuth = channel.getAzimuth();
 		if (azimuth == null) {
 			if (required) {
-				return Result.of(false, "Expected a value between " + min + " and " + max + " but received null.");
+				return Result.error("Expected a value between " + min + " and " + max + " but received null.");
 			}
-			return Result.of(true, "");
+			return Result.success();
 		}
 		if (azimuth.getValue() < min || azimuth.getValue() > max) {
-			return Result.of(false,
-					"Expected a value between " + min + " and " + max + " but received " + azimuth.getValue());
+			return Result
+					.error("Expected a value between " + min + " and " + max + " but received " + azimuth.getValue());
 		}
-		return Result.of(true, "");
+		return Result.success();
 	}
 }

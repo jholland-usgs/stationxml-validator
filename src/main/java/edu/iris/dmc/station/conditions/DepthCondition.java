@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Distance;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class DepthCondition extends AbstractCondition {
@@ -13,25 +14,25 @@ public class DepthCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Method not supported for Network.class");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("Method not supported for Station.class");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		if (channel == null) {
 
 		}
 		Distance distance = channel.getDepth();
 		if (distance == null) {
-			return Result.of(false, "depth cannot be null");
+			return Result.error("depth cannot be null");
 		}
-		return Result.of(true, null);
+		return Result.success();
 	}
 
 }

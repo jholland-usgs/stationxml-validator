@@ -3,6 +3,7 @@ package edu.iris.dmc.station.conditions;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class DistanceCondition extends AbstractCondition {
@@ -15,15 +16,15 @@ public class DistanceCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("method not supported for network.");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 
 		if (station.getChannels() == null || station.getChannels().isEmpty()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
 		for (Channel channel : station.getChannels()) {
@@ -34,17 +35,17 @@ public class DistanceCondition extends AbstractCondition {
 					channel.getLongitude().getValue(), station.getLatitude().getValue(),
 					station.getLongitude().getValue(), "K");
 			if (distance > this.margin) {
-				return Result.of(false,
+				return Result.error(
 						"Expected a distance difference of less than " + margin + " between "+station.getCode()+" and "+channel.getCode()+":"+channel.getLocationCode()+", but was " + distance);
 			}
 		}
 
-		return Result.of(true, null);
+		return Result.success();
 
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		throw new IllegalArgumentException("method not supported for channel.");
 	}
 

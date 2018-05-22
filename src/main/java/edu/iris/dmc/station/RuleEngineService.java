@@ -55,6 +55,9 @@ public class RuleEngineService {
 	}
 	
 	public void executeAllRules(Network network, RuleContext context, Action action) {
+		if(network==null){
+			return;
+		}
 		if (network != null) {
 			for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
 				rule.execute(network, context, action);

@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Latitude;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class LatitudeCondition extends AbstractCondition {
@@ -11,17 +12,17 @@ public class LatitudeCondition extends AbstractCondition {
 		super(required, description);
 	}
 
-	private Result run(Latitude latitude) {
+	private Message run(Latitude latitude) {
 		if (latitude == null) {
-			return Result.of(false, "Latitude cannot be null");
+			return Result.error( "Latitude cannot be null");
 		}
 		if (latitude.getValue() == 0) {
-			return Result.of(false, "Latitude cannot be 0");
+			return Result.error( "Latitude cannot be 0");
 		}
 		if (-90 <= latitude.getValue() && 90 >= latitude.getValue()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
-		return Result.of(false, "Expected a value between -90 and 90 but was " + latitude.getValue());
+		return Result.error( "Expected a value between -90 and 90 but was " + latitude.getValue());
 	}
 
 	@Override
@@ -30,17 +31,17 @@ public class LatitudeCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported for network.");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		return run(station.getLatitude());
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		return run(channel.getLatitude());
 	}
 

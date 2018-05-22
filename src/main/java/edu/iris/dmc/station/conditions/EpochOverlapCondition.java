@@ -15,6 +15,7 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.XmlUtil;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class EpochOverlapCondition extends AbstractCondition {
@@ -24,53 +25,53 @@ public class EpochOverlapCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(FDSNStationXML document) {
+	public Message evaluate(FDSNStationXML document) {
 		if (document == null) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
 		if (document.getNetwork() == null || document.getNetwork().isEmpty()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
-		Result result = run(document.getNetwork());
+		Message result = run(document.getNetwork());
 		return result;
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		if (network == null) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
 		if (network.getStations() == null || network.getStations().isEmpty()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
-		Result result = run(network.getStations());
+		Message result = run(network.getStations());
 		result.setNetwork(network);
 		return result;
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		if (station == null) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
 		if (station.getChannels() == null || station.getChannels().isEmpty()) {
-			return Result.of(true, null);
+			return Result.success();
 		}
-		Result result = run(station.getChannels());
+		Message result = run(station.getChannels());
 		result.setStation(station);
 		return result;
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		throw new IllegalArgumentException("Not supported for channels");
 	}
 
-	private Result run(List<? extends BaseNodeType> list) {
+	private Message run(List<? extends BaseNodeType> list) {
 
 		int i = 0;
 		Map<String, List<Tuple>> map = new HashMap<String, List<Tuple>>();
@@ -110,12 +111,11 @@ public class EpochOverlapCondition extends AbstractCondition {
 								.append(",").append(XmlUtil.toText(tuple[1].start)).append(",")
 								.append(XmlUtil.toText(tuple[1].end)).append(")]");
 					}
-					Result result = Result.of(false, builder.toString());
-					return result;
+					return Result.error( builder.toString());
 				}
 			}
 		}
-		return Result.of(true, null);
+		return Result.success();
 	}
 
 	private List<Tuple[]> checkRanges(List<Tuple> tuples) {

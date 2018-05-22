@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import edu.iris.dmc.station.XmlUtil;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class HtmlPrintStream extends PrintStream implements RuleResultPrintStream {
@@ -103,14 +104,14 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 		this.print("</thead>");
 	}
 
-	public void print(Result result) {
+	public void print(Message result) {
 		print("", result);
 	}
 
-	public void print(String source, Result result) {
+	public void print(String source, Message result) {
 		this.println("<TR>");
 		this.print("<TD>");
-		this.print(result.getRuleId());
+		this.print(result.getRule().getId());
 		this.print("</TD>");
 
 		this.print("<TD>");
@@ -164,7 +165,7 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 		}
 
 		this.print("<TD>");
-		this.print(result.getMessage());
+		this.print(result.getDescription());
 		this.print("</TD>");
 		this.println("</TR>");
 

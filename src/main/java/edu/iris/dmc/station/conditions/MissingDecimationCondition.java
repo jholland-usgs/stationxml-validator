@@ -7,6 +7,7 @@ import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class MissingDecimationCondition extends AbstractCondition {
@@ -16,43 +17,43 @@ public class MissingDecimationCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("method not supported!");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("method not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		throw new IllegalArgumentException("method not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel,Response response) {
+	public Message evaluate(Channel channel,Response response) {
 		List<ResponseStage> stages = response.getStage();
 		if (stages == null || stages.isEmpty()) {
-			Result.of(true, null);
+			return Result.success();
 		}
 
 		int i = 1;
 		for (ResponseStage stage : stages) {
 			if (stage.getFIR() != null || stage.getCoefficients() != null) {
 				if (stage.getDecimation() == null) {
-					return Result.of(false, "stage number: " + i);
+					return Result.error( "stage number: " + i);
 				}
 			}
 			if (stage.getPolesZeros() != null) {
 				if ("DIGITAL (Z-TRANSFORM)".equals(stage.getPolesZeros().getPzTransferFunctionType())) {
 					if (stage.getDecimation() == null) {
-						return Result.of(false, "stage number: " + i);
+						return Result.error( "stage number: " + i);
 					}
 				}
 			}
 			i++;
 		}
-		return Result.of(true, null);
+		return Result.success();
 	}
 }

@@ -26,45 +26,50 @@ public class Rule {
 	}
 
 	public void execute(Network network, RuleContext context, Action action) {
-		Result result = condition.evaluate(network);
-		if (!result.isSuccess()) {
-			result.setRuleId(this.id);
-			result.setNetwork(network);
-			action.update(context, result);
+		Message message = condition.evaluate(network);
+		if (message instanceof Success) {
+			return;
 		}
+		message.setRule(this);
+		message.setNetwork(network);
+		action.update(context, message);
 	}
 
 	public void execute(Network network, Station station, RuleContext context, Action action) {
-		Result result = condition.evaluate(station);
-		if (!result.isSuccess()) {
-			result.setRuleId(this.id);
-			result.setNetwork(network);
-			result.setStation(station);
-			action.update(context, result);
+		Message message = condition.evaluate(station);
+		if (message instanceof Success) {
+			return;
 		}
+		message.setRule(this);
+		message.setNetwork(network);
+		message.setStation(station);
+		action.update(context, message);
+
 	}
 
 	public void execute(Network network, Station station, Channel channel, RuleContext context, Action action) {
-		Result result = condition.evaluate(channel);
-		if (!result.isSuccess()) {
-			result.setRuleId(this.id);
-			result.setNetwork(network);
-			result.setStation(station);
-			result.setChannel(channel);
-			action.update(context, result);
+		Message message = condition.evaluate(channel);
+		if (message instanceof Success) {
+			return;
 		}
+		message.setRule(this);
+		message.setNetwork(network);
+		message.setStation(station);
+		message.setChannel(channel);
+		action.update(context, message);
 	}
 
 	public void execute(Network network, Station station, Channel channel, Response response, RuleContext context,
 			Action action) {
-		Result result = condition.evaluate(channel,response);
-		if (!result.isSuccess()) {
-			result.setRuleId(this.id);
-			result.setNetwork(network);
-			result.setStation(station);
-			result.setChannel(channel);
-			action.update(context, result);
+		Message message = condition.evaluate(channel, response);
+		if (message instanceof Success) {
+			return;
 		}
+		message.setRule(this);
+		message.setNetwork(network);
+		message.setStation(station);
+		message.setChannel(channel);
+		action.update(context, message);
 	}
 
 	public Condition getConditionExpression() {
@@ -101,6 +106,5 @@ public class Rule {
 			return false;
 		return true;
 	}
-
 
 }

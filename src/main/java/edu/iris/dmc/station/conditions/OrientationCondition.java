@@ -4,6 +4,7 @@ package edu.iris.dmc.station.conditions;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class OrientationCondition extends AbstractCondition {
@@ -13,22 +14,22 @@ public class OrientationCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		assert (channel != null);
 
 		if(channel.getCode()==null || channel.getAzimuth()==null || channel.getDip()==null){
 			//should be caught somewhere else
-			return Result.of(true, "");
+			return Result.success();
 		}
 		char[] array = channel.getCode().toCharArray();
 
@@ -68,9 +69,9 @@ public class OrientationCondition extends AbstractCondition {
 		}
 
 		if (valid) {
-			return Result.of(true, "");
+			return Result.success();
 		}
-		return Result.of(false,
+		return Result.error(
 				"Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 	}

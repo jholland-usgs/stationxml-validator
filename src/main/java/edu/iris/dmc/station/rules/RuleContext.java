@@ -7,12 +7,9 @@ import java.util.Map;
 
 import edu.iris.dmc.fdsn.station.model.BaseNodeType.LEVEL;
 
-
-
-
 public class RuleContext {
 
-	private Map<Integer, List<Result>> map = new HashMap<>();
+	private Map<Integer, List<Message>> map = new HashMap<>();
 
 	private LEVEL level;
 
@@ -28,25 +25,25 @@ public class RuleContext {
 		return this.level;
 	}
 
-	public List<Result> getResponse() {
-		List<Result> list = new ArrayList<>();
-		for (List<Result> l : map.values()) {
+	public List<Message> getResponse() {
+		List<Message> list = new ArrayList<>();
+		for (List<Message> l : map.values()) {
 			list.addAll(l);
 		}
 		return list;
 	}
 
-	public List<Result> getResponse(int ruleId) {
+	public List<Message> getResponse(int ruleId) {
 		return map.get(ruleId);
 	}
 
-	public void addViolation(Result result) {
-		List<Result> list = map.get(result.getRuleId());
+	public void addViolation(Message message) {
+		List<Message> list = map.get(message.getRule().getId());
 		if (list == null) {
 			list = new ArrayList<>();
-			map.put(result.getRuleId(), list);
+			map.put(message.getRule().getId(), list);
 		}
-		list.add(result);
+		list.add(message);
 	}
 
 	public void clear() {

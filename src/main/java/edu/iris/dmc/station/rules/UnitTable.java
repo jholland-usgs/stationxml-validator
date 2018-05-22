@@ -18,7 +18,8 @@ public class UnitTable {
 			"percent", "%", "count", "counts", "number", "unitless"));
 
 	public static boolean contains(String name) {
-		return units.contains(name);
+		boolean bool = units.contains(name);
+		return bool;
 	}
 
 	public static boolean containsCaseInsensitive(String name) {

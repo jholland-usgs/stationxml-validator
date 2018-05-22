@@ -11,6 +11,7 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.SampleRate;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class SampleRateDecimationCondition extends AbstractCondition {
@@ -20,23 +21,23 @@ public class SampleRateDecimationCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		throw new IllegalArgumentException("Not supported!");
 	}
 
 	@Override
-	public Result evaluate(Channel channel, Response response) {
-		
+	public Message evaluate(Channel channel, Response response) {
+
 		SampleRate sampleRate = channel.getSampleRate();
 
 		Decimation decimation = null;
@@ -46,22 +47,20 @@ public class SampleRateDecimationCondition extends AbstractCondition {
 			}
 		}
 		if (decimation == null) {
-			return Result.of(false,
-					"Decimation cannot be null");
+			return Result.error("Decimation cannot be null");
 		}
 
 		Frequency frequence = decimation.getInputSampleRate();
 		BigInteger factor = decimation.getFactor();
 
 		if (frequence == null) {
-			return Result.of(false, "frequency is null");
+			return Result.error("frequency is null");
+		}
+		if (Math.abs(sampleRate.getValue() - (frequence.getValue() / factor.doubleValue())) > 0.0001) {
+			return Result.error(sampleRate.getValue() + "!=" + (frequence.getValue() / factor.doubleValue()));
 		}
 
-		if (sampleRate.getValue() != (frequence.getValue() / factor.doubleValue())) {
-			return Result.of(false, sampleRate.getValue() +"!="+ (frequence.getValue() / factor.doubleValue()));
-		}
-
-		return Result.of(true, null);
+		return Result.success();
 	}
 
 }

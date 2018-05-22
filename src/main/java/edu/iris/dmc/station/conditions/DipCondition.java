@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Dip;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class DipCondition extends AbstractCondition {
@@ -18,30 +19,30 @@ public class DipCondition extends AbstractCondition {
 	}
 
 	@Override
-	public Result evaluate(Network network) {
+	public Message evaluate(Network network) {
 		throw new IllegalArgumentException("method not supported for network.");
 	}
 
 	@Override
-	public Result evaluate(Station station) {
+	public Message evaluate(Station station) {
 		throw new IllegalArgumentException("method not supported for station.");
 	}
 
 	@Override
-	public Result evaluate(Channel channel) {
+	public Message evaluate(Channel channel) {
 		if (channel == null) {
-			return Result.of(true, null);
+			return Result.success();
 		}
 
 		Dip dip = channel.getDip();
 		if (dip == null) {
-			return Result.of(false, "expected dip value but was null");
+			return Result.error( "expected dip value but was null");
 		}
 
 		if (dip.getValue() >= -90 && dip.getValue() <= 90) {
-			return Result.of(true, null);
+			return Result.success();
 		}
-		return Result.of(false, "expected a value between "+min+" and "+max+" but was "+dip.getValue());
+		return Result.error( "expected a value between "+min+" and "+max+" but was "+dip.getValue());
 	}
 
 }
