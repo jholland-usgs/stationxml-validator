@@ -34,6 +34,7 @@ import edu.iris.dmc.station.conditions.StageSequenceCondition;
 import edu.iris.dmc.station.conditions.StageUnitCondition;
 import edu.iris.dmc.station.conditions.StartTimeCondition;
 import edu.iris.dmc.station.conditions.StationElevationCondition;
+import edu.iris.dmc.station.conditions.UnitCondition;
 import edu.iris.dmc.station.rules.Rule;
 
 public class RuleEngineRegistry {
@@ -112,10 +113,10 @@ public class RuleEngineRegistry {
 	}
 
 	private void defaultResponseRules() {
-		add(401, new StageSequenceCondition(true, "Invalid channel orientation"), Response.class);
-		add(402, new StageUnitCondition(true,
+		add(401, new StageSequenceCondition(true, "The 'number' attribute of Response::Stage element must start at 1 and be sequential"), Response.class);
+		add(402, new UnitCondition(true,
 				"The input unit of a stage must match the output unit of the preceding stage, except for stages 0 or 1."),
-				Response.class);
+				Channel.class);
 		
 		add(408, new SampleRateDecimationCondition(true,
 				"The value of Channel::SampleRate must be equal to the value of Decimation::InputSampleRate divided by Decimation::Factor of the final response stage."),

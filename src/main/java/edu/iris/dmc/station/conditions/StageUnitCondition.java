@@ -39,7 +39,7 @@ public class StageUnitCondition extends AbstractCondition {
 		}
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
 			Units[] current = null;
-			int i = 1;
+
 			for (ResponseStage stage : response.getStage()) {
 				Units[] units = getUnits(stage);
 				if (units == null) {

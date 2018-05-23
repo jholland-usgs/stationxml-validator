@@ -149,7 +149,7 @@
      <Stage number="5">
       <Coefficients>
        <InputUnits>
-        <Name>V</Name>
+        <Name>VVV</Name>
         <Description>emf in volts</Description>
        </InputUnits>
        <OutputUnits>

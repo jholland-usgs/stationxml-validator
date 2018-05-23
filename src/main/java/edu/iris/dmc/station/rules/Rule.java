@@ -30,6 +30,7 @@ public class Rule {
 		if (message instanceof Success) {
 			return;
 		}
+
 		message.setRule(this);
 		message.setNetwork(network);
 		action.update(context, message);

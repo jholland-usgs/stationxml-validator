@@ -42,13 +42,13 @@ public class StageSequenceCondition extends AbstractCondition {
 			List<ResponseStage> stages = response.getStage();
 			ResponseStage stage = stages.get(stages.size() - 1);
 			if (stage.getNumber().intValue() == stages.size()-1) {
-				return Result.error( "invalida sequence number " + stage.getNumber().intValue());
+				return Result.error( "invalid sequence number " + stage.getNumber().intValue());
 			} else {
 				int i = 1;
 				for (ResponseStage s : stages) {
 					if (s.getNumber().intValue() != i) {
 						return Result.error(
-								"invalida sequence number " + s.getNumber().intValue() + " expected: " + i);
+								"invalid sequence number " + s.getNumber().intValue() + " expected: " + i);
 					}
 					i++;
 				}
