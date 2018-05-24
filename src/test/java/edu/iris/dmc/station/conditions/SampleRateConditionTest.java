@@ -38,7 +38,7 @@ public class SampleRateConditionTest {
 		Network iu = theDocument.getNetwork().get(0);
 		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
 
-		SampleRateDecimationCondition condition = new SampleRateDecimationCondition(true, "");
+		DecimationCondition condition = new DecimationCondition(true, "");
 		Response response = bhz00.getResponse();
 		Message result = condition.evaluate(bhz00, response);
 

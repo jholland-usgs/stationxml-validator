@@ -15,7 +15,7 @@ public class UnitTable {
 			"volt", "V", "millivolt", "mV", "microvolt", "uV", "ohm", "hertz", "Hz", "newton", "N", "joule", "J",
 			"tesla", "T", "nanotesla", "nT", "strain", "m/m", "m**3/m**3", "cm/cm", "mm/mm", "um/um", "nm/nm",
 			"microstrain", "watt", "W", "milliwatt", "mW", "V/m", "W/m**2", "gap", "reboot", "byte", "bit", "bit/s",
-			"percent", "%", "count", "counts", "number", "unitless"));
+			"percent", "%", "count", "counts", "number", "unitless","unkown","UNKOWN"));
 
 	public static boolean contains(String name) {
 		boolean bool = units.contains(name);

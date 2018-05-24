@@ -1,11 +1,9 @@
 package edu.iris.dmc.station.conditions;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Decimation;
-import edu.iris.dmc.fdsn.station.model.Frequency;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
@@ -52,6 +50,7 @@ public class SampleRateCondition extends AbstractCondition {
 				for (ResponseStage stage : stages) {
 					if (stage.getDecimation() != null) {
 						decimation = stage.getDecimation();
+						break;
 					}
 				}
 				if (decimation == null) {
@@ -59,7 +58,7 @@ public class SampleRateCondition extends AbstractCondition {
 				}
 			}
 			if (response.getInstrumentPolynomial() == null && response.getInstrumentSensitivity() == null) {
-				return Result.error("If Channel sample rate > 0, total instrument response must exist as either or.");
+				return Result.error("If Channel sample rate > 0, total instrument response must exist as a scale factor or a polynomial.");
 			}
 
 		}

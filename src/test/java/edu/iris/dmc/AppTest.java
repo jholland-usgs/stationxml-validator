@@ -6,7 +6,7 @@ package edu.iris.dmc;
  */
 public class AppTest {
 	public static void main(String[] args) throws Exception {
-		args = new String[] {"--format","csv","/Users/Suleiman/PROJECTS/StationXML-Validator/src/test/resources/AUMCQBHZ_stageNOSEQUENCE.xml"};
+		args = new String[] {"--format","csv","--ignore-warnings","/Users/Suleiman/PROJECTS/StationXML-Validator/src/test/resources/ace.xml"};
 		Application app = new Application();
 		app.main(args);
 	}

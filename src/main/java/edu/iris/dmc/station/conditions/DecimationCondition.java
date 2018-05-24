@@ -14,9 +14,9 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
-public class SampleRateDecimationCondition extends AbstractCondition {
+public class DecimationCondition extends AbstractCondition {
 
-	public SampleRateDecimationCondition(boolean required, String description) {
+	public DecimationCondition(boolean required, String description) {
 		super(required, description);
 	}
 

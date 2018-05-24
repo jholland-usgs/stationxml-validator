@@ -28,7 +28,7 @@ import edu.iris.dmc.station.conditions.LongitudeCondition;
 import edu.iris.dmc.station.conditions.MissingDecimationCondition;
 import edu.iris.dmc.station.conditions.OrientationCondition;
 import edu.iris.dmc.station.conditions.SampleRateCondition;
-import edu.iris.dmc.station.conditions.SampleRateDecimationCondition;
+import edu.iris.dmc.station.conditions.DecimationCondition;
 import edu.iris.dmc.station.conditions.SensorCondition;
 import edu.iris.dmc.station.conditions.StageSequenceCondition;
 import edu.iris.dmc.station.conditions.StageUnitCondition;
@@ -105,7 +105,7 @@ public class RuleEngineRegistry {
 		add(310, new SampleRateCondition(false, "If Channel sample rate = 0, no Response should be included."),
 				Channel.class);
 
-		add(311, new SensorCondition(true, "Invalid sensor"), Channel.class);
+		add(311, new SensorCondition(false, "Invalid sensor"), Channel.class);
 		add(312, new CalibrationUnitCondition(true, "Calibration unit is invalid"), Channel.class);
 
 		add(314, new DipCondition(true, "Invalid dip", -90, 90), Channel.class);
@@ -118,7 +118,7 @@ public class RuleEngineRegistry {
 				"The input unit of a stage must match the output unit of the preceding stage, except for stages 0 or 1."),
 				Channel.class);
 		
-		add(408, new SampleRateDecimationCondition(true,
+		add(408, new DecimationCondition(true,
 				"The value of Channel::SampleRate must be equal to the value of Decimation::InputSampleRate divided by Decimation::Factor of the final response stage."),
 				Response.class);
 		add(409, new MissingDecimationCondition(true,

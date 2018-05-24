@@ -53,9 +53,9 @@ public class RuleEngineService {
 			}
 		}
 	}
-	
+
 	public void executeAllRules(Network network, RuleContext context, Action action) {
-		if(network==null){
+		if (network == null) {
 			return;
 		}
 		if (network != null) {
@@ -80,7 +80,7 @@ public class RuleEngineService {
 			}
 			if (station.getChannels() != null) {
 				for (Channel channel : station.getChannels()) {
-					this.executeAllRules(network, station, channel,context, action);
+					this.executeAllRules(network, station, channel, context, action);
 				}
 			}
 		}
@@ -88,6 +88,9 @@ public class RuleEngineService {
 
 	public void executeAllRules(Network network, Station station, Channel channel, RuleContext context, Action action) {
 		if (channel != null) {
+			if(isSpecial(channel)){
+				return;
+			}
 			for (Rule rule : this.ruleEngineRegistry.getChannelRules()) {
 				rule.execute(network, station, channel, context, action);
 			}
@@ -97,11 +100,40 @@ public class RuleEngineService {
 
 	public void executeAllRules(Network network, Station station, Channel channel, Response response,
 			RuleContext context, Action action) {
-		if (response != null) {
+		if(isSpecial(channel)){
+			return;
+		}
+		if (response != null && !isEmpty(response)) {
 			for (Rule rule : this.ruleEngineRegistry.getResponseRules()) {
 				rule.execute(network, station, channel, response, context, action);
 			}
 		}
+	}
+
+	private boolean isSpecial(Channel channel){
+		if(channel==null){
+			throw new IllegalArgumentException("Channel cannot be null");
+		}
+		if(channel.getCode().startsWith("A")){
+			return true;
+		}
+		if("LOG".equals(channel.getCode())){
+			return true;
+		}
+		if("SOH".equals(channel.getCode())){
+			return true;
+		}
+		return false;
+	}
+	private boolean isEmpty(Response response) {
+		if (response == null) {
+			return true;
+		}
+		if (response.getInstrumentPolynomial() != null || response.getInstrumentSensitivity() != null
+				|| (response.getStage() != null && !response.getStage().isEmpty())) {
+			return false;
+		}
+		return true;
 	}
 
 	public List<Rule> getRules() {
