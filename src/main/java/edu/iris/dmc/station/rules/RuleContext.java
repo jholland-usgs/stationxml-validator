@@ -5,24 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.iris.dmc.fdsn.station.model.BaseNodeType.LEVEL;
 
 public class RuleContext {
 
 	private Map<Integer, List<Message>> map = new HashMap<>();
 
-	private LEVEL level;
+	private boolean ignoreWarnings=false;
 
-	private RuleContext(LEVEL level) {
-		this.level = level;
+	private RuleContext(boolean ignoreWarnings) {
+		this.ignoreWarnings = ignoreWarnings;
 	}
 
-	public static RuleContext of(LEVEL level) {
-		return new RuleContext(level);
+	public static RuleContext of(boolean includeWarnings) {
+		return new RuleContext(includeWarnings);
 	}
 
-	public LEVEL getLevel() {
-		return this.level;
+	public boolean isIgnoreWarnings() {
+		return this.ignoreWarnings;
 	}
 
 	public List<Message> getResponse() {
@@ -38,6 +37,15 @@ public class RuleContext {
 	}
 
 	public void addViolation(Message message) {
+		if(message instanceof Warning && this.ignoreWarnings){
+			return;
+		}
+		if(message instanceof NestedMessage){
+			for(Message m:((NestedMessage) message).getNestedMessages()){
+				addViolation(m);
+			}
+			return;
+		}
 		List<Message> list = map.get(message.getRule().getId());
 		if (list == null) {
 			list = new ArrayList<>();

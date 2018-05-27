@@ -27,7 +27,6 @@ import org.xml.sax.SAXException;
 
 import com.beust.jcommander.JCommander;
 
-import edu.iris.dmc.fdsn.station.model.BaseNodeType.LEVEL;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.Action;
@@ -54,7 +53,6 @@ public class Application {
 	 */
 	public static void main(String[] argv) throws Exception {
 
-		
 		JCommander.newBuilder().addObject(args).build().parse(argv);
 		if (args.version) {
 			System.out.println(Application.getVersion());
@@ -84,7 +82,6 @@ public class Application {
 		LOGGER.setLevel(logLevel);
 		LOGGER.addHandler(consoleHandler);
 
-		LEVEL level = LEVEL.parse(args.level.toLowerCase());
 		OutputStream out = System.out;
 
 		if (args.output != null) {
@@ -95,8 +92,7 @@ public class Application {
 
 		List<String> input = new ArrayList<>();
 		// PrintStream stream = new PrintStream(out);
-
-		RuleContext rulesContext = RuleContext.of(LEVEL.RESPONSE);
+		RuleContext rulesContext = RuleContext.of(args.ignoreWarnings);
 		int EXIT = 0;
 		if (args.input.startsWith("http://")) {
 			input.add(args.input);
@@ -116,23 +112,20 @@ public class Application {
 				input.add(file.getAbsolutePath());
 			}
 		}
-		run(rulesContext, input, args.format, out, level, args.ignoreWarnings);
+		run(rulesContext, input, args.format, out);
 		if (out != null) {
 			out.close();
 		}
-		
-	
+
 		System.exit(EXIT);
 	}
 
-	private void run(RuleContext context, List<String> input, String format, OutputStream outputStream, LEVEL level,
-			boolean ignoreWarnings) {
+	private void run(RuleContext context, List<String> input, String format, OutputStream outputStream) {
 
 		RuleEngineService ruleEngineService = new RuleEngineService();
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
 			ps.printHeader();
 			InputStream is = null;
-			Bool bool = new Bool();
 			for (String uri : input) {
 				if (uri.startsWith("http://")) {
 					is = new URL(uri).openStream();
@@ -154,22 +147,23 @@ public class Application {
 				ruleEngineService.executeAllRules(document, context, new Action() {
 					@Override
 					public void update(RuleContext context, Message message) {
-						try {
-							if(message instanceof Success){
-								return;
-							}
-							if(ignoreWarnings && message instanceof Warning){
-								return;
-							}
-							bool.value = false;
-							ps.print(uri, message);
-							ps.flush();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						context.addViolation(message);
 					}
 				});
+				List<Message> messages = context.getResponse();
+				if (messages != null && !messages.isEmpty()) {
+					try {
+						for (Message m : messages) {
+							ps.print(uri, m);
+							ps.flush();
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					ps.printMessage("PASSED");
+				}
 				if (is != null) {
 					try {
 						is.close();
@@ -177,16 +171,14 @@ public class Application {
 					}
 				}
 			}
-			if (bool.value) {
-				ps.printMessage("PASSED");
-			}
+
 			ps.printFooter();
 		} catch (IOException ioe) {
 			// TODO Auto-generated catch block
 			ioe.printStackTrace();
-		} catch(UnmarshalException e){
+		} catch (UnmarshalException e) {
 			System.err.println(e.getCause().getMessage());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -209,7 +201,8 @@ public class Application {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
 			Unmarshaller u = jaxbContext.createUnmarshaller();
-			StreamSource stream = new StreamSource(Application.class.getClassLoader().getResourceAsStream("fdsn-station-1.0.xsd"));
+			StreamSource stream = new StreamSource(
+					Application.class.getClassLoader().getResourceAsStream("fdsn-station-1.0.xsd"));
 			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = sf.newSchema(stream);
 			u.setSchema(schema);

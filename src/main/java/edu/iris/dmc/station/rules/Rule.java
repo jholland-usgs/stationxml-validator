@@ -31,8 +31,15 @@ public class Rule {
 			return;
 		}
 
+		update(context,action, message, network, null, null);
+	}
+
+	private void update(RuleContext context, Action action, Message message, Network network, Station station,
+			Channel channel) {
 		message.setRule(this);
 		message.setNetwork(network);
+		message.setStation(station);
+		message.setChannel(channel);
 		action.update(context, message);
 	}
 
@@ -41,11 +48,7 @@ public class Rule {
 		if (message instanceof Success) {
 			return;
 		}
-		message.setRule(this);
-		message.setNetwork(network);
-		message.setStation(station);
-		action.update(context, message);
-
+		update(context,action, message, network, station, null);
 	}
 
 	public void execute(Network network, Station station, Channel channel, RuleContext context, Action action) {
@@ -53,11 +56,7 @@ public class Rule {
 		if (message instanceof Success) {
 			return;
 		}
-		message.setRule(this);
-		message.setNetwork(network);
-		message.setStation(station);
-		message.setChannel(channel);
-		action.update(context, message);
+		update(context,action, message, network, station, channel);
 	}
 
 	public void execute(Network network, Station station, Channel channel, Response response, RuleContext context,
@@ -66,11 +65,7 @@ public class Rule {
 		if (message instanceof Success) {
 			return;
 		}
-		message.setRule(this);
-		message.setNetwork(network);
-		message.setStation(station);
-		message.setChannel(channel);
-		action.update(context, message);
+		update(context,action, message, network, station, channel);
 	}
 
 	public Condition getConditionExpression() {

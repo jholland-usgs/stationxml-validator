@@ -15,7 +15,7 @@ public class Args {
 
 
 	@Parameter(names = "--ignore-warnings", description = "Ignore warnings")
-	boolean ignoreWarnings = true;
+	boolean ignoreWarnings = false;
 	@Parameter(names = { "--rules", "-r" }, description = "Print rules")
 	boolean printRules = false;
 	@Parameter(names = { "--units", "-u" }, description = "Print units")
