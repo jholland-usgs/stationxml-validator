@@ -41,6 +41,7 @@ import edu.iris.dmc.station.rules.RuleContext;
 import edu.iris.dmc.station.rules.Success;
 import edu.iris.dmc.station.rules.UnitTable;
 import edu.iris.dmc.station.rules.Warning;
+import edu.iris.dmc.xml.DefaultNamespacePrefixMapper;
 
 public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -206,6 +207,7 @@ public class Application {
 			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = sf.newSchema(stream);
 			u.setSchema(schema);
+			u.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", new DefaultNamespacePrefixMapper());
 			return u;
 		} catch (JAXBException | SAXException e) {
 			throw new IOException(e);
@@ -276,7 +278,4 @@ public class Application {
 		System.exit(0);
 	}
 
-	class Bool {
-		boolean value = true;
-	}
 }

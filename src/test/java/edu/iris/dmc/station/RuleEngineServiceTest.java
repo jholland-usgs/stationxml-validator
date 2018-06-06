@@ -38,7 +38,7 @@ public class RuleEngineServiceTest {
 	@Test
 	public void shouldRunWithNoProblems() throws Exception {
 		RuleEngineService ruleEngineService = new RuleEngineService();
-		RuleContext context = getContext(LEVEL.RESPONSE);
+		RuleContext context = getContext(true);
 		for (Network network : theDocument.getNetwork()) {
 			ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 		}
@@ -49,7 +49,7 @@ public class RuleEngineServiceTest {
 	@Test
 	public void networkCode() throws Exception {
 		RuleEngineService ruleEngineService = new RuleEngineService();
-		RuleContext context = getContext(LEVEL.RESPONSE);
+		RuleContext context = getContext(true);
 		for (Network network : theDocument.getNetwork()) {
 			network.setCode("IUUUUUUUUU");
 			ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
@@ -69,7 +69,7 @@ public class RuleEngineServiceTest {
 	@Test
 	public void networkTimeRange() throws Exception {
 		RuleEngineService ruleEngineService = new RuleEngineService();
-		RuleContext context = getContext(LEVEL.RESPONSE);
+		RuleContext context = getContext(true);
 
 		Network network = theDocument.getNetwork().get(0);
 		Date cal = XmlUtil.toDate("yyyy-MM-dd'T'HH:mm:ss", "2502-12-31T23:59:59");
@@ -104,7 +104,7 @@ public class RuleEngineServiceTest {
 
 		Network network = getNetwork();
 		RuleEngineService ruleEngineService = new RuleEngineService();
-		RuleContext context = getContext(LEVEL.RESPONSE);
+		RuleContext context = getContext(true);
 		ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 		List<Message> resultSet = context.getResponse();
 		Assert.assertTrue("Expected result of rule execution to be true", resultSet.isEmpty());
@@ -129,15 +129,15 @@ public class RuleEngineServiceTest {
 		iu.addStation(anmo2);
 
 		RuleEngineService ruleEngineService = new RuleEngineService();
-		RuleContext context = getContext(LEVEL.RESPONSE);
+		RuleContext context = getContext(true);
 		ruleEngineService.executeNetworkRules(iu, context, new DefaultAction());
 		List<Message> resultSet = context.getResponse();
 		Assert.assertFalse("Expected result of rule execution to be true", resultSet.isEmpty());
 		Assert.assertEquals(1, resultSet.size());
 	}
 
-	private RuleContext getContext(LEVEL level) {
-		return RuleContext.of(level);
+	private RuleContext getContext(boolean bool) {
+		return RuleContext.of(bool);
 	}
 
 	private Network getNetwork() throws ParseException {
