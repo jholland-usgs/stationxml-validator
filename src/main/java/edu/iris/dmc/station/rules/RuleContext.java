@@ -1,0 +1,60 @@
+package edu.iris.dmc.station.rules;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public class RuleContext {
+
+	private Map<Integer, List<Message>> map = new HashMap<>();
+
+	private boolean ignoreWarnings=false;
+
+	private RuleContext(boolean ignoreWarnings) {
+		this.ignoreWarnings = ignoreWarnings;
+	}
+
+	public static RuleContext of(boolean includeWarnings) {
+		return new RuleContext(includeWarnings);
+	}
+
+	public boolean isIgnoreWarnings() {
+		return this.ignoreWarnings;
+	}
+
+	public List<Message> getResponse() {
+		List<Message> list = new ArrayList<>();
+		for (List<Message> l : map.values()) {
+			list.addAll(l);
+		}
+		return list;
+	}
+
+	public List<Message> getResponse(int ruleId) {
+		return map.get(ruleId);
+	}
+
+	public void addViolation(Message message) {
+		if(message instanceof Warning && this.ignoreWarnings){
+			return;
+		}
+		if(message instanceof NestedMessage){
+			for(Message m:((NestedMessage) message).getNestedMessages()){
+				addViolation(m);
+			}
+			return;
+		}
+		List<Message> list = map.get(message.getRule().getId());
+		if (list == null) {
+			list = new ArrayList<>();
+			map.put(message.getRule().getId(), list);
+		}
+		list.add(message);
+	}
+
+	public void clear() {
+		this.map = new HashMap<>();
+	}
+}
