@@ -5,7 +5,7 @@
  <Sender>IRIS-DMC</Sender>
  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.33</Module>
  <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=NC&amp;sta=IRGMT&amp;starttime=2005-08-20T20:00:00&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
- <Created>2018-08-03T20:17:23</Created>
+ <Created>2018-08-03T20:38:46</Created>
  <Network code="NC" startDate="1967-01-01T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
   <Description>USGS Northern California Regional Network</Description>
   <TotalNumberStations>460</TotalNumberStations>
