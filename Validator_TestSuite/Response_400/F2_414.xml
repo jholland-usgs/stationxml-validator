@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<FDSNStationXML xmlns="http://www.fdsn.org/xml/station/1" schemaVersion="1.0" xsi:schemaLocation="http://www.fdsn.org/xml/station/1 http://www.fdsn.org/xml/station/fdsn-station-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iris="http://www.fdsn.org/xml/station/1/iris">
+ <Source>IRIS-DMC</Source>
+ <Sender>IRIS-DMC</Sender>
+ <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.33</Module>
+ <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=IU&amp;sta=ANMO&amp;cha=EHE&amp;starttime=1994-04-27T07:30:00&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
+ <Created>2018-08-03T21:03:22</Created>
+ <Network code="IU" startDate="1988-01-01T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
+  <Description>Global Seismograph Network (GSN - IRIS/USGS)</Description>
+  <TotalNumberStations>270</TotalNumberStations>
+  <SelectedNumberStations>1</SelectedNumberStations>
+  <Station code="ANMO" startDate="1989-08-29T00:00:00" endDate="1995-07-14T00:00:00" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,_GSN-BROADBAND,.CEUSN-CONTRIB,_FDSN-ALL,_REALTIME,.UNRESTRICTED,_GSN">
+   <Comment>
+    <Value>Time may be 1 minute slow.</Value>
+    <BeginEffectiveTime>1991-01-31T00:00:00</BeginEffectiveTime>
+    <EndEffectiveTime>1991-02-16T00:00:00</EndEffectiveTime>
+   </Comment>
+   <Comment>
+    <Value>Time correction does not include leap second.</Value>
+    <BeginEffectiveTime>1992-06-30T00:00:00</BeginEffectiveTime>
+    <EndEffectiveTime>1993-03-22T18:50:00</EndEffectiveTime>
+   </Comment>
+   <Comment>
+    <Value>TEST DATA:  Calibration, and testing in progress.</Value>
+    <BeginEffectiveTime>1993-02-08T23:00:00</BeginEffectiveTime>
+    <EndEffectiveTime>1993-02-09T17:50:00</EndEffectiveTime>
+   </Comment>
+   <Latitude>34.9459</Latitude>
+   <Longitude>-106.4572</Longitude>
+   <Elevation>1850.0</Elevation>
+   <Site>
+    <Name>Albuquerque, New Mexico, USA</Name>
+   </Site>
+   <CreationDate>1989-08-29T00:00:00</CreationDate>
+   <TotalNumberChannels>121</TotalNumberChannels>
+   <SelectedNumberChannels>1</SelectedNumberChannels>
+   <Channel code="EHE" endDate="1995-07-14T00:00:00" locationCode="" restrictedStatus="open" startDate="1993-02-08T00:00:00">
+    <Comment>
+     <Value>Channel is down.</Value>
+     <BeginEffectiveTime>1995-05-17T16:14:00</BeginEffectiveTime>
+     <EndEffectiveTime>1995-05-18T16:14:00</EndEffectiveTime>
+    </Comment>
+    <Latitude>34.9459</Latitude>
+    <Longitude>-106.457199</Longitude>
+    <Elevation>1849</Elevation>
+    <Depth>1</Depth>
+    <Azimuth>90</Azimuth>
+    <Dip>0</Dip>
+    <Type>TRIGGERED</Type>
+    <Type>GEOPHYSICAL</Type>
+    <SampleRate>1E02</SampleRate>
+    <ClockDrift>0E00</ClockDrift>
+    <CalibrationUnits>
+     <Name>A</Name>
+     <Description>Amperes</Description>
+    </CalibrationUnits>
+    <Sensor>
+     <Description>Geotech GS-13 Seismometer</Description>
+    </Sensor>
+    <Response>
+     <InstrumentSensitivity>
+      <Value>1.0939E9</Value>
+      <Frequency>5E0</Frequency>
+      <InputUnits>
+       <Name>M/S</Name>
+       <Description>Velocity in Meters Per Second</Description>
+      </InputUnits>
+      <OutputUnits>
+       <Name>COUNTS</Name>
+       <Description>Digital Counts</Description>
+      </OutputUnits>
+     </InstrumentSensitivity>
+     <Stage number="1">
+      <PolesZeros>
+       <InputUnits>
+        <Name>M/S</Name>
+        <Description>Velocity in Meters Per Second</Description>
+       </InputUnits>
+       <OutputUnits>
+        <Name>V</Name>
+        <Description>Volts</Description>
+       </OutputUnits>
+       <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+       <NormalizationFactor>1.0096</NormalizationFactor>
+       <NormalizationFrequency>5.00000</NormalizationFrequency>
+       <Zero number="0">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Zero number="1">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Pole number="0">
+        <Real minusError="0.00000" plusError="0.00000">-4.39820</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">3.20440</Imaginary>
+       </Pole>
+       <Pole number="1">
+        <Real minusError="0.00000" plusError="0.00000">-4.39820</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">-3.20440</Imaginary>
+       </Pole>
+      </PolesZeros>
+      <StageGain>
+       <Value>1669.0</Value>
+       <Frequency>5.0</Frequency>
+      </StageGain>
+     </Stage>
+     <Stage number="2">
+      <PolesZeros>
+       <InputUnits>
+        <Name>V</Name>
+        <Description>Volts</Description>
+       </InputUnits>
+       <OutputUnits>
+        <Name>V</Name>
+        <Description>Volts</Description>
+       </OutputUnits>
+       <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+       <NormalizationFactor>4.31019E11</NormalizationFactor>
+       <NormalizationFrequency>5.00000</NormalizationFrequency>
+       <Zero number="0">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Pole number="0">
+        <Real minusError="0.00000" plusError="0.00000">-111.930</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">154.160</Imaginary>
+       </Pole>
+       <Pole number="1">
+        <Real minusError="0.00000" plusError="0.00000">-111.930</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">-154.160</Imaginary>
+       </Pole>
+       <Pole number="2">
+        <Real minusError="0.00000" plusError="0.00000">-116.040</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">287.320</Imaginary>
+       </Pole>
+       <Pole number="3">
+        <Real minusError="0.00000" plusError="0.00000">-116.040</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">-287.320</Imaginary>
+       </Pole>
+       <Pole number="4">
+        <Real minusError="0.00000" plusError="0.00000">-120.940</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
+       <Pole number="5">
+        <Real minusError="0.00000" plusError="0.00000">-3.24250</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
+      </PolesZeros>
+      <StageGain>
+       <Value>200.0</Value>
+       <Frequency>0.0</Frequency>
+      </StageGain>
+     </Stage>
+     <Stage number="3">
+      <Coefficients>
+       <InputUnits>
+        <Name>V</Name>
+        <Description>Volts</Description>
+       </InputUnits>
+       <OutputUnits>
+        <Name>COUNTS</Name>
+        <Description>Digital Counts</Description>
+       </OutputUnits>
+       <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
+      </Coefficients>
+      <Decimation>
+       <InputSampleRate>100.0</InputSampleRate>
+       <Factor>1</Factor>
+       <Offset>0</Offset>
+       <Delay>0.0</Delay>
+       <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+       <Value>3276.8</Value>
+       <Frequency>0.0</Frequency>
+      </StageGain>
+     </Stage>
+    </Response>
+   </Channel>
+  </Station>
+ </Network>
+</FDSNStationXML>
