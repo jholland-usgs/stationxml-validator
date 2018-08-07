@@ -25,8 +25,8 @@
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
-    <Azimuth>362</Azimuth>
-    <Dip>0</Dip>
+    <Azimuth>360</Azimuth>
+    <Dip>180</Dip>
     <Type>CONTINUOUS</Type>
     <Type>GEOPHYSICAL</Type>
     <SampleRate>2E01</SampleRate>
