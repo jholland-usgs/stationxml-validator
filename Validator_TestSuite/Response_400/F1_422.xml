@@ -36,7 +36,7 @@
      <Description>Volts</Description>
     </CalibrationUnits>
     <Sensor>
-     <Description>Response Developed for testing the station XML validator.</Description>
+     <Description>50A (Infrasound), 0.2-50 Hz, 0.4 V/Pa-null</Description>
     </Sensor>
     <Response>
      <InstrumentSensitivity>
@@ -149,7 +149,7 @@
       </Coefficients>
       <Decimation>
        <InputSampleRate>40.0</InputSampleRate>
-       <Factor>2</Factor>
+       <Factor>4</Factor>
        <Offset>0</Offset>
        <Delay>3.9063E-5</Delay>
        <Correction>3.9063E-5</Correction>

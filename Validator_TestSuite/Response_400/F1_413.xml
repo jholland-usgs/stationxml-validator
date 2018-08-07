@@ -94,8 +94,8 @@
        </Pole>
       </PolesZeros>
       <StageGain>
-       <Value>5.0</Value>
-       <Frequency>1.0</Frequency>
+       <Value>0.0</Value>
+       <Frequency>0.5</Frequency>
       </StageGain>
      </Stage>
      <Stage number="2">

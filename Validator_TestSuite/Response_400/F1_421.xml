@@ -180,7 +180,7 @@
       </Coefficients>
       <Decimation>
        <InputSampleRate>20.0</InputSampleRate>
-       <Factor>1</Factor>
+       <Factor>4</Factor>
        <Offset>0</Offset>
        <Delay>9.375E-5</Delay>
        <Correction>9.375E-5</Correction>

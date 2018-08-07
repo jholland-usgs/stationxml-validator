@@ -36,7 +36,7 @@
      <Description>Volts</Description>
     </CalibrationUnits>
     <Sensor>
-     <Description>Response Developed for testing the station XML validator.</Description>
+     <Description>Response Developed for testing the station XML validator. </Description>
     </Sensor>
     <Response>
      <InstrumentSensitivity>
@@ -117,13 +117,6 @@
        <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
        <Numerator minusError="0.00000" plusError="0.00000">1.00000</Numerator>
       </Coefficients>
-      <Decimation>
-       <InputSampleRate>80.0</InputSampleRate>
-       <Factor>2</Factor>
-       <Offset>0</Offset>
-       <Delay>0.0</Delay>
-       <Correction>0.0</Correction>
-      </Decimation>
       <StageGain>
        <Value>1.0</Value>
        <Frequency>1.0</Frequency>
@@ -147,13 +140,6 @@
        <Numerator minusError="0.00000" plusError="0.00000">0.156250</Numerator>
        <Numerator minusError="0.00000" plusError="0.00000">0.0312500</Numerator>
       </Coefficients>
-      <Decimation>
-       <InputSampleRate>40.0</InputSampleRate>
-       <Factor>2</Factor>
-       <Offset>0</Offset>
-       <Delay>3.9063E-5</Delay>
-       <Correction>3.9063E-5</Correction>
-      </Decimation>
       <StageGain>
        <Value>1.0</Value>
        <Frequency>1.0</Frequency>
@@ -178,13 +164,6 @@
        <Numerator minusError="0.00000" plusError="0.00000">0.0937500</Numerator>
        <Numerator minusError="0.00000" plusError="0.00000">0.0156250</Numerator>
       </Coefficients>
-      <Decimation>
-       <InputSampleRate>20.0</InputSampleRate>
-       <Factor>1</Factor>
-       <Offset>0</Offset>
-       <Delay>9.375E-5</Delay>
-       <Correction>9.375E-5</Correction>
-      </Decimation>
       <StageGain>
        <Value>1.0</Value>
        <Frequency>1.0</Frequency>

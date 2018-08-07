@@ -41,7 +41,7 @@
     <Response>
      <InstrumentSensitivity>
       <Value>10.0</Value>
-      <Frequency>1.0</Frequency>
+      <Frequency>0.0</Frequency>
       <InputUnits>
        <Name>PA</Name>
        <Description>No Abbreviation Referenced</Description>
@@ -95,7 +95,7 @@
       </PolesZeros>
       <StageGain>
        <Value>5.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.0</Frequency>
       </StageGain>
      </Stage>
      <Stage number="2">
