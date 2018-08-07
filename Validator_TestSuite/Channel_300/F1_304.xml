@@ -6,7 +6,7 @@
  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.33</Module>
  <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=QI&amp;sta=VPASS&amp;cha=BDF&amp;starttime=2018-08-06T00:00:01&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
  <Created>2018-08-06T20:17:16</Created>
- <Network code="QI" startDate="2018-08-06T00:00:00" endDate="2045-05-08T00:00:00" restrictedStatus="open">
+ <Network code="QI" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
   <Description>[IRIS DMC] Station XML Validator Passing Test File</Description>
   <TotalNumberStations>1</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>
@@ -33,10 +33,10 @@
     <ClockDrift>0E00</ClockDrift>
     <CalibrationUnits>
      <Name>V</Name>
-     <Description>Volts</Description>
+     <Description></Description>
     </CalibrationUnits>
     <Sensor>
-     <Description>50A (Infrasound), 0.2-50 Hz, 0.4 V/Pa-null</Description>
+     <Description></Description>
     </Sensor>
     <Response>
      <InstrumentSensitivity>
