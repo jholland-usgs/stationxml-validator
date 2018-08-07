@@ -41,7 +41,7 @@
     <Response>
      <InstrumentSensitivity>
       <Value>2.44648E5</Value>
-      <Frequency>1E0</Frequency>
+      <Frequency>4E01</Frequency>
       <InputUnits>
        <Name>PA</Name>
        <Description>No Abbreviation Referenced</Description>
