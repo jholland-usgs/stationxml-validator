@@ -36,7 +36,7 @@
      <Description>Volts</Description>
     </CalibrationUnits>
     <Sensor>
-     <Description>Response Developed to test the station XML validator.</Description>
+     <Description>Response developed to test the station XML validator.</Description>
     </Sensor>
     <Response>
      <InstrumentSensitivity>
