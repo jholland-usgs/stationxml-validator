@@ -1,0 +1,7 @@
+Summary:
+=================================================================================
+1    |111   |Network:startDate must occur before Network:endDate if Network:endDate is available.
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Network_100/F1_111.xml,111,Error,QI,null,null,null,2018-08-06T00:00:00,2045-05-08T00:00:00,Network endDate Sun May 07 17:00:00 PDT 2045 cannot be before station endDate Fri Dec 31 15:59:59 PST 2500
