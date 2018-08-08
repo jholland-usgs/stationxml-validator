@@ -1,0 +1,7 @@
+Summary:
+=================================================================================
+1    |110   |Starttime is a field
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Network_100/F1_110.xml,110,Error,QI,null,null,null,null,2500-12-31T23:59:59,startDate is null
