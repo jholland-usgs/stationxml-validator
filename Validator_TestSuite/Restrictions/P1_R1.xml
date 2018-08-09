@@ -12,7 +12,7 @@
   <SelectedNumberStations>1</SelectedNumberStations>
   <Station code="TPASS" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
    <Latitude>47.66157</Latitude>
-   <Longitude>-0.01</Longitude>
+   <Longitude>-122.31332</Longitude>
    <Elevation>225.879999</Elevation>
    <Site>
     <Name>Synthetic Test File, IRIS DMC, USA, 218 2018, Tim Ronan</Name>
@@ -22,7 +22,7 @@
    <SelectedNumberChannels>1</SelectedNumberChannels>
    <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
     <Latitude>47.66157</Latitude>
-    <Longitude>0</Longitude>
+    <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
     <Azimuth>360</Azimuth>
@@ -39,8 +39,8 @@
      <Description>50A (Infrasound), 0.2-50 Hz, 0.4 V/Pa-null</Description>
     </Sensor>
     <Response>
-     <InstrumentSensitivity>
-      <Value>2.44648E5</Value>
+     <InstrumentPolynomial>
+      <Value>0E0</Value>
       <Frequency>1E0</Frequency>
       <InputUnits>
        <Name>PA</Name>
@@ -50,7 +50,7 @@
        <Name>COUNTS</Name>
        <Description>Digital Counts</Description>
       </OutputUnits>
-     </InstrumentSensitivity>
+     </InstrumentPolynomial>
      <Stage number="1">
       <PolesZeros>
        <InputUnits>
@@ -65,20 +65,20 @@
        <NormalizationFactor>314.1</NormalizationFactor>
        <NormalizationFrequency>1.00000</NormalizationFrequency>
        <Zero number="0">
-        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
-        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+        <Real minusError="0.00000" plusError="0.00000">1.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">1.00000</Imaginary>
        </Zero>
        <Zero number="1">
-        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
-        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+        <Real minusError="0.00000" plusError="0.00000">1.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">1.00000</Imaginary>
        </Zero>
        <Zero number="2">
         <Real minusError="0.00000" plusError="0.00000">-0.170000</Real>
         <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
        </Zero>
        <Pole number="0">
-        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
-        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+        <Real minusError="0.00000" plusError="0.00000">0.10000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">1.00000</Imaginary>
        </Pole>
        <Pole number="1">
         <Real minusError="0.00000" plusError="0.00000">-314.000</Real>
