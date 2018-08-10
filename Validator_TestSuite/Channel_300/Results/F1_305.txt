@@ -6,6 +6,6 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,305,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Sample rate cannot be 0 or null.
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,411,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,1.0>0.0/2
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,422,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,samplerate: 0.0!= frequency/factor 20.0
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,305,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Sample rate cannot be 0 or null.
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,411,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,1.0>0.0/2
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_305.xml,422,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,samplerate: 0.0!= frequency/factor 20.0

@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Network_100/F1_101.xml,101,Error,QI9,null,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like[A-Za-z0-9\*\?]{1,2} but was QI9
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Network_100/F1_101.xml,101,Error,XX9,null,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like[A-Za-z0-9\*\?]{1,2} but was XX9

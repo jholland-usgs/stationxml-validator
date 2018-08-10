@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_332.xml,332,Error,QI,TPASS,BDN,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Invalid channel orientation: azimuth: 167.0  for BDN
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_332.xml,332,Error,XX,TPASS,BDN,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Invalid channel orientation: azimuth: 167.0  for BDN

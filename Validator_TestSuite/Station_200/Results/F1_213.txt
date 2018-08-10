@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_213.xml,213,Error,QI,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value between for date but was null.
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_213.xml,213,Error,XX,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value between for date but was null.

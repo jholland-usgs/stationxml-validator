@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_330.xml,330,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value between 0.0 and 360.0 but received 362.0
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_330.xml,330,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value between 0.0 and 360.0 but received 362.0

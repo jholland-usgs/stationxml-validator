@@ -4,5 +4,5 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-null,402,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,[stage 1] expected outputUnit smoot but was smoot
-null,402,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,[stage 3] invalid inputUnit smoot
+null,402,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,[stage 1] expected outputUnit smoot but was smoot
+null,402,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,[stage 3] invalid inputUnit smoot

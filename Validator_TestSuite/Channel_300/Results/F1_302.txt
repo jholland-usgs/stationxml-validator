@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_302.xml,302,Error,QI,TPASS,BDF,777,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like ([A-Za-z0-9\*\?\-\ ]{0,2})? but was 777
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_302.xml,302,Error,XX,TPASS,BDF,777,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like ([A-Za-z0-9\*\?\-\ ]{0,2})? but was 777

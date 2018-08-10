@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_212.xml,211,Error,QI,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Station TPASS startDate 2018-08-06 12:00:00 cannot be after channel BDF:00 startDate 1951-08-06 12:00:00
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_212.xml,211,Error,XX,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Station TPASS startDate 2018-08-06 12:00:00 cannot be after channel BDF:00 startDate 1951-08-06 12:00:00

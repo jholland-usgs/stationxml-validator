@@ -4,4 +4,4 @@ Summary:
 =================================================================================
 
 Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Response_400/F1_413.xml,413,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Stage 1 gain cannot be zero
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Response_400/F1_413.xml,413,Error,XX,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Stage 1 gain cannot be zero
