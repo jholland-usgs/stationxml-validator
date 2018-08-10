@@ -1,8 +1,5 @@
 package edu.iris.dmc.station.rules;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -10,17 +7,20 @@ import edu.iris.dmc.fdsn.station.model.Station;
 public abstract class AbstractMessage implements Message {
 
 	private Rule rule;
+	private String source;
 	private Network network;
 	private Station station;
 	private Channel channel;
 
 	private String message;
 
-
 	protected AbstractMessage(String message) {
 		this.message = message;
 	}
 
+	public void setSource(String source) {
+		this.source = source;
+	}
 
 	public Rule getRule() {
 		return this.rule;
@@ -58,10 +58,16 @@ public abstract class AbstractMessage implements Message {
 		return this.message;
 	}
 
+	public String getSource() {
+		return this.source;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("Result [ruleId=" + rule.getId());
-
+		StringBuilder builder = new StringBuilder("Result ");
+		if (rule != null) {
+			builder.append("[ruleId=" + rule.getId());
+		}
 		if (network != null) {
 			builder.append(", network=" + network.getCode());
 		}

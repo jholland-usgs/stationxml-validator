@@ -7,13 +7,14 @@ import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
-public class MissingDecimationCondition extends AbstractCondition {
+public class MissingDecimationCondition extends ChannelRestrictedCondition {
 
-	public MissingDecimationCondition(boolean required, String description) {
-		super(required, description);
+	public MissingDecimationCondition(boolean required, String description, Restriction... restrictions) {
+		super(required, description, restrictions);
 	}
 
 	@Override
@@ -33,6 +34,9 @@ public class MissingDecimationCondition extends AbstractCondition {
 
 	@Override
 	public Message evaluate(Channel channel,Response response) {
+		if (isRestricted(channel)) {
+			return Result.success();
+		}
 		List<ResponseStage> stages = response.getStage();
 		if (stages == null || stages.isEmpty()) {
 			return Result.success();
@@ -40,20 +44,11 @@ public class MissingDecimationCondition extends AbstractCondition {
 
 		int i = 1;
 		for (ResponseStage stage : stages) {
-			if (stage.getFIR() != null || stage.getCoefficients() != null) {
-				if (stage.getDecimation() == null) {
-					return Result.error( "stage number: " + i);
-				}
-			}
-			if (stage.getPolesZeros() != null) {
-				if ("DIGITAL (Z-TRANSFORM)".equals(stage.getPolesZeros().getPzTransferFunctionType())) {
-					if (stage.getDecimation() == null) {
-						return Result.error( "stage number: " + i);
-					}
-				}
+			if(stage.getDecimation()!=null){
+				return Result.success();
 			}
 			i++;
 		}
-		return Result.success();
+		return Result.error("No decimation found");
 	}
 }

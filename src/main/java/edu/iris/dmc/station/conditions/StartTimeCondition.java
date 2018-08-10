@@ -1,5 +1,6 @@
 package edu.iris.dmc.station.conditions;
 
+import edu.iris.dmc.fdsn.station.model.BaseNodeType;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -14,26 +15,32 @@ public class StartTimeCondition extends AbstractCondition {
 
 	@Override
 	public Message evaluate(Network network) {
-		if (network.getStartDate() == null) {
-			return Result.error( "startDate is null");
-		}
-		return Result.success();
+		return check(network);
 	}
 
 	@Override
 	public Message evaluate(Station station) {
-		if (station.getStartDate() == null) {
-			return Result.error( "startDate is null");
-		}
-		return Result.success();
+		return check(station);
 	}
 
 	@Override
 	public Message evaluate(Channel channel) {
-		if (channel.getStartDate() == null) {
-			return Result.error( "startDate is null");
+		return check(channel);
+	}
+
+	public Message check(BaseNodeType node) {
+		if (node == null) {
+			throw new IllegalArgumentException("Node cannot be null");
+		}
+		if (node.getStartDate() == null) {
+			return Result.error("startDate is null");
+		}
+
+		if (node.getEndDate() != null) {
+			if (node.getStartDate().after(node.getEndDate())) {
+				return Result.error("startDate " + node.getStartDate() + " must occur before endDate " + node.getEndDate());
+			}
 		}
 		return Result.success();
 	}
-
 }
