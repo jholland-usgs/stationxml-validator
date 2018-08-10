@@ -1,6 +1,5 @@
 package edu.iris.dmc.station.conditions;
 
-
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -27,8 +26,7 @@ public class OrientationCondition extends AbstractCondition {
 	public Message evaluate(Channel channel) {
 		assert (channel != null);
 
-		if(channel.getCode()==null || channel.getAzimuth()==null || channel.getDip()==null){
-			//should be caught somewhere else
+		if (channel.getCode() == null ||channel.getCode().trim().isEmpty()|| channel.getAzimuth() == null || channel.getDip() == null) {
 			return Result.success();
 		}
 		char[] array = channel.getCode().toCharArray();
@@ -39,7 +37,9 @@ public class OrientationCondition extends AbstractCondition {
 		boolean valid = true;
 		StringBuilder messageBuilder = new StringBuilder();
 		if ('E' == array[2]) {
-			if (azimuth > 95 && azimuth < 85) {
+			if (azimuth < 95 && azimuth > 85 || azimuth < 275 && azimuth > 265) {
+				
+			}else{
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
@@ -49,11 +49,15 @@ public class OrientationCondition extends AbstractCondition {
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
 		} else if ('N' == array[2]) {
-			if (azimuth > 5 && azimuth < 355) {
+			if (azimuth <= 5 && azimuth >= 0 || azimuth >=355 && azimuth <= 360 || (azimuth <= 185 && azimuth >= 175)) {
+
+			} else {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
-			if (dip > 5 || dip < -5) {
+			if (dip < 5 || dip > -5) {
+
+			} else {
 				valid = false;
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
@@ -62,7 +66,9 @@ public class OrientationCondition extends AbstractCondition {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
-			if (dip > -85) {
+			if (dip > -95 && dip < -85 || (dip > 85 && dip < 95)) {
+
+			} else {
 				valid = false;
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
@@ -71,8 +77,7 @@ public class OrientationCondition extends AbstractCondition {
 		if (valid) {
 			return Result.success();
 		}
-		return Result.error(
-				"Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
+		return Result.error("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 	}
 

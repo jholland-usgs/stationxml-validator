@@ -36,11 +36,11 @@
      <Description>Volts</Description>
     </CalibrationUnits>
     <Sensor>
-     <Description>Response Developed for testing the station XML validator. </Description>
+     <Description>50A (Infrasound), 0.2-50 Hz, 0.4 V/Pa-null</Description>
     </Sensor>
     <Response>
      <InstrumentSensitivity>
-      <Value></Value>
+      <Value>10.0</Value>
       <Frequency>1.0</Frequency>
       <InputUnits>
        <Name>PA</Name>
@@ -94,13 +94,13 @@
        </Pole>
       </PolesZeros>
       <StageGain>
-       <Value>5.0</Value>
+       <Value>2.0</Value>
        <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
      <Stage number="2">
       <StageGain>
-       <Value>2.0</Value>
+       <Value>10.0</Value>
        <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
@@ -126,7 +126,7 @@
       </Decimation>
       <StageGain>
        <Value>5.0</Value>
-       <Frequency>20.0</Frequency>
+       <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
      <Stage number="4">
@@ -156,7 +156,7 @@
       </Decimation>
       <StageGain>
        <Value>100.0</Value>
-       <Frequency>0.5</Frequency>
+       <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
      <Stage number="5">
@@ -186,7 +186,7 @@
        <Correction>9.375E-5</Correction>
       </Decimation>
       <StageGain>
-       <Value>5.0</Value>
+       <Value>8.0</Value>
        <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
