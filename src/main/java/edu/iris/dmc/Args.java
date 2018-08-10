@@ -14,6 +14,9 @@ public class Args {
 	boolean debug = false;
 
 
+	@Parameter(names = { "--ignore-rules"}, description = "[103,105]")
+	String ignoreRules;
+	
 	@Parameter(names = "--ignore-warnings", description = "Ignore warnings")
 	boolean ignoreWarnings = false;
 	@Parameter(names = { "--rules", "-r" }, description = "Print rules")
@@ -24,7 +27,7 @@ public class Args {
 	@Parameter(names = { "--level", "-l" }, description = "[net|sta|cha|resp]default is resp")
 	String level = "resp";
 	
-	@Parameter(names = { "--format", "-f" }, description = "[csv|html|xml]default is html")
+	@Parameter(names = { "--format", "-f" }, description = "[csv|html|xml|report]default is html")
 	String format = "html";
 
 	@Parameter(names = { "--summary", "-s" }, description = "Print summary result")

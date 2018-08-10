@@ -6,13 +6,14 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.fdsn.station.model.Units;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
-public class StageUnitCondition extends AbstractCondition {
+public class StageUnitCondition extends ChannelRestrictedCondition {
 
-	public StageUnitCondition(boolean required, String description) {
-		super(required, description);
+	public StageUnitCondition(boolean required, String description, Restriction[] restrictions) {
+		super(required, description, restrictions);
 	}
 
 	@Override
@@ -27,14 +28,20 @@ public class StageUnitCondition extends AbstractCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		throw new IllegalArgumentException("method not supported!");
+		if(channel==null){
+			return Result.success();
+		}
+		return this.evaluate(channel,channel.getResponse());
 	}
-
 	@Override
 	public Message evaluate(Channel channel,Response response) {
+		if (isRestricted(channel)) {
+			return Result.success();
+		}
+
 		if (this.required) {
 			if (response == null) {
-				return Result.error( "expected response but was null");
+				return Result.error("expected response but was null");
 			}
 		}
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
@@ -43,16 +50,18 @@ public class StageUnitCondition extends AbstractCondition {
 			for (ResponseStage stage : response.getStage()) {
 				Units[] units = getUnits(stage);
 				if (units == null) {
-					return Result.error( "stage [ null units for stage " + stage.getNumber().intValue() + "]");
+					// return Result.error("stage [ null units for stage " +
+					// stage.getNumber().intValue() + "]");
 				} else {
 					if (current != null) {
-
 						if (!current[1].getName().equals(units[0].getName())) {
-							return Result.error( "stage [" + stage.getNumber().intValue() + "]");
+							return Result.error("stage [" + stage.getNumber().intValue() + "]");
 						}
 					}
 				}
-				current = units;
+				if (units != null) {
+					current = units;
+				}
 			}
 		}
 		return Result.success();

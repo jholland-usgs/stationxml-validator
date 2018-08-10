@@ -206,7 +206,7 @@
        <Frequency>0.0</Frequency>
       </StageGain>
      </Stage>
-     <Stage number="4">
+     <Stage number="3">
       <Coefficients>
        <InputUnits>
         <Name>COUNTS</Name>

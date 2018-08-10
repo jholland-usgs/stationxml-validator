@@ -23,6 +23,9 @@ public class XmlPrintStream extends PrintStream implements RuleResultPrintStream
 
 	}
 
+	public void printHeader(String text) throws IOException {
+		printHeader();
+	}
 	@Override
 	public void printFooter() {
 		// TODO Auto-generated method stub
@@ -30,14 +33,9 @@ public class XmlPrintStream extends PrintStream implements RuleResultPrintStream
 	}
 
 	public void print(Message result) {
-		print("", result);
-	}
-
-	@Override
-	public void print(String source, Message result) {
-		// TODO Auto-generated method stub
 
 	}
+
 
 	@Override
 	public void printRow(String text) {
