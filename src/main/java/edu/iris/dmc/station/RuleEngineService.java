@@ -17,8 +17,8 @@ public class RuleEngineService {
 
 	private RuleEngineRegistry ruleEngineRegistry;
 
-	public RuleEngineService() {
-		this.ruleEngineRegistry = new RuleEngineRegistry();
+	public RuleEngineService(List<Integer> ignoreRules) {
+		this.ruleEngineRegistry = new RuleEngineRegistry(ignoreRules);
 	}
 
 	public void setRuleEngineRegistry(RuleEngineRegistry ruleEngineRegistry) {

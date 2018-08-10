@@ -10,6 +10,8 @@ public interface Message {
 
 	public Rule getRule();
 
+	public void setSource(String source);
+
 	public void setNetwork(Network network);
 
 	public Network getNetwork();
@@ -21,6 +23,8 @@ public interface Message {
 	public void setChannel(Channel channel);
 
 	public Channel getChannel();
-	
+
 	public String getDescription();
+
+	public String getSource();
 }

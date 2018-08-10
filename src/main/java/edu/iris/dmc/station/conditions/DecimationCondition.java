@@ -11,13 +11,14 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.SampleRate;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
-public class DecimationCondition extends AbstractCondition {
+public class DecimationCondition extends ChannelRestrictedCondition {
 
-	public DecimationCondition(boolean required, String description) {
-		super(required, description);
+	public DecimationCondition(boolean required, String description, Restriction... restrictions) {
+		super(required, description, restrictions);
 	}
 
 	@Override
@@ -32,32 +33,39 @@ public class DecimationCondition extends AbstractCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		throw new IllegalArgumentException("Not supported!");
+		if(channel==null){
+			throw new IllegalArgumentException("Channel cannot be null.");
+		}
+		return evaluate(channel,channel.getResponse());
 	}
+
+	// The value of Channel::SampleRate must be equal to the value of
+	// Decimation::InputSampleRate divided by Decimation::Factor of the final
+	// response stage.
 
 	@Override
 	public Message evaluate(Channel channel, Response response) {
-
-		SampleRate sampleRate = channel.getSampleRate();
-
-		Decimation decimation = null;
-		for (ResponseStage stage : response.getStage()) {
+		if (isRestricted(channel)) {
+			return Result.success();
+		}
+		List<ResponseStage> stages = response.getStage();
+		if (stages == null || stages.isEmpty()) {
+			Result.success();
+		}
+		Double inputSampleRateByFactor = null;
+		int i = 1;
+		for (ResponseStage stage : stages) {
+			Decimation decimation = stage.getDecimation();
 			if (stage.getDecimation() != null) {
-				decimation = stage.getDecimation();
+				double inputSampleRate = decimation.getInputSampleRate().getValue();
+				if (inputSampleRateByFactor != null) {
+					if (Math.abs(inputSampleRate - inputSampleRateByFactor.doubleValue()) > 0.001) {
+						return Result.error("stage number: " + i+" inputSampleRate="+inputSampleRate+" : inputSampleRateByFactor="+inputSampleRateByFactor.doubleValue());
+					}
+				}
+				inputSampleRateByFactor = inputSampleRate / decimation.getFactor().doubleValue();
 			}
-		}
-		if (decimation == null) {
-			return Result.error("Decimation cannot be null");
-		}
-
-		Frequency frequence = decimation.getInputSampleRate();
-		BigInteger factor = decimation.getFactor();
-
-		if (frequence == null) {
-			return Result.error("frequency is null");
-		}
-		if (Math.abs(sampleRate.getValue() - (frequence.getValue() / factor.doubleValue())) > 0.0001) {
-			return Result.error(sampleRate.getValue() + "!=" + (frequence.getValue() / factor.doubleValue()));
+			i++;
 		}
 
 		return Result.success();

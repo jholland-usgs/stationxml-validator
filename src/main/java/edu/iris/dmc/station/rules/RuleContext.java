@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class RuleContext {
 
 	private Map<Integer, List<Message>> map = new HashMap<>();
 
-	private boolean ignoreWarnings=false;
+	private boolean ignoreWarnings = false;
+	private List<Integer> ignoreRules = new ArrayList<Integer>();
 
 	private RuleContext(boolean ignoreWarnings) {
 		this.ignoreWarnings = ignoreWarnings;
@@ -24,7 +24,28 @@ public class RuleContext {
 		return this.ignoreWarnings;
 	}
 
-	public List<Message> getResponse() {
+	public void ignoreRule(String text) {
+		if(text==null){
+			return;
+		}
+		String[] array=text.split(",");
+		
+		for(String s:array){
+			ignoreRule(Integer.valueOf(s));
+		}
+	}
+
+	public void ignoreRules(int[] nums) {
+		for (int n : nums) {
+			this.ignoreRule(n);
+		}
+	}
+
+	public void ignoreRule(int num) {
+		this.ignoreRules.add(num);
+	}
+
+	public List<Message> list() {
 		List<Message> list = new ArrayList<>();
 		for (List<Message> l : map.values()) {
 			list.addAll(l);
@@ -32,16 +53,20 @@ public class RuleContext {
 		return list;
 	}
 
-	public List<Message> getResponse(int ruleId) {
+	public Map<Integer, List<Message>> map() {
+		return this.map;
+	}
+
+	public List<Message> getMessages(int ruleId) {
 		return map.get(ruleId);
 	}
 
 	public void addViolation(Message message) {
-		if(message instanceof Warning && this.ignoreWarnings){
+		if (message instanceof Warning && this.ignoreWarnings) {
 			return;
 		}
-		if(message instanceof NestedMessage){
-			for(Message m:((NestedMessage) message).getNestedMessages()){
+		if (message instanceof NestedMessage) {
+			for (Message m : ((NestedMessage) message).getNestedMessages()) {
 				addViolation(m);
 			}
 			return;
@@ -52,6 +77,10 @@ public class RuleContext {
 			map.put(message.getRule().getId(), list);
 		}
 		list.add(message);
+	}
+
+	public List<Integer> getIgnoreRules() {
+		return ignoreRules;
 	}
 
 	public void clear() {

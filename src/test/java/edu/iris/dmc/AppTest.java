@@ -6,8 +6,8 @@ package edu.iris.dmc;
  */
 public class AppTest {
 	public static void main(String[] args) throws Exception {
-		args = new String[] {"--format","csv","--ignore-warnings",
-				"/Users/Suleiman/PROJECTS/StationXML-Validator/src/test/resources/408.xml"};
+		args = new String[] {"--format","report","--ignore-warnings","--ignore-rules","--debug",
+				"/Users/Suleiman/validations/channel_300"};
 		Application app = new Application();
 		app.main(args);
 	}

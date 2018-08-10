@@ -27,8 +27,13 @@ public class CalibrationUnitCondition extends AbstractCondition {
 	@Override
 	public Message evaluate(Channel channel) {
 		Units units = channel.getCalibrationUnits();
-		if (this.required && units == null) {
-			return Result.error("expected a value for calibration unit but was null");
+		if (units == null) {
+			if (this.required) {
+				return Result.error("expected a value for calibration unit but was null");
+			}else{
+				return Result.success();
+			}
+			
 		}
 
 		if (units.getName() == null) {
@@ -40,12 +45,12 @@ public class CalibrationUnitCondition extends AbstractCondition {
 			return Result.success();
 		}
 
-		result = UnitTable.contains(units.getName().toLowerCase());
+		result = UnitTable.containsCaseInsensitive(units.getName().toLowerCase());
 		if (result) {
 			return Result.warning("expected " + units.getName().toLowerCase() + " for calibration unit/name but was "
 					+ units.getName());
 		}
 
-		return Result.error("Invalid unit "+units.getName());
+		return Result.error("Invalid unit " + units.getName());
 	}
 }

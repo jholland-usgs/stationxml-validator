@@ -9,11 +9,12 @@ public interface RuleResultPrintStream extends AutoCloseable {
 
 	public void printHeader() throws IOException;
 
+	public void printHeader(String text) throws IOException;
+	
 	public void printFooter() throws IOException;
 
 	public void print(Message message) throws IOException;
-	
-	public void print(String source, Message message) throws IOException;
+
 
 	public void printRow(String text) throws IOException;
 
