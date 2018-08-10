@@ -6,7 +6,7 @@ public class Result {
 		return new Warning(message);
 	}
 
-	public static Error error(String message) {
+	public static Error error( String message) {
 		return new Error(message);
 	}
 

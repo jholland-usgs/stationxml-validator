@@ -9,7 +9,10 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -17,7 +20,6 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -32,16 +34,13 @@ import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.Action;
 import edu.iris.dmc.station.io.CsvPrintStream;
 import edu.iris.dmc.station.io.HtmlPrintStream;
+import edu.iris.dmc.station.io.ReportPrintStream;
 import edu.iris.dmc.station.io.RuleResultPrintStream;
 import edu.iris.dmc.station.io.XmlPrintStream;
 import edu.iris.dmc.station.rules.Message;
-import edu.iris.dmc.station.rules.Result;
 import edu.iris.dmc.station.rules.Rule;
 import edu.iris.dmc.station.rules.RuleContext;
-import edu.iris.dmc.station.rules.Success;
 import edu.iris.dmc.station.rules.UnitTable;
-import edu.iris.dmc.station.rules.Warning;
-import edu.iris.dmc.xml.DefaultNamespacePrefixMapper;
 
 public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -95,6 +94,21 @@ public class Application {
 		// PrintStream stream = new PrintStream(out);
 		RuleContext rulesContext = RuleContext.of(args.ignoreWarnings);
 		int EXIT = 0;
+		if (args.ignoreRules != null) {
+			String[] array = args.ignoreRules.split(",");
+			for (String a : array) {
+				if ("".equals(a.trim())) {
+					continue;
+				}
+				try {
+					rulesContext.ignoreRule(Integer.valueOf(a));
+				} catch (NumberFormatException e) {
+					System.out.println("Invalid value for --ignore-rules: "+a);
+					help();
+					System.exit(1);
+				}
+			}
+		}
 		if (args.input.startsWith("http://")) {
 			input.add(args.input);
 		} else {
@@ -107,7 +121,8 @@ public class Application {
 
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
-					input.add(f.getAbsolutePath());
+					if (!f.getName().startsWith(".") && f.getName().endsWith(".xml"))
+						input.add(f.getAbsolutePath());
 				}
 			} else {
 				input.add(file.getAbsolutePath());
@@ -123,11 +138,13 @@ public class Application {
 
 	private void run(RuleContext context, List<String> input, String format, OutputStream outputStream) {
 
-		RuleEngineService ruleEngineService = new RuleEngineService();
+		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
+		String source = null;
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
-			ps.printHeader();
+
 			InputStream is = null;
 			for (String uri : input) {
+				source = uri;
 				if (uri.startsWith("http://")) {
 					is = new URL(uri).openStream();
 				} else {
@@ -144,42 +161,62 @@ public class Application {
 				}
 
 				FDSNStationXML document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
-
 				ruleEngineService.executeAllRules(document, context, new Action() {
 					@Override
 					public void update(RuleContext context, Message message) {
+						message.setSource(uri);
 						context.addViolation(message);
 					}
 				});
-				List<Message> messages = context.getResponse();
-				if (messages != null && !messages.isEmpty()) {
-					try {
-						for (Message m : messages) {
-							ps.print(uri, m);
+			}
+			Map<Integer, List<Message>> map = context.map();
+			if (map != null && !map.isEmpty()) {
+				SortedSet<Integer> keys = new TreeSet<>(map.keySet());
+
+				if (ps instanceof ReportPrintStream) {
+					StringBuffer buffer = new StringBuffer();
+					buffer.append("Summary:").append(System.lineSeparator());
+					buffer.append("=================================================================================")
+							.append(System.lineSeparator());
+
+					for (Integer key : keys) {
+						List<Message> list = map.get(key);
+						String description = list.get(0).getRule().getDescription();
+						buffer.append(String.format("%-5d|%-6d|%s", list.size(), key, description)).append("\n");
+					}
+					buffer.append("=================================================================================")
+							.append(System.lineSeparator());
+					ps.printHeader(buffer.toString());
+				} else {
+					ps.printHeader();
+				}
+
+				try {
+					for (Integer key : keys) {
+						List<Message> l = map.get(key);
+						for (Message m : l) {
+							ps.print(m);
 							ps.flush();
 						}
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-				} else {
-					ps.printMessage("PASSED");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				if (is != null) {
-					try {
-						is.close();
-					} catch (Exception e) {
-					}
+			} else {
+				ps.printMessage("PASSED");
+			}
+			if (is != null) {
+				try {
+					is.close();
+				} catch (Exception e) {
 				}
 			}
-
 			ps.printFooter();
-		} catch (IOException ioe) {
-			// TODO Auto-generated catch block
-			ioe.printStackTrace();
-		} catch (UnmarshalException e) {
-			System.err.println(e.getCause().getMessage());
 		} catch (Exception e) {
+			if (source != null) {
+				System.out.println(source);
+			}
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -193,6 +230,8 @@ public class Application {
 			return new CsvPrintStream(outputStream);
 		} else if ("xml".equalsIgnoreCase(format)) {
 			return new XmlPrintStream(outputStream);
+		} else if ("report".equalsIgnoreCase(format)) {
+			return new ReportPrintStream(outputStream);
 		} else {
 			throw new IOException("Invalid format [" + format + "] requested");
 		}
@@ -206,8 +245,9 @@ public class Application {
 					Application.class.getClassLoader().getResourceAsStream("fdsn-station-1.0.xsd"));
 			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			Schema schema = sf.newSchema(stream);
-			u.setSchema(schema);
-			u.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", new DefaultNamespacePrefixMapper());
+			// u.setSchema(schema);
+			// u.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper",
+			// new DefaultNamespacePrefixMapper());
 			return u;
 		} catch (JAXBException | SAXException e) {
 			throw new IOException(e);
@@ -239,7 +279,7 @@ public class Application {
 
 	private static void printRules() {
 
-		RuleEngineService ruleEngineService = new RuleEngineService();
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
 		for (Rule rule : ruleEngineService.getRules()) {
 			System.out.printf("%-8s %s\n", rule.getId(), rule.getDescription());
 		}

@@ -14,6 +14,10 @@ public class HtmlPrintStream extends PrintStream implements RuleResultPrintStrea
 		super(out);
 	}
 
+	public void printHeader(String text) throws IOException {
+		printHeader();
+	}
+
 	public void printHeader() {
 		this.println("<!DOCTYPE html><html>");
 		this.println("<head>");

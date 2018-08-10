@@ -29,16 +29,17 @@ public class StationElevationCondition extends AbstractCondition {
 		}
 		Distance distance = station.getElevation();
 		if (distance == null) {
-
+			return Result.success();
 		}
 		if (station.getElevation() == null) {
 			return Result.success();
 		}
 		for (Channel channel : station.getChannels()) {
 			if (channel.getElevation() != null) {
-				if (channel.getElevation().getValue() > station.getElevation().getValue()) {
-					return Result.error( "expected "+station.getCode()+" elevation "+station.getElevation().getValue()+" to be equal to or above "+channel.getCode()+":"+channel.getLocationCode()+
-							" elevation "+channel.getElevation().getValue() );
+				if (Math.abs(channel.getElevation().getValue() - station.getElevation().getValue()) > 1000) {
+					return Result.error("expected " + station.getCode() + " elevation "
+							+ station.getElevation().getValue() + " to be equal to or above " + channel.getCode() + ":"
+							+ channel.getLocationCode() + " elevation " + channel.getElevation().getValue());
 				}
 			}
 		}

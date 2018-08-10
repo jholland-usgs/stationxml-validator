@@ -30,6 +30,10 @@ public class CsvPrintStream extends PrintStream implements RuleResultPrintStream
 	public void printHeader() throws IOException {
 		csvFilePrinter.printRecord(FILE_HEADER);
 	}
+	
+	public void printHeader(String text) throws IOException {
+		printHeader();
+	}
 
 	public void print(Message message) throws IOException {
 		print("", message);
