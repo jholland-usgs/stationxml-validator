@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |302   |Channel:locationCode must be unassigned or be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_302.xml,302,Error,QI,TPASS,BDF,777,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like ([A-Za-z0-9\*\?\-\ ]{0,2})? but was 777
