@@ -1,0 +1,7 @@
+Summary:
+=================================================================================
+1    |201   |Station:Code must be assigned a string consisting of 1-5 uppercase characters A-Z and or numeric characters 0-9.
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_201.xml,201,Error,QI,#TPASS.17,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a value like[A-Za-z0-9\*\?]{1,5} but was #TPASS.17

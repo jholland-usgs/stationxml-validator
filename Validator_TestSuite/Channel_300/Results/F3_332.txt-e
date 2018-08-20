@@ -1,0 +1,7 @@
+Summary:
+=================================================================================
+1    |332   |Channel:Azimuth and or Channel:Dip do not correspond, within 5 degrees of tolerance, to last digit of orthogonal Channel:Code.
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F3_332.xml,332,Error,XX,TPASS,BDZ,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Invalid channel orientation: dip: 84.0  for BDZ

@@ -1,0 +1,7 @@
+Summary:
+=================================================================================
+1    |222   |Station:Position must be within 1 km of all subordinate Channel:Position.
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_223.xml,222,Error,QI,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,expected TPASS elevation 1.0 to be equal to or above BDF:00 elevation 1.0000001E7

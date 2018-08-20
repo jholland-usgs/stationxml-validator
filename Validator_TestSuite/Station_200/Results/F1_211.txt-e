@@ -1,0 +1,10 @@
+Summary:
+=================================================================================
+1    |212   |Station:Epoch must encompass all subordinate Channel:Epoch [Epoch=startDate-endDate].
+2    |412   |InstrumentSensitivity:Value must equal the product of all StageGain:Value if all StageGain:Frequency are equal to InstrumentSensitivity:Frequency [Normalization Frequency].	
+=================================================================================
+
+Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_211.xml,212,Error,QI,TPASS,null,null,2016-06-05T00:00:00,2500-12-31T23:59:59,[(BDF,2016-06-06T00:00:00,2019-10-01T23:59:59)(BDF,2018-08-06T00:00:00,2500-12-31T23:59:59)]
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_211.xml,412,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Product of stage gains 244648.40000000002 must equal total gain 244648.0
+/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_211.xml,412,Error,QI,TPASS,BDF,00,2016-06-06T00:00:00,2019-10-01T23:59:59,Product of stage gains 244648.40000000002 must equal total gain 244648.0
