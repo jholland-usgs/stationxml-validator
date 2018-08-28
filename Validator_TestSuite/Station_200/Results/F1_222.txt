@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |223   |Station:Elevation must be within 1 km of all subordinate Channel:Elevation.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Station_200/F1_222.xml,223,Error,XX,TPASS,null,null,2018-08-06T00:00:00,2500-12-31T23:59:59,Expected a distance difference of less than 1 between TPASS and BDF:00, but was 10229.44108032
