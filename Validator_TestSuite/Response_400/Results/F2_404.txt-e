@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |404   |Stage types FIR, Coefficient, or PolesZeros with transfer function type Digital must include Decimation and StageGain elements.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Response_400/F2_404.xml,404,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Gain and|or decimation are missing

@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |311   |Channel:startDate must occur before Channel:endDate if Channel:endDate is available.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_311.xml,311,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,1999-12-31T23:59:59,endDate 1999-12-31T23:59:59 cannot be before startDate 2018-08-06T00:00:00

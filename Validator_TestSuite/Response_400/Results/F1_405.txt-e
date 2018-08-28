@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |413   |StageGain:Value cannot be assigned 0 or Null.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Response_400/F1_405.xml,413,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,Stage 1 is missing gain
