@@ -34,10 +34,10 @@ import edu.iris.dmc.seed.Blockette;
 import edu.iris.dmc.seed.Volume;
 import edu.iris.dmc.seed.blockette.util.BlocketteItrator;
 import edu.iris.dmc.seed.builder.BlocketteBuilder;
-import edu.iris.dmc.seed.convert.SeedToXmlDocumentConverter;
 import edu.iris.dmc.seed.director.BlocketteDirector;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.Action;
+import edu.iris.dmc.station.converter.SeedToXmlDocumentConverter;
 import edu.iris.dmc.station.io.CsvPrintStream;
 import edu.iris.dmc.station.io.HtmlPrintStream;
 import edu.iris.dmc.station.io.ReportPrintStream;
@@ -47,6 +47,7 @@ import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Rule;
 import edu.iris.dmc.station.rules.RuleContext;
 import edu.iris.dmc.station.rules.UnitTable;
+import edu.iris.dmc.station.util.SeedUtils;
 
 public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -177,7 +178,8 @@ public class Application {
 					if (uri.endsWith(".xml")) {
 						document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
 					} else {
-						Volume volume = this.load(is);
+						// Volume volume = this.load(is);
+						Volume volume = SeedUtils.load(new File(source));
 						document = SeedToXmlDocumentConverter.getInstance().convert(volume);
 					}
 
