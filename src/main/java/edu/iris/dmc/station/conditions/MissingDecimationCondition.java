@@ -33,7 +33,7 @@ public class MissingDecimationCondition extends ChannelRestrictedCondition {
 	}
 
 	@Override
-	public Message evaluate(Channel channel,Response response) {
+	public Message evaluate(Channel channel, Response response) {
 		if (isRestricted(channel)) {
 			return Result.success();
 		}
@@ -42,13 +42,11 @@ public class MissingDecimationCondition extends ChannelRestrictedCondition {
 			return Result.success();
 		}
 
-		int i = 1;
 		for (ResponseStage stage : stages) {
-			if(stage.getDecimation()!=null){
+			if (stage.getDecimation() != null) {
 				return Result.success();
 			}
-			i++;
 		}
-		return Result.error("No decimation found");
+		return Result.warning("No decimation found");
 	}
 }

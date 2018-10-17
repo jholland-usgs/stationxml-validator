@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import edu.iris.dmc.TimeUtil;
 import edu.iris.dmc.fdsn.station.model.BaseNodeType;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
@@ -106,12 +109,12 @@ public class EpochOverlapCondition extends AbstractCondition {
 				if (invalidRanges != null && !invalidRanges.isEmpty()) {
 					StringBuilder builder = new StringBuilder();
 					for (Tuple[] tuple : invalidRanges) {
-						builder.append("[(").append(tuple[0].code).append(",").append(XmlUtil.toText(tuple[0].start))
-								.append(",").append(XmlUtil.toText(tuple[0].end)).append(")(").append(tuple[1].code)
-								.append(",").append(XmlUtil.toText(tuple[1].start)).append(",")
+						builder.append("[(").append(tuple[0].code).append("|").append(XmlUtil.toText(tuple[0].start))
+								.append("|").append(XmlUtil.toText(tuple[0].end)).append(")(").append(tuple[1].code)
+								.append("|").append(XmlUtil.toText(tuple[1].start)).append("|")
 								.append(XmlUtil.toText(tuple[1].end)).append(")]");
 					}
-					return Result.error( builder.toString());
+					return Result.error(builder.toString());
 				}
 			}
 		}
@@ -124,7 +127,7 @@ public class EpochOverlapCondition extends AbstractCondition {
 		for (int i = 1; i < tuples.size(); i++) {
 			Tuple tuple1 = tuples.get(i - 1);
 			Tuple tuple2 = tuples.get(i);
-			if (tuple1.end == null || tuple2.start == null || tuple1.end.getTime() > tuple2.start.getTime()) {
+			if (tuple1.end == null || tuple2.start == null || TimeUtil.isAfter(tuple1.end, tuple2.start)) {
 				overlappingDatePairs.add(new Tuple[] { tuple1, tuple2 });
 			}
 		}
@@ -132,13 +135,13 @@ public class EpochOverlapCondition extends AbstractCondition {
 	}
 
 	private class Tuple implements Comparable<Tuple> {
-		public final Date start;
-		private Date end;
+		public final XMLGregorianCalendar start;
+		private XMLGregorianCalendar end;
 		public final int index;
 		public String code;
 		public String location;
 
-		public Tuple(String code, String location, Date start, Date end, int index) {
+		public Tuple(String code, String location, XMLGregorianCalendar start, XMLGregorianCalendar end, int index) {
 			this.code = code;
 			this.location = location;
 			this.start = start;
@@ -147,7 +150,7 @@ public class EpochOverlapCondition extends AbstractCondition {
 		}
 
 		public int compareTo(Tuple other) {
-			return start.compareTo(other.start);
+			return TimeUtil.compare(start, other.start);
 		}
 
 	}

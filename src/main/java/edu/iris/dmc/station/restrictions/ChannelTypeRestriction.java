@@ -22,7 +22,7 @@ public class ChannelTypeRestriction implements Restriction {
 	}
 
 	@Override
-	public boolean doesQualify(Channel channel) {
+	public boolean qualifies(Channel channel) {
 		List<String> flags = channel.getType();
 		if (flags == null || flags.isEmpty()) {
 			return false;
@@ -48,7 +48,7 @@ public class ChannelTypeRestriction implements Restriction {
 		return false;
 	}
 	@Override
-	public boolean doesQualify(Response response) {
+	public boolean qualifies(Response response) {
 		return false;
 	}
 	@Override

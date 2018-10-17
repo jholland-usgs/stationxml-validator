@@ -27,7 +27,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "");
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
@@ -41,7 +41,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "");
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
@@ -55,7 +55,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "");
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}

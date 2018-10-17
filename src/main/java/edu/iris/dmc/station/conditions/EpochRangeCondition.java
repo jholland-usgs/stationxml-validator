@@ -1,5 +1,6 @@
 package edu.iris.dmc.station.conditions;
 
+import edu.iris.dmc.TimeUtil;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -25,12 +26,12 @@ public class EpochRangeCondition extends AbstractCondition {
 
 		if (network.getStations() != null) {
 			for (Station s : network.getStations()) {
-				if (s.getStartDate() != null && s.getStartDate().getTime() < network.getStartDate().getTime()) {
+				if (s.getStartDate() != null && TimeUtil.isBefore(s.getStartDate(), network.getStartDate())) {
 					return Result.error("Station startDate " + XmlUtil.toText(s.getStartDate())
 							+ " cannot occur before network startDate " + XmlUtil.toText(network.getStartDate()));
 				}
 				if (network.getEndDate() != null && s.getEndDate() != null) {
-					if (s.getEndDate().getTime() > network.getEndDate().getTime()) {
+					if (TimeUtil.isAfter(s.getEndDate(), network.getEndDate())) {
 						return Result.error("Station endDate " + XmlUtil.toText(s.getEndDate())
 								+ " cannot occur after network endDate " + XmlUtil.toText(network.getEndDate()));
 					}
@@ -53,12 +54,12 @@ public class EpochRangeCondition extends AbstractCondition {
 		if (station.getChannels() != null) {
 			for (Channel c : station.getChannels()) {
 
-				if (c.getStartDate() != null && c.getStartDate().getTime() < station.getStartDate().getTime()) {
+				if (c.getStartDate() != null && TimeUtil.isBefore(c.getStartDate(), station.getStartDate())) {
 					return Result.error("Channel startDate " + XmlUtil.toText(c.getStartDate())
 							+ " cannot occur before Station startDate " + XmlUtil.toText(station.getStartDate()));
 				}
 				if (station.getEndDate() != null && c.getEndDate() != null) {
-					if (c.getEndDate().getTime() > station.getEndDate().getTime()) {
+					if (TimeUtil.isAfter(c.getEndDate(), station.getEndDate())) {
 						return Result.error("Channel endDate " + XmlUtil.toText(c.getEndDate())
 								+ " cannot occur after Station endDate " + XmlUtil.toText(station.getEndDate()));
 					}

@@ -1,5 +1,6 @@
 package edu.iris.dmc.station.conditions;
 
+import edu.iris.dmc.TimeUtil;
 import edu.iris.dmc.fdsn.station.model.BaseNodeType;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
@@ -37,8 +38,9 @@ public class StartTimeCondition extends AbstractCondition {
 		}
 
 		if (node.getEndDate() != null) {
-			if (node.getStartDate().after(node.getEndDate())) {
-				return Result.error("startDate " + node.getStartDate() + " must occur before endDate " + node.getEndDate());
+			if (TimeUtil.isAfter(node.getStartDate(), node.getEndDate())) {
+				return Result
+						.error("startDate " + node.getStartDate() + " must occur before endDate " + node.getEndDate());
 			}
 		}
 		return Result.success();

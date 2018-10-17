@@ -77,7 +77,7 @@ public class OrientationCondition extends AbstractCondition {
 		if (valid) {
 			return Result.success();
 		}
-		return Result.error("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
+		return Result.warning("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 	}
 

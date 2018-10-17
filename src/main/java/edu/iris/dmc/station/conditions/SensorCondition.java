@@ -35,8 +35,8 @@ public class SensorCondition extends AbstractCondition {
 			if (equipment == null) {
 				return Result.error("expected equipment/sensor but was null");
 			}else{
-				if (equipment.getDescription() == null) {
-					return Result.warning("expected equipment/sensor description but was null");
+				if (equipment.getDescription() == null||equipment.getDescription().trim().isEmpty()) {
+					return Result.error("expected equipment/sensor description but was null");
 				}
 			}
 		}

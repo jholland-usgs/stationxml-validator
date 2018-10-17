@@ -1,9 +1,8 @@
 package edu.iris.dmc.station.restrictions;
 
-import java.util.Arrays;
-
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Response;
+import edu.iris.dmc.fdsn.station.model.ResponseStage;
 
 public class ResponsePolynomialRestriction implements Restriction {
 
@@ -18,28 +17,34 @@ public class ResponsePolynomialRestriction implements Restriction {
 	}
 
 	@Override
-	public boolean doesQualify(Response response) {
+	public boolean qualifies(Response response) {
 		if (response == null) {
-			throw new IllegalArgumentException("Channel|code cannot be null");
+			throw new IllegalArgumentException("Response cannot be null");
 		}
 
 		if (response.getInstrumentPolynomial() != null) {
 			return true;
 		}
+
+		for (ResponseStage stage : response.getStage()) {
+			if (stage.getPolynomial() != null) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean doesQualify(Channel channel) {
-		if(channel==null){
+	public boolean qualifies(Channel channel) {
+		if (channel == null) {
 			return false;
 		}
-		return this.doesQualify(channel.getResponse());
+		return this.qualifies(channel.getResponse());
 	}
 
 	@Override
 	public String toString() {
-		return "ChannelCodeRestriction [name=" + name + "]";
+		return "ResponsePolynomialRestriction [name=" + name + "]";
 	}
 
 }

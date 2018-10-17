@@ -52,12 +52,12 @@ public class StageSequenceCondition extends ChannelRestrictedCondition {
 			List<ResponseStage> stages = response.getStage();
 			ResponseStage stage = stages.get(stages.size() - 1);
 			if (stage.getNumber().intValue() == stages.size() - 1) {
-				return Result.error("invalid sequence number " + stage.getNumber().intValue());
+				return Result.error("invalid stage sequence number " + stage.getNumber().intValue());
 			} else {
 				int i = 1;
 				for (ResponseStage s : stages) {
 					if (s.getNumber().intValue() != i) {
-						return Result.error("invalid sequence number " + s.getNumber().intValue() + " expected: " + i);
+						return Result.error("invalid stage sequence number " + s.getNumber().intValue() + " expected: " + i);
 					}
 					i++;
 				}

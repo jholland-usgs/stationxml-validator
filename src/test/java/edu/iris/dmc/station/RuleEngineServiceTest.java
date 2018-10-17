@@ -123,6 +123,34 @@ public class RuleEngineServiceTest {
 	}
 
 	@Test
+	public void rule304() throws Exception {
+
+		theDocument = unmarshal("F1_304.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		List<Message> m = context.getMessages(304);
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(304,message.getRule().getId());
+	}
+	
+	@Test
+	public void rule402() throws Exception {
+
+		theDocument = unmarshal("F1_402.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		List<Message> m = context.getMessages(402);
+		
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(402,message.getRule().getId());
+	}
+	@Test
 	public void rule405() throws Exception {
 
 		theDocument = unmarshal("F1_405.xml");
@@ -173,12 +201,7 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-		assertEquals(1, resultSet.size());
-
-		Message message = resultSet.get(0);
-		assertNotNull(message.getRule());
-
-		assertEquals(411, message.getRule().getId());
+		assertEquals(0, resultSet.size());
 
 	}
 
@@ -213,7 +236,7 @@ public class RuleEngineServiceTest {
 		for (Message m : resultSet) {
 			//System.out.println("413: "+m);
 		}
-		assertEquals(2, resultSet.size());
+		assertEquals(3, resultSet.size());
 
 		List<Message> list = context.getMessages(413);
 		assertNotNull(list);

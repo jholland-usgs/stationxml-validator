@@ -33,10 +33,10 @@ public class UnitCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		if(channel==null){
+		if (channel == null) {
 			return new Success("");
 		}
-		return evaluate(channel,channel.getResponse());
+		return evaluate(channel, channel.getResponse());
 	}
 
 	@Override
@@ -88,11 +88,10 @@ public class UnitCondition extends ChannelRestrictedCondition {
 						result = UnitTable.containsCaseInsensitive(outputUnits.getName().toLowerCase());
 						if (result) {
 							message.add(Result.warning("[stage " + stage.getNumber().intValue()
-									+ "] expected outputUnit " + outputUnits.getName().toLowerCase()
-									+ " unit/name but was " + outputUnits.getName()));
+									+ "] invalid outputUnits " + outputUnits.getName()));
 						} else {
-							message.add(Result.error("[stage " + stage.getNumber().intValue() + "] expected outputUnit "
-									+ outputUnits.getName().toLowerCase() + " but was " + outputUnits.getName()));
+							message.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid outputUnits "
+									+ outputUnits.getName()));
 						}
 					}
 				}

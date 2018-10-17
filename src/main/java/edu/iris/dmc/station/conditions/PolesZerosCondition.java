@@ -44,7 +44,7 @@ public class PolesZerosCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel, Response response) {
-		
+
 		if (isRestricted(channel)) {
 			return Result.success();
 		}
@@ -62,25 +62,17 @@ public class PolesZerosCondition extends ChannelRestrictedCondition {
 				t = true;
 			}
 
-			
 			int stage = 1;
 			for (ResponseStage s : stages) {
 				Gain gain = s.getStageGain();
 				if (t || gain == null || gain.getFrequency() == 0) {
 					if (s.getPolesZeros() != null) {
-						if (s.getPolesZeros().getPole() != null) {
-							for (PoleZero p : s.getPolesZeros().getPole()) {
-								if (p.getReal().getValue() == 0) {
-									return Result.error(
-											"stage " + s.getNumber() + " pole " + p.getNumber() + " cannot be 0");
-								}
-							}
-						}
 						if (s.getPolesZeros().getZero() != null) {
 							for (PoleZero z : s.getPolesZeros().getZero()) {
-								if (z.getReal().getValue() == 0) {
+								if (z.getReal().getValue() == 0 || z.getImaginary().getValue() == 0) {
+									//"stage 2 zero at index 0 is at 0; stage 2 StageGain:Frequency cannot be 0”
 									return Result.error("stage " + s.getNumber() + " zero at index " + z.getNumber()
-											+ " cannot be 0");
+											+ " is at 0; stage " + s.getNumber() + " StageGain:Frequency cannot be 0");
 								}
 							}
 						}

@@ -16,9 +16,7 @@ public class LatitudeCondition extends AbstractCondition {
 		if (latitude == null) {
 			return Result.error( "Latitude cannot be null");
 		}
-		if (latitude.getValue() == 0) {
-			return Result.error( "Latitude cannot be 0");
-		}
+
 		if (-90 <= latitude.getValue() && 90 >= latitude.getValue()) {
 			return Result.success();
 		}

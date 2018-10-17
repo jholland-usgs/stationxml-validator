@@ -28,6 +28,7 @@ import edu.iris.dmc.station.conditions.LongitudeCondition;
 import edu.iris.dmc.station.conditions.MissingDecimationCondition;
 import edu.iris.dmc.station.conditions.OrientationCondition;
 import edu.iris.dmc.station.conditions.PolesZerosCondition;
+import edu.iris.dmc.station.conditions.PolynomialCondition;
 import edu.iris.dmc.station.conditions.ResponseListCondition;
 import edu.iris.dmc.station.conditions.SampleRateCondition;
 import edu.iris.dmc.station.conditions.DecimationCondition;
@@ -107,12 +108,10 @@ public class RuleEngineRegistry {
 				"Station:Latitude must be assigned a value that is not 0 and between -90 and 90."), Station.class);
 		add(221, new LongitudeCondition(true,
 				"Station:Longitude must be assigned a value that is not 0 and between -180 and 180."), Station.class);
-
-		add(223, new StationElevationCondition(true,
-				"Station:Elevation must be within 1 km of all subordinate Channel:Elevation."), Station.class);
-
 		add(222, new DistanceCondition(true,
 				"Station:Position must be within 1 km of all subordinate Channel:Position.", 1), Station.class);
+		add(223, new StationElevationCondition(true,
+				"Station:Elevation must be within 1 km of all subordinate Channel:Elevation."), Station.class);
 
 	}
 
@@ -127,7 +126,7 @@ public class RuleEngineRegistry {
 				Channel.class);
 
 		add(303, new CalibrationUnitCondition(false, "Invalid Calibration unit is invalid"), Channel.class);
-		add(304, new SensorCondition(false, "Channel:Sensor:Description cannot be null."), Channel.class);
+		add(304, new SensorCondition(true, "Channel:Sensor:Description cannot be null."), Channel.class);
 		add(305, new SampleRateCondition(false,
 				"If Channel:SampleRate is NULL or 0 then Response information should not be included.", restrictions),
 				Channel.class);
@@ -145,7 +144,7 @@ public class RuleEngineRegistry {
 
 		add(331, new DipCondition(true, "Dip must be assigned a value between -90 and 90.", -90, 90), Channel.class);
 		add(332, new OrientationCondition(true,
-				"Channel:Azimuth and or Channel:Dip do not correspond, within 5 degrees of tolerance, to last digit of orthogonal Channel:Code."),
+				"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code."),
 				Channel.class);
 	}
 
@@ -162,11 +161,11 @@ public class RuleEngineRegistry {
 		add(403, new StageUnitCondition(true, "Stage[N]:InputUnits:Name must equal Stage[N-1]:OutputUnits:Name.",
 				restrictions), Response.class);
 		add(404, new DigitalFilterCondition(true,
-				"Stage types FIR, Coefficient, or PolesZeros with transfer function type Digital must include Decimation and StageGain elements.",
+				"Stage types FIR|Coefficient|PolesZeros with transfer function type Digital must include Decimation and StageGain elements.",
 				restrictions), Response.class);
 		add(405, new ResponseListCondition(true,
-				"Stage of type ResponseList cannot be the only stage available in a response.", restrictions),
-				Response.class);
+				"Stage of type ResponseList cannot be the only stage available in a response.",
+				new ChannelCodeRestriction(), new ChannelTypeRestriction()), Response.class);
 
 		add(410, new EmptySensitivityCondition(true, "InstrumentSensitivity:Value cannot be assigned 0 or Null.",
 				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
@@ -178,22 +177,33 @@ public class RuleEngineRegistry {
 				Response.class);
 		add(412, new StageGainProductCondition(true,
 				"InstrumentSensitivity:Value must equal the product of all StageGain:Value if all StageGain:Frequency are equal to InstrumentSensitivity:Frequency [Normalization Frequency].	",
-				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()), Response.class);
+				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
+				Response.class);
 		add(413, new StageGainNonZeroCondition(true, "StageGain:Value cannot be assigned 0 or Null.",
-				new ChannelCodeRestriction(), new ChannelTypeRestriction()), Response.class);
+				new ChannelCodeRestriction(), new ResponsePolynomialRestriction(), new ChannelTypeRestriction()),
+				Response.class);
 
 		add(414, new PolesZerosCondition(false,
 				"If Stage[N] of type PolesZeros contains a Zero where both Real and Imaginary components equal 0 then InstrumentSensitivity:Frequency cannot equal 0 and Stage[N]:StageGain:Frequency cannot equal 0.",
-				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()), Response.class);
+				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
+				Response.class);
+
+		add(415, new PolynomialCondition(false,
+				"Response must be defined as Response:InstrumentPolynomial if it contains any Stages defined as ResponseStage:Polynomial",
+				new ChannelCodeRestriction(), new ChannelTypeRestriction()), Response.class);
+
 		add(420, new MissingDecimationCondition(true,
-				"A Response must contain at least one instance of Response:Stage:Decimation.", new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
+				"A Response must contain at least one instance of Response:Stage:Decimation.",
+				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
 				Response.class);
 		add(421, new DecimationSampleRateCondition(true,
 				"Stage[Final]:Decimation:InputSampleRate divided by Stage[Final]:Decimation:Factor must equal Channel:SampleRate.",
-				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()), Response.class);
+				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
+				Response.class);
 		add(422, new DecimationCondition(true,
 				"Stage[N]:Decimation:InputSampleRate must equal Stage[N-1]:Decimation:InputSampleRate divided by Stage[N-1]:Decimation:Factor.",
-				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()), Response.class);
+				new ChannelCodeRestriction(), new ChannelTypeRestriction(), new ResponsePolynomialRestriction()),
+				Response.class);
 	}
 
 	public void add(int id, Condition condition, Class<?> clazz) {

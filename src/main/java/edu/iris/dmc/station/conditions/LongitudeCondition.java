@@ -16,9 +16,7 @@ public class LongitudeCondition extends AbstractCondition {
 		if (longitude == null) {
 			return Result.error("longitude cannot be null");
 		}
-		if (longitude.getValue() == 0) {
-			return Result.error( "longitude cannot be 0");
-		}
+
 		if (-180 <= longitude.getValue() && 180 >= longitude.getValue()) {
 			return Result.success();
 		}

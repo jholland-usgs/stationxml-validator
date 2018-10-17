@@ -36,7 +36,7 @@ public class DistanceCondition extends AbstractCondition {
 					station.getLongitude().getValue(), "K");
 			if (distance > this.margin) {
 				return Result.error(
-						"Expected a distance difference of less than " + margin + " between "+station.getCode()+" and "+channel.getCode()+":"+channel.getLocationCode()+", but was " + distance);
+						"Expected a distance difference of less than " + margin + " between "+station.getCode()+" and "+channel.getCode()+":"+channel.getLocationCode()+" but was " + distance);
 			}
 		}
 

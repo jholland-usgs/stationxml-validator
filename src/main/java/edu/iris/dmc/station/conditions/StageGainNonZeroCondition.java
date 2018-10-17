@@ -5,11 +5,9 @@ import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Station;
-import edu.iris.dmc.fdsn.station.model.Units;
 import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
-import edu.iris.dmc.station.rules.Util;
 
 public class StageGainNonZeroCondition extends ChannelRestrictedCondition {
 
@@ -49,10 +47,14 @@ public class StageGainNonZeroCondition extends ChannelRestrictedCondition {
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
 			for (ResponseStage stage : response.getStage()) {
 				if (stage.getStageGain() == null) {
-					return Result.error("Stage " + stage.getNumber() + " is missing gain");
+					if (stage.getPolynomial() == null) {
+						return Result.error("Stage " + stage.getNumber() + " is missing gain");
+					}
 				} else {
 					if (stage.getStageGain().getValue() == null || stage.getStageGain().getValue() == 0) {
-						return Result.error("Stage " + stage.getNumber() + " gain cannot be zero");
+						if (stage.getPolynomial() == null) {
+							return Result.error("Stage " + stage.getNumber() + " gain cannot be zero");
+						}
 					}
 				}
 			}

@@ -9,10 +9,11 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
+import edu.iris.dmc.station.rules.Util;
 
-public class FrequencyCondition extends ChannelRestrictedCondition {
+public class PolynomialCondition extends ChannelRestrictedCondition {
 
-	public FrequencyCondition(boolean required, String description, Restriction... restrictions) {
+	public PolynomialCondition(boolean required, String description, Restriction... restrictions) {
 		super(required, description, restrictions);
 	}
 
@@ -28,14 +29,17 @@ public class FrequencyCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		if (isRestricted(channel)) {
+		if (channel == null) {
 			return Result.success();
 		}
-		return evaluate(channel, channel.getResponse());
+		return this.evaluate(channel, channel.getResponse());
 	}
 
 	@Override
 	public Message evaluate(Channel channel, Response response) {
+		if (isRestricted(channel)) {
+			return Result.success();
+		}
 
 		if (this.required) {
 			if (response == null) {
@@ -43,14 +47,15 @@ public class FrequencyCondition extends ChannelRestrictedCondition {
 			}
 		}
 
-		if (channel.getResponse().getInstrumentSensitivity() != null
-				&& channel.getResponse().getInstrumentSensitivity().getFrequency() != null) {
-
-			if (channel.getResponse().getInstrumentSensitivity()
-					.getFrequency() > (channel.getSampleRate().getValue() / 2)) {
-				return Result.warning(channel.getResponse().getInstrumentSensitivity().getFrequency() + ">"
-						+ channel.getSampleRate().getValue() + "/2");
+		int index=1;
+		for (ResponseStage stage : response.getStage()) {
+			if (stage.getPolynomial() != null) {
+				if (response.getInstrumentPolynomial() == null) {
+					//Stage [N] polynomial requires that an InstrumentPolynomial be included
+					return Result.error("Stage ["+index+"] polynomial requires that an InstrumentPolynomial be included");
+				}
 			}
+			index++;
 		}
 		return Result.success();
 	}

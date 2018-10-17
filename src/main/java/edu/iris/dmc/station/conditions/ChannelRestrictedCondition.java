@@ -23,7 +23,7 @@ public abstract class ChannelRestrictedCondition extends AbstractCondition {
 	public boolean isRestricted(Channel channel) {
 		if (restrictions != null) {
 			for (Restriction restriction : restrictions) {
-				if (restriction.doesQualify(channel)) {
+				if (restriction.qualifies(channel)) {
 					return true;
 				}
 			}

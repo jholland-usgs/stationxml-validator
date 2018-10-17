@@ -28,13 +28,14 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		if(channel==null){
+		if (channel == null) {
 			return Result.success();
 		}
-		return this.evaluate(channel,channel.getResponse());
+		return this.evaluate(channel, channel.getResponse());
 	}
+
 	@Override
-	public Message evaluate(Channel channel,Response response) {
+	public Message evaluate(Channel channel, Response response) {
 		if (isRestricted(channel)) {
 			return Result.success();
 		}
@@ -55,7 +56,9 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 				} else {
 					if (current != null) {
 						if (!current[1].getName().equals(units[0].getName())) {
-							return Result.error("stage [" + stage.getNumber().intValue() + "]");
+							return Result.error("stage [" + stage.getNumber().intValue() + "] " + units[0].getName()
+									+ " does not equal stage[" + (stage.getNumber().intValue() - 1) + "] "
+									+ units[1].getName());
 						}
 					}
 				}

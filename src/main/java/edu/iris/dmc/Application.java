@@ -30,6 +30,12 @@ import org.xml.sax.SAXException;
 import com.beust.jcommander.JCommander;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
+import edu.iris.dmc.seed.Blockette;
+import edu.iris.dmc.seed.Volume;
+import edu.iris.dmc.seed.blockette.util.BlocketteItrator;
+import edu.iris.dmc.seed.builder.BlocketteBuilder;
+import edu.iris.dmc.seed.convert.SeedToXmlDocumentConverter;
+import edu.iris.dmc.seed.director.BlocketteDirector;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.Action;
 import edu.iris.dmc.station.io.CsvPrintStream;
@@ -103,7 +109,7 @@ public class Application {
 				try {
 					rulesContext.ignoreRule(Integer.valueOf(a));
 				} catch (NumberFormatException e) {
-					System.out.println("Invalid value for --ignore-rules: "+a);
+					System.out.println("Invalid value for --ignore-rules: " + a);
 					help();
 					System.exit(1);
 				}
@@ -121,7 +127,7 @@ public class Application {
 
 			if (file.isDirectory()) {
 				for (File f : file.listFiles()) {
-					if (!f.getName().startsWith(".") && f.getName().endsWith(".xml"))
+					if (!f.getName().startsWith("."))
 						input.add(f.getAbsolutePath());
 				}
 			} else {
@@ -144,23 +150,41 @@ public class Application {
 
 			InputStream is = null;
 			for (String uri : input) {
+				System.out.println(uri);
 				source = uri;
+				FDSNStationXML document = null;
 				if (uri.startsWith("http://")) {
 					is = new URL(uri).openStream();
+					document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
 				} else {
-					if (!uri.endsWith(".xml")) {
-						continue;
-					}
 					File file = new File(uri);
 					if (!file.exists()) {
 						System.err.println("File does not exist.  File is required!");
 						help();
 						System.exit(1);
 					}
-					is = new FileInputStream(new File(uri));
-				}
 
-				FDSNStationXML document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+					if (file.isDirectory()) {
+						List<String> list = new ArrayList<>();
+						for (File f : file.listFiles()) {
+							if (!f.getName().startsWith("."))
+								list.add(f.getAbsolutePath());
+						}
+						run(context, list, format, outputStream);
+						continue;
+					}
+					is = new FileInputStream(new File(uri));
+					if (uri.endsWith(".xml")) {
+						document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+					} else {
+						Volume volume = this.load(is);
+						document = SeedToXmlDocumentConverter.getInstance().convert(volume);
+					}
+
+					if (document == null) {
+						continue;
+					}
+				}
 				ruleEngineService.executeAllRules(document, context, new Action() {
 					@Override
 					public void update(RuleContext context, Message message) {
@@ -221,6 +245,25 @@ public class Application {
 			e.printStackTrace();
 		}
 
+	}
+
+	public Volume load(File file) throws Exception {
+		try (final FileInputStream inputStream = new FileInputStream(file)) {
+			return load(inputStream);
+		}
+	}
+
+	public Volume load(InputStream inputStream) throws Exception {
+
+		BlocketteDirector director = new BlocketteDirector(new BlocketteBuilder());
+		BlocketteItrator iterator = director.process(inputStream);
+
+		Volume volume = new Volume();
+		while (iterator.hasNext()) {
+			Blockette blockette = iterator.next();
+			volume.add(blockette);
+		}
+		return volume;
 	}
 
 	private RuleResultPrintStream getOutputStream(String format, OutputStream outputStream) throws IOException {

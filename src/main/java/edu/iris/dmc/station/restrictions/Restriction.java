@@ -5,6 +5,6 @@ import edu.iris.dmc.fdsn.station.model.Response;
 
 public interface Restriction {
 
-	public boolean doesQualify(Channel channel);
-	public boolean doesQualify(Response response);
+	public boolean qualifies(Channel channel);
+	public boolean qualifies(Response response);
 }

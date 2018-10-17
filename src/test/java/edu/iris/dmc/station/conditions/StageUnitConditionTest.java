@@ -26,43 +26,21 @@ public class StageUnitConditionTest {
 
 	private FDSNStationXML theDocument;
 
-	@Before
-	public void init() throws Exception {
-
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("test.xml")) {
-			theDocument = DocumentMarshaller.unmarshal(is);
-		}
-	}
-
 	@Test
 	public void shouldRunWithNoProblems() throws Exception {
-		Network iu = theDocument.getNetwork().get(0);
-		Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_402.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+			Network iu = theDocument.getNetwork().get(0);
+			Channel bhz00 = iu.getStations().get(0).getChannels().get(0);
 
-		Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
-		
-		StageUnitCondition condition = new StageUnitCondition(true, "",restrictions);
-		Response response = bhz00.getResponse();
-		Message result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof Success);
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(),
+					new ChannelTypeRestriction() };
 
-		List<ResponseStage> stages = response.getStage();
-		ResponseStage stage = stages.get(1);
-		Assert.assertEquals(2, stage.getNumber().intValue());
-		Coefficients coefficients = stage.getCoefficients();
-		Units originalUnits = coefficients.getOutputUnits();
-		Units units = new Units();
-		units.setName("Dummy");
-		units.setDescription("Dummy");
-		coefficients.setOutputUnits(units);
+			UnitCondition condition = new UnitCondition(true, "", restrictions);
+			Message result = condition.evaluate(bhz00);
+			
 
-		result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
-
-		coefficients.setOutputUnits(originalUnits);
-
-		result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof Success);
+		}
 
 	}
 }

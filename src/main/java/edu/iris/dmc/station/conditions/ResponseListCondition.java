@@ -17,7 +17,7 @@ public class ResponseListCondition extends ChannelRestrictedCondition {
 
 	private static final Logger LOGGER = Logger.getLogger(ResponseListCondition.class.getName());
 
-	public ResponseListCondition(boolean required, String description, Restriction[] restrictions) {
+	public ResponseListCondition(boolean required, String description, Restriction... restrictions) {
 		super(required, description, restrictions);
 	}
 
@@ -41,7 +41,7 @@ public class ResponseListCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel, Response response) {
-		if (isRestricted(channel)) {System.out.println("restricted");
+		if (isRestricted(channel)) {
 			return Result.success();
 		}
 		if (this.required) {
