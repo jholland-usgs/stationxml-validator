@@ -1,7 +1,0 @@
-Summary:
-=================================================================================
-1    |331   |Dip must be assigned a value between -90 and 90.
-=================================================================================
-
-Source,RuleId,Type,Network,Station,Channel,Location,StartDate,EndDate,Message
-/seed/sxml_validator/TEST_XML/Validator_TestSuite/Channel_300/F1_331.xml,331,Error,QI,TPASS,BDF,00,2018-08-06T00:00:00,2500-12-31T23:59:59,expected a value between -90 and 90 but was 180.0
