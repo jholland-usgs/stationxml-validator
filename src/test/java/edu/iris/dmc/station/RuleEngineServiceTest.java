@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
@@ -38,6 +39,7 @@ public class RuleEngineServiceTest {
 			Assert.assertTrue("Expected result of rule execution to be true", resultSet.isEmpty());
 		}
 	}
+
 	@Test
 	public void rule111() throws Exception {
 
@@ -48,10 +50,11 @@ public class RuleEngineServiceTest {
 
 		List<Message> m = context.getMessages(111);
 		assertNotNull(m);
-		assertEquals(1,m.size());
+		assertEquals(1, m.size());
 		Message message = m.get(0);
-		assertEquals(111,message.getRule().getId());
+		assertEquals(111, message.getRule().getId());
 	}
+
 	@Test
 	public void rule112() throws Exception {
 
@@ -63,7 +66,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(112);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(112,message.getRule().getId());
+		assertEquals(112, message.getRule().getId());
 	}
 
 	@Test
@@ -74,10 +77,12 @@ public class RuleEngineServiceTest {
 		RuleContext context = getContext(true);
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
+		Map<Integer, List<Message>> map = context.map();
+		System.out.println(map);
 		List<Message> m = context.getMessages(211);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(211,message.getRule().getId());
+		assertEquals(211, message.getRule().getId());
 	}
 
 	@Test
@@ -91,7 +96,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(212);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(212,message.getRule().getId());
+		assertEquals(212, message.getRule().getId());
 	}
 
 	@Test
@@ -105,7 +110,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(222);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(222,message.getRule().getId());
+		assertEquals(222, message.getRule().getId());
 	}
 
 	@Test
@@ -119,7 +124,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(223);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(223,message.getRule().getId());
+		assertEquals(223, message.getRule().getId());
 	}
 
 	@Test
@@ -133,9 +138,9 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(304);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(304,message.getRule().getId());
+		assertEquals(304, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule402() throws Exception {
 
@@ -145,11 +150,12 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> m = context.getMessages(402);
-		
+
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(402,message.getRule().getId());
+		assertEquals(402, message.getRule().getId());
 	}
+
 	@Test
 	public void rule405() throws Exception {
 
@@ -161,7 +167,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(405);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(405,message.getRule().getId());
+		assertEquals(405, message.getRule().getId());
 	}
 
 	@Test
@@ -234,7 +240,7 @@ public class RuleEngineServiceTest {
 
 		List<Message> resultSet = context.list();
 		for (Message m : resultSet) {
-			//System.out.println("413: "+m);
+			// System.out.println("413: "+m);
 		}
 		assertEquals(3, resultSet.size());
 
@@ -260,7 +266,7 @@ public class RuleEngineServiceTest {
 
 		List<Message> resultSet = context.list();
 		for (Message m : resultSet) {
-			//System.out.println("414: "+m);
+			// System.out.println("414: "+m);
 		}
 		assertEquals(1, resultSet.size());
 
