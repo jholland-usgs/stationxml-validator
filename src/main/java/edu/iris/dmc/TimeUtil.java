@@ -63,11 +63,15 @@ public class TimeUtil {
 	}
 
 	public static boolean isAfter(XMLGregorianCalendar one, XMLGregorianCalendar two) {
-		return one.toGregorianCalendar().after(two);
+		if (one == null || two == null) {
+			return true;
+		}
+		boolean bool = one.toGregorianCalendar().getTime().after(two.toGregorianCalendar().getTime());
+		return bool;
 	}
 
 	public static boolean isBefore(XMLGregorianCalendar one, XMLGregorianCalendar two) {
-		return one.toGregorianCalendar().before(two);
+		return one.toGregorianCalendar().getTime().before(two.toGregorianCalendar().getTime());
 	}
 
 	public static int compare(XMLGregorianCalendar one, XMLGregorianCalendar two) {
