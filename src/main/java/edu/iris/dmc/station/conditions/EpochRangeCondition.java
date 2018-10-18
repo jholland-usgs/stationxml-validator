@@ -53,7 +53,6 @@ public class EpochRangeCondition extends AbstractCondition {
 
 		if (station.getChannels() != null) {
 			for (Channel c : station.getChannels()) {
-
 				if (c.getStartDate() != null && TimeUtil.isBefore(c.getStartDate(), station.getStartDate())) {
 					return Result.error("Channel startDate " + XmlUtil.toText(c.getStartDate())
 							+ " cannot occur before Station startDate " + XmlUtil.toText(station.getStartDate()));
