@@ -14,7 +14,7 @@ import edu.iris.dmc.station.rules.Util;
 public class StageGainProductCondition extends ChannelRestrictedCondition {
 
 	public StageGainProductCondition(boolean required, String description, Restriction... restrictions) {
-		super(required, description,restrictions);
+		super(required, description, restrictions);
 	}
 
 	@Override
@@ -29,12 +29,12 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		if(channel==null){
+		if (channel == null) {
 			return Result.success();
 		}
-		return this.evaluate(channel,channel.getResponse());
+		return this.evaluate(channel, channel.getResponse());
 	}
-	
+
 	@Override
 	public Message evaluate(Channel channel,Response response) {
 		if (isRestricted(channel)) {
@@ -46,7 +46,7 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 				return Result.error("expected response but was null");
 			}
 		}
-		if (response.getInstrumentSensitivity() != null && response.getInstrumentSensitivity().getValue() != null) {
+		if (response.getInstrumentSensitivity() != null) {
 
 			Sensitivity sensitivity = response.getInstrumentSensitivity();
 			sensitivity.getValue();
@@ -55,7 +55,7 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 			double product = 1;
 			if (response.getStage() != null && !response.getStage().isEmpty()) {
 				for (ResponseStage stage : response.getStage()) {
-					if (stage.getStageGain() != null && stage.getStageGain().getFrequency().equals(frequency)) {
+					if (stage.getStageGain() != null && stage.getStageGain().getFrequency()==frequency) {
 						product = product * stage.getStageGain().getValue();
 					} else {
 						return Result.success();
