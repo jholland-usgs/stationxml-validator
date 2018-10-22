@@ -21,7 +21,7 @@ public class PolynomialCondition415Test {
 
 	@Test
 	public void pass2() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_415.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P2_415.xml")) {
 			FDSNStationXML theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network iu = theDocument.getNetwork().get(0);
