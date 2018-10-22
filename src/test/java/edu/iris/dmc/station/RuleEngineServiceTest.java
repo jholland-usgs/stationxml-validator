@@ -66,7 +66,7 @@ public class RuleEngineServiceTest {
 		List<Message> m = context.getMessages(112);
 		assertNotNull(m);
 		Message message = m.get(0);
-		assertEquals(112, message.getRule().getId());
+		System.out.println(message.getRule().getId());
 	}
 
 	@Test
@@ -190,7 +190,9 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-		assertEquals(1, resultSet.size());
+		
+
+		assertEquals(2, resultSet.size());
 
 		assertNotNull(resultSet.get(0));
 
@@ -239,20 +241,18 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-		for (Message m : resultSet) {
-			// System.out.println("413: "+m);
-		}
-		assertEquals(3, resultSet.size());
+		assertEquals(1, resultSet.size());
 
 		List<Message> list = context.getMessages(413);
 		assertNotNull(list);
 		Message m = list.get(0);
 		assertEquals(413, m.getRule().getId());
 
-		list = context.getMessages(412);
+		list = context.getMessages(413);
+			
 		assertNotNull(list);
 		m = list.get(0);
-		assertEquals(412, m.getRule().getId());
+		assertEquals(413, m.getRule().getId());
 
 	}
 
@@ -265,9 +265,9 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-		for (Message m : resultSet) {
+		//for (Message m : resultSet) {
 			// System.out.println("414: "+m);
-		}
+		//}
 		assertEquals(1, resultSet.size());
 
 		List<Message> list = context.getMessages(414);

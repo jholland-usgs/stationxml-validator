@@ -11,7 +11,7 @@
   <TotalNumberStations>1</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>
   <Station code="TPASS" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
-   <Latitude>0.001</Latitude>
+   <Latitude>91.001</Latitude>
    <Longitude>-122.31332</Longitude>
    <Elevation>225.879999</Elevation>
    <Site>
@@ -21,7 +21,7 @@
    <TotalNumberChannels>1</TotalNumberChannels>
    <SelectedNumberChannels>1</SelectedNumberChannels>
    <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
-    <Latitude>0</Latitude>
+    <Latitude>91</Latitude>
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
@@ -621,8 +621,4 @@
    </Channel>
   </Station>
  </Network>
-<<<<<<< HEAD
 </FDSNStationXML>
-=======
-</FDSNStationXML>
->>>>>>> branch 'master' of https://github.com/iris-edu/StationXML-Validation.git
