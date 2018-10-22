@@ -191,7 +191,7 @@ public class RuleEngineServiceTest {
 
 		List<Message> resultSet = context.list();
 
-		assertEquals(1, resultSet.size());
+		assertEquals(2, resultSet.size());
 
 		
 

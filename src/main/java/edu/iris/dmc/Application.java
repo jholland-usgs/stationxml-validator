@@ -84,10 +84,10 @@ public class Application {
 	}
 
 	public void run() throws Exception {
-		final Level logLevel = args.debug ? Level.FINER : Level.INFO;
-		Handler consoleHandler = new ConsoleHandler();
-		LOGGER.setLevel(logLevel);
-		LOGGER.addHandler(consoleHandler);
+		//final Level logLevel = args.debug ? Level.FINER : Level.INFO;
+		//Handler consoleHandler = new ConsoleHandler();
+		//LOGGER.setLevel(logLevel);
+		//LOGGER.addHandler(consoleHandler);
 
 		OutputStream out = System.out;
 
@@ -151,7 +151,6 @@ public class Application {
 
 			InputStream is = null;
 			for (String uri : input) {
-				System.out.println(uri);
 				source = uri;
 				FDSNStationXML document = null;
 				if (uri.startsWith("http://")) {
