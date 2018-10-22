@@ -10,7 +10,7 @@
   <Description>[IRIS DMC] Station XML Validator Passing Test File</Description>
   <TotalNumberStations>1</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>
-  <Station code="TPASS" startDate="1900-24-26T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
+  <Station code="TPASS" startDate="1981-12-31T23:59:59" endDate="2018-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
    <Latitude>47.66157</Latitude>
    <Longitude>-122.31332</Longitude>
    <Elevation>225.879999</Elevation>
@@ -20,7 +20,7 @@
    <CreationDate>2018-08-06T00:00:00</CreationDate>
    <TotalNumberChannels>1</TotalNumberChannels>
    <SelectedNumberChannels>1</SelectedNumberChannels>
-   <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
+   <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T10:01:01">
     <Latitude>47.66157</Latitude>
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>

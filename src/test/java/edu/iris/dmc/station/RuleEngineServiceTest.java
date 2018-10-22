@@ -190,6 +190,9 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
+		for(Message s:resultSet) {
+			System.out.println(s.getRule().getId()+"   "+s.getDescription());
+		}
 		assertEquals(1, resultSet.size());
 
 		assertNotNull(resultSet.get(0));
