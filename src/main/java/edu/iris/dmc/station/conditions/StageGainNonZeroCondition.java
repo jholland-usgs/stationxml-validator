@@ -51,7 +51,7 @@ public class StageGainNonZeroCondition extends ChannelRestrictedCondition {
 						return Result.error("Stage " + stage.getNumber() + " is missing gain");
 					}
 				} else {
-					if (stage.getStageGain().getValue() == null || stage.getStageGain().getValue() == 0) {
+					if (stage.getStageGain().getValue() == 0) {
 						if (stage.getPolynomial() == null) {
 							return Result.error("Stage " + stage.getNumber() + " gain cannot be zero");
 						}

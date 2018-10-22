@@ -58,7 +58,7 @@ public class PolesZerosCondition extends ChannelRestrictedCondition {
 
 			Sensitivity sensitivity = response.getInstrumentSensitivity();
 			boolean t = false;
-			if (sensitivity == null || sensitivity.getFrequency() == null || sensitivity.getFrequency() == 0.0) {
+			if (sensitivity == null || sensitivity.getFrequency() == 0.0) {
 				t = true;
 			}
 

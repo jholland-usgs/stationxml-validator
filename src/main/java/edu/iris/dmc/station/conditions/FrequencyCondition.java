@@ -43,8 +43,7 @@ public class FrequencyCondition extends ChannelRestrictedCondition {
 			}
 		}
 
-		if (channel.getResponse().getInstrumentSensitivity() != null
-				&& channel.getResponse().getInstrumentSensitivity().getFrequency() != null) {
+		if (channel.getResponse().getInstrumentSensitivity() != null) {
 
 			if (channel.getResponse().getInstrumentSensitivity()
 					.getFrequency() > (channel.getSampleRate().getValue() / 2)) {

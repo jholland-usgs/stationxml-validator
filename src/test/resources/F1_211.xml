@@ -4,23 +4,23 @@
  <Source>IRIS-DMC</Source>
  <Sender>IRIS-DMC</Sender>
  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.33</Module>
- <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=QI&amp;sta=VPASS&amp;cha=BDF&amp;starttime=2018-08-06T00:00:01&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
+ <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=XX&amp;sta=VPASS&amp;cha=BDF&amp;starttime=2018-08-06T00:00:01&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
  <Created>2018-08-06T20:17:16</Created>
- <Network code="QI" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
+ <Network code="XX" startDate="2016-06-05T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open">
   <Description>[IRIS DMC] Station XML Validator Passing Test File</Description>
   <TotalNumberStations>1</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>
-  <Station code="TPASS" startDate="2012-08-06T00:00:00" endDate="2018-11-01T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
+  <Station code="TPASS" startDate="2016-06-05T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
    <Latitude>47.66157</Latitude>
    <Longitude>-122.31332</Longitude>
    <Elevation>225.879999</Elevation>
    <Site>
     <Name>Synthetic Test File, IRIS DMC, USA, 218 2018, Tim Ronan</Name>
    </Site>
-   <CreationDate>2018-08-06T00:00:00</CreationDate>
+   <CreationDate>2016-06-06T00:00:00</CreationDate>
    <TotalNumberChannels>1</TotalNumberChannels>
    <SelectedNumberChannels>1</SelectedNumberChannels>
-   <Channel code="BDF" endDate="2016-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2012-08-06T00:00:00">
+   <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
     <Latitude>47.66157</Latitude>
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
@@ -619,7 +619,7 @@
      </Stage>
     </Response>
    </Channel>
-   <Channel code="BDF" endDate="2018-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2015-08-06T00:00:00">
+   <Channel code="BDF" endDate="2019-09-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2016-06-06T00:00:00">
     <Latitude>47.66157</Latitude>
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
@@ -1218,7 +1218,6 @@
      </Stage>
     </Response>
    </Channel>
- 
   </Station>
  </Network>
 </FDSNStationXML>

@@ -621,4 +621,8 @@
    </Channel>
   </Station>
  </Network>
+<<<<<<< HEAD
 </FDSNStationXML>
+=======
+</FDSNStationXML>
+>>>>>>> branch 'master' of https://github.com/iris-edu/StationXML-Validation.git
