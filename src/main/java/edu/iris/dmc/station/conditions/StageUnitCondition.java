@@ -46,47 +46,66 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 			}
 		}
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
-			Units[] current = null;
+			StageUnit current = null;
 
 			for (ResponseStage stage : response.getStage()) {
-				Units[] units = getUnits(stage);
-				if (units == null) {
+				StageUnit stageUnit = getUnits(stage);
+				if (stageUnit == null) {
 					// return Result.error("stage [ null units for stage " +
 					// stage.getNumber().intValue() + "]");
 				} else {
-					if (current != null) {
-						if (!current[1].getName().equals(units[0].getName())) {
-							return Result.error("stage [" + stage.getNumber().intValue() + "] " + units[0].getName()
-									+ " does not equal stage[" + (stage.getNumber().intValue() - 1) + "] "
-									+ units[1].getName());
+					if (current != null && current.input != null && stageUnit.input != null) {
+						if (!current.input.getName().equals(stageUnit.input.getName())) {
+							// Stage[N]:InputUnits:Name must equal Stage[N-1]:OutputUnits:Name
+							return Result.error("stage [" + stage.getNumber().intValue() + "] "
+									+ stageUnit.input.getName() + " does not equal stage["
+									+ (stage.getNumber().intValue() - 1) + "] " + stageUnit.output.getName());
 						}
 					}
 				}
-				if (units != null) {
-					current = units;
+				if (stageUnit != null) {
+					current = stageUnit;
 				}
 			}
 		}
 		return Result.success();
 	}
 
-	public Units[] getUnits(ResponseStage stage) {
+	public StageUnit getUnits(ResponseStage stage) {
 
+		Units input = null;
+		Units output = null;
 		if (stage.getPolesZeros() != null) {
-			return new Units[] { stage.getPolesZeros().getInputUnits(), stage.getPolesZeros().getOutputUnits() };
+			input = stage.getPolesZeros().getInputUnits();
+			output = stage.getPolesZeros().getOutputUnits();
 		}
 		if (stage.getResponseList() != null) {
-			return new Units[] { stage.getResponseList().getInputUnits(), stage.getResponseList().getOutputUnits() };
+			input = stage.getResponseList().getInputUnits();
+			output = stage.getResponseList().getOutputUnits();
 		}
 		if (stage.getFIR() != null) {
-			return new Units[] { stage.getFIR().getInputUnits(), stage.getFIR().getOutputUnits() };
+			input = stage.getFIR().getInputUnits();
+			output = stage.getFIR().getOutputUnits();
 		}
 		if (stage.getPolynomial() != null) {
-			return new Units[] { stage.getPolynomial().getInputUnits(), stage.getPolynomial().getOutputUnits() };
+			input = stage.getPolynomial().getInputUnits();
+			output = stage.getPolynomial().getOutputUnits();
 		}
 		if (stage.getCoefficients() != null) {
-			return new Units[] { stage.getCoefficients().getInputUnits(), stage.getCoefficients().getOutputUnits() };
+			input = stage.getCoefficients().getInputUnits();
+			output = stage.getCoefficients().getOutputUnits();
 		}
-		return null;
+
+		return new StageUnit(input, output);
+	}
+
+	class StageUnit {
+		Units input;
+		Units output;
+
+		public StageUnit(Units input, Units output) {
+			this.input = input;
+			this.output = output;
+		}
 	}
 }
