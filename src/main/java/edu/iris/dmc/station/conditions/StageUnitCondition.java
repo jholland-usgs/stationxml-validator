@@ -54,8 +54,9 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 					// return Result.error("stage [ null units for stage " +
 					// stage.getNumber().intValue() + "]");
 				} else {
-					if (current != null && current.input != null && stageUnit.input != null) {
-						if (!current.input.getName().equals(stageUnit.output.getName())) {
+
+					if (current != null && current.output != null && stageUnit.input != null) {
+						if (!current.output.getName().equals(stageUnit.input.getName())) {
 							// Stage[N]:InputUnits:Name must equal Stage[N-1]:OutputUnits:Name
 							return Result.error("stage [" + stage.getNumber().intValue() + "] "
 									+ stageUnit.input.getName() + " does not equal stage["
