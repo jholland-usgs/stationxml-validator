@@ -84,10 +84,10 @@ public class Application {
 	}
 
 	public void run() throws Exception {
-		//final Level logLevel = args.debug ? Level.FINER : Level.INFO;
-		//Handler consoleHandler = new ConsoleHandler();
-		//LOGGER.setLevel(logLevel);
-		//LOGGER.addHandler(consoleHandler);
+		// final Level logLevel = args.debug ? Level.FINER : Level.INFO;
+		// Handler consoleHandler = new ConsoleHandler();
+		// LOGGER.setLevel(logLevel);
+		// LOGGER.addHandler(consoleHandler);
 
 		OutputStream out = System.out;
 
@@ -148,7 +148,6 @@ public class Application {
 		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
 		String source = null;
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
-
 			InputStream is = null;
 			for (String uri : input) {
 				source = uri;
@@ -174,16 +173,24 @@ public class Application {
 						continue;
 					}
 					is = new FileInputStream(new File(uri));
-					if (uri.endsWith(".xml")) {
-						document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
-					} else {
-						// Volume volume = this.load(is);
-						Volume volume = SeedUtils.load(new File(source));
-						document = SeedToXmlDocumentConverter.getInstance().convert(volume);
-					}
+					try {
+						if (uri.endsWith(".xml")) {
+							document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+						} else {
 
-					if (document == null) {
-						continue;
+							Volume volume = SeedUtils.load(new File(source));
+							document = SeedToXmlDocumentConverter.getInstance().convert(volume);
+						}
+
+						if (document == null) {
+							continue;
+						}
+					} catch (Exception e) {
+						if (source != null) {
+							System.out.println("location: "+source);
+						}
+						e.printStackTrace();
+						throw e;
 					}
 				}
 				ruleEngineService.executeAllRules(document, context, new Action() {
@@ -242,8 +249,9 @@ public class Application {
 			if (source != null) {
 				System.out.println(source);
 			}
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("//////////" + source);
+			// e.printStackTrace();
+			System.out.println("//////////" + source);
 		}
 
 	}
