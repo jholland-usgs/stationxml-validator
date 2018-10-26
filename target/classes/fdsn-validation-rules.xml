@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE digester-rules PUBLIC
+  "-//Apache Commons //DTD digester-rules XML V1.0//EN"
+  "http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd">
+<Rules>
+	<Rule id="101">
+		<message>Network attribute 'code' cannot be null</message>
+		<description></description>
+		<class>edu.iris.dmc.station.validate.CodeValidator.class</class>
+	</Rule>
+	<Rule id="102">
+		<message>Network attribute 'code' must consist of a two-character
+			string
+		</message>
+		<description></description>
+		<class>edu.iris.dmc.station.validate.CodeValidator.class</class>
+	</Rule>
+	<Rule id="103">
+		<message>Network element 'startDate' is required</message>
+		<description></description>
+		<class>edu.iris.dmc.station.validate.CodeValidator.class</class>
+	</Rule>
+	<Rule id="105">
+		<message>Network element 'startDate' must occur before Network element
+			'endDate', if 'endDate' is available
+		</message>
+		<description></description>
+		<class>edu.iris.dmc.station.validate.CodeValidator.class</class>
+	</Rule>
+	<Rule id="152">
+		<message>Station epochs cannot overlap in time</message>
+		<description></description>
+		<class>edu.iris.dmc.station.validate.CodeValidator.class</class>
+	</Rule>
+</Rules>
