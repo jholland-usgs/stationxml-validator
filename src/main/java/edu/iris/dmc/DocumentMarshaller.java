@@ -9,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 
+
 public class DocumentMarshaller {
 
 	public static FDSNStationXML unmarshal(InputStream inputStream) throws JAXBException {
