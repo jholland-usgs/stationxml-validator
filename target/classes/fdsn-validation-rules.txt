@@ -1,1 +1,0 @@
-101,Network attribute 'code' cannot be null,edu.iris.dmc.station.validate.CodeRule
