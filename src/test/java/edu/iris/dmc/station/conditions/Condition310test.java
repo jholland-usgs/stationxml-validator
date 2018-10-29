@@ -14,7 +14,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition320test {
+public class Condition310test {
 
 	private FDSNStationXML theDocument;
 
@@ -25,14 +25,14 @@ public class Condition320test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_320.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_310.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
 
-			LatitudeCondition condition = new LatitudeCondition(true, "");
+			StartTimeCondition condition = new StartTimeCondition(true, "");
 
 			Message result = condition.evaluate(c);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);

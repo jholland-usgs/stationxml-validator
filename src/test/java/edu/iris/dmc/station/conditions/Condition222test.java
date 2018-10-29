@@ -7,14 +7,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
-import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition320test {
+public class Condition222test {
 
 	private FDSNStationXML theDocument;
 
@@ -25,16 +24,14 @@ public class Condition320test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_320.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_222.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
-			Channel c = s.getChannels().get(0);
+			DistanceCondition condition = new DistanceCondition(true, "", 1);
 
-			LatitudeCondition condition = new LatitudeCondition(true, "");
-
-			Message result = condition.evaluate(c);
+			Message result = condition.evaluate(s);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
@@ -56,4 +53,5 @@ public class Condition320test {
 
 	}
 }
+
 

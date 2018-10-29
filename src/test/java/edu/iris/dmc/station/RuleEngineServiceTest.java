@@ -41,6 +41,36 @@ public class RuleEngineServiceTest {
 	}
 
 	@Test
+	public void rule101() throws Exception {
+
+		theDocument = unmarshal("F1_101.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		List<Message> m = context.getMessages(101);
+		assertNotNull(m);
+		assertEquals(1, m.size());
+		Message message = m.get(0);
+		assertEquals(101, message.getRule().getId());
+	}
+	
+	@Test
+	public void rule110() throws Exception {
+
+		theDocument = unmarshal("F1_110.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		List<Message> m = context.getMessages(110);
+		assertNotNull(m);
+		assertEquals(1, m.size());
+		Message message = m.get(0);
+		assertEquals(110, message.getRule().getId());
+	}
+	
+	@Test
 	public void rule111() throws Exception {
 
 		theDocument = unmarshal("F1_111.xml");
@@ -67,6 +97,38 @@ public class RuleEngineServiceTest {
 		assertNotNull(m);
 		Message message = m.get(0);
 		System.out.println(message.getRule().getId());
+	}
+	
+	@Test
+	public void rule201() throws Exception {
+
+		theDocument = unmarshal("F1_201.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		Map<Integer, List<Message>> map = context.map();
+		System.out.println(map);
+		List<Message> m = context.getMessages(201);
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(201, message.getRule().getId());
+	}
+	
+	@Test
+	public void rule210() throws Exception {
+
+		theDocument = unmarshal("F1_210.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+
+		Map<Integer, List<Message>> map = context.map();
+		System.out.println(map);
+		List<Message> m = context.getMessages(210);
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(210, message.getRule().getId());
 	}
 
 	@Test
@@ -98,6 +160,37 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(212, message.getRule().getId());
 	}
+	
+	@Test
+	public void rule220() throws Exception {
+
+		theDocument = unmarshal("F1_220.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+		List<Message> m = context.getMessages(220);
+		System.out.println(m);
+
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(220, message.getRule().getId());
+	}
+	
+	@Test
+	public void rule221() throws Exception {
+
+		theDocument = unmarshal("F1_221.xml");
+		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleContext context = getContext(true);
+		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
+		List<Message> m = context.getMessages(221);
+		System.out.println(m);
+
+		assertNotNull(m);
+		Message message = m.get(0);
+		assertEquals(221, message.getRule().getId());
+	}
+	
 
 	@Test
 	public void rule222() throws Exception {
