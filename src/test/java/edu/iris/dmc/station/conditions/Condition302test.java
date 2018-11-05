@@ -24,7 +24,7 @@ public class Condition302test {
 	}
 
 	@Test
-	public void fail() throws Exception {
+	public void f1() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_302.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
@@ -35,12 +35,27 @@ public class Condition302test {
 			LocationCodeCondition condition = new LocationCodeCondition(true, "", "");
 
 			Message result = condition.evaluate(c);
-			System.out.println(result.getDescription());
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
+	@Test
+	public void f2() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_302.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
 
+			Network n = theDocument.getNetwork().get(0);
+			Station s = n.getStations().get(0);
+			Channel c = s.getChannels().get(0);
+    
+			LocationCodeCondition condition = new LocationCodeCondition(true, "", "");
+
+			Message result = condition.evaluate(c);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		}
+
+	}
+	
 	@Test
 	public void pass() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("pass.xml")) {

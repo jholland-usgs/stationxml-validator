@@ -25,13 +25,15 @@ public class RuleContext {
 	}
 
 	public void ignoreRule(String text) {
-		if(text==null){
+		if (text == null) {
 			return;
 		}
-		String[] array=text.split(",");
-		
-		for(String s:array){
-			ignoreRule(Integer.valueOf(s));
+		String[] array = text.split(",");
+
+		for (String s : array) {
+			if (!s.trim().isEmpty()) {
+				ignoreRule(Integer.valueOf(s));
+			}
 		}
 	}
 

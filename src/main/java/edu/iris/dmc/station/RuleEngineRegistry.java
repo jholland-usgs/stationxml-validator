@@ -121,7 +121,7 @@ public class RuleEngineRegistry {
 		add(301, new CodeCondition(true, codeRegex,
 				"Channel:Code must be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
-		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\?\\-\\ ]{0,2})?",
+		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\ ]{0,2})?",
 				"Channel:locationCode must be unassigned or be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
 
