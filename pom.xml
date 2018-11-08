@@ -8,9 +8,15 @@
 	<packaging>jar</packaging>
 	<version>1.5.9.3</version>
 	<name>FDSN StationXML Validator</name>
-
-
-	<properties>
+	
+	<repositories>
+     <repository>
+      <id>ossrh</id>
+      <name>ossrh</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+     </repository>
+    </repositories>
+    <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
