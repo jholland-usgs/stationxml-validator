@@ -23,7 +23,7 @@ public class Condition210test {
 	}
 
 	@Test
-	public void fail() throws Exception {
+	public void F1_210() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_210.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
