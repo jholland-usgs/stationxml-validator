@@ -46,28 +46,27 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 			}
 		}
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
-			StageUnit current = null;
 
+			StageUnit current = null;
 			for (ResponseStage stage : response.getStage()) {
+
 				StageUnit stageUnit = getUnits(stage);
 				if (stageUnit == null) {
-					// return Result.error("stage [ null units for stage " +
-					// stage.getNumber().intValue() + "]");
-				} else {
-
-					if (current != null && current.output != null && stageUnit.input != null) {
-						if (!current.output.getName().equals(stageUnit.input.getName())) {
-							// Stage[N]:InputUnits:Name must equal Stage[N-1]:OutputUnits:Name
-							return Result.error("stage [" + stage.getNumber().intValue() + "] "
-									+ stageUnit.input.getName() + " does not equal stage["
-									+ (stage.getNumber().intValue() - 1) + "] " + stageUnit.output.getName());
-						}
-					}
+					continue;
 				}
-				if (stageUnit != null) {
+				if (current == null) {
 					current = stageUnit;
+					continue;
 				}
+
+				if (!current.output.getName().equals(stageUnit.input.getName())) {
+					return Result.error("stage [" + stage.getNumber().intValue() + "] " + stageUnit.input.getName()
+							+ " does not equal stage[" + (stage.getNumber().intValue() - 1) + "] "
+							+ current.output.getName());
+				}
+				current = stageUnit;
 			}
+
 		}
 		return Result.success();
 	}
@@ -97,6 +96,9 @@ public class StageUnitCondition extends ChannelRestrictedCondition {
 			output = stage.getCoefficients().getOutputUnits();
 		}
 
+		if (input == null || output == null) {
+			return null;
+		}
 		return new StageUnit(input, output);
 	}
 

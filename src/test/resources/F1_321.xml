@@ -22,7 +22,7 @@
    <SelectedNumberChannels>1</SelectedNumberChannels>
    <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
     <Latitude>47.66157</Latitude>
-    <Longitude>0</Longitude>
+    <Longitude>190</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
     <Azimuth>360</Azimuth>
