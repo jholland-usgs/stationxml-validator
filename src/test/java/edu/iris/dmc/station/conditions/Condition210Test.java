@@ -1,8 +1,9 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class Condition210Test {
 			StartTimeCondition condition = new StartTimeCondition(true, "");
 
 			Message result = condition.evaluate(s);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
@@ -48,7 +49,7 @@ public class Condition210Test {
 			EpochRangeCondition condition = new EpochRangeCondition(true, "");
 
 			Message result = condition.evaluate(s);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

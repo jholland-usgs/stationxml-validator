@@ -34,7 +34,6 @@ public class Condition101Test {
 			Message result = condition.evaluate(n);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
-
 	}
 
 	@Test

@@ -29,7 +29,10 @@ public class MissingDecimationCondition extends ChannelRestrictedCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		throw new IllegalArgumentException("method not supported!");
+		if(channel==null) {
+			
+		}
+		return evaluate(channel,channel.getResponse());
 	}
 
 	@Override

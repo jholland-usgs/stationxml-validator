@@ -1,9 +1,5 @@
 package edu.iris.dmc.station.conditions;
 
-import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
-import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
-import edu.iris.dmc.station.restrictions.Restriction;
-
 import java.io.InputStream;
 
 import org.junit.Assert;
@@ -14,12 +10,11 @@ import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
-import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition402Test {
+public class Condition411Test {
 
 	private FDSNStationXML theDocument;
 
@@ -30,21 +25,16 @@ public class Condition402Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_402.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_411.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
-			Response r = c.getResponse();
-			System.out.println(c);
-			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
-
-			UnitCondition condition = new UnitCondition(true, "", restrictions);
+			FrequencyCondition condition = new FrequencyCondition(true, "");
 
 			Message result = condition.evaluate(c);
-			System.out.println(result);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
