@@ -14,7 +14,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition310Test {
+public class Condition310Test2 {
 
 	private FDSNStationXML theDocument;
 
@@ -25,7 +25,7 @@ public class Condition310Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_310.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_310.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);

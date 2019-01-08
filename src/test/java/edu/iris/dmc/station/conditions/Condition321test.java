@@ -14,7 +14,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition321test {
+public class Condition321Test {
 
 	private FDSNStationXML theDocument;
 

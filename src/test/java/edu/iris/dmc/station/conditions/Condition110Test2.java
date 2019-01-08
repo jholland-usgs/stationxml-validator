@@ -7,14 +7,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
-import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition310Test {
+public class Condition110Test2 {
 
 	private FDSNStationXML theDocument;
 
@@ -25,16 +24,14 @@ public class Condition310Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_310.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_110.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
-			Station s = n.getStations().get(0);
-			Channel c = s.getChannels().get(0);
-
+			//Station s = n.getStations().get(0);
 			StartTimeCondition condition = new StartTimeCondition(true, "");
 
-			Message result = condition.evaluate(c);
+			Message result = condition.evaluate(n);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
@@ -56,4 +53,3 @@ public class Condition310Test {
 
 	}
 }
-

@@ -19,7 +19,7 @@ import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
 import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 
-public class F2_410 {
+public class F2410 {
 
 	private FDSNStationXML theDocument;
 

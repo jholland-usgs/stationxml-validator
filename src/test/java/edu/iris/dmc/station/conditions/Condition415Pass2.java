@@ -1,5 +1,9 @@
 package edu.iris.dmc.station.conditions;
 
+import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
+import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
+import edu.iris.dmc.station.restrictions.Restriction;
+
 import java.io.InputStream;
 
 import org.junit.Assert;
@@ -14,7 +18,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition310Test {
+public class Condition415Pass2 {
 
 	private FDSNStationXML theDocument;
 
@@ -25,17 +29,20 @@ public class Condition310Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_310.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P2_415.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
+			
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 
-			StartTimeCondition condition = new StartTimeCondition(true, "");
-
+			PolynomialCondition condition = new PolynomialCondition(true, "", restrictions);
+               
 			Message result = condition.evaluate(c);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}
@@ -47,13 +54,12 @@ public class Condition310Test {
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
+			Channel c = s.getChannels().get(0);
+			EmptySensitivityCondition condition = new EmptySensitivityCondition(true, "");
 
-			EpochRangeCondition condition = new EpochRangeCondition(true, "");
-
-			Message result = condition.evaluate(s);
+			Message result = condition.evaluate(c);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}
 }
-
