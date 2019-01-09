@@ -6,7 +6,7 @@
 	<groupId>edu.iris.dmc</groupId>
 	<artifactId>station-xml-validator</artifactId>
 	<packaging>jar</packaging>
-	<version>1.5.9.4</version>
+	<version>1.5.9.5</version>
 	<name>FDSN StationXML Validator</name>
 
 	<properties>
@@ -130,5 +130,14 @@
 		</dependency>
 
 	</dependencies>
-
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
