@@ -75,14 +75,8 @@ public class TimeUtil {
 	}
 
 	public static int compare(XMLGregorianCalendar one, XMLGregorianCalendar two) {
-		if (one.toGregorianCalendar().before(two)) {
-			return -1;
-		}
+		int result = one.toGregorianCalendar().compareTo(two.toGregorianCalendar());
+		return result;
 
-		if (one.toGregorianCalendar().after(two)) {
-			return 1;
-		}
-
-		return 0;
 	}
 }

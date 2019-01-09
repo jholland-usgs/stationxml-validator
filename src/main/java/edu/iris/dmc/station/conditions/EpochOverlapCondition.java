@@ -128,6 +128,7 @@ public class EpochOverlapCondition extends AbstractCondition {
 			Tuple tuple1 = tuples.get(i - 1);
 			Tuple tuple2 = tuples.get(i);
 			if (tuple1.end == null || tuple2.start == null || TimeUtil.isAfter(tuple1.end, tuple2.start)) {
+				System.out.println(tuple1+"   "+tuple2+"   "+TimeUtil.isAfter(tuple1.end, tuple2.start));
 				overlappingDatePairs.add(new Tuple[] { tuple1, tuple2 });
 			}
 		}
@@ -151,6 +152,12 @@ public class EpochOverlapCondition extends AbstractCondition {
 
 		public int compareTo(Tuple other) {
 			return TimeUtil.compare(start, other.start);
+		}
+
+		@Override
+		public String toString() {
+			return "Tuple [code=" + code + ", location=" + location + ", start=" + start + ", end=" + end + ", index="
+					+ index + "]";
 		}
 
 	}
