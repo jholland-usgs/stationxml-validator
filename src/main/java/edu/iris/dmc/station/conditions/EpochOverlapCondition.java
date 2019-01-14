@@ -1,5 +1,6 @@
 package edu.iris.dmc.station.conditions;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -136,13 +137,13 @@ public class EpochOverlapCondition extends AbstractCondition {
 	}
 
 	private class Tuple implements Comparable<Tuple> {
-		public final XMLGregorianCalendar start;
-		private XMLGregorianCalendar end;
+		public final ZonedDateTime start;
+		private ZonedDateTime end;
 		public final int index;
 		public String code;
 		public String location;
 
-		public Tuple(String code, String location, XMLGregorianCalendar start, XMLGregorianCalendar end, int index) {
+		public Tuple(String code, String location, ZonedDateTime start, ZonedDateTime end, int index) {
 			this.code = code;
 			this.location = location;
 			this.start = start;

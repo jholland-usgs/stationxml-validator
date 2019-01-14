@@ -283,7 +283,7 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-
+System.out.println("------"+resultSet);
 		assertEquals(2, resultSet.size());
 
 		

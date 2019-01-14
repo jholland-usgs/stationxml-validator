@@ -3,6 +3,9 @@ package edu.iris.dmc.station;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -23,7 +26,7 @@ public class XmlUtil {
 		if (calendar == null) {
 			return null;
 		}
-		GregorianCalendar cal=calendar.toGregorianCalendar();
+		GregorianCalendar cal = calendar.toGregorianCalendar();
 		cal.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return cal.getTime();
 	}
@@ -51,17 +54,16 @@ public class XmlUtil {
 		return xmlCalendar;
 	}
 
-	public static String toText(XMLGregorianCalendar calendar) {
-		if (calendar == null) {
+	public static String toText(ZonedDateTime dateTime) {
+		if (dateTime == null) {
 			return null;
 		}
-		Date date =toDate(calendar);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		return format.format(date);
+
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss").withZone(ZoneId.of("UTC"));
+		return format.format(dateTime);
 
 	}
-	
+
 	public static String toText(Date date) {
 		if (date == null) {
 			return null;

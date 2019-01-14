@@ -62,20 +62,23 @@ public class TimeUtil {
 		return datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
 	}
 
-	public static boolean isAfter(XMLGregorianCalendar one, XMLGregorianCalendar two) {
+	public static boolean isAfter(ZonedDateTime one, ZonedDateTime two) {
 		if (one == null || two == null) {
 			return true;
 		}
-		boolean bool = one.toGregorianCalendar().getTime().after(two.toGregorianCalendar().getTime());
+		boolean bool = one.isAfter(two);
 		return bool;
 	}
 
-	public static boolean isBefore(XMLGregorianCalendar one, XMLGregorianCalendar two) {
-		return one.toGregorianCalendar().getTime().before(two.toGregorianCalendar().getTime());
+	public static boolean isBefore(ZonedDateTime one, ZonedDateTime two) {
+		return one.isBefore(two);
 	}
 
-	public static int compare(XMLGregorianCalendar one, XMLGregorianCalendar two) {
-		int result = one.toGregorianCalendar().compareTo(two.toGregorianCalendar());
+	public static int compare(ZonedDateTime one, ZonedDateTime two) {
+		if(two==null) {
+			return 1;
+		}
+		int result = one.compareTo(two);
 		return result;
 
 	}
