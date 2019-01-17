@@ -1,5 +1,6 @@
 package edu.iris.dmc;
 
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
@@ -63,6 +64,7 @@ public class TimeUtil {
 	}
 
 	public static boolean isAfter(ZonedDateTime one, ZonedDateTime two) {
+		System.out.println(one+"    "+two);
 		if (one == null || two == null) {
 			return true;
 		}
