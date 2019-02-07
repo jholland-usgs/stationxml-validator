@@ -20,7 +20,7 @@
    <CreationDate>2018-08-06T00:00:00</CreationDate>
    <TotalNumberChannels>1</TotalNumberChannels>
    <SelectedNumberChannels>1</SelectedNumberChannels>
-   <Channel code="BDO" endDate="2500-12-31T23:59:59" locationCode="30" restrictedStatus="open" startDate="2018-08-06T00:00:00">
+   <Channel code="BDE" endDate="2500-12-31T23:59:59" locationCode="30" restrictedStatus="open" startDate="2018-08-06T00:00:00">
     <Latitude>47.66157</Latitude>
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
