@@ -64,7 +64,6 @@ public class TimeUtil {
 	}
 
 	public static boolean isAfter(ZonedDateTime one, ZonedDateTime two) {
-		System.out.println(one+"    "+two);
 		if (one == null || two == null) {
 			return true;
 		}
