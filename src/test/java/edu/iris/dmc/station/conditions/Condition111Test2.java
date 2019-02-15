@@ -24,7 +24,7 @@ public class Condition111Test2 {
 	}
 
 	@Test
-	public void fail() throws Exception {
+	public void success() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_111.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 

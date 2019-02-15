@@ -42,17 +42,17 @@ public class ChannelOrientationCondition extends AbstractCondition {
 		boolean valid = true;
 		StringBuilder messageBuilder = new StringBuilder();
 		if ('E' == array[2]) {
-			if (azimuth > 95 && azimuth < 85) {
+			boolean azimuth_range = ((azimuth > 85 && azimuth < 95) || (azimuth > 265 && azimuth < 275));
+			if (! azimuth_range) {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
-
 			if (dip > 5 || dip < -5) {
 				valid = false;
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
 		} else if ('N' == array[2]) {
-			if (azimuth > 5 && azimuth < 355) {
+			if ((azimuth > 5 && azimuth < 355) || (azimuth > 175 && azimuth < 185)) {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
@@ -61,7 +61,7 @@ public class ChannelOrientationCondition extends AbstractCondition {
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
 		} else if ('Z' == array[2]) {
-			if (azimuth > 5 && azimuth < 355) {
+			if ((azimuth > 5 && azimuth < 355) || (azimuth > 175 && azimuth < 185)) {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}

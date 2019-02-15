@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
+import edu.iris.dmc.fdsn.station.model.Azimuth;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
@@ -31,16 +32,18 @@ public class Condition332Test2 {
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
-
+			
 			ChannelOrientationCondition condition = new ChannelOrientationCondition(true, "");
- 
+   
 			Message result = condition.evaluate(c); 
-			System.out.println(result);
+
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
 
+	/// Change values and verify that they work for the majority of the cases. 
+	
 	@Test
 	public void pass() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("pass.xml")) {

@@ -103,21 +103,27 @@ public class EpochOverlapCondition extends AbstractCondition {
 		}
 
 		if (!map.isEmpty()) {
-			Iterator<Entry<String, List<Tuple>>> it = map.entrySet().iterator();
-			while (it.hasNext()) {
-				Map.Entry<String, List<Tuple>> pair = (Map.Entry<String, List<Tuple>>) it.next();
-				List<Tuple> tuples = pair.getValue();
+			int mapsize = map.size();
+			int i2 = 1;
+			String description ="";
+            map.keySet();
+			for(String key : map.keySet()) {
+				List<Tuple> tuples = map.get(key);
 				List<Tuple[]> invalidRanges = checkRanges(tuples);
-				if (invalidRanges != null && !invalidRanges.isEmpty()) {
-					StringBuilder builder = new StringBuilder();
-					for (Tuple[] tuple : invalidRanges) {
-						builder.append("[(").append(tuple[0].code).append("|").append(XmlUtil.toText(tuple[0].start))
-								.append("|").append(XmlUtil.toText(tuple[0].end)).append(")(").append(tuple[1].code)
-								.append("|").append(XmlUtil.toText(tuple[1].start)).append("|")
-								.append(XmlUtil.toText(tuple[1].end)).append(")]");
-					}
-					return Result.error(builder.toString());
+				StringBuilder builder = new StringBuilder();
+				for (Tuple[] tuple : invalidRanges) {
+					builder.append("[(").append(tuple[0].code).append("|").append(XmlUtil.toText(tuple[0].start))
+							.append("|").append(XmlUtil.toText(tuple[0].end)).append(")(").append(tuple[1].code)
+							.append("|").append(XmlUtil.toText(tuple[1].start)).append("|")
+							.append(XmlUtil.toText(tuple[1].end)).append(")]");
 				}
+			    description = description + builder.toString();
+				
+				if (mapsize == i2 && invalidRanges != null && !invalidRanges.isEmpty()) {
+
+					return Result.error(description);
+				}
+				i2 ++;
 			}
 		}
 		return Result.success();
