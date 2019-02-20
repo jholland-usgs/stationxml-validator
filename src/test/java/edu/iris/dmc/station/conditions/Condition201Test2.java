@@ -33,7 +33,7 @@ public class Condition201Test2 {
 			CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,5}", "");
 
 			Message result = condition.evaluate(s);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}

@@ -35,7 +35,7 @@ public class Condition301Test2 {
 			CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,3}","");
 			Message result = condition.evaluate(c);
 			System.out.println(result.getDescription());
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
