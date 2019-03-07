@@ -29,7 +29,7 @@ public class Condition101Test {
 
 			Network n = theDocument.getNetwork().get(0);
 			//Station s = n.getStations().get(0);
-			CodeCondition condition = new CodeCondition(true, "X", "");
+			CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,2}", "");
 
 			Message result = condition.evaluate(n);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
