@@ -145,7 +145,6 @@ public class Application {
 		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
 		String source = null;
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
-
 			for (String uri : input) {
 				source = uri;
 				FDSNStationXML document = null;
@@ -196,46 +195,11 @@ public class Application {
 						context.addViolation(message);
 					}
 				});
-			}
-			Map<Integer, List<Message>> map = context.map();
-			if (map != null && !map.isEmpty()) {
-				SortedSet<Integer> keys = new TreeSet<>(map.keySet());
+				print(ps, context.map());
+				context.clear();
 
-				if (ps instanceof ReportPrintStream) {
-					StringBuffer buffer = new StringBuffer();
-					buffer.append("Summary:").append(System.lineSeparator());
-					buffer.append("=================================================================================")
-							.append(System.lineSeparator());
-
-					for (Integer key : keys) {
-						List<Message> list = map.get(key);
-						String description = list.get(0).getRule().getDescription();
-						buffer.append(String.format("%-5d|%-6d|%s", list.size(), key, description)).append("\n");
-					}
-					buffer.append("=================================================================================")
-							.append(System.lineSeparator());
-					ps.printHeader(buffer.toString());
-				} else {
-					ps.printHeader();
-				}
-
-				try {
-					for (Integer key : keys) {
-						List<Message> l = map.get(key);
-						for (Message m : l) {
-							ps.print(m);
-							ps.flush();
-						}
-					}
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else {
-				ps.printMessage("PASSED");
 			}
 
-			ps.printFooter();
 		} catch (Exception e) {
 			if (source != null) {
 				System.out.println(source);
@@ -243,6 +207,48 @@ public class Application {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void print(RuleResultPrintStream ps, Map<Integer, List<Message>> map) throws IOException {
+
+		if (map != null && !map.isEmpty()) {
+			SortedSet<Integer> keys = new TreeSet<>(map.keySet());
+
+			if (ps instanceof ReportPrintStream) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append("Summary:").append(System.lineSeparator());
+				buffer.append("=================================================================================")
+						.append(System.lineSeparator());
+
+				for (Integer key : keys) {
+					List<Message> list = map.get(key);
+					String description = list.get(0).getRule().getDescription();
+					buffer.append(String.format("%-5d|%-6d|%s", list.size(), key, description)).append("\n");
+				}
+				buffer.append("=================================================================================")
+						.append(System.lineSeparator());
+				ps.printHeader(buffer.toString());
+			} else {
+				ps.printHeader();
+			}
+
+			try {
+				for (Integer key : keys) {
+					List<Message> l = map.get(key);
+					for (Message m : l) {
+						ps.print(m);
+						ps.flush();
+					}
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			ps.printMessage("PASSED");
+		}
+
+		ps.printFooter();
 	}
 
 	public Volume load(File file) throws Exception {
