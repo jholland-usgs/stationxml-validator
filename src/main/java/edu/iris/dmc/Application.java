@@ -214,7 +214,7 @@ public class Application {
 		if (map != null && !map.isEmpty()) {
 			SortedSet<Integer> keys = new TreeSet<>(map.keySet());
 
-			if (ps instanceof ReportPrintStream) {
+			/*if (ps instanceof ReportPrintStream) {
 				StringBuffer buffer = new StringBuffer();
 				buffer.append("Summary:").append(System.lineSeparator());
 				buffer.append("=================================================================================")
@@ -230,7 +230,7 @@ public class Application {
 				ps.printHeader(buffer.toString());
 			} else {
 				ps.printHeader();
-			}
+			}*/
 
 			try {
 				for (Integer key : keys) {
