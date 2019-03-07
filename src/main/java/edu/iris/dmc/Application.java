@@ -13,9 +13,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -148,13 +145,14 @@ public class Application {
 		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
 		String source = null;
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
-			InputStream is = null;
+
 			for (String uri : input) {
 				source = uri;
 				FDSNStationXML document = null;
 				if (uri.startsWith("http://")) {
-					is = new URL(uri).openStream();
-					document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+					try (InputStream is = new URL(uri).openStream()) {
+						document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+					}
 				} else {
 					File file = new File(uri);
 					if (!file.exists()) {
@@ -172,12 +170,10 @@ public class Application {
 						run(context, list, format, outputStream);
 						continue;
 					}
-					is = new FileInputStream(new File(uri));
-					try {
-						if (uri.endsWith(".xml")) {
+					try (InputStream is = new FileInputStream(new File(uri))) {
+						if (uri.toLowerCase().endsWith(".xml")) {
 							document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
 						} else {
-
 							Volume volume = SeedUtils.load(new File(source));
 							document = SeedToXmlDocumentConverter.getInstance().convert(volume);
 						}
@@ -187,7 +183,7 @@ public class Application {
 						}
 					} catch (Exception e) {
 						if (source != null) {
-							System.out.println("location: "+source);
+							System.out.println("location: " + source);
 						}
 						e.printStackTrace();
 						throw e;
@@ -238,20 +234,13 @@ public class Application {
 			} else {
 				ps.printMessage("PASSED");
 			}
-			if (is != null) {
-				try {
-					is.close();
-				} catch (Exception e) {
-				}
-			}
+
 			ps.printFooter();
 		} catch (Exception e) {
 			if (source != null) {
 				System.out.println(source);
 			}
-			System.out.println("//////////" + source);
-			// e.printStackTrace();
-			System.out.println("//////////" + source);
+			e.printStackTrace();
 		}
 
 	}
