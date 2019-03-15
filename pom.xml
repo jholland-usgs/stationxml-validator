@@ -27,7 +27,7 @@
             </snapshots>
             <releases>
                 <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
+                <updatePolicy>always</updatePolicy>
             </releases>
 		</repository>
 	</repositories>
