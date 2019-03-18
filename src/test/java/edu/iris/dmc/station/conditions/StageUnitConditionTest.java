@@ -1,5 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.Assert.*;
+
 import java.io.InputStream;
 import java.util.List;
 
@@ -38,9 +40,18 @@ public class StageUnitConditionTest {
 
 			UnitCondition condition = new UnitCondition(true, "", restrictions);
 			Message result = condition.evaluate(bhz00);
-			
 
 		}
+	}
 
+	@Test
+	public void singleUnit() throws Exception {
+		UnitCondition condition = new UnitCondition(true, "", null);
+		Units u = new Units();
+		u.setName("COUNTS");
+		u.setDescription("Testing");
+		Message m = condition.evaluate(u);
+		assertNotNull(m);
+		assertTrue(m instanceof edu.iris.dmc.station.rules.Error);
 	}
 }

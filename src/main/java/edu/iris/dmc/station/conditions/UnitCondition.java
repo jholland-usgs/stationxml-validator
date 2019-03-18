@@ -138,4 +138,15 @@ public class UnitCondition extends ChannelRestrictedCondition {
 		}
 		return null;
 	}
+
+	public Message evaluate(Units units) {
+		boolean result = UnitTable.contains(units.getName());
+		if (!result) {
+			result = UnitTable.containsCaseInsensitive(units.getName());
+			if (!result) {
+				return new edu.iris.dmc.station.rules.Error("Invalid inputUnit " + units.getName());
+			}
+		}
+		return Result.success();
+	}
 }
