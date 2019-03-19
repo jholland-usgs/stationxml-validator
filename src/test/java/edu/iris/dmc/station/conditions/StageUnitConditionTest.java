@@ -48,7 +48,7 @@ public class StageUnitConditionTest {
 	public void singleUnit() throws Exception {
 		UnitCondition condition = new UnitCondition(true, "", null);
 		Units u = new Units();
-		u.setName("COUNTS");
+		u.setName("COUNTS1");
 		u.setDescription("Testing");
 		Message m = condition.evaluate(u);
 		assertNotNull(m);
