@@ -36,6 +36,9 @@ public class OrientationCondition extends AbstractCondition {
 
 		boolean valid = true;
 		StringBuilder messageBuilder = new StringBuilder();
+		if(array.length < 3) {
+			return Result.success();
+		}
 		if ('E' == array[2]) {
 			if (azimuth < 95 && azimuth > 85 || azimuth < 275 && azimuth > 265) {
 				
