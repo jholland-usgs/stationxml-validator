@@ -32,7 +32,7 @@ public class Condition301Test {
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
 
-			CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,3}","");
+			CodeCondition condition = new CodeCondition(true, "[A-Z0-9_\\*\\?]{3}","");
 			Message result = condition.evaluate(c);
 			System.out.println(result.getDescription());
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);

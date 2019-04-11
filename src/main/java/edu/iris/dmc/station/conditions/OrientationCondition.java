@@ -3,13 +3,16 @@ package edu.iris.dmc.station.conditions;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Result;
 
 public class OrientationCondition extends AbstractCondition {
 
-	public OrientationCondition(boolean required, String description) {
+	private Restriction[] restrictions;
+	public OrientationCondition(boolean required, String description,Restriction[] restrictions) {
 		super(required, description);
+		this.restrictions=restrictions;
 	}
 
 	@Override
@@ -26,6 +29,11 @@ public class OrientationCondition extends AbstractCondition {
 	public Message evaluate(Channel channel) {
 		assert (channel != null);
 
+		for(Restriction r:this.restrictions) {
+			if(r.qualifies(channel)) {
+				return Result.success();
+			}
+		}
 		if (channel.getCode() == null ||channel.getCode().trim().isEmpty()|| channel.getAzimuth() == null || channel.getDip() == null) {
 			return Result.success();
 		}

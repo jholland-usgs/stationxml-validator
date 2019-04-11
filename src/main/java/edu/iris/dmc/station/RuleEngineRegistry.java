@@ -121,8 +121,8 @@ public class RuleEngineRegistry {
 		add(301, new CodeCondition(true, codeRegex,
 				"Channel:Code must be assigned a string consisting of 3 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
-		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\ ]{0,2})?",
-				"Channel:locationCode must be unassigned or be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9."),
+		add(302, new LocationCodeCondition(true, "([A-Z0-9\\*\\ ]{0,2})?",
+				"Channel:locationCode must be unassigned or be assigned a string consisting of 0-2 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
 
 		add(303, new CalibrationUnitCondition(false, "Invalid Calibration unit is invalid"), Channel.class);
@@ -144,8 +144,8 @@ public class RuleEngineRegistry {
 
 		add(331, new DipCondition(true, "Dip must be assigned a value between -90 and 90.", -90, 90), Channel.class);
 		add(332, new OrientationCondition(true,
-				"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code."),
-				Channel.class);
+				"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code.",
+				new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() }), Channel.class);
 	}
 
 	private void defaultResponseRules(List<Integer> ignoreRules) {

@@ -10,6 +10,9 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
+import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
+import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Success;
 
@@ -22,9 +25,10 @@ public class OrientationConditionTest {
 
 		try (InputStream is = OrientationConditionTest.class.getClassLoader().getResourceAsStream("F1_332.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 			Network iu = theDocument.getNetwork().get(0);
 			Station anmo = iu.getStations().get(0);
-			OrientationCondition condition = new OrientationCondition(true, "");
+			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
@@ -36,9 +40,10 @@ public class OrientationConditionTest {
 
 		try (InputStream is = OrientationConditionTest.class.getClassLoader().getResourceAsStream("F2_332.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 			Network iu = theDocument.getNetwork().get(0);
 			Station anmo = iu.getStations().get(0);
-			OrientationCondition condition = new OrientationCondition(true, "");
+			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
@@ -50,9 +55,10 @@ public class OrientationConditionTest {
 
 		try (InputStream is = OrientationConditionTest.class.getClassLoader().getResourceAsStream("F3_332.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 			Network iu = theDocument.getNetwork().get(0);
 			Station anmo = iu.getStations().get(0);
-			OrientationCondition condition = new OrientationCondition(true, "");
+			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);

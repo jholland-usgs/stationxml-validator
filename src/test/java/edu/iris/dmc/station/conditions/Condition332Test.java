@@ -12,6 +12,9 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
+import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
+import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 
 public class Condition332Test {
@@ -27,16 +30,17 @@ public class Condition332Test {
 	public void fail() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_332.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
+			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
 
-			ChannelOrientationCondition condition = new ChannelOrientationCondition(true, "");
+			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
  
 			Message result = condition.evaluate(c); 
 			System.out.println(result);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
