@@ -12,13 +12,9 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
-import edu.iris.dmc.station.conditions.EpochRangeCondition;
-import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
-import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
-import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
 
-public class Condition332Pass4 {
+public class Condition301Test3 {
 
 	private FDSNStationXML theDocument;
 
@@ -29,19 +25,17 @@ public class Condition332Pass4 {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P4_332.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F3_301.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
-			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 
 			Network n = theDocument.getNetwork().get(0);
 			Station s = n.getStations().get(0);
 			Channel c = s.getChannels().get(0);
 
-			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
- 
-			Message result = condition.evaluate(c); 
-			System.out.println(result);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			CodeCondition condition = new CodeCondition(true, "[A-Z0-9_\\*\\?]{3}","");
+			Message result = condition.evaluate(c);
+			System.out.println(result.getDescription());
+			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}

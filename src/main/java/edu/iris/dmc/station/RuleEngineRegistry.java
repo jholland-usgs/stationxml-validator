@@ -75,7 +75,7 @@ public class RuleEngineRegistry {
 	}
 
 	private void defaultNetworkRules(List<Integer> ignoreRules) {
-		String codeRegex = "[A-Za-z0-9\\*\\?]{1,2}";
+		String codeRegex = "[A-Z0-9_\\*\\?]{1,2}";
 		add(101, new CodeCondition(true, codeRegex,
 				"Network:Code must be assigned a string consisting of 1-2 uppercase characters A-Z and or numeric characters 0-9."),
 				Network.class);
@@ -90,7 +90,7 @@ public class RuleEngineRegistry {
 	}
 
 	private void defaultStationRules(List<Integer> ignoreRules) {
-		String codeRegex = "[A-Za-z0-9\\*\\?]{1,5}";
+		String codeRegex = "[A-Z0-9_\\*\\?]{1,5}";
 		add(201, new CodeCondition(true, codeRegex,
 				"Station:Code must be assigned a string consisting of 1-5 uppercase characters A-Z and or numeric characters 0-9."),
 				Station.class);
@@ -116,13 +116,13 @@ public class RuleEngineRegistry {
 	}
 
 	private void defaultChannelRules(List<Integer> ignoreRules) {
-		String codeRegex = "[A-Za-z0-9\\*\\?]{1,3}";
+		String codeRegex = "[A-Z0-9_\\*\\?]{3}";
 		Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 		add(301, new CodeCondition(true, codeRegex,
-				"Channel:Code must be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9."),
+				"Channel:Code must be assigned a string consisting of 3 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
-		add(302, new LocationCodeCondition(true, "([A-Za-z0-9\\*\\ ]{0,2})?",
-				"Channel:locationCode must be unassigned or be assigned a string consisting of 1-3 uppercase characters A-Z and or numeric characters 0-9."),
+		add(302, new LocationCodeCondition(true, "([A-Z0-9\\*\\ ]{0,2})?",
+				"Channel:locationCode must be unassigned or be assigned a string consisting of 0-2 uppercase characters A-Z and or numeric characters 0-9."),
 				Channel.class);
 
 		add(303, new CalibrationUnitCondition(false, "Invalid Calibration unit is invalid"), Channel.class);
@@ -144,8 +144,8 @@ public class RuleEngineRegistry {
 
 		add(331, new DipCondition(true, "Dip must be assigned a value between -90 and 90.", -90, 90), Channel.class);
 		add(332, new OrientationCondition(true,
-				"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code."),
-				Channel.class);
+				"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code.",
+				new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() }), Channel.class);
 	}
 
 	private void defaultResponseRules(List<Integer> ignoreRules) {

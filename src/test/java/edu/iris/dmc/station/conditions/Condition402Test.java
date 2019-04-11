@@ -41,10 +41,9 @@ public class Condition402Test {
 			System.out.println(c);
 			Restriction[] restrictions = new Restriction[] { new ChannelCodeRestriction(), new ChannelTypeRestriction() };
 
-			UnitCondition condition = new UnitCondition(true, "", restrictions);
+			UnitCondition condition = new UnitCondition(true, "Stage[N]:InputUnits:Name and/or Stage[N]:OutputUnits:Name are not defined in Unit name overview for IRIS StationXML validator.", restrictions);
 
-			Message result = condition.evaluate(c);
-			System.out.println("//////"+result);
+			Message result = condition.evaluate(c);			
 			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.NestedMessage);
 		}
 
