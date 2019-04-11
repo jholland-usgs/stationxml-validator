@@ -18,6 +18,7 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
 import edu.iris.dmc.fdsn.station.model.Units;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.conditions.PolesZerosCondition;
 import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
 import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
 import edu.iris.dmc.station.restrictions.Restriction;

@@ -69,6 +69,7 @@ public class RuleContext {
 		}
 		if (message instanceof NestedMessage) {
 			for (Message m : ((NestedMessage) message).getNestedMessages()) {
+				m.setSource(message.getSource());
 				addViolation(m);
 			}
 			return;

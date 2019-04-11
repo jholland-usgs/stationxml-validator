@@ -11,6 +11,8 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.conditions.EpochRangeCondition;
+import edu.iris.dmc.station.conditions.StationElevationCondition;
 import edu.iris.dmc.station.rules.Message;
 
 public class Condition223Test {

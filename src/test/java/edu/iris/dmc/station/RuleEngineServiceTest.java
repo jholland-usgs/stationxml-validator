@@ -16,6 +16,7 @@ import org.junit.Test;
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
+import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.actions.DefaultAction;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.RuleContext;

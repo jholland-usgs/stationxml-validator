@@ -1,5 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
+import java.util.Objects;
+
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -24,9 +26,14 @@ public class OrientationCondition extends AbstractCondition {
 
 	@Override
 	public Message evaluate(Channel channel) {
-		assert (channel != null);
+		Objects.requireNonNull(channel, "channel cannot be null");
 
-		if (channel.getCode() == null ||channel.getCode().trim().isEmpty()|| channel.getAzimuth() == null || channel.getDip() == null) {
+		String code = channel.getCode();
+		if (code == null) {
+			return Result.success();
+		}
+		code = code.trim();
+		if (code.isEmpty() || code.length() < 3 || channel.getAzimuth() == null || channel.getDip() == null) {
 			return Result.success();
 		}
 		char[] array = channel.getCode().toCharArray();
@@ -38,8 +45,8 @@ public class OrientationCondition extends AbstractCondition {
 		StringBuilder messageBuilder = new StringBuilder();
 		if ('E' == array[2]) {
 			if (azimuth < 95 && azimuth > 85 || azimuth < 275 && azimuth > 265) {
-				
-			}else{
+
+			} else {
 				valid = false;
 				messageBuilder.append("azimuth: ").append(azimuth).append(" ");
 			}
@@ -49,7 +56,8 @@ public class OrientationCondition extends AbstractCondition {
 				messageBuilder.append("dip: ").append(dip).append(" ");
 			}
 		} else if ('N' == array[2]) {
-			if (azimuth <= 5 && azimuth >= 0 || azimuth >=355 && azimuth <= 360 || (azimuth <= 185 && azimuth >= 175)) {
+			if (azimuth <= 5 && azimuth >= 0 || azimuth >= 355 && azimuth <= 360
+					|| (azimuth <= 185 && azimuth >= 175)) {
 
 			} else {
 				valid = false;
@@ -77,7 +85,8 @@ public class OrientationCondition extends AbstractCondition {
 		if (valid) {
 			return Result.success();
 		}
-		return Result.warning("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
+		return Result
+				.warning("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 	}
 

@@ -6,34 +6,34 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import org.xml.sax.SAXException;
-
-import com.beust.jcommander.JCommander;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.seed.Blockette;
+import edu.iris.dmc.seed.SeedException;
 import edu.iris.dmc.seed.Volume;
 import edu.iris.dmc.seed.blockette.util.BlocketteItrator;
 import edu.iris.dmc.seed.builder.BlocketteBuilder;
 import edu.iris.dmc.seed.director.BlocketteDirector;
 import edu.iris.dmc.station.RuleEngineService;
-import edu.iris.dmc.station.actions.Action;
 import edu.iris.dmc.station.converter.SeedToXmlDocumentConverter;
 import edu.iris.dmc.station.io.CsvPrintStream;
 import edu.iris.dmc.station.io.HtmlPrintStream;
@@ -44,205 +44,137 @@ import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Rule;
 import edu.iris.dmc.station.rules.RuleContext;
 import edu.iris.dmc.station.rules.UnitTable;
-import edu.iris.dmc.station.util.SeedUtils;
 
 public class Application {
 	private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
 
-	private static Args args = new Args();
+	private static CommandLine commandLine;
 
 	/**
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] argv) throws Exception {
+	public static void main(String[] args) throws Exception {
+		try {
+			commandLine = CommandLine.parse(args);
+		} catch (CommandLineParseException e) {
+			System.err.println(e.getMessage());
+			System.exit(1);
+		}
 
-		JCommander.newBuilder().addObject(args).build().parse(argv);
-		if (args.version) {
-			System.out.println(Application.getVersion());
+		Logger rootLogger = LogManager.getLogManager().getLogger("");
+		rootLogger.setLevel(commandLine.getLogLevel());
+		for (Handler h : rootLogger.getHandlers()) {
+			h.setLevel(commandLine.getLogLevel());
+		}
+		LOGGER.info("STATION VALIDATOR");
+
+		if (commandLine.showVersion()) {
+			LOGGER.info(Application.getVersion());
 			System.exit(0);
-		} else if (args.help) {
+		} else if (commandLine.showHelp()) {
 			help();
 			System.exit(0);
-		} else if (args.printRules) {
+		} else if (commandLine.showRules()) {
 			printRules();
 			System.exit(0);
-		} else if (args.printUnits) {
+		} else if (commandLine.showUnits()) {
 			printUnits();
 			System.exit(0);
-		} else if (args.input == null) {
-			System.out.println("File is required!");
+		} else if (commandLine.file() == null) {
+			LOGGER.info("File is required!");
 			help();
 			System.exit(1);
 		}
 
-		Application app = new Application();
-		app.run();
+		try {
+			Application app = new Application();
+			app.run();
+		} catch (Exception e) {
+			LOGGER.log(Level.INFO, e.getMessage(), e);
+			System.exit(1);
+		}
 	}
 
 	public void run() throws Exception {
-		// final Level logLevel = args.debug ? Level.FINER : Level.INFO;
-		// Handler consoleHandler = new ConsoleHandler();
-		// LOGGER.setLevel(logLevel);
-		// LOGGER.addHandler(consoleHandler);
 
-		OutputStream out = System.out;
-
-		if (args.output != null) {
-			out = new FileOutputStream(new File(args.output));
-			// Handler fileHandler = new FileHandler(outputFile[1]);
-			// LOGGER.addHandler(fileHandler);
+		Path path = commandLine.file();
+		if (!path.toFile().exists()) {
+			throw new IOException(String.format("File %s does not exist.  File is required!", path.toString()));
 		}
-
-		List<String> input = new ArrayList<>();
-		// PrintStream stream = new PrintStream(out);
-		RuleContext rulesContext = RuleContext.of(args.ignoreWarnings);
-		int EXIT = 0;
-		if (args.ignoreRules != null) {
-			String[] array = args.ignoreRules.split(",");
-			for (String a : array) {
-				if ("".equals(a.trim())) {
-					continue;
-				}
-				try {
-					rulesContext.ignoreRule(Integer.valueOf(a));
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid value for --ignore-rules: " + a);
-					help();
-					System.exit(1);
-				}
+		List<Path> input = new ArrayList<>();
+		if (path.toFile().isDirectory()) {
+			try (Stream<Path> paths = Files.walk(path)) {
+				input = paths.filter(Files::isRegularFile).collect(Collectors.toList());
 			}
-		}
-		if (args.input.startsWith("http://")) {
-			input.add(args.input);
 		} else {
-			File file = new File(args.input);
-			if (!file.exists()) {
-				System.out.println("File does not exist.  File is required!");
-				help();
-				System.exit(1);
-			}
-
-			if (file.isDirectory()) {
-				for (File f : file.listFiles()) {
-					if (!f.getName().startsWith("."))
-						input.add(f.getAbsolutePath());
-				}
-			} else {
-				input.add(file.getAbsolutePath());
-			}
-		}
-		run(rulesContext, input, args.format, out);
-		if (out != null) {
-			out.close();
+			input.add(path);
 		}
 
-		System.exit(EXIT);
+		RuleContext rulesContext = RuleContext.of(commandLine.ignoreWarnings());
+		if (commandLine.ignoreRules() != null) {
+			for (int rule : commandLine.ignoreRules()) {
+				rulesContext.ignoreRule(rule);
+			}
+		}
+		File outputFile = null;
+		if (commandLine.output() != null) {
+			outputFile = commandLine.output().toFile();
+			if (!outputFile.exists()) {
+				throw new IOException(String.format("File %s is not found!", commandLine.output().toString()));
+			}
+		}
+		try (OutputStream outputStream = (outputFile != null) ? new FileOutputStream(outputFile) : System.out;) {
+			run(rulesContext, input, "csv", outputStream);
+		}
 	}
 
-	private void run(RuleContext context, List<String> input, String format, OutputStream outputStream) {
-
+	private void run(RuleContext context, List<Path> input, String format, OutputStream outputStream) throws Exception {
 		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
-		String source = null;
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
-			for (String uri : input) {
-				source = uri;
-				FDSNStationXML document = null;
-				if (uri.startsWith("http://")) {
-					try (InputStream is = new URL(uri).openStream()) {
-						document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
-					}
-				} else {
-					File file = new File(uri);
-					if (!file.exists()) {
-						System.err.println("File does not exist.  File is required!");
-						help();
-						System.exit(1);
-					}
-
-					if (file.isDirectory()) {
-						List<String> list = new ArrayList<>();
-						for (File f : file.listFiles()) {
-							if (!f.getName().startsWith("."))
-								list.add(f.getAbsolutePath());
-						}
-						run(context, list, format, outputStream);
-						continue;
-					}
-					try (InputStream is = new FileInputStream(new File(uri))) {
-						if (uri.toLowerCase().endsWith(".xml")) {
-							document = (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
-						} else {
-							Volume volume = SeedUtils.load(new File(source));
-							document = SeedToXmlDocumentConverter.getInstance().convert(volume);
-						}
-
-						if (document == null) {
-							continue;
-						}
-					} catch (Exception e) {
-						if (source != null) {
-							System.out.println("location: " + source);
-						}
-						e.printStackTrace();
-						throw e;
-					}
+			for (Path p : input) {
+				FDSNStationXML document = read(p);
+				if (document == null) {
+					continue;
 				}
-				ruleEngineService.executeAllRules(document, context, new Action() {
-					@Override
-					public void update(RuleContext context, Message message) {
-						message.setSource(uri);
-						context.addViolation(message);
-					}
+				ruleEngineService.executeAllRules(document, context, (RuleContext c, Message message) -> {
+					message.setSource(p.toString());
+					c.addViolation(message);
 				});
+
 				print(ps, context.map());
 				context.clear();
-
 			}
-
-		} catch (Exception e) {
-			if (source != null) {
-				System.out.println(source);
-			}
-			e.printStackTrace();
 		}
 
+	}
+
+	private FDSNStationXML read(Path path) throws Exception {
+		File file = path.toFile();
+		if (!file.exists()) {
+			LOGGER.severe("File does not exist.  File is required!");
+			throw new IOException(String.format("File %s does not exist.  File is required!", file.getAbsoluteFile()));
+		}
+		try (InputStream is = new FileInputStream(file)) {
+			if (file.getName().toLowerCase().endsWith(".xml")) {
+				return (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+			} else {
+				Volume volume = IrisUtil.readSeed(file);
+				return SeedToXmlDocumentConverter.getInstance().convert(volume);
+			}
+		}
 	}
 
 	private void print(RuleResultPrintStream ps, Map<Integer, List<Message>> map) throws IOException {
 
 		if (map != null && !map.isEmpty()) {
 			SortedSet<Integer> keys = new TreeSet<>(map.keySet());
-
-			/*if (ps instanceof ReportPrintStream) {
-				StringBuffer buffer = new StringBuffer();
-				buffer.append("Summary:").append(System.lineSeparator());
-				buffer.append("=================================================================================")
-						.append(System.lineSeparator());
-
-				for (Integer key : keys) {
-					List<Message> list = map.get(key);
-					String description = list.get(0).getRule().getDescription();
-					buffer.append(String.format("%-5d|%-6d|%s", list.size(), key, description)).append("\n");
+			for (Integer key : keys) {
+				List<Message> l = map.get(key);
+				for (Message m : l) {
+					ps.print(m);
+					ps.flush();
 				}
-				buffer.append("=================================================================================")
-						.append(System.lineSeparator());
-				ps.printHeader(buffer.toString());
-			} else {
-				ps.printHeader();
-			}*/
-
-			try {
-				for (Integer key : keys) {
-					List<Message> l = map.get(key);
-					for (Message m : l) {
-						ps.print(m);
-						ps.flush();
-					}
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		} else {
 			ps.printMessage("PASSED");
@@ -251,14 +183,13 @@ public class Application {
 		ps.printFooter();
 	}
 
-	public Volume load(File file) throws Exception {
+	public Volume load(File file) throws SeedException, IOException {
 		try (final FileInputStream inputStream = new FileInputStream(file)) {
 			return load(inputStream);
 		}
 	}
 
-	public Volume load(InputStream inputStream) throws Exception {
-
+	public Volume load(InputStream inputStream) throws SeedException, IOException {
 		BlocketteDirector director = new BlocketteDirector(new BlocketteBuilder());
 		BlocketteItrator iterator = director.process(inputStream);
 
@@ -287,16 +218,8 @@ public class Application {
 	private Unmarshaller theMarshaller() throws IOException {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
-			Unmarshaller u = jaxbContext.createUnmarshaller();
-			StreamSource stream = new StreamSource(
-					Application.class.getClassLoader().getResourceAsStream("fdsn-station-1.0.xsd"));
-			SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = sf.newSchema(stream);
-			// u.setSchema(schema);
-			// u.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper",
-			// new DefaultNamespacePrefixMapper());
-			return u;
-		} catch (JAXBException | SAXException e) {
+			return jaxbContext.createUnmarshaller();
+		} catch (JAXBException e) {
 			throw new IOException(e);
 		}
 
@@ -350,15 +273,12 @@ public class Application {
 		System.out.println("|" + version + "|");
 		System.out.println("================================================================");
 		System.out.println("Usage:");
-		System.out.println("java -jar stationxml-validator [OPTIONS] [FILE]");
+		System.out.println("java -jar stationxml-validator <FILE> [OPTIONS]");
 		System.out.println("OPTIONS");
-		System.out.println("   --[net|sta|cha|resp] default is resp ");
 		System.out.println("   --output      	: where to output result, default is System.out");
 		System.out.println("   --ignore-warnings: don't show warnings");
 		System.out.println("   --rules 			: print a list of validation rules");
 		System.out.println("   --units 			: print a list of units used to validate");
-		System.out.println("   --format 	    : csv|html|xml");
-		System.out.println("   --summary     	: print summary only report for errors if any");
 		System.out.println("   --debug       	:");
 		System.out.println("   --help        	: print this message");
 		System.out.println("===============================================================");

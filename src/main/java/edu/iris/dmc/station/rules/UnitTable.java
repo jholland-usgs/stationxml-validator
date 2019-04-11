@@ -3,11 +3,13 @@ package edu.iris.dmc.station.rules;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UnitTable {
 
-	public static List<String> units = new ArrayList<String>(Arrays.asList("meter", "meters", "m", "m/s", "m/s**2",
+	private UnitTable() {
+	}
+
+	public static final List<String> units = new ArrayList<String>(Arrays.asList("meter", "meters", "m", "m/s", "m/s**2",
 			"centimeter", "centimeters", "cm", "cm/s", "cm/s**2", "millimeter", "millimeters", "mm", "mm/s", "mm/s**2",
 			"mm/hour", "micrometer", "micrometers", "um", "um/s", "um/s**2", "nanometer", "nm", "nm/s", "nm/s**2",
 			"second", "seconds", "nanometers", "nanoradians", "bars", "s", "millisecond", "ms", "microsecond", "us",
@@ -23,13 +25,12 @@ public class UnitTable {
 			"UNKNOWN"));
 
 	public static boolean contains(String name) {
-		boolean bool = units.contains(name);
-		return bool;
+		return units.contains(name);
 	}
 
 	public static boolean containsCaseInsensitive(final String name) {
 		for (String s : units) {
-			if (s.toLowerCase().equals(name.toLowerCase())) {
+			if (s.equalsIgnoreCase(name)) {
 				return true;
 			}
 
