@@ -38,6 +38,9 @@ public class OrientationCondition extends AbstractCondition {
 		}
 		code = code.trim();
 		if (code.isEmpty() || code.length() < 3 || channel.getAzimuth() == null || channel.getDip() == null) {
+			return Result.success();
+		}
+		
 			for (Restriction r : this.restrictions) {
 				if (r.qualifies(channel)) {
 					return Result.success();
@@ -103,6 +106,5 @@ public class OrientationCondition extends AbstractCondition {
 					.warning("Invalid channel orientation: " + messageBuilder.toString() + " for " + channel.getCode());
 
 		}
-		return Result.success();
-	}
 }
+
