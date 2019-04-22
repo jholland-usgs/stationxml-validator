@@ -1,6 +1,13 @@
-## Overview
+## Description
 
 The IRIS StationXML Validator is a Java library and related command-line tool for validating [FDSN StationXML](http://www.fdsn.org/xml/station/) documents.  The purpose is ensure that the metadata is complete and formatted sufficiently for acceptance at the [IRIS DMC](http://ds.iris.edu/).
+
+## Documentation
+
+*[Validation tests](tests.md)
+*[Unit name overview for IRIS stationxml-validator](units.md)
+*[Rule restrictions](orientation.md)
+*[Channel:Code orthogonal orientation guidelines](orientation.md)
 
 ### Downloading releases
 
@@ -34,12 +41,12 @@ The Validator has options for formatting results. By default, the validator retu
 
 Refer to the usage message for more arguments. 
 
-
 ## Validation tests
 
 The validator performs a number of tests starting with validation of the StationXML schema followed by a number of other tests to ensure completeness sufficient for long-term archiving.  All tests with descriptions are listed on the wiki pages:
 
 [[Validation tests]]
+
 
 ## Convention for Units
 
