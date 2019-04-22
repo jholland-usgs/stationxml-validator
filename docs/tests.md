@@ -3,7 +3,7 @@ The following chart outlines the various code numbers and associated rules used 
 Also, included are the filenames for test cases that correspond to a specific rule. 
 
 | Rule ID | Rule Description          |Type| Restrictions | Test Case Fail | Test Case Pass |
-|:----:|-------------|:--:|:---:|:---:|:--:|
+|:----:|---------------|:---:|:----:|:----:|:---:|
 |      | **Network Level Validation**     |||||
 |      | **`Network Definition Errors`** |||||
 | 101  | Network:Code must be assigned a string consisting of 1-2 uppercase characters A-Z and or numeric characters 0-9. |Error||[F1_101](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/F1_101.xml)|[PASS](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/Validator_Pass.xml)|
