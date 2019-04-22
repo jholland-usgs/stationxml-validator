@@ -46,6 +46,16 @@ public class NestedMessage extends AbstractMessage {
 			message.setStation(station);
 		}
 	}
+	
+	@Override
+	public void setSource(String source) {
+		super.setSource(source);
+		for(Message message:nestedMessages){
+			source = message.getSource();
+			System.out.println(source);
+			message.setSource(source);
+		}
+	}
 
 	@Override
 	public void setChannel(Channel channel) {
