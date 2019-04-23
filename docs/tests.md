@@ -3,7 +3,7 @@ The following chart outlines the various code numbers and associated rules used 
 Also, included are the filenames for test cases that correspond to a specific rule. 
 
 | Rule ID | Rule Description          |Type| Restrictions | Test Case Fail | Test Case Pass |
-|:----:|---------------|:---:|:----:|:----:|:---:|
+|:------:|---------------|:----:|:------:|:------:|:----:|
 |      | **Network Level Validation**     |||||
 |      | **`Network Definition Errors`** |||||
 | 101  | Network:Code must be assigned a string consisting of 1-2 uppercase characters A-Z and or numeric characters 0-9. |Error||[F1_101](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/F1_101.xml)|[PASS](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/Validator_Pass.xml)|
@@ -69,4 +69,3 @@ Also, included are the filenames for test cases that correspond to a specific ru
 | 421  | Stage[Final]:Decimation:InputSampleRate divided by Stage[Final]:Decimation:Factor must equal Channel:SampleRate. [305]|Error|[C1](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#channel), [C2](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#channel), [R1](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#response)|[F1_421](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/F1_421.xml)|[PASS](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/Validator_Pass.xml)|
 | 422  | Stage[N]:Decimation:InputSampleRate must equal Stage[N-1]:Decimation:InputSampleRate divided by Stage[N-1]:Decimation:Factor. |Error|[C1](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#channel), [C2](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#channel), [R1](https://github.com/iris-edu/StationXML-Validator/wiki/Restrictions#response)|[F1_422](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/F1_422.xml)|[PASS](https://github.com/iris-edu/StationXML-Validator/blob/master/src/test/resources/Validator_Pass.xml)|
 ||||||
-
