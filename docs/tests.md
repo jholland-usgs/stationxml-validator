@@ -2,7 +2,7 @@
 The following chart outlines the various code numbers and associated rules used by the StationXML-Validator. Associated rules are denoted by [###] at the end of each rule description.
 Also, included are the filenames for test cases that correspond to a specific rule. 
 
-| Rule ID | Rule Description          |Type| Restrictions | Test Case Fail | Test Case Pass |
+| Rule ID  |  Rule Description          |Type |  Restrictions  |  Test Case Fail  | Test Case Pass |
 |:------:|---------------|:----:|:------:|:------:|:----:|
 |      | **Network Level Validation**     |||||
 |      | **`Network Definition Errors`** |||||
