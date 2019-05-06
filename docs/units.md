@@ -52,10 +52,10 @@ Below are the common unit names checked by the IRIS validator.  The values are b
     "percent","%",
     "count","counts",
     "number",
-    "unitless"
-    "unknown", "UNKNOWN"
+    "unitless",
+    "unknown"
 
-[As of 2019-04-02]
+[As of 2019-05-06]
 ## SEED rules
 
 From the SEED 2.4 (August 2012) Manual, Blockette 34, field 4 (unit name) description:
