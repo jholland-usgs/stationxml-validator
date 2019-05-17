@@ -21,10 +21,16 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+
+import org.xml.sax.SAXException;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.seed.Blockette;
@@ -61,7 +67,6 @@ public class Application {
 			System.err.println(e.getMessage());
 			System.exit(1);
 		}
-
 		Logger rootLogger = LogManager.getLogManager().getLogger("");
 		rootLogger.setLevel(commandLine.getLogLevel());
 		for (Handler h : rootLogger.getHandlers()) {
@@ -90,7 +95,7 @@ public class Application {
 		try {
 			Application app = new Application();
 			app.run();
-		} catch (Exception e) {
+		} catch (Exception e) {e.printStackTrace();
 			LOGGER.log(Level.INFO, e.getMessage(), e);
 			System.exit(1);
 		}
@@ -218,12 +223,31 @@ public class Application {
 	private Unmarshaller theMarshaller() throws IOException {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
-			return jaxbContext.createUnmarshaller();
-		} catch (JAXBException e) {
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			InputStream stream = Application.class.getResourceAsStream("station.1.1.xsd");
+			Schema stationSchema = sf.newSchema(new StreamSource(stream));
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			unmarshaller.setSchema(stationSchema);
+			return unmarshaller;
+		} catch (JAXBException | SAXException e) {
 			throw new IOException(e);
 		}
 
 	}
+	static boolean validateAgainstXSD(File xml){
+        try{
+
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = factory.newSchema(new StreamSource("station.1.1.xsd"));
+
+            Validator validator  = schema.newValidator();
+            validator.validate(new StreamSource(xml));
+            return true;
+        }catch(Exception exe){
+            exe.printStackTrace();
+        return false;
+        }
+    }
 
 	private static String getVersion() throws IOException {
 		Properties prop = new Properties();
@@ -251,7 +275,7 @@ public class Application {
 
 		RuleEngineService ruleEngineService = new RuleEngineService(null);
 		for (Rule rule : ruleEngineService.getRules()) {
-			System.out.printf("%-8s %s\n", rule.getId(), rule.getDescription());
+			System.out.printf("%-8s %s%n", rule.getId(), rule.getDescription());
 		}
 	}
 
