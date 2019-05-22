@@ -95,7 +95,8 @@ public class Application {
 		try {
 			Application app = new Application();
 			app.run();
-		} catch (Exception e) {e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.log(Level.INFO, e.getMessage(), e);
 			System.exit(1);
 		}
@@ -131,8 +132,6 @@ public class Application {
 		}
 		try (OutputStream outputStream = (outputFile != null) ? new FileOutputStream(outputFile) : System.out;) {
 			run(rulesContext, input, "csv", outputStream);
-		}catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -152,6 +151,8 @@ public class Application {
 				print(ps, context.map());
 				context.clear();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -236,20 +237,21 @@ public class Application {
 		}
 
 	}
-	static boolean validateAgainstXSD(File xml){
-        try{
 
-            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = factory.newSchema(new StreamSource("station.1.1.xsd"));
+	static boolean validateAgainstXSD(File xml) {
+		try {
 
-            Validator validator  = schema.newValidator();
-            validator.validate(new StreamSource(xml));
-            return true;
-        }catch(Exception exe){
-            exe.printStackTrace();
-        return false;
-        }
-    }
+			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = factory.newSchema(new StreamSource("station.1.1.xsd"));
+
+			Validator validator = schema.newValidator();
+			validator.validate(new StreamSource(xml));
+			return true;
+		} catch (Exception exe) {
+			exe.printStackTrace();
+			return false;
+		}
+	}
 
 	private static String getVersion() throws IOException {
 		Properties prop = new Properties();
