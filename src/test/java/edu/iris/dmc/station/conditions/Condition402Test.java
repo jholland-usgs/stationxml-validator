@@ -1,11 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
@@ -24,7 +24,7 @@ public class Condition402Test {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 	}
@@ -44,7 +44,7 @@ public class Condition402Test {
 			UnitCondition condition = new UnitCondition(true, "Stage[N]:InputUnits:Name and/or Stage[N]:OutputUnits:Name are not defined in Unit name overview for IRIS StationXML validator.", restrictions);
 
 			Message result = condition.evaluate(c);			
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.NestedMessage);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.NestedMessage);
 		}
 
 	}
@@ -60,7 +60,7 @@ public class Condition402Test {
 			EmptySensitivityCondition condition = new EmptySensitivityCondition(true, "");
 
 			Message result = condition.evaluate(c);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

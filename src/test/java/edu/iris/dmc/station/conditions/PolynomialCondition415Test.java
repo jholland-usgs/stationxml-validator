@@ -1,9 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -37,7 +39,7 @@ public class PolynomialCondition415Test {
 			Message result = condition.evaluate(bhz00, response);
 			System.out.println(result.getDescription());
 
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}
@@ -59,7 +61,7 @@ public class PolynomialCondition415Test {
 			Message result = condition.evaluate(bhz00, response);
 			System.out.println(result.getDescription());
 
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}

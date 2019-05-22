@@ -1,10 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -23,7 +24,7 @@ public class Condition414Test {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 	}
@@ -43,7 +44,7 @@ public class Condition414Test {
                
 			Message result = condition.evaluate(c);
 			
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
@@ -59,7 +60,7 @@ public class Condition414Test {
 			EmptySensitivityCondition condition = new EmptySensitivityCondition(true, "");
 
 			Message result = condition.evaluate(c);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

@@ -1,9 +1,10 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -38,7 +39,7 @@ public class StageGainNonZeroCondition413Test {
 
 			Response response = bhz00.getResponse();
 			Message result = condition.evaluate(bhz00, response);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}
 
 	}
@@ -59,7 +60,7 @@ public class StageGainNonZeroCondition413Test {
 			Response response = bhz00.getResponse();
 			Message result = condition.evaluate(bhz00, response);
 System.out.println(result.getDescription());
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}
@@ -78,7 +79,7 @@ System.out.println(result.getDescription());
 			StageGainNonZeroCondition condition = new StageGainNonZeroCondition(true, "", restrictions);
 			Response response = bhz00.getResponse();
 			Message result = condition.evaluate(bhz00, response);
-			Assert.assertTrue(result instanceof Success);
+			assertTrue(result instanceof Success);
 		}
 
 	}

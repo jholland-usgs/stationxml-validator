@@ -1,10 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -22,7 +23,7 @@ public class Condition332Pass4 {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 	}
@@ -41,7 +42,7 @@ public class Condition332Pass4 {
  
 			Message result = condition.evaluate(c); 
 			System.out.println(result);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}
@@ -57,7 +58,7 @@ public class Condition332Pass4 {
 			EpochRangeCondition condition = new EpochRangeCondition(true, "");
 
 			Message result = condition.evaluate(s);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

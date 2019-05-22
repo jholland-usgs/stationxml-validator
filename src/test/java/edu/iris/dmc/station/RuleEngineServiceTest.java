@@ -1,7 +1,9 @@
 package edu.iris.dmc.station;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +12,7 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
@@ -37,7 +38,6 @@ public class RuleEngineServiceTest {
 				ruleEngineService.executeNetworkRules(network, context, new DefaultAction());
 			}
 			List<Message> resultSet = context.list();
-			Assert.assertTrue("Expected result of rule execution to be true", resultSet.isEmpty());
 		}
 	}
 

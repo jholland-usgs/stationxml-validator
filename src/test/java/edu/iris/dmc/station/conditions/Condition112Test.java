@@ -1,11 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
@@ -19,12 +19,12 @@ public class Condition112Test {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fail() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_112.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);

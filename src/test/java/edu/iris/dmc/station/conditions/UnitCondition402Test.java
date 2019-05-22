@@ -1,11 +1,13 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -27,7 +29,7 @@ public class UnitCondition402Test {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("test.xml")) {
@@ -45,11 +47,11 @@ public class UnitCondition402Test {
 		StageUnitCondition condition = new StageUnitCondition(true, "",restrictions);
 		Response response = bhz00.getResponse();
 		Message result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof Success);
+		assertTrue(result instanceof Success);
 
 		List<ResponseStage> stages = response.getStage();
 		ResponseStage stage = stages.get(1);
-		Assert.assertEquals(2, stage.getNumber().intValue());
+		assertEquals(2, stage.getNumber().intValue());
 		Coefficients coefficients = stage.getCoefficients();
 		Units originalUnits = coefficients.getOutputUnits();
 		Units units = new Units();
@@ -58,12 +60,11 @@ public class UnitCondition402Test {
 		coefficients.setOutputUnits(units);
 
 		result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
-
+		assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		coefficients.setOutputUnits(originalUnits);
 
 		result = condition.evaluate(bhz00);
-		Assert.assertTrue(result instanceof Success);
+		assertTrue(result instanceof Success);
 
 	}
 }

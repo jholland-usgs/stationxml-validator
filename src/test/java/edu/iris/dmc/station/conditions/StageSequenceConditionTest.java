@@ -1,10 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -23,7 +24,7 @@ public class StageSequenceConditionTest {
 
 	private FDSNStationXML theDocument;
 
-	@Before
+	@BeforeEach
 	public void init() throws Exception {
 
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("stage_sequence_test.xml")) {
@@ -41,7 +42,7 @@ public class StageSequenceConditionTest {
 
 		Message result = condition.evaluate(bhz00,bhz00.getResponse());
 		System.out.println(result);
-		Assert.assertTrue(result instanceof Success);
+		assertTrue(result instanceof Success);
 		
 	}
 }

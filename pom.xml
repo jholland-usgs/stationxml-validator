@@ -12,7 +12,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
-
 		<junit.jupiter.version>5.3.2</junit.jupiter.version>
 		<junit.vintage.version>5.3.2</junit.vintage.version>
 	</properties>
@@ -85,6 +84,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+			</plugin>
 		</plugins>
 
 	</build>
@@ -93,7 +97,6 @@
 			<groupId>edu.iris.dmc</groupId>
 			<artifactId>stationxml-seed-converter</artifactId>
 			<version>2.0.5-SNAPSHOT</version>
-
 		</dependency>
 
 
@@ -119,6 +122,21 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.4.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>1.4.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-api -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite-api</artifactId>
+			<version>1.4.2</version>
 			<scope>test</scope>
 		</dependency>
 

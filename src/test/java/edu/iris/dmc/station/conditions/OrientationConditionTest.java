@@ -1,9 +1,11 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -31,7 +33,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
@@ -46,7 +48,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}
@@ -61,7 +63,7 @@ public class OrientationConditionTest {
 			OrientationCondition condition = new OrientationCondition(true, "", restrictions);
 			Channel channel = anmo.getChannels().get(0);
 			Message result = condition.evaluate(channel);
-			Assert.assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Warning);
 		}
 
 	}

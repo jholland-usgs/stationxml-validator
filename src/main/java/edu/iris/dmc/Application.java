@@ -131,6 +131,8 @@ public class Application {
 		}
 		try (OutputStream outputStream = (outputFile != null) ? new FileOutputStream(outputFile) : System.out;) {
 			run(rulesContext, input, "csv", outputStream);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
