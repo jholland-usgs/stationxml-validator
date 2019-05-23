@@ -1,6 +1,5 @@
 package edu.iris.dmc.station;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +12,7 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
@@ -55,7 +55,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(101, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule110() throws Exception {
 
@@ -70,7 +70,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(110, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule111() throws Exception {
 
@@ -99,7 +99,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		System.out.println(message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule201() throws Exception {
 
@@ -115,7 +115,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(201, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule210() throws Exception {
 
@@ -161,7 +161,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(212, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule220() throws Exception {
 
@@ -176,7 +176,7 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(220, message.getRule().getId());
 	}
-	
+
 	@Test
 	public void rule221() throws Exception {
 
@@ -191,7 +191,6 @@ public class RuleEngineServiceTest {
 		Message message = m.get(0);
 		assertEquals(221, message.getRule().getId());
 	}
-	
 
 	@Test
 	public void rule222() throws Exception {
@@ -284,13 +283,10 @@ public class RuleEngineServiceTest {
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-System.out.println("------"+resultSet);
+		System.out.println("------" + resultSet);
 		assertEquals(2, resultSet.size());
 
-		
-
 		assertEquals(2, resultSet.size());
-
 
 		assertNotNull(resultSet.get(0));
 
@@ -347,7 +343,7 @@ System.out.println("------"+resultSet);
 		assertEquals(413, m.getRule().getId());
 
 		list = context.getMessages(413);
-			
+
 		assertNotNull(list);
 		m = list.get(0);
 		assertEquals(413, m.getRule().getId());
@@ -363,9 +359,9 @@ System.out.println("------"+resultSet);
 		ruleEngineService.executeAllRules(theDocument, context, new DefaultAction());
 
 		List<Message> resultSet = context.list();
-		//for (Message m : resultSet) {
-			// System.out.println("414: "+m);
-		//}
+		// for (Message m : resultSet) {
+		// System.out.println("414: "+m);
+		// }
 		assertEquals(1, resultSet.size());
 
 		List<Message> list = context.getMessages(414);
@@ -414,9 +410,11 @@ System.out.println("------"+resultSet);
 
 	}
 
-	private FDSNStationXML unmarshal(String file) throws JAXBException, IOException {
+	private FDSNStationXML unmarshal(String file) throws IOException {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream(file)) {
 			return DocumentMarshaller.unmarshal(is);
+		} catch (SAXException | JAXBException e) {
+			throw new IOException(e);
 		}
 	}
 

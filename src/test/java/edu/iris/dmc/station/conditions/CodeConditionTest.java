@@ -31,7 +31,6 @@ public class CodeConditionTest {
 		Network iu = theDocument.getNetwork().get(0);
 		CodeCondition condition = new CodeCondition(true, "[A-Za-z0-9\\*\\?]{1,2}", "");
 		Message result = condition.evaluate(iu);
-		System.out.println(result.getDescription());
 		assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 
 		iu.setCode("IIIIII");

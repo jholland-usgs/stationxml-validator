@@ -31,7 +31,7 @@ public class Condition404Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_404.xml")) {
+		try (InputStream is = Condition404Test.class.getClassLoader().getResourceAsStream("F1_404.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);

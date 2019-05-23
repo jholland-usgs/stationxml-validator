@@ -165,7 +165,7 @@ public class Application {
 		}
 		try (InputStream is = new FileInputStream(file)) {
 			if (file.getName().toLowerCase().endsWith(".xml")) {
-				return (FDSNStationXML) theMarshaller().unmarshal(new StreamSource(is));
+				return (FDSNStationXML) DocumentMarshaller.unmarshal(is);
 			} else {
 				Volume volume = IrisUtil.readSeed(file);
 				return SeedToXmlDocumentConverter.getInstance().convert(volume);
@@ -221,21 +221,6 @@ public class Application {
 		} else {
 			throw new IOException("Invalid format [" + format + "] requested");
 		}
-	}
-
-	private Unmarshaller theMarshaller() throws IOException {
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
-			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			InputStream stream = Application.class.getResourceAsStream("station.1.1.xsd");
-			Schema stationSchema = sf.newSchema(new StreamSource(stream));
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			unmarshaller.setSchema(stationSchema);
-			return unmarshaller;
-		} catch (JAXBException | SAXException e) {
-			throw new IOException(e);
-		}
-
 	}
 
 	static boolean validateAgainstXSD(File xml) {
