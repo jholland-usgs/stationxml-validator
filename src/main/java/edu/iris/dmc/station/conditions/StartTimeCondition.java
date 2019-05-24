@@ -38,7 +38,7 @@ public class StartTimeCondition extends AbstractCondition {
 		}
 
 		if (node.getEndDate() != null) {
-			if (TimeUtil.isAfter(node.getStartDate(), node.getEndDate())) {
+			if(!TimeUtil.isBefore(node.getStartDate(), node.getEndDate())) {
 				return Result
 						.error("startDate " + node.getStartDate() + " must occur before endDate " + node.getEndDate());
 			}

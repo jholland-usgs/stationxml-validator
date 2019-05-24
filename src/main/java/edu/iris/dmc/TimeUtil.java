@@ -67,8 +67,8 @@ public class TimeUtil {
 		if (one == null || two == null) {
 			return true;
 		}
-		boolean bool = one.isAfter(two);
-		return bool;
+
+		return one.isAfter(two);
 	}
 
 	public static boolean isBefore(ZonedDateTime one, ZonedDateTime two) {
