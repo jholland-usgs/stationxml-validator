@@ -6,7 +6,7 @@
  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.33</Module>
  <ModuleURI>http://service.iris.edu/fdsnws/station/1/query?net=XX&amp;sta=VPASS&amp;cha=BDF&amp;starttime=2018-08-06T00:00:01&amp;level=response&amp;format=xml&amp;includecomments=true&amp;nodata=404</ModuleURI>
  <Created>2018-08-06T20:17:16</Created>
- <Network code="XX" startDate="" endDate="2500-12-31T23:59:59" restrictedStatus="open">
+ <Network code="XX" startDate="2500-12-31T23:59:59" endDate="2500-12-31T23:59:59" restrictedStatus="open">
   <Description>[IRIS DMC] Station XML Validator Passing Test File</Description>
   <TotalNumberStations>1</TotalNumberStations>
   <SelectedNumberStations>1</SelectedNumberStations>
@@ -25,7 +25,7 @@
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
-    <Azimuth>360</Azimuth>
+    <Azimuth>359</Azimuth>
     <Dip>0</Dip>
     <Type>CONTINUOUS</Type>
     <Type>GEOPHYSICAL</Type>

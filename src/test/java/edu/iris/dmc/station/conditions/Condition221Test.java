@@ -26,8 +26,8 @@ public class Condition221Test {
 	}
 
 	@Test
-	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_221.xml")) {
+	public void zeroLongitude() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_221.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
@@ -35,7 +35,7 @@ public class Condition221Test {
 			LongitudeCondition condition = new LongitudeCondition(true, "");
 
 			Message result = condition.evaluate(s);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

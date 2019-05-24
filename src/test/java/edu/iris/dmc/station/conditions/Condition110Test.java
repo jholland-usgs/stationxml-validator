@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 
+import javax.xml.bind.UnmarshalException;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
+import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -36,8 +40,7 @@ public class Condition110Test {
 
 			Message result = condition.evaluate(n);
 			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
-		}
-
+       }
 	}
 
 	@Test

@@ -25,7 +25,7 @@
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
-    <Azimuth>360</Azimuth>
+    <Azimuth>359</Azimuth>
     <Dip>0</Dip>
     <Type>CONTINUOUS</Type>
     <Type>GEOPHYSICAL</Type>
@@ -112,7 +112,11 @@
         <Phase minusError="0.0" plusError="0.0">-11.797</Phase>
        </ResponseListElement>
       </ResponseList>
-     </Stage>    
+      <StageGain>
+        <Value>1</Value>
+        <Frequency>1.0</Frequency>
+      </StageGain>
+    </Stage>    
     </Response>
    </Channel>
   </Station>

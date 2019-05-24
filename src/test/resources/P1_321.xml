@@ -12,7 +12,7 @@
   <SelectedNumberStations>1</SelectedNumberStations>
   <Station code="TPASS" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
    <Latitude>47.66157</Latitude>
-   <Longitude>-122.31332</Longitude>
+   <Longitude>-0.01</Longitude>
    <Elevation>225.879999</Elevation>
    <Site>
     <Name>Synthetic Test File, IRIS DMC, USA, 218 2018, Tim Ronan</Name>
@@ -22,7 +22,7 @@
    <SelectedNumberChannels>1</SelectedNumberChannels>
    <Channel code="BDF" endDate="2500-12-31T23:59:59" locationCode="00" restrictedStatus="open" startDate="2018-08-06T00:00:00">
     <Latitude>47.66157</Latitude>
-    <Longitude>-122.31332</Longitude>
+    <Longitude>-180</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
     <Azimuth>359</Azimuth>
@@ -53,28 +53,49 @@
      </InstrumentSensitivity>
      <Stage number="1">
       <PolesZeros>
-	   <InputUnits>
-        <Name>M/M</Name>
-        <Description>STRAIN</Description>
+       <InputUnits>
+        <Name>PA</Name>
+        <Description>No Abbreviation Referenced</Description>
        </InputUnits>
        <OutputUnits>
         <Name>V</Name>
-        <Description>DIGITAL COUNTS</Description>
+        <Description>Volts</Description>
        </OutputUnits>
-       <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
-       <NormalizationFactor>1.0</NormalizationFactor>
-       <NormalizationFrequency>0</NormalizationFrequency>
+       <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+       <NormalizationFactor>314.1</NormalizationFactor>
+       <NormalizationFrequency>1.00000</NormalizationFrequency>
+       <Zero number="0">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Zero number="1">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Zero number="2">
+        <Real minusError="0.00000" plusError="0.00000">-0.170000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Zero>
+       <Pole number="0">
+        <Real minusError="0.00000" plusError="0.00000">0.00000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
+       <Pole number="1">
+        <Real minusError="0.00000" plusError="0.00000">-314.000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
+       <Pole number="2">
+        <Real minusError="0.00000" plusError="0.00000">-0.188000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
+       <Pole number="3">
+        <Real minusError="0.00000" plusError="0.00000">-0.0440000</Real>
+        <Imaginary minusError="0.00000" plusError="0.00000">0.00000</Imaginary>
+       </Pole>
       </PolesZeros>
-      <Decimation>
-       <InputSampleRate>512000.0</InputSampleRate>
-       <Factor>1</Factor>
-       <Offset>0</Offset>
-       <Delay>0.0</Delay>
-       <Correction>0.0</Correction>
-      </Decimation>      
       <StageGain>
-       <Value>1</Value>
-       <Frequency>0.0</Frequency>
+       <Value>0.4</Value>
+       <Frequency>1.0</Frequency>
       </StageGain>
      </Stage>
      <Stage number="2">

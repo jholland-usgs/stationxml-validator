@@ -12,7 +12,7 @@
   <SelectedNumberStations>1</SelectedNumberStations>
   <Station code="TPASS" startDate="2018-08-06T00:00:00" endDate="2500-12-31T23:59:59" restrictedStatus="open" iris:alternateNetworkCodes="_FDSN,.UNRESTRICTED">
    <Latitude>47.66157</Latitude>
-   <Longitude>180.001</Longitude>
+   <Longitude>0</Longitude>
    <Elevation>225.879999</Elevation>
    <Site>
     <Name>Synthetic Test File, IRIS DMC, USA, 218 2018, Tim Ronan</Name>
@@ -25,7 +25,7 @@
     <Longitude>179.9999</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
-    <Azimuth>360</Azimuth>
+    <Azimuth>359</Azimuth>
     <Dip>0</Dip>
     <Type>CONTINUOUS</Type>
     <Type>GEOPHYSICAL</Type>

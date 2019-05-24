@@ -59,7 +59,6 @@ public class PolynomialCondition415Test {
 
 			Response response = bhz00.getResponse();
 			Message result = condition.evaluate(bhz00, response);
-			System.out.println(result.getDescription());
 
 			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
 		}

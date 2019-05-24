@@ -28,7 +28,7 @@ public class Condition331Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_331.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_331.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
@@ -38,7 +38,7 @@ public class Condition331Test {
 			DipCondition condition = new DipCondition(true, "", -90, 90);
 
 			Message result = condition.evaluate(c);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

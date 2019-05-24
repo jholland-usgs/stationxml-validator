@@ -27,7 +27,7 @@ public class Condition220Test {
 
 	@Test
 	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_220.xml")) {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_220.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
@@ -35,7 +35,7 @@ public class Condition220Test {
 			LatitudeCondition condition = new LatitudeCondition(true, "");
 
 			Message result = condition.evaluate(s);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

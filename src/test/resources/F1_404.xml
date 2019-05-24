@@ -25,7 +25,7 @@
     <Longitude>-122.31332</Longitude>
     <Elevation>225.879999</Elevation>
     <Depth>0</Depth>
-    <Azimuth>360</Azimuth>
+    <Azimuth>359</Azimuth>
     <Dip>0</Dip>
     <Type>CONTINUOUS</Type>
     <Type>GEOPHYSICAL</Type>
@@ -117,6 +117,10 @@
        <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
        <Numerator minusError="0.00000" plusError="0.00000">1.00000</Numerator>
       </Coefficients>
+      <StageGain>
+       <Value>1.0</Value>
+       <Frequency>1.0</Frequency>
+      </StageGain>
      </Stage>
      <Stage number="4">
       <Coefficients>

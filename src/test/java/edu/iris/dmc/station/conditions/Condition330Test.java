@@ -27,8 +27,8 @@ public class Condition330Test {
 	}
 
 	@Test
-	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_330.xml")) {
+	public void zeroAzimuth() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_330.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
 			Network n = theDocument.getNetwork().get(0);
@@ -38,7 +38,7 @@ public class Condition330Test {
 			AzimuthCondition condition = new AzimuthCondition(true, "", 0, 360);
 
 			Message result = condition.evaluate(c);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
 		}
 
 	}

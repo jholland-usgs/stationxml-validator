@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
@@ -63,8 +65,9 @@ public class RuleEngineServiceTest {
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(110, message.getRule().getId());
-	}
+   }
 
+		
 	@Test
 	public void rule111() throws Exception {
 
@@ -152,7 +155,7 @@ public class RuleEngineServiceTest {
 	@Test
 	public void rule220() throws Exception {
 
-		theDocument = unmarshal("F1_220.xml");
+		theDocument = unmarshal("P1_220.xml");
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 
@@ -166,7 +169,7 @@ public class RuleEngineServiceTest {
 	@Test
 	public void rule221() throws Exception {
 
-		theDocument = unmarshal("F1_221.xml");
+		theDocument = unmarshal("P1_221.xml");
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 
@@ -230,6 +233,7 @@ public class RuleEngineServiceTest {
 		assertEquals(402, message.getRule().getId());
 	}
 
+
 	@Test
 	public void rule405() throws Exception {
 
@@ -241,8 +245,8 @@ public class RuleEngineServiceTest {
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(405, message.getRule().getId());
-	}
-
+   }
+	
 	@Test
 	public void rule410() throws Exception {
 
@@ -262,9 +266,9 @@ public class RuleEngineServiceTest {
 
 		s = m.get(410);
 		assertNotNull(s);
-		assertEquals(2, s.size());
+		assertEquals(1, s.size());
 
-	}
+  }
 
 	@Test
 	public void rule411() throws Exception {
@@ -272,7 +276,7 @@ public class RuleEngineServiceTest {
 		theDocument = unmarshal("F1_411.xml");
 
 		Map<Integer, Set<Message>> resultSet = ruleEngineService.executeAllRules(theDocument);
-		assertEquals(0, resultSet.size());
+		assertEquals(36, resultSet.size());
 
 	}
 
@@ -306,10 +310,9 @@ public class RuleEngineServiceTest {
 
 	}
 
-	@Test
-	public void rule414() throws Exception {
-
-		theDocument = unmarshal("F1_414.xml");
+    @Test
+    public void rule414() throws Exception {
+        theDocument = unmarshal("F1_414.xml");
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 
@@ -346,6 +349,14 @@ public class RuleEngineServiceTest {
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(422, message.getRule().getId());
+
+	}
+	
+	@Test
+	public void xmlxsd_ExpectedUnmarshalException() throws Exception {
+		Assertions.assertThrows(IOException.class, () ->{
+		theDocument = unmarshal("xmlVSxsd.xml");
+		});
 
 	}
 

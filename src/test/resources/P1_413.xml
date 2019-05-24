@@ -46,6 +46,8 @@
     </Sensor>
     <Response>
      <InstrumentSensitivity>
+      <Value>1</Value>
+      <Frequency>1E0</Frequency>   
       <InputUnits>
        <Name>PA</Name>
        <Description>Pressure in Pascals</Description>
