@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Handler;
@@ -22,15 +23,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
-import org.xml.sax.SAXException;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.seed.Blockette;
@@ -48,7 +44,6 @@ import edu.iris.dmc.station.io.RuleResultPrintStream;
 import edu.iris.dmc.station.io.XmlPrintStream;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Rule;
-import edu.iris.dmc.station.rules.RuleContext;
 import edu.iris.dmc.station.rules.UnitTable;
 
 public class Application {
@@ -117,12 +112,6 @@ public class Application {
 			input.add(path);
 		}
 
-		RuleContext rulesContext = RuleContext.of(commandLine.ignoreWarnings());
-		if (commandLine.ignoreRules() != null) {
-			for (int rule : commandLine.ignoreRules()) {
-				rulesContext.ignoreRule(rule);
-			}
-		}
 		File outputFile = null;
 		if (commandLine.output() != null) {
 			outputFile = commandLine.output().toFile();
@@ -131,25 +120,20 @@ public class Application {
 			}
 		}
 		try (OutputStream outputStream = (outputFile != null) ? new FileOutputStream(outputFile) : System.out;) {
-			run(rulesContext, input, "csv", outputStream);
+			run(input, "csv", outputStream, commandLine.ignoreRules(), commandLine.ignoreWarnings());
 		}
 	}
 
-	private void run(RuleContext context, List<Path> input, String format, OutputStream outputStream) throws Exception {
-		RuleEngineService ruleEngineService = new RuleEngineService(context.getIgnoreRules());
+	private void run(List<Path> input, String format, OutputStream outputStream, int[] ignoreRules,
+			boolean ignoreWarnings) throws Exception {
+		RuleEngineService ruleEngineService = new RuleEngineService(ignoreWarnings, ignoreRules);
 		try (final RuleResultPrintStream ps = getOutputStream(format, outputStream)) {
 			for (Path p : input) {
 				FDSNStationXML document = read(p);
 				if (document == null) {
 					continue;
 				}
-				ruleEngineService.executeAllRules(document, context, (RuleContext c, Message message) -> {
-					message.setSource(p.toString());
-					c.addViolation(message);
-				});
-
-				print(ps, context.map());
-				context.clear();
+				print(ps, ruleEngineService.executeAllRules(document));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,7 +149,7 @@ public class Application {
 		}
 		try (InputStream is = new FileInputStream(file)) {
 			if (file.getName().toLowerCase().endsWith(".xml")) {
-				return (FDSNStationXML) DocumentMarshaller.unmarshal(is);
+				return DocumentMarshaller.unmarshal(is);
 			} else {
 				Volume volume = IrisUtil.readSeed(file);
 				return SeedToXmlDocumentConverter.getInstance().convert(volume);
@@ -173,12 +157,12 @@ public class Application {
 		}
 	}
 
-	private void print(RuleResultPrintStream ps, Map<Integer, List<Message>> map) throws IOException {
+	private void print(RuleResultPrintStream ps, Map<Integer, Set<Message>> map) throws IOException {
 
 		if (map != null && !map.isEmpty()) {
 			SortedSet<Integer> keys = new TreeSet<>(map.keySet());
 			for (Integer key : keys) {
-				List<Message> l = map.get(key);
+				Set<Message> l = map.get(key);
 				for (Message m : l) {
 					ps.print(m);
 					ps.flush();
@@ -262,7 +246,7 @@ public class Application {
 
 	private static void printRules() {
 
-		RuleEngineService ruleEngineService = new RuleEngineService(null);
+		RuleEngineService ruleEngineService = new RuleEngineService(false, null);
 		for (Rule rule : ruleEngineService.getRules()) {
 			System.out.printf("%-8s %s%n", rule.getId(), rule.getDescription());
 		}

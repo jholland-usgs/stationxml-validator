@@ -1,24 +1,31 @@
 package edu.iris.dmc.station;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.Station;
-import edu.iris.dmc.station.actions.Action;
 import edu.iris.dmc.station.conditions.Condition;
+import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Rule;
-import edu.iris.dmc.station.rules.RuleContext;
+import edu.iris.dmc.station.rules.Warning;
 
 public class RuleEngineService {
 
 	private RuleEngineRegistry ruleEngineRegistry;
+	boolean ignoreWarnings = false;
 
-	public RuleEngineService(List<Integer> ignoreRules) {
+	public RuleEngineService(boolean ingnoreWarnings, int... ignoreRules) {
 		this.ruleEngineRegistry = new RuleEngineRegistry(ignoreRules);
+		this.ignoreWarnings = ignoreWarnings;
 	}
 
 	public void setRuleEngineRegistry(RuleEngineRegistry ruleEngineRegistry) {
@@ -33,98 +40,143 @@ public class RuleEngineService {
 		this.ruleEngineRegistry.unregister(id);
 	}
 
-	public void executeAllRules(FDSNStationXML document, RuleContext context, Action action) {
-		if (context == null) {
-			throw new IllegalArgumentException("Rules Context cannot be null");
-		}
-		if (document != null) {
-			if (document.getNetwork() != null) {
-				for (Network network : document.getNetwork()) {
-					executeAllRules(network, context, action);
+	public Map<Integer, Set<Message>> executeAllRules(FDSNStationXML document) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
+		if (document != null && document.getNetwork() != null) {
+			for (Network network : document.getNetwork()) {
+				Map<Integer, Set<Message>> m = this.executeAllRules(network);
+				for (Map.Entry<Integer, Set<Message>> e : m.entrySet()) {
+					map.computeIfAbsent(e.getKey(), k -> new HashSet<Message>()).addAll(e.getValue());
 				}
 			}
 		}
+		return map;
 	}
 
-	public void executeNetworkRules(Network network, RuleContext context, Action action) {
+	public Map<Integer, Set<Message>> executeNetworkRules(Network network) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
 		if (network != null) {
 			for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
-				rule.execute(network, context, action);
+				Message m = rule.execute(network);
+				if (!ignoreWarnings && !(m instanceof Warning)) {
+					m.setRule(rule);
+					m.setNetwork(network);
+					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				}
 			}
 		}
+		return map;
 	}
 
-	public void executeAllRules(Network network, RuleContext context, Action action) {
+	public Map<Integer, Set<Message>> executeAllRules(Network network) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
 		if (network == null) {
-			return;
+			return map;
 		}
-		if (network != null) {
-			for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
-				rule.execute(network, context, action);
+		for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
+			Message m = rule.execute(network);
+			if (!ignoreWarnings && !(m instanceof Warning)) {
+				m.setRule(rule);
+				m.setNetwork(network);
+				map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 			}
 		}
 
 		if (network.getStations() != null) {
 			for (Station station : network.getStations()) {
-				executeAllRules(network, station, context, action);
-			}
-		}
-
-	}
-
-	public void executeAllRules(Network network, Station station, RuleContext context, Action action) {
-		if (station != null) {
-			Collection<Rule> col = this.ruleEngineRegistry.getStationRules();
-			for (Rule rule : col) {
-				rule.execute(network, station, context, action);
-			}
-			if (station.getChannels() != null) {
-				for (Channel channel : station.getChannels()) {
-					this.executeAllRules(network, station, channel, context, action);
+				Map<Integer, Set<Message>> m = this.executeAllRules(network, station);
+				for (Map.Entry<Integer, Set<Message>> e : m.entrySet()) {
+					map.computeIfAbsent(e.getKey(), k -> new HashSet<Message>()).addAll(e.getValue());
 				}
 			}
 		}
+		return map;
 	}
 
-	public void executeAllRules(Network network, Station station, Channel channel, RuleContext context, Action action) {
+	public Map<Integer, Set<Message>> executeAllRules(Network network, Station station) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
+		if (station != null) {
+			Collection<Rule> col = this.ruleEngineRegistry.getStationRules();
+			for (Rule rule : col) {
+				Message m = rule.execute(network, station);
+				if (!ignoreWarnings && !(m instanceof Warning)) {
+					m.setRule(rule);
+					m.setNetwork(network);
+					m.setStation(station);
+					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				}
+			}
+			if (station.getChannels() != null) {
+				for (Channel channel : station.getChannels()) {
+					Map<Integer, Set<Message>> m = this.executeAllRules(network, station, channel);
+					for (Map.Entry<Integer, Set<Message>> e : m.entrySet()) {
+						map.computeIfAbsent(e.getKey(), k -> new HashSet<Message>()).addAll(e.getValue());
+					}
+
+				}
+			}
+		}
+		return map;
+	}
+
+	public Map<Integer, Set<Message>> executeAllRules(Network network, Station station, Channel channel) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
 		if (channel != null) {
-			if(isSpecial(channel)){
-				return;
+			if (isSpecial(channel)) {
+				return map;
 			}
 			for (Rule rule : this.ruleEngineRegistry.getChannelRules()) {
-				rule.execute(network, station, channel, context, action);
+				Message m = rule.execute(network, station, channel);
+				if (!ignoreWarnings && !(m instanceof Warning)) {
+					m.setRule(rule);
+					m.setNetwork(network);
+					m.setStation(station);
+					m.setChannel(channel);
+					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				}
 			}
-			this.executeAllRules(network, station, channel, channel.getResponse(), context, action);
+			map.putAll(this.executeAllRules(network, station, channel, channel.getResponse()));
 		}
+		return map;
 	}
 
-	public void executeAllRules(Network network, Station station, Channel channel, Response response,
-			RuleContext context, Action action) {
-		if(isSpecial(channel)){
-			return;
+	public Map<Integer, Set<Message>> executeAllRules(Network network, Station station, Channel channel,
+			Response response) {
+		Map<Integer, Set<Message>> map = new HashMap<>();
+		if (isSpecial(channel)) {
+			return map;
 		}
 		if (response != null && !isEmpty(response)) {
 			for (Rule rule : this.ruleEngineRegistry.getResponseRules()) {
-				rule.execute(network, station, channel, response, context, action);
+				Message m = rule.execute(network, station, channel, response);
+				if (!ignoreWarnings && !(m instanceof Warning)) {
+					m.setRule(rule);
+					m.setNetwork(network);
+					m.setStation(station);
+					m.setChannel(channel);
+					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				}
 			}
 		}
+		return map;
 	}
 
-	private boolean isSpecial(Channel channel){
-		if(channel==null){
+	private boolean isSpecial(Channel channel) {
+		if (channel == null) {
 			throw new IllegalArgumentException("Channel cannot be null");
 		}
-		if(channel.getCode().startsWith("A")){
+		if (channel.getCode().startsWith("A")) {
 			return true;
 		}
-		if("LOG".equals(channel.getCode())){
+		if ("LOG".equals(channel.getCode())) {
 			return true;
 		}
-		if("SOH".equals(channel.getCode())){
+		if ("SOH".equals(channel.getCode())) {
 			return true;
 		}
 		return false;
 	}
+
 	private boolean isEmpty(Response response) {
 		if (response == null) {
 			return true;
