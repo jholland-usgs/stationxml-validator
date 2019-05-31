@@ -91,14 +91,12 @@ public class Application {
 			Application app = new Application();
 			app.run();
 		} catch (Exception e) {
-			e.printStackTrace();
 			LOGGER.log(Level.INFO, e.getMessage(), e);
 			System.exit(1);
 		}
 	}
 
 	public void run() throws Exception {
-
 		Path path = commandLine.file();
 		if (!path.toFile().exists()) {
 			throw new IOException(String.format("File %s does not exist.  File is required!", path.toString()));
@@ -182,7 +180,7 @@ public class Application {
 	}
 
 	public Volume load(InputStream inputStream) throws SeedException, IOException {
-		BlocketteDirector director = new BlocketteDirector(new BlocketteBuilder());
+		BlocketteDirector director = new BlocketteDirector();
 		BlocketteItrator iterator = director.process(inputStream);
 
 		Volume volume = new Volume();
@@ -204,21 +202,6 @@ public class Application {
 			return new ReportPrintStream(outputStream);
 		} else {
 			throw new IOException("Invalid format [" + format + "] requested");
-		}
-	}
-
-	static boolean validateAgainstXSD(File xml) {
-		try {
-
-			SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = factory.newSchema(new StreamSource("station.1.1.xsd"));
-
-			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(xml));
-			return true;
-		} catch (Exception exe) {
-			exe.printStackTrace();
-			return false;
 		}
 	}
 
