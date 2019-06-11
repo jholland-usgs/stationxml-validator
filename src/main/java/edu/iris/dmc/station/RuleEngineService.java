@@ -75,11 +75,13 @@ public class RuleEngineService {
 		}
 		for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
 			Message m = rule.execute(network);
-			if (!ignoreWarnings && !(m instanceof Warning)) {
-				m.setRule(rule);
-				m.setNetwork(network);
-				map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+			if (m instanceof Warning && ignoreWarnings) {
+				continue;
 			}
+
+			m.setRule(rule);
+			m.setNetwork(network);
+			map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 		}
 
 		if (network.getStations() != null) {
@@ -99,7 +101,9 @@ public class RuleEngineService {
 			Collection<Rule> col = this.ruleEngineRegistry.getStationRules();
 			for (Rule rule : col) {
 				Message m = rule.execute(network, station);
-				if (!ignoreWarnings && !(m instanceof Warning)) {
+				if (m instanceof Warning && ignoreWarnings) {
+
+				} else {
 					m.setRule(rule);
 					m.setNetwork(network);
 					m.setStation(station);
@@ -127,7 +131,9 @@ public class RuleEngineService {
 			}
 			for (Rule rule : this.ruleEngineRegistry.getChannelRules()) {
 				Message m = rule.execute(network, station, channel);
-				if (!ignoreWarnings && !(m instanceof Warning)) {
+				if (m instanceof Warning && ignoreWarnings) {
+
+				} else {
 					m.setRule(rule);
 					m.setNetwork(network);
 					m.setStation(station);
@@ -149,7 +155,9 @@ public class RuleEngineService {
 		if (response != null && !isEmpty(response)) {
 			for (Rule rule : this.ruleEngineRegistry.getResponseRules()) {
 				Message m = rule.execute(network, station, channel, response);
-				if (!ignoreWarnings && !(m instanceof Warning)) {
+				if (m instanceof Warning && ignoreWarnings) {
+
+				} else {
 					m.setRule(rule);
 					m.setNetwork(network);
 					m.setStation(station);
@@ -168,10 +176,7 @@ public class RuleEngineService {
 		if (channel.getCode().startsWith("A")) {
 			return true;
 		}
-		if ("LOG".equals(channel.getCode())) {
-			return true;
-		}
-		if ("SOH".equals(channel.getCode())) {
+		if ("LOG".equals(channel.getCode()) || "SOH".equals(channel.getCode())) {
 			return true;
 		}
 		return false;
