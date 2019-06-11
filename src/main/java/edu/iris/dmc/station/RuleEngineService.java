@@ -16,6 +16,7 @@ import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.conditions.Condition;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.Rule;
+import edu.iris.dmc.station.rules.Success;
 import edu.iris.dmc.station.rules.Warning;
 
 public class RuleEngineService {
@@ -58,9 +59,9 @@ public class RuleEngineService {
 		if (network != null) {
 			for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
 				Message m = rule.execute(network);
-				if (!ignoreWarnings && !(m instanceof Warning)) {
-					m.setRule(rule);
-					m.setNetwork(network);
+				m.setRule(rule);
+				m.setNetwork(network);
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
@@ -75,13 +76,11 @@ public class RuleEngineService {
 		}
 		for (Rule rule : this.ruleEngineRegistry.getNetworkRules()) {
 			Message m = rule.execute(network);
-			if (m instanceof Warning && ignoreWarnings) {
-				continue;
-			}
-
 			m.setRule(rule);
 			m.setNetwork(network);
-			map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+			if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
+				map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+			}
 		}
 
 		if (network.getStations() != null) {
@@ -101,12 +100,10 @@ public class RuleEngineService {
 			Collection<Rule> col = this.ruleEngineRegistry.getStationRules();
 			for (Rule rule : col) {
 				Message m = rule.execute(network, station);
-				if (m instanceof Warning && ignoreWarnings) {
-
-				} else {
-					m.setRule(rule);
-					m.setNetwork(network);
-					m.setStation(station);
+				m.setRule(rule);
+				m.setNetwork(network);
+				m.setStation(station);
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
@@ -131,13 +128,11 @@ public class RuleEngineService {
 			}
 			for (Rule rule : this.ruleEngineRegistry.getChannelRules()) {
 				Message m = rule.execute(network, station, channel);
-				if (m instanceof Warning && ignoreWarnings) {
-
-				} else {
-					m.setRule(rule);
-					m.setNetwork(network);
-					m.setStation(station);
-					m.setChannel(channel);
+				m.setRule(rule);
+				m.setNetwork(network);
+				m.setStation(station);
+				m.setChannel(channel);
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
@@ -155,13 +150,11 @@ public class RuleEngineService {
 		if (response != null && !isEmpty(response)) {
 			for (Rule rule : this.ruleEngineRegistry.getResponseRules()) {
 				Message m = rule.execute(network, station, channel, response);
-				if (m instanceof Warning && ignoreWarnings) {
-
-				} else {
-					m.setRule(rule);
-					m.setNetwork(network);
-					m.setStation(station);
-					m.setChannel(channel);
+				m.setRule(rule);
+				m.setNetwork(network);
+				m.setStation(station);
+				m.setChannel(channel);
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
