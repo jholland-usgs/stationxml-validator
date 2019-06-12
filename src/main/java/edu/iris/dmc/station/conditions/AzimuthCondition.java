@@ -37,10 +37,6 @@ public class AzimuthCondition extends AbstractCondition {
 			}
 			return Result.success();
 		}
-		if (azimuth.getValue() < min || azimuth.getValue() > max) {
-			return Result
-					.error("Expected a value between " + min + " and " + max + " but received " + azimuth.getValue());
-		}
 		return Result.success();
 	}
 }

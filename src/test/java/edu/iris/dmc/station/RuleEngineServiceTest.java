@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.xml.bind.JAXBException;
@@ -152,33 +153,6 @@ public class RuleEngineServiceTest {
 		assertEquals(212, message.getRule().getId());
 	}
 
-	@Test
-	public void rule220() throws Exception {
-
-		theDocument = unmarshal("P1_220.xml");
-
-		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
-
-		Set<Message> s = m.get(220);
-		assertNotNull(s);
-		assertEquals(1, s.size());
-		Message message = s.iterator().next();
-		assertEquals(220, message.getRule().getId());
-	}
-
-	@Test
-	public void rule221() throws Exception {
-
-		theDocument = unmarshal("P1_221.xml");
-
-		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
-
-		Set<Message> s = m.get(221);
-		assertNotNull(s);
-		assertEquals(1, s.size());
-		Message message = s.iterator().next();
-		assertEquals(221, message.getRule().getId());
-	}
 
 	@Test
 	public void rule222() throws Exception {

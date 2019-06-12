@@ -34,15 +34,11 @@ public class DipCondition extends AbstractCondition {
 			return Result.success();
 		}
 
-		Dip dip = channel.getDip();
-		if (dip == null) {
+		if (channel.getDip() == null) {
 			return Result.error( "expected dip value but was null");
 		}
 
-		if (dip.getValue() >= -90 && dip.getValue() <= 90) {
-			return Result.success();
-		}
-		return Result.error( "expected a value between "+min+" and "+max+" but was "+dip.getValue());
+		return Result.success();
 	}
 
 }

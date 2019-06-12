@@ -27,9 +27,7 @@ import edu.iris.dmc.station.conditions.EmptySensitivityCondition;
 import edu.iris.dmc.station.conditions.EpochOverlapCondition;
 import edu.iris.dmc.station.conditions.EpochRangeCondition;
 import edu.iris.dmc.station.conditions.FrequencyCondition;
-import edu.iris.dmc.station.conditions.LatitudeCondition;
 import edu.iris.dmc.station.conditions.LocationCodeCondition;
-import edu.iris.dmc.station.conditions.LongitudeCondition;
 import edu.iris.dmc.station.conditions.MissingDecimationCondition;
 import edu.iris.dmc.station.conditions.OrientationCondition;
 import edu.iris.dmc.station.conditions.PolesZerosCondition;
@@ -121,15 +119,7 @@ public class RuleEngineRegistry {
 					"Station:Epoch must encompass all subordinate Channel:Epoch [Epoch=startDate-endDate]"),
 					Station.class);
 		}
-		if (!set.contains(220)) {
-			add(220, new LatitudeCondition(true,
-					"Station:Latitude must be assigned a value that is not 0 and between -90 and 90."), Station.class);
-		}
-		if (!set.contains(221)) {
-			add(221, new LongitudeCondition(true,
-					"Station:Longitude must be assigned a value that is not 0 and between -180 and 180."),
-					Station.class);
-		}
+
 		if (!set.contains(222)) {
 			add(222, new DistanceCondition(true,
 					"Station:Position must be within 1 km of all subordinate Channel:Position.", 1), Station.class);
@@ -170,15 +160,7 @@ public class RuleEngineRegistry {
 					"Channel:startDate is required and must occur before Channel:endDate if Channel:endDate is available."),
 					Channel.class);
 		}
-		if (!set.contains(320)) {
-			add(320, new LatitudeCondition(true,
-					"Channel:Latitude must be assigned a value that is not 0 and between -90 and 90."), Channel.class);
-		}
-		if (!set.contains(321)) {
-			add(321, new LongitudeCondition(true,
-					"Channel:Longitude must be assigned a value that is not 0 and between -180 and 180."),
-					Channel.class);
-		}
+
 		if (!set.contains(330)) {
 			add(330, new AzimuthCondition(true, "Azimuth must be assigned a value between 0 and 360.", 0, 360),
 					Channel.class);
