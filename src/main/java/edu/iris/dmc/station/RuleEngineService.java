@@ -1,6 +1,5 @@
 package edu.iris.dmc.station;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,8 +14,8 @@ import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.conditions.Condition;
 import edu.iris.dmc.station.rules.Message;
+import edu.iris.dmc.station.rules.NestedMessage;
 import edu.iris.dmc.station.rules.Rule;
-import edu.iris.dmc.station.rules.Success;
 import edu.iris.dmc.station.rules.Warning;
 
 public class RuleEngineService {
@@ -24,7 +23,7 @@ public class RuleEngineService {
 	private RuleEngineRegistry ruleEngineRegistry;
 	boolean ignoreWarnings = false;
 
-	public RuleEngineService(boolean ingnoreWarnings, int... ignoreRules) {
+	public RuleEngineService(boolean ignoreWarnings, int... ignoreRules) {
 		this.ruleEngineRegistry = new RuleEngineRegistry(ignoreRules);
 		this.ignoreWarnings = ignoreWarnings;
 	}
@@ -63,10 +62,21 @@ public class RuleEngineService {
 				m.setNetwork(network);
 				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				} else if (m instanceof edu.iris.dmc.station.rules.NestedMessage) {
+					List<Message> list = ((edu.iris.dmc.station.rules.NestedMessage) m).getNestedMessages();
+					if (list != null) {
+						for (Message msg : list) {
+							if (msg instanceof edu.iris.dmc.station.rules.Error
+									|| (!ignoreWarnings && msg instanceof Warning)) {
+								map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(msg);
+							}
+						}
+					}
 				}
 			}
 		}
 		return map;
+
 	}
 
 	public Map<Integer, Set<Message>> executeAllRules(Network network) {
@@ -78,9 +88,18 @@ public class RuleEngineService {
 			Message m = rule.execute(network);
 			m.setRule(rule);
 			m.setNetwork(network);
-			if (m instanceof edu.iris.dmc.station.rules.Error || m instanceof edu.iris.dmc.station.rules.NestedMessage
-					|| (!ignoreWarnings && m instanceof Warning)) {
+			if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 				map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+			} else if (m instanceof edu.iris.dmc.station.rules.NestedMessage) {
+				List<Message> list = ((edu.iris.dmc.station.rules.NestedMessage) m).getNestedMessages();
+				if (list != null) {
+					for (Message msg : list) {
+						if (msg instanceof edu.iris.dmc.station.rules.Error
+								|| (!ignoreWarnings && msg instanceof Warning)) {
+							map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(msg);
+						}
+					}
+				}
 			}
 		}
 
@@ -104,10 +123,18 @@ public class RuleEngineService {
 				m.setRule(rule);
 				m.setNetwork(network);
 				m.setStation(station);
-				if (m instanceof edu.iris.dmc.station.rules.Error
-						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
-						|| (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				} else if (m instanceof edu.iris.dmc.station.rules.NestedMessage) {
+					List<Message> list = ((edu.iris.dmc.station.rules.NestedMessage) m).getNestedMessages();
+					if (list != null) {
+						for (Message msg : list) {
+							if (msg instanceof edu.iris.dmc.station.rules.Error
+									|| (!ignoreWarnings && msg instanceof Warning)) {
+								map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(msg);
+							}
+						}
+					}
 				}
 			}
 			if (station.getChannels() != null) {
@@ -135,10 +162,18 @@ public class RuleEngineService {
 				m.setNetwork(network);
 				m.setStation(station);
 				m.setChannel(channel);
-				if (m instanceof edu.iris.dmc.station.rules.Error
-						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
-						|| (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				} else if (m instanceof edu.iris.dmc.station.rules.NestedMessage) {
+					List<Message> list = ((edu.iris.dmc.station.rules.NestedMessage) m).getNestedMessages();
+					if (list != null) {
+						for (Message msg : list) {
+							if (msg instanceof edu.iris.dmc.station.rules.Error
+									|| (!ignoreWarnings && msg instanceof Warning)) {
+								map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(msg);
+							}
+						}
+					}
 				}
 			}
 			map.putAll(this.executeAllRules(network, station, channel, channel.getResponse()));
@@ -159,10 +194,18 @@ public class RuleEngineService {
 				m.setNetwork(network);
 				m.setStation(station);
 				m.setChannel(channel);
-				if (m instanceof edu.iris.dmc.station.rules.Error
-						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
-						|| (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
+				} else if (m instanceof edu.iris.dmc.station.rules.NestedMessage) {
+					List<Message> list = ((edu.iris.dmc.station.rules.NestedMessage) m).getNestedMessages();
+					if (list != null) {
+						for (Message msg : list) {
+							if (msg instanceof edu.iris.dmc.station.rules.Error
+									|| (!ignoreWarnings && msg instanceof Warning)) {
+								map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(msg);
+							}
+						}
+					}
 				}
 			}
 		}

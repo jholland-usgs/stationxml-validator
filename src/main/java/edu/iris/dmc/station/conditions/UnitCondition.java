@@ -68,20 +68,25 @@ public class UnitCondition extends ChannelRestrictedCondition {
 				Units outputUnits = units[1];
 
 				if (inputUnits == null || inputUnits.getName() == null) {
-					nestedMessage.add(Result.error("Inputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+					nestedMessage
+							.add(Result.error("Inputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(inputUnits.getName());
 					if (!result) {
 						result = UnitTable.containsCaseInsensitive(inputUnits.getName());
-						if (!result) {
-							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid inputUnit "
-									+ inputUnits.getName()));
+						if (result) {
+							nestedMessage.add(Result.warning("[stage " + stage.getNumber().intValue()
+									+ "] invalid inpuyUnits " + inputUnits.getName()));
+						} else {
+							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue()
+									+ "] invalid inpuyUnits " + inputUnits.getName()));
 						}
 					}
 				}
 
 				if (outputUnits == null || outputUnits.getName() == null) {
-					nestedMessage.add(Result.error("Outputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+					nestedMessage.add(
+							Result.error("Outputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(outputUnits.getName());
 					if (!result) {
@@ -90,8 +95,8 @@ public class UnitCondition extends ChannelRestrictedCondition {
 							nestedMessage.add(Result.warning("[stage " + stage.getNumber().intValue()
 									+ "] invalid outputUnits " + outputUnits.getName()));
 						} else {
-							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid outputUnits "
-									+ outputUnits.getName()));
+							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue()
+									+ "] invalid outputUnits " + outputUnits.getName()));
 						}
 					}
 				}

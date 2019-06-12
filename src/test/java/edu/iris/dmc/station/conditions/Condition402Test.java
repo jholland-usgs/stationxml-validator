@@ -54,7 +54,6 @@ public class Condition402Test {
 			assertEquals(10,nestedMessage.getNestedMessages().size());
 			
 		}
-
 	}
 
 	@Test

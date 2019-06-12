@@ -1,5 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
+import java.util.List;
+
 import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Response;
