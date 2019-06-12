@@ -51,7 +51,7 @@ public class Condition402Test {
 			
 			NestedMessage nestedMessage=(NestedMessage)result;
 			assertNotNull(nestedMessage.getNestedMessages());
-			assertEquals(10,nestedMessage.getNestedMessages().size());
+			assertEquals(22,nestedMessage.getNestedMessages().size());
 			
 		}
 	}

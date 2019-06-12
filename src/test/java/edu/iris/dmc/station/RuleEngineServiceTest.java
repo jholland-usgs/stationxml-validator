@@ -214,7 +214,7 @@ public class RuleEngineServiceTest {
 		Set<Message> s = m.get(402);
 
 		assertNotNull(s);
-		assertEquals(1, s.size());
+		assertEquals(22, s.size());
 		Message message = s.iterator().next();
 		assertEquals(402, message.getRule().getId());
 	}
@@ -261,7 +261,7 @@ public class RuleEngineServiceTest {
 		theDocument = unmarshal("F1_411.xml");
 
 		Map<Integer, Set<Message>> resultSet = ruleEngineService.executeAllRules(theDocument);
-		assertEquals(36, resultSet.size());
+		assertEquals(2, resultSet.size());
 
 	}
 
