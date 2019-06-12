@@ -52,7 +52,6 @@ public class NestedMessage extends AbstractMessage {
 		super.setSource(source);
 		for(Message message:nestedMessages){
 			source = message.getSource();
-			System.out.println(source);
 			message.setSource(source);
 		}
 	}

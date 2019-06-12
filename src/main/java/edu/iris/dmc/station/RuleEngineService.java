@@ -78,7 +78,8 @@ public class RuleEngineService {
 			Message m = rule.execute(network);
 			m.setRule(rule);
 			m.setNetwork(network);
-			if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
+			if (m instanceof edu.iris.dmc.station.rules.Error || m instanceof edu.iris.dmc.station.rules.NestedMessage
+					|| (!ignoreWarnings && m instanceof Warning)) {
 				map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 			}
 		}
@@ -103,7 +104,9 @@ public class RuleEngineService {
 				m.setRule(rule);
 				m.setNetwork(network);
 				m.setStation(station);
-				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error
+						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
+						|| (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
@@ -132,7 +135,9 @@ public class RuleEngineService {
 				m.setNetwork(network);
 				m.setStation(station);
 				m.setChannel(channel);
-				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error
+						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
+						|| (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}
@@ -154,7 +159,9 @@ public class RuleEngineService {
 				m.setNetwork(network);
 				m.setStation(station);
 				m.setChannel(channel);
-				if (m instanceof edu.iris.dmc.station.rules.Error || (!ignoreWarnings && m instanceof Warning)) {
+				if (m instanceof edu.iris.dmc.station.rules.Error
+						|| m instanceof edu.iris.dmc.station.rules.NestedMessage
+						|| (!ignoreWarnings && m instanceof Warning)) {
 					map.computeIfAbsent(rule.getId(), k -> new HashSet<Message>()).add(m);
 				}
 			}

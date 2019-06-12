@@ -1,5 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
@@ -19,6 +21,7 @@ import edu.iris.dmc.station.restrictions.ChannelCodeRestriction;
 import edu.iris.dmc.station.restrictions.ChannelTypeRestriction;
 import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
+import edu.iris.dmc.station.rules.NestedMessage;
 
 public class Condition402Test {
 
@@ -45,6 +48,11 @@ public class Condition402Test {
 
 			Message result = condition.evaluate(c);			
 			assertTrue(result instanceof edu.iris.dmc.station.rules.NestedMessage);
+			
+			NestedMessage nestedMessage=(NestedMessage)result;
+			assertNotNull(nestedMessage.getNestedMessages());
+			assertEquals(10,nestedMessage.getNestedMessages().size());
+			
 		}
 
 	}

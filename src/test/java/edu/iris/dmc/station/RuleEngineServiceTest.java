@@ -23,6 +23,7 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.rules.Message;
+import edu.iris.dmc.station.rules.NestedMessage;
 
 public class RuleEngineServiceTest {
 
@@ -48,7 +49,7 @@ public class RuleEngineServiceTest {
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 		assertNotNull(m);
-		
+
 		Set<Message> s = m.get(101);
 		assertEquals(1, s.size());
 		assertEquals(101, s.iterator().next().getRule().getId());
@@ -66,9 +67,8 @@ public class RuleEngineServiceTest {
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(110, message.getRule().getId());
-   }
+	}
 
-		
 	@Test
 	public void rule111() throws Exception {
 
@@ -153,7 +153,6 @@ public class RuleEngineServiceTest {
 		assertEquals(212, message.getRule().getId());
 	}
 
-
 	@Test
 	public void rule222() throws Exception {
 
@@ -200,13 +199,25 @@ public class RuleEngineServiceTest {
 		theDocument = unmarshal("F1_402.xml");
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 
+		for (Map.Entry<Integer, Set<Message>> e : m.entrySet()) {
+			System.out.println(e.getKey());
+			Set<Message> set = e.getValue();
+			for (Message mmm : set) {
+				if (mmm instanceof NestedMessage) {
+					NestedMessage v = (NestedMessage) mmm;
+					for (Message l : v.getNestedMessages()) {
+						System.out.println(l);
+					}
+				}
+			}
+		}
 		Set<Message> s = m.get(402);
+
 		assertNotNull(s);
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(402, message.getRule().getId());
 	}
-
 
 	@Test
 	public void rule405() throws Exception {
@@ -219,8 +230,8 @@ public class RuleEngineServiceTest {
 		assertEquals(1, s.size());
 		Message message = s.iterator().next();
 		assertEquals(405, message.getRule().getId());
-   }
-	
+	}
+
 	@Test
 	public void rule410() throws Exception {
 
@@ -242,7 +253,7 @@ public class RuleEngineServiceTest {
 		assertNotNull(s);
 		assertEquals(1, s.size());
 
-  }
+	}
 
 	@Test
 	public void rule411() throws Exception {
@@ -284,9 +295,9 @@ public class RuleEngineServiceTest {
 
 	}
 
-    @Test
-    public void rule414() throws Exception {
-        theDocument = unmarshal("F1_414.xml");
+	@Test
+	public void rule414() throws Exception {
+		theDocument = unmarshal("F1_414.xml");
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
 
@@ -325,11 +336,11 @@ public class RuleEngineServiceTest {
 		assertEquals(422, message.getRule().getId());
 
 	}
-	
+
 	@Test
 	public void xmlxsd_ExpectedUnmarshalException() throws Exception {
-		Assertions.assertThrows(IOException.class, () ->{
-		theDocument = unmarshal("xmlVSxsd.xml");
+		Assertions.assertThrows(IOException.class, () -> {
+			theDocument = unmarshal("xmlVSxsd.xml");
 		});
 
 	}

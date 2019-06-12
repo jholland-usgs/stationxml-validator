@@ -55,49 +55,49 @@ public class UnitCondition extends ChannelRestrictedCondition {
 			return new Success("");
 		}
 
-		NestedMessage message = new NestedMessage();
+		NestedMessage nestedMessage = new NestedMessage();
 		for (ResponseStage stage : stages) {
 			if (!hasFilter(stage)) {
 				continue;
 			}
 			Units[] units = getUnits(stage);
 			if (units == null) {
-				message.add(Result.error("stage [ null units for stage " + stage.getNumber().intValue() + "]"));
+				nestedMessage.add(Result.error("stage [ null units for stage " + stage.getNumber().intValue() + "]"));
 			} else {
 				Units inputUnits = units[0];
 				Units outputUnits = units[1];
 
 				if (inputUnits == null || inputUnits.getName() == null) {
-					message.add(Result.error("Inputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+					nestedMessage.add(Result.error("Inputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(inputUnits.getName());
 					if (!result) {
 						result = UnitTable.containsCaseInsensitive(inputUnits.getName());
 						if (!result) {
-							message.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid inputUnit "
+							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid inputUnit "
 									+ inputUnits.getName()));
 						}
 					}
 				}
 
 				if (outputUnits == null || outputUnits.getName() == null) {
-					message.add(Result.error("Outputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+					nestedMessage.add(Result.error("Outputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(outputUnits.getName());
 					if (!result) {
 						result = UnitTable.containsCaseInsensitive(outputUnits.getName().toLowerCase());
 						if (result) {
-							message.add(Result.warning("[stage " + stage.getNumber().intValue()
+							nestedMessage.add(Result.warning("[stage " + stage.getNumber().intValue()
 									+ "] invalid outputUnits " + outputUnits.getName()));
 						} else {
-							message.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid outputUnits "
+							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue() + "] invalid outputUnits "
 									+ outputUnits.getName()));
 						}
 					}
 				}
 			}
 		}
-		return message;
+		return nestedMessage;
 	}
 
 	private boolean hasFilter(ResponseStage stage) {
