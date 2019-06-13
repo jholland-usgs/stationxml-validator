@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.iris.dmc</groupId>
-	<artifactId>station-xml-validator</artifactId>
+	<artifactId>stationxml-validator</artifactId>
 	<packaging>jar</packaging>
 	<version>1.6.0.1-SNAPSHOT</version>
 	<name>FDSN StationXML Validator</name>
