@@ -267,11 +267,10 @@ public class RuleEngineServiceTest {
 
 	@Test
 	public void rule412() throws Exception {
-
 		theDocument = unmarshal("F1_412.xml");
 
 		Map<Integer, Set<Message>> m = ruleEngineService.executeAllRules(theDocument);
-
+        
 		Set<Message> s = m.get(412);
 		assertNotNull(s);
 		assertEquals(1, s.size());
