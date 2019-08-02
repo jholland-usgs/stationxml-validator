@@ -50,7 +50,12 @@ public class OrientationCondition extends AbstractCondition {
 					|| channel.getDip() == null) {
 				return Result.success();
 			}
+			
+			if (channel.getAzimuth().getValue()== null || channel.getDip().getValue() ==null) {
+			    return Result.success();
+			}
 			char[] array = channel.getCode().toCharArray();
+			
 
 			double azimuth = channel.getAzimuth().getValue();
 			double dip = channel.getDip().getValue();

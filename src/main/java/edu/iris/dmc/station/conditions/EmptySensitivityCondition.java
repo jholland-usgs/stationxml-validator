@@ -44,7 +44,8 @@ public class EmptySensitivityCondition extends ChannelRestrictedCondition {
 			}
 		}
 
-		if (response.getInstrumentSensitivity() == null || response.getInstrumentSensitivity().getValue() == null) {
+		if (response.getInstrumentSensitivity() == null || response.getInstrumentSensitivity().getValue() == null
+				|| response.getInstrumentSensitivity().getValue() == 0) {
 			return Result.error("InstrumentSensitivity/value is required");
 		}
 		return Result.success();

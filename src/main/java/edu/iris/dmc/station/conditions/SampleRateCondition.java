@@ -36,7 +36,7 @@ public class SampleRateCondition extends ChannelRestrictedCondition {
 		}
 		SampleRate sampleRate = channel.getSampleRate();
 
-		if (sampleRate == null || sampleRate.getValue() == null) {
+		if (sampleRate == null || sampleRate.getValue() == null || sampleRate.getValue() == 0) {
 			if (channel.getResponse() != null) {
 				if (sampleRate.getValue() != 0) {
 

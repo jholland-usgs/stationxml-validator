@@ -69,34 +69,34 @@ public class UnitCondition extends ChannelRestrictedCondition {
 
 				if (inputUnits == null || inputUnits.getName() == null) {
 					nestedMessage
-							.add(Result.error("Inputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+							.add(Result.error("Input unit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(inputUnits.getName());
 					if (!result) {
 						result = UnitTable.containsCaseInsensitive(inputUnits.getName());
 						if (result) {
 							nestedMessage.add(Result.warning("[stage " + stage.getNumber().intValue()
-									+ "] invalid inpuyUnits " + inputUnits.getName()));
+									+ "] invalid input units " + inputUnits.getName()));
 						} else {
 							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue()
-									+ "] invalid inpuyUnits " + inputUnits.getName()));
+									+ "] invalid input units " + inputUnits.getName()));
 						}
 					}
 				}
 
 				if (outputUnits == null || outputUnits.getName() == null) {
 					nestedMessage.add(
-							Result.error("Outputunit cannot be null [stage " + stage.getNumber().intValue() + "]"));
+							Result.error("Output unit cannot be null [stage " + stage.getNumber().intValue() + "]"));
 				} else {
 					boolean result = UnitTable.contains(outputUnits.getName());
 					if (!result) {
 						result = UnitTable.containsCaseInsensitive(outputUnits.getName().toLowerCase());
 						if (result) {
 							nestedMessage.add(Result.warning("[stage " + stage.getNumber().intValue()
-									+ "] invalid outputUnits " + outputUnits.getName()));
+									+ "] invalid output units " + outputUnits.getName()));
 						} else {
 							nestedMessage.add(Result.error("[stage " + stage.getNumber().intValue()
-									+ "] invalid outputUnits " + outputUnits.getName()));
+									+ "] invalid output units " + outputUnits.getName()));
 						}
 					}
 				}
