@@ -1,6 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
+import edu.iris.dmc.fdsn.station.model.Gain;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
@@ -36,7 +37,7 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 	}
 
 	@Override
-	public Message evaluate(Channel channel,Response response) {
+	public Message evaluate(Channel channel, Response response) {
 		if (isRestricted(channel)) {
 			return Result.success();
 		}
@@ -46,23 +47,28 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 				return Result.error("expected response but was null");
 			}
 		}
-		if (response.getInstrumentSensitivity() != null) {
-
-			Sensitivity sensitivity = response.getInstrumentSensitivity();
-			sensitivity.getValue();
+		Sensitivity sensitivity = response.getInstrumentSensitivity();
+		if (sensitivity != null) {
 			Double frequency = sensitivity.getFrequency();
-
 			Double product = 1.0;
 			if (response.getStage() != null && !response.getStage().isEmpty()) {
 				for (ResponseStage stage : response.getStage()) {
-					if (stage.getStageGain() != null && stage.getStageGain().getFrequency().doubleValue()==frequency.doubleValue()) {
-						product = product * stage.getStageGain().getValue();
+					Gain stageGain = stage.getStageGain();
+					if (stageGain != null) {
+						Double stageFrequency = stage.getStageGain().getFrequency();
+						if (stageFrequency != null) {
+							if (Double.compare(stageFrequency, frequency) == 0) {
+								if (stageGain.getValue() != null) {
+									product = product * stageGain.getValue();
+								}
+							}
+						}
 					} else {
 						return Result.success();
 					}
 				}
-				
-				if(!Util.equal(product, response.getInstrumentSensitivity().getValue())){
+
+				if (!Util.equal(product, sensitivity.getValue())) {
 					return Result.error("Product of stage gains " + product + " must equal total gain "
 							+ response.getInstrumentSensitivity().getValue());
 				}
