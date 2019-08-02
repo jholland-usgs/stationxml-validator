@@ -26,17 +26,21 @@ public class DistanceCondition extends AbstractCondition {
 		if (station.getChannels() == null || station.getChannels().isEmpty()) {
 			return Result.success();
 		}
+		if (station.getLongitude() == null || station.getLatitude() == null) {
+			return Result.warning("Expected longitude/latitude but was null!");
+		}
 
 		for (Channel channel : station.getChannels()) {
 			if (channel.getLatitude() == null || channel.getLongitude() == null) {
-
+				return Result.warning("Expected longitude/latitude but was null!");
 			}
 			double distance = DistanceCalculator.distance(channel.getLatitude().getValue(),
 					channel.getLongitude().getValue(), station.getLatitude().getValue(),
 					station.getLongitude().getValue(), "K");
 			if (distance > this.margin) {
-				return Result.error(
-						"Expected a distance difference of less than " + margin + " between "+station.getCode()+" and "+channel.getCode()+":"+channel.getLocationCode()+" but was " + distance);
+				return Result.error("Expected a distance difference of less than " + margin + " between "
+						+ station.getCode() + " and " + channel.getCode() + ":" + channel.getLocationCode()
+						+ " but was " + distance);
 			}
 		}
 

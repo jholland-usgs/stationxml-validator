@@ -4,6 +4,7 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
+import edu.iris.dmc.fdsn.station.model.SampleRate;
 import edu.iris.dmc.fdsn.station.model.Sensitivity;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.restrictions.Restriction;
@@ -43,12 +44,11 @@ public class FrequencyCondition extends ChannelRestrictedCondition {
 			}
 		}
 
-		if (channel.getResponse().getInstrumentSensitivity() != null) {
-
-			if (channel.getResponse().getInstrumentSensitivity()
-					.getFrequency() > (channel.getSampleRate().getValue() / 2)) {
-				return Result.warning(channel.getResponse().getInstrumentSensitivity().getFrequency() + ">"
-						+ channel.getSampleRate().getValue() + "/2");
+		Sensitivity sensitivity = channel.getResponse().getInstrumentSensitivity();
+		SampleRate sampleRate = channel.getSampleRate();
+		if (sensitivity != null && sensitivity.getFrequency() != null && sampleRate != null) {
+			if (sensitivity.getFrequency() > (sampleRate.getValue() / 2)) {
+				return Result.warning(sensitivity.getFrequency() + ">" + sampleRate.getValue() + "/2");
 			}
 		}
 		return Result.success();

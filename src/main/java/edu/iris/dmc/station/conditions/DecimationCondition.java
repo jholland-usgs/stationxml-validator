@@ -1,6 +1,5 @@
 package edu.iris.dmc.station.conditions;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
@@ -9,7 +8,6 @@ import edu.iris.dmc.fdsn.station.model.Frequency;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
-import edu.iris.dmc.fdsn.station.model.SampleRate;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.restrictions.Restriction;
 import edu.iris.dmc.station.rules.Message;
@@ -57,7 +55,12 @@ public class DecimationCondition extends ChannelRestrictedCondition {
 		for (ResponseStage stage : stages) {
 			Decimation decimation = stage.getDecimation();
 			if (stage.getDecimation() != null) {
-				double inputSampleRate = decimation.getInputSampleRate().getValue();
+				Frequency sampleRate = decimation.getInputSampleRate();
+				if(sampleRate==null) {
+					return Result.error("expected samplerate but was null");
+				}
+				double inputSampleRate = sampleRate.getValue();
+				
 				if (inputSampleRateByFactor != null) {
 					if (Math.abs(inputSampleRate - inputSampleRateByFactor.doubleValue()) > 0.001) {
 						return Result.error("stage number: " + i+" inputSampleRate="+inputSampleRate+" : inputSampleRateByFactor="+inputSampleRateByFactor.doubleValue());
