@@ -56,7 +56,7 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 					Gain stageGain = stage.getStageGain();
 					if (stageGain != null) {
 						Double stageFrequency = stage.getStageGain().getFrequency();
-						if (stageFrequency != null) {
+						if (stageFrequency != null && frequency != null) {
 							if (Double.compare(stageFrequency, frequency) == 0) {
 								if (stageGain.getValue() != null) {
 									product = product * stageGain.getValue();
