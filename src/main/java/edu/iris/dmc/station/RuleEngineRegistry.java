@@ -160,15 +160,7 @@ public class RuleEngineRegistry {
 					"Channel:startDate is required and must occur before Channel:endDate if Channel:endDate is available."),
 					Channel.class);
 		}
-
-		if (!set.contains(330)) {
-			add(330, new AzimuthCondition(true, "Azimuth must be assigned a value between 0 and 360.", 0, 360),
-					Channel.class);
-		}
-		if (!set.contains(331)) {
-			add(331, new DipCondition(true, "Dip must be assigned a value between -90 and 90.", -90, 90),
-					Channel.class);
-		}
+		
 		if (!set.contains(332)) {
 			add(332, new OrientationCondition(true,
 					"Channel:Azimuth and or Channel:Dip do not correspond within 5 degrees of tolerance to last digit of orthogonal Channel:Code.",
