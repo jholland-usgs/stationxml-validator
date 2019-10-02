@@ -51,18 +51,20 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 		if (sensitivity != null) {
 			Double frequency = sensitivity.getFrequency();
 			Double product = 1.0;
-			if (response.getStage() != null && !response.getStage().isEmpty()) {
-				for (ResponseStage stage : response.getStage()) {
-					Gain stageGain = stage.getStageGain();
-					if (stageGain != null) {
-						Double stageFrequency = stage.getStageGain().getFrequency();
-						if (stageFrequency != null && frequency != null) {
-							if (Double.compare(stageFrequency, frequency) == 0) {
-								if (stageGain.getValue() != null) {
-									product = product * stageGain.getValue();
-								}
-							}
-						}
+			    if (response.getStage() != null && !response.getStage().isEmpty()) {
+				    for (ResponseStage stage : response.getStage()) {
+					    Gain stageGain = stage.getStageGain();
+					    if (stageGain != null) {
+						    Double stageFrequency = stage.getStageGain().getFrequency();
+						    if (stageFrequency != null && frequency != null) {
+							    if (Double.compare(stageFrequency, frequency) == 0) {
+								    if (stageGain.getValue() != null) {
+									    product = product * stageGain.getValue();
+								    }
+							    }else{
+							    	return Result.success();     	
+							    }
+						    }
 					} else {
 						return Result.success();
 					}
