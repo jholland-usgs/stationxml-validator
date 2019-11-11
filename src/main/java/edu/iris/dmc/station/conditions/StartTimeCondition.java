@@ -33,8 +33,16 @@ public class StartTimeCondition extends AbstractCondition {
 		if (node == null) {
 			throw new IllegalArgumentException("Node cannot be null");
 		}
+
+		
+		if (node.getEndDate() == null) {
+			return Result.success();
+		}
+		
 		if (node.getStartDate() == null) {
-			return Result.error("startDate is null");
+			if (node instanceof Network) {
+				return Result.success();
+		}
 		}
 
 		if (node.getEndDate() != null) {
