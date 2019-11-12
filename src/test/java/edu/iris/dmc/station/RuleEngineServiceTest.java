@@ -261,6 +261,9 @@ public class RuleEngineServiceTest {
 		theDocument = unmarshal("F1_411.xml");
 
 		Map<Integer, Set<Message>> resultSet = ruleEngineService.executeAllRules(theDocument);
+		System.out.println(resultSet.toString());
+
+
 		assertEquals(2, resultSet.size());
 
 	}

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 
+import javax.xml.bind.UnmarshalException;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +16,6 @@ import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
 import edu.iris.dmc.station.RuleEngineServiceTest;
-import edu.iris.dmc.station.conditions.DipCondition;
 import edu.iris.dmc.station.conditions.EpochRangeCondition;
 import edu.iris.dmc.station.rules.Message;
 
@@ -27,19 +29,11 @@ public class Condition331Test {
 	}
 
 	@Test
-	public void fail() throws Exception {
-		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_331.xml")) {
-			theDocument = DocumentMarshaller.unmarshal(is);
-
-			Network n = theDocument.getNetwork().get(0);
-			Station s = n.getStations().get(0);
-			Channel c = s.getChannels().get(0);
-
-			DipCondition condition = new DipCondition(true, "", -90, 90);
-
-			Message result = condition.evaluate(c);
-			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+	public void throwsExceptionWithSpecificType() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F1_331.xml")) {
+			Assertions.assertThrows(UnmarshalException.class,() -> DocumentMarshaller.unmarshal(is));
 		}
+		
 
 	}
 

@@ -39,6 +39,53 @@ public class Condition110Test2 {
 		}
 
 	}
+	
+	@Test
+	public void nulltimespan() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_110.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+
+			Network n = theDocument.getNetwork().get(0);
+			//Station s = n.getStations().get(0);
+			StartTimeCondition condition = new StartTimeCondition(true, "");
+
+			Message result = condition.evaluate(n);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+		}
+
+	}
+	
+	@Test
+	public void nullendtime() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P2_110.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+
+			Network n = theDocument.getNetwork().get(0);
+			//Station s = n.getStations().get(0);
+			StartTimeCondition condition = new StartTimeCondition(true, "");
+
+			Message result = condition.evaluate(n);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+		}
+
+	}
+	
+	@Test
+	public void nullstarttime() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P3_110.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+
+			Network n = theDocument.getNetwork().get(0);
+			//Station s = n.getStations().get(0);
+			StartTimeCondition condition = new StartTimeCondition(true, "");
+
+			Message result = condition.evaluate(n);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Success);
+		}
+
+	}
+	
+
 
 	@Test
 	public void pass() throws Exception {
