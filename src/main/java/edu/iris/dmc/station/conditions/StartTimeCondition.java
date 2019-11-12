@@ -42,7 +42,7 @@ public class StartTimeCondition extends AbstractCondition {
 			if (node instanceof Network) {
 				return Result.success();
 			} else {
-				return Result.error("startDate is required for node:" + node.code());
+				return Result.error("startDate is required for node:" + node.getCode());
 			}
 		}
 
