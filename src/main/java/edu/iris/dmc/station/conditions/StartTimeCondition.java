@@ -34,19 +34,20 @@ public class StartTimeCondition extends AbstractCondition {
 			throw new IllegalArgumentException("Node cannot be null");
 		}
 
-		
 		if (node.getEndDate() == null) {
 			return Result.success();
 		}
-		
+
 		if (node.getStartDate() == null) {
 			if (node instanceof Network) {
 				return Result.success();
-		}
+			} else {
+				return Result.error("startDate is required for node:" + node.code());
+			}
 		}
 
 		if (node.getEndDate() != null) {
-			if(!TimeUtil.isBefore(node.getStartDate(), node.getEndDate())) {
+			if (!TimeUtil.isBefore(node.getStartDate(), node.getEndDate())) {
 				return Result
 						.error("startDate " + node.getStartDate() + " must occur before endDate " + node.getEndDate());
 			}
