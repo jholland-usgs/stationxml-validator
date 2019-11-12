@@ -1,7 +1,7 @@
 package edu.iris.dmc.station.conditions;
 
 import edu.iris.dmc.fdsn.station.model.Channel;
-import edu.iris.dmc.fdsn.station.model.Gain;
+import edu.iris.dmc.fdsn.station.model.StageGain;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Response;
 import edu.iris.dmc.fdsn.station.model.ResponseStage;
@@ -47,7 +47,7 @@ public class StageGainNonZeroCondition extends ChannelRestrictedCondition {
 		}
 		if (response.getStage() != null && !response.getStage().isEmpty()) {
 			for (ResponseStage stage : response.getStage()) {
-				Gain stageGain = stage.getStageGain();
+				StageGain stageGain = stage.getStageGain();
 				if (stageGain == null) {
 					if (stage.getPolynomial() == null) {
 						return Result.error("Stage " + stage.getNumber() + " is missing gain");

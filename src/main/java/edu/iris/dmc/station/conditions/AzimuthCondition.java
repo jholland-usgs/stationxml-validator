@@ -33,7 +33,7 @@ public class AzimuthCondition extends AbstractCondition {
 		Azimuth azimuth = channel.getAzimuth();
 		if (azimuth == null) {
 			if (required) {
-				return Result.error("Expected a value between " + min + " and " + max + " but received null.");
+				return Result.error("Expected an Azimuth value between " + min + " and " + max + " but received null.");
 			}
 			return Result.success();
 		}

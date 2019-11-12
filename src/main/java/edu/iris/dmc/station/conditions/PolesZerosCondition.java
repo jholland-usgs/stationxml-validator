@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import edu.iris.dmc.fdsn.station.model.BaseFilter;
 import edu.iris.dmc.fdsn.station.model.Channel;
-import edu.iris.dmc.fdsn.station.model.Gain;
+import edu.iris.dmc.fdsn.station.model.StageGain;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.PoleZero;
 import edu.iris.dmc.fdsn.station.model.Response;
@@ -64,7 +64,7 @@ public class PolesZerosCondition extends ChannelRestrictedCondition {
 
 			int stage = 1;
 			for (ResponseStage s : stages) {
-				Gain gain = s.getStageGain();
+				StageGain gain = s.getStageGain();
 				if (t || gain == null || gain.getFrequency() == 0) {
 					if (s.getPolesZeros() != null) {
 						if (s.getPolesZeros().getZero() != null) {
