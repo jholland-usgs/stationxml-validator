@@ -29,8 +29,8 @@ public class DocumentMarshaller {
 		}catch(javax.xml.bind.UnmarshalException e) {
 			if(e.getCause() != null && e.getCause() instanceof org.xml.sax.SAXParseException) {
 			String saxexception = e.getCause().getMessage();		
-			    throw new StationxmlException(String.format("XML Document does not comply with the FDSN-StationXML xsd schema! \n"
-			    		+ "Error is in the StationXML Document and is described by the line below: \n" + saxexception+ "\n"), e.getCause());
+			    throw new StationxmlException(String.format("XML Document does not comply with the FDSN-StationXML xsd schema. \n"
+			    		+ "Error occurs in the StationXML Document and is described by the line below (refer to trace for line #): \n" + saxexception+ "\n"), e.getCause());
 			}else {
 			    throw new StationxmlException(e);
 			}
