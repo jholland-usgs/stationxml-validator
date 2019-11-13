@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
+import edu.iris.dmc.fdsn.station.model.StationxmlException;
 import edu.iris.dmc.station.RuleEngineService;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.NestedMessage;
@@ -341,13 +342,13 @@ public class RuleEngineServiceTest {
 
 	@Test
 	public void xmlxsd_ExpectedUnmarshalException() throws Exception {
-		Assertions.assertThrows(IOException.class, () -> {
+		Assertions.assertThrows(StationxmlException.class, () -> {
 			theDocument = unmarshal("xmlVSxsd.xml");
 		});
 
 	}
 
-	private FDSNStationXML unmarshal(String file) throws IOException {
+	private FDSNStationXML unmarshal(String file) throws IOException, StationxmlException {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream(file)) {
 			return DocumentMarshaller.unmarshal(is);
 		} catch (SAXException | JAXBException e) {

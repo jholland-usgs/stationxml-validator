@@ -40,7 +40,7 @@
     </Sensor>
     <Response>
      <InstrumentSensitivity>
-      <Value>2.44648E5</Value>
+      <Value>None</Value>
       <Frequency>1E0</Frequency>
       <InputUnits>
        <Name>PA</Name>

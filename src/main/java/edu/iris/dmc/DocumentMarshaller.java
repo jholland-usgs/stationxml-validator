@@ -15,15 +15,26 @@ import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
+import edu.iris.dmc.fdsn.station.model.StationxmlException;
 
 public class DocumentMarshaller {
 
 	private DocumentMarshaller() {
 	}
 
-	public static FDSNStationXML unmarshal(InputStream inputStream) throws JAXBException, SAXException, IOException {
+	public static FDSNStationXML unmarshal(InputStream inputStream) throws JAXBException, SAXException, IOException, StationxmlException {
 		Unmarshaller jaxbUnmarshaller = unmarshaller();
-		return (FDSNStationXML) jaxbUnmarshaller.unmarshal(inputStream);
+		try {
+			return (FDSNStationXML) jaxbUnmarshaller.unmarshal(inputStream);
+		}catch(javax.xml.bind.UnmarshalException e) {
+			if(e.getCause() != null && e.getCause() instanceof org.xml.sax.SAXParseException) {
+			String saxexception = e.getCause().getMessage();		
+			    throw new StationxmlException(String.format("XML Document does not comply with the FDSN-StationXML xsd schema! \n"
+			    		+ "Error is in the StationXML Document and is described by the line below: \n" + saxexception+ "\n"), e.getCause());
+			}else {
+			    throw new StationxmlException(e);
+			}
+		}
 	}
 
 	public static FDSNStationXML unmarshalString(String inputStream) throws JAXBException, SAXException, IOException {
@@ -34,6 +45,7 @@ public class DocumentMarshaller {
 	public static Unmarshaller unmarshaller() throws JAXBException, SAXException, IOException {
 		JAXBContext jaxbContext = JAXBContext.newInstance(edu.iris.dmc.fdsn.station.model.ObjectFactory.class);
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		
 		try (InputStream stream = DocumentMarshaller.class.getClassLoader().getResourceAsStream("station.1.1.xsd");) {
 			Schema stationSchema = sf.newSchema(new StreamSource(stream));
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
