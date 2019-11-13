@@ -15,9 +15,9 @@ import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
-import edu.iris.dmc.fdsn.station.model.StationxmlException;
 import edu.iris.dmc.station.RuleEngineServiceTest;
 import edu.iris.dmc.station.conditions.EpochRangeCondition;
+import edu.iris.dmc.station.exceptions.StationxmlException;
 import edu.iris.dmc.station.rules.Message;
 
 public class Condition331Test {

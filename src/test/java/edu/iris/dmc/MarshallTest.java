@@ -5,9 +5,9 @@ import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
 
-import edu.iris.dmc.fdsn.station.model.StationxmlException;
 import edu.iris.dmc.seed.SeedException;
 import edu.iris.dmc.station.RuleEngineServiceTest;
+import edu.iris.dmc.station.exceptions.StationxmlException;
 
 public class MarshallTest {
 

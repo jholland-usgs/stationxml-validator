@@ -15,7 +15,7 @@ import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
 
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
-import edu.iris.dmc.fdsn.station.model.StationxmlException;
+import edu.iris.dmc.station.exceptions.StationxmlException;
 
 public class DocumentMarshaller {
 

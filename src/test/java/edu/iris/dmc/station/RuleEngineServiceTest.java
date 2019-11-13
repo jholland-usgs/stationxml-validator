@@ -21,8 +21,8 @@ import org.xml.sax.SAXException;
 import edu.iris.dmc.DocumentMarshaller;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
-import edu.iris.dmc.fdsn.station.model.StationxmlException;
 import edu.iris.dmc.station.RuleEngineService;
+import edu.iris.dmc.station.exceptions.StationxmlException;
 import edu.iris.dmc.station.rules.Message;
 import edu.iris.dmc.station.rules.NestedMessage;
 
