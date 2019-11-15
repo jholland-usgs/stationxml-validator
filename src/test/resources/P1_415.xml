@@ -50,8 +50,8 @@
       <ApproximationLowerBound>90000.0</ApproximationLowerBound>
       <ApproximationUpperBound>106000</ApproximationUpperBound>
       <MaximumError>0.00000</MaximumError>
-      <Coefficient number="0" minusError="0.00000" plusError="0.00000">90000.0</Coefficient>
-      <Coefficient number="1" minusError="0.00000" plusError="0.00000">0.614258</Coefficient>
+      <Coefficient minusError="0.00000" plusError="0.00000" number="0">90000.0</Coefficient>
+      <Coefficient minusError="0.00000" plusError="0.00000" number="1">0.614258</Coefficient>
      </InstrumentPolynomial>
      <Stage number="1">
       <Polynomial>
@@ -69,8 +69,8 @@
        <ApproximationLowerBound>90000.0</ApproximationLowerBound>
        <ApproximationUpperBound>106000</ApproximationUpperBound>
        <MaximumError>0.00000</MaximumError>
-       <Coefficient number="0" minusError="0.00000" plusError="0.00000">90000.0</Coefficient>
-       <Coefficient number="1" minusError="0.00000" plusError="0.00000">3200.00</Coefficient>
+       <Coefficient minusError="0.00000" plusError="0.00000" number="0">90000.0</Coefficient>
+       <Coefficient minusError="0.00000" plusError="0.00000" number="1">3200.00</Coefficient>
       </Polynomial>
      </Stage>
      <Stage number="2">

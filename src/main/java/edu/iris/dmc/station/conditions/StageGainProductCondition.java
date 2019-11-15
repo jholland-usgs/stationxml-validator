@@ -62,6 +62,8 @@ public class StageGainProductCondition extends ChannelRestrictedCondition {
 								if (stageGain.getValue() != null) {
 									product = product * stageGain.getValue();
 								}
+							}else {
+								return Result.success();
 							}
 						}
 

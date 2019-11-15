@@ -41,7 +41,7 @@
     <Response>
      <InstrumentSensitivity>
       <Value>10.0</Value>
-      <Frequency>1.0</Frequency>
+      <Frequency>0.002</Frequency>
       <InputUnits>
        <Name>PA</Name>
        <Description>No Abbreviation Referenced</Description>
@@ -95,13 +95,13 @@
       </PolesZeros>
       <StageGain>
        <Value>5.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.005</Frequency>
       </StageGain>
      </Stage>
      <Stage number="2">
       <StageGain>
        <Value>2.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.002</Frequency>
       </StageGain>
      </Stage>
      <Stage number="3">
@@ -126,7 +126,7 @@
       </Decimation>
       <StageGain>
        <Value>1.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.002</Frequency>
       </StageGain>
      </Stage>
      <Stage number="4">
@@ -156,7 +156,7 @@
       </Decimation>
       <StageGain>
        <Value>1.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.02</Frequency>
       </StageGain>
      </Stage>
      <Stage number="5">
@@ -187,7 +187,7 @@
       </Decimation>
       <StageGain>
        <Value>1.0</Value>
-       <Frequency>1.0</Frequency>
+       <Frequency>0.002</Frequency>
       </StageGain>
      </Stage>
     </Response>
