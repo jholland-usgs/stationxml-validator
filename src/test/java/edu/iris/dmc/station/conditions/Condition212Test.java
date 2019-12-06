@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.iris.dmc.DocumentMarshaller;
+import edu.iris.dmc.fdsn.station.model.Channel;
 import edu.iris.dmc.fdsn.station.model.FDSNStationXML;
 import edu.iris.dmc.fdsn.station.model.Network;
 import edu.iris.dmc.fdsn.station.model.Station;
@@ -38,6 +39,23 @@ public class Condition212Test {
 		}
 
 	}
+	
+	@Test
+	public void fail2() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_212.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+
+			Network n = theDocument.getNetwork().get(0);
+			Station s = n.getStations().get(0);
+			Channel c = s.getChannels().get(0);			
+			EpochRangeCondition condition = new EpochRangeCondition(true, "");
+
+			Message result = condition.evaluate(s);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		}
+
+	}
+
 
 	@Test
 	public void pass() throws Exception {

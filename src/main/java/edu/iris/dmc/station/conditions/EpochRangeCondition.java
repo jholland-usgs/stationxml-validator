@@ -26,6 +26,10 @@ public class EpochRangeCondition extends AbstractCondition {
 
 		if (network.getStations() != null) {
 			for (Station s : network.getStations()) {
+				if (network.getEndDate() != null && s.getEndDate() == null) {
+					return Result.error("Station endDate cannot be null"
+					+ " if network endDate is defined as: " + XmlUtil.toText(network.getEndDate()));
+				}
 				if (s.getStartDate() != null && TimeUtil.isBefore(s.getStartDate(), network.getStartDate())) {
 					return Result.error("Station startDate " + XmlUtil.toText(s.getStartDate())
 							+ " cannot occur before network startDate " + XmlUtil.toText(network.getStartDate()));
@@ -35,6 +39,7 @@ public class EpochRangeCondition extends AbstractCondition {
 						return Result.error("Station endDate " + XmlUtil.toText(s.getEndDate())
 								+ " cannot occur after network endDate " + XmlUtil.toText(network.getEndDate()));
 					}
+
 				}
 			}
 		}
@@ -53,6 +58,12 @@ public class EpochRangeCondition extends AbstractCondition {
 
 		if (station.getChannels() != null) {
 			for (Channel c : station.getChannels()) {
+				System.out.println(c.getEndDate());
+				
+				if (station.getEndDate() != null && c.getEndDate() == null) {
+					return Result.error("Channel endDate cannot be null"
+						+ " if station endDate is defined as: " + XmlUtil.toText(station.getEndDate()));
+				}
 				if (c.getStartDate() != null && TimeUtil.isBefore(c.getStartDate(), station.getStartDate())) {
 					return Result.error("Channel startDate " + XmlUtil.toText(c.getStartDate())
 							+ " cannot occur before Station startDate " + XmlUtil.toText(station.getStartDate()));

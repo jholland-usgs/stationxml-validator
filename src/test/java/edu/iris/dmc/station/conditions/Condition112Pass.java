@@ -26,9 +26,24 @@ public class Condition112Pass {
 	public void init() throws Exception {
 
 	}
-
+	
 	@Test
 	public void fail() throws Exception {
+		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("F2_112.xml")) {
+			theDocument = DocumentMarshaller.unmarshal(is);
+
+			Network n = theDocument.getNetwork().get(0);
+			//Station s = n.getStations().get(0);
+			EpochRangeCondition condition = new EpochRangeCondition(true, "");
+
+			Message result = condition.evaluate(n);
+			assertTrue(result instanceof edu.iris.dmc.station.rules.Error);
+		}
+
+	}
+
+	@Test
+	public void pass_EpochRange() throws Exception {
 		try (InputStream is = RuleEngineServiceTest.class.getClassLoader().getResourceAsStream("P1_112.xml")) {
 			theDocument = DocumentMarshaller.unmarshal(is);
 
