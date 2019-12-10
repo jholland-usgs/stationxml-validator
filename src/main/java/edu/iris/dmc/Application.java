@@ -18,6 +18,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import edu.iris.dmc.station.exceptions.StationxmlException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -165,7 +166,25 @@ public class Application {
 		}
 		try (InputStream is = new FileInputStream(file)) {
 			if (file.getName().toLowerCase().endsWith(".xml")) {
-				return DocumentMarshaller.unmarshal(is);
+				try {
+					return DocumentMarshaller.unmarshal(is);
+				} catch (StationxmlException e){
+					StringBuilder message = new StringBuilder(
+							"Except parsing file: " + path.toString() + "\n");
+					message.append(e.getLocalizedMessage());
+					for (StackTraceElement element : e.getStackTrace()){
+						message.append(element.toString()).append("\n");
+					}
+					if (e.getCause() != null) {
+						message.append(e.getCause().getLocalizedMessage());
+						for (StackTraceElement element : e.getCause().getStackTrace()) {
+							message.append(element.toString()).append("\n");
+						}
+					}
+					LOGGER.severe(message.toString());
+					System.err.println(message.toString());
+					return null;
+				}
 			} else {
 				Volume volume = IrisUtil.readSeed(file);
 				return SeedToXmlDocumentConverter.getInstance().convert(volume);
@@ -185,7 +204,7 @@ public class Application {
 				}
 			}
 		} else {
-			ps.printMessage("PASSED");
+			ps.printMessage("PASSED\n");
 		}
 
 		ps.printFooter();
