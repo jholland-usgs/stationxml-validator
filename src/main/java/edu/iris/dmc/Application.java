@@ -275,8 +275,8 @@ public class Application {
 		System.out.println("OPTIONS");
 		System.out.println("   --output      	: where to output result, default is System.out");
 		System.out.println("   --ignore-warnings: don't show warnings");
-		System.out.println("   --rules 			: print a list of validation rules");
-		System.out.println("   --units 			: print a list of units used to validate");
+		System.out.println("   --show-rules     : print a list of validation rules");
+		System.out.println("   --show-units     : print a list of units used to validate");
 		System.out.println("   --debug       	:");
 		System.out.println("   --help        	: print this message");
 		System.out.println("===============================================================");
