@@ -75,6 +75,10 @@ public class CommandLine {
 				commandLine.showHelp = true;
 			} else if ("--version".equalsIgnoreCase(args[0]) || "-v".equalsIgnoreCase(args[0])) {
 				commandLine.showVersion = true;
+			} else if ("--show-rules".equalsIgnoreCase(args[0])) {
+				commandLine.showRules = true;
+			} else if ("--show-units".equalsIgnoreCase(args[0])) {
+				commandLine.showUnits = true;
 			}
 			return commandLine;
 		}
