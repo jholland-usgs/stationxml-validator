@@ -58,6 +58,7 @@ public class EpochRangeCondition extends AbstractCondition {
 
 		if (station.getChannels() != null) {
 			for (Channel c : station.getChannels()) {
+
 				if (station.getEndDate() != null && c.getEndDate() == null) {
 					return Result.error("Channel endDate cannot be null"
 						+ " if station endDate is defined as: " + XmlUtil.toText(station.getEndDate()));
