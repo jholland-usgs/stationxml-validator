@@ -90,7 +90,7 @@ public class CommandLine {
 		}
 
 		// look for logLevel
-		if (args.length > 2) {
+		if (args.length >= 2) {
 			for (int i = 1; i < args.length; i++) {
 				String arg = args[i];
 				if ("--help".equalsIgnoreCase(arg) || "--showhelp".equalsIgnoreCase(arg)
